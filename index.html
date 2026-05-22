@@ -116,7 +116,7 @@
   .main-tab-panel.active { display: block; }
 
   /* ARCH panel compat — CSS variables bridge */
-  #tab-map, #tab-dash, #tab-arch {
+  #tab-map, #tab-dash, #tab-arch, #tab-funnel {
     --accent: #BB0A21; --text: #1a1a1a; --text2: #6b6b6b;
     --surface: #ffffff; --surface2: #f4f4f4; --border: #e0e0e0;
     --blue: #2563eb; --blue-bg: #eff6ff;
@@ -126,67 +126,67 @@
     --bg: #f4f4f4;
     font-family: 'Segoe UI', Arial, sans-serif;
   }
-  #tab-map .container, #tab-arch,
+  #tab-map .container, #tab-arch .container,
   #tab-dash .container {
     max-width: 1400px; margin: 0 auto; padding: 28px 24px;
   }
-  #tab-map h2, #tab-arch,
+  #tab-map h2, #tab-arch h2,
   #tab-dash h2 {
     font-size: 15px; font-weight: 700; color: var(--text); margin: 20px 0 10px;
     text-transform: uppercase; letter-spacing: 0.5px;
   }
-  #tab-map .section, #tab-arch,
+  #tab-map .section, #tab-arch .section,
   #tab-dash .section {
     background: #fff; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 16px; overflow: hidden;
   }
-  #tab-map .section-body, #tab-arch,
+  #tab-map .section-body, #tab-arch .section-body,
   #tab-dash .section-body { padding: 16px; }
-  #tab-map .section-header, #tab-arch,
+  #tab-map .section-header, #tab-arch .section-header,
   #tab-dash .section-header {
     padding: 12px 16px; font-weight: 700; font-size: 13px; cursor: pointer;
     background: #fafafa; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;
   }
-  #tab-map .grid2, #tab-arch,
+  #tab-map .grid2, #tab-arch .grid2,
   #tab-dash .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
-  #tab-map .grid3, #tab-arch,
+  #tab-map .grid3, #tab-arch .grid3,
   #tab-dash .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  #tab-map .mini-card, #tab-arch,
+  #tab-map .mini-card, #tab-arch .mini-card,
   #tab-dash .mini-card {
     background: #fff; border-radius: 8px; padding: 14px; border: 1px solid var(--border);
   }
-  #tab-map .mini-card h4, #tab-arch,
+  #tab-map .mini-card h4, #tab-arch .mini-card h4,
   #tab-dash .mini-card h4 { font-size: 13px; margin-bottom: 4px; }
-  #tab-map .mini-card p, #tab-arch,
+  #tab-map .mini-card p, #tab-arch .mini-card p,
   #tab-dash .mini-card p { font-size: 11px; color: var(--text2); }
-  #tab-map .badge, #tab-arch,
+  #tab-map .badge, #tab-arch .badge,
   #tab-dash .badge { display: inline-block; border-radius: 4px; padding: 3px 8px; font-size: 11px; font-weight: 600; }
-  #tab-map .badge-blue, #tab-arch,
+  #tab-map .badge-blue, #tab-arch .badge-blue,
   #tab-dash .badge-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid #bfdbfe; }
-  #tab-map .badge-green, #tab-arch,
+  #tab-map .badge-green, #tab-arch .badge-green,
   #tab-dash .badge-green { background: var(--green-bg); color: var(--green); }
-  #tab-map .badge-red, #tab-arch,
+  #tab-map .badge-red, #tab-arch .badge-red,
   #tab-dash .badge-red { background: var(--red-bg); color: var(--accent); }
-  #tab-map .badge-yellow, #tab-arch,
+  #tab-map .badge-yellow, #tab-arch .badge-yellow,
   #tab-dash .badge-yellow { background: #fffbeb; color: #92400e; }
-  #tab-map .ev-strip, #tab-arch,
+  #tab-map .ev-strip, #tab-arch .ev-strip,
   #tab-dash .ev-strip { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  #tab-map .ev, #tab-arch,
+  #tab-map .ev, #tab-arch .ev,
   #tab-dash .ev { font-size: 11px; padding: 3px 8px; border-radius: 4px; font-family: monospace; }
-  #tab-map .ev-micro, #tab-arch,
+  #tab-map .ev-micro, #tab-arch .ev-micro,
   #tab-dash .ev-micro { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
-  #tab-map .ev-lead, #tab-arch,
+  #tab-map .ev-lead, #tab-arch .ev-lead,
   #tab-dash .ev-lead { background: #fef2f2; color: #BB0A21; border: 1px solid #fecaca; }
-  #tab-map .ev-warn, #tab-arch,
+  #tab-map .ev-warn, #tab-arch .ev-warn,
   #tab-dash .ev-warn { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
-  #tab-map .ev-num, #tab-arch,
+  #tab-map .ev-num, #tab-arch .ev-num,
   #tab-dash .ev-num { font-weight: 700; }
-  #tab-map .alert, #tab-arch,
+  #tab-map .alert, #tab-arch .alert,
   #tab-dash .alert { border-radius: 6px; padding: 10px 14px; font-size: 12px; margin-bottom: 8px; }
-  #tab-map .alert-red, #tab-arch,
+  #tab-map .alert-red, #tab-arch .alert-red,
   #tab-dash .alert-red { background: var(--red-bg); border: 1px solid #fecaca; color: #991b1b; }
-  #tab-map .alert-yellow, #tab-arch,
+  #tab-map .alert-yellow, #tab-arch .alert-yellow,
   #tab-dash .alert-yellow { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
-  #tab-map .alert-blue, #tab-arch,
+  #tab-map .alert-blue, #tab-arch .alert-blue,
   #tab-dash .alert-blue { background: var(--blue-bg); border: 1px solid #bfdbfe; color: #1e40af; }
   #tab-dash .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
   #tab-dash .kpi-card { background: #fff; border-radius: 8px; padding: 18px 20px; border: 1px solid var(--border); position: relative; overflow: hidden; }
@@ -294,6 +294,8 @@
   <button class="main-tab-btn active" onclick="switchMainTab('ga4', this)">📊 Analiza GA4</button>
   <button class="main-tab-btn" onclick="switchMainTab('map', this)">🗺 Mapa strony</button>
   <button class="main-tab-btn" onclick="switchMainTab('arch', this)">🏗 Architektura + Eventy</button>
+  <button class="main-tab-btn" onclick="switchMainTab('funnel', this)">🔻 Lejek formularza</button>
+  <button class="main-tab-btn" onclick="switchMainTab('mom', this)">📅 Formularze MoM</button>
 </div>
 
 <div class="main-tab-panel active" id="tab-ga4">
@@ -1203,7 +1205,6 @@ function toggleSection(header) {
 <!-- ===== TAB: ARCHITEKTURA + EVENTY GA4 ===== -->
 <div class="main-tab-panel" id="tab-arch">
 <div class="container">
-<div class="container">
 
   <!-- LEGENDA EVENTÓW -->
   <div class="section">
@@ -1895,8 +1896,585 @@ function toggleSection(header) {
   </div>
 
 </div><!-- /container -->
-</div><!-- /container -->
 </div><!-- /tab-arch -->
+
+<!-- ===== TAB: LEJEK FORMULARZA ===== -->
+<div class="main-tab-panel" id="tab-funnel">
+<div class="container">
+
+  <div class="section-label" style="margin-top:8px">🔻 Lejek konwersji — Formularz kontaktowy (karta pojazdu)</div>
+
+  <!-- GŁÓWNY UKŁAD: screenshot + lejek -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:24px; align-items:start;">
+
+    <!-- LEWA: screenshot formularza -->
+    <div class="card" style="padding:0; overflow:hidden;">
+      <div class="card-title" style="padding:14px 20px; margin-bottom:0; border-bottom:1px solid var(--border);">
+        <span class="icon">📋</span> Formularz "Zapytaj o ofertę" — karta pojazdu
+      </div>
+      <div style="padding:16px; background:#f8f8f8; text-align:center;">
+        <!-- Inline SVG mockup formularza oparty na screenshocie -->
+        <svg width="100%" viewBox="0 0 320 440" xmlns="http://www.w3.org/2000/svg" style="max-width:320px; display:block; margin:0 auto; border:1px solid #ddd; border-radius:6px; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+          <!-- Nagłówek -->
+          <rect x="0" y="0" width="320" height="36" fill="#1a1a1a"/>
+          <text x="16" y="23" font-family="Arial" font-size="13" font-weight="700" fill="white">Zapytaj o ofertę</text>
+
+          <!-- Pola formularza -->
+          <!-- Imię i nazwisko -->
+          <rect x="12" y="48" width="143" height="32" rx="4" fill="white" stroke="#ddd" stroke-width="1"/>
+          <text x="20" y="68" font-family="Arial" font-size="10" fill="#aaa">Imię i nazwisko *</text>
+
+          <!-- Telefon -->
+          <rect x="163" y="48" width="145" height="32" rx="4" fill="white" stroke="#ddd" stroke-width="1"/>
+          <text x="171" y="68" font-family="Arial" font-size="10" fill="#aaa">Telefon *</text>
+
+          <!-- Email -->
+          <rect x="12" y="90" width="296" height="32" rx="4" fill="white" stroke="#ddd" stroke-width="1"/>
+          <text x="20" y="110" font-family="Arial" font-size="10" fill="#aaa">Email</text>
+
+          <!-- Tekst zgody -->
+          <rect x="12" y="132" width="296" height="28" rx="3" fill="#f9f9f9" stroke="#eee" stroke-width="1"/>
+          <text x="20" y="150" font-family="Arial" font-size="9" fill="#666">Wysyłając formularz podajesz nam swoje dane...</text>
+
+          <!-- Checkboxy zgód -->
+          <rect x="12" y="168" width="12" height="12" rx="2" fill="white" stroke="#ccc" stroke-width="1"/>
+          <text x="30" y="178" font-family="Arial" font-size="9" fill="#555">Zapoznałem się z Polityką prywatności *</text>
+
+          <rect x="12" y="188" width="12" height="12" rx="2" fill="white" stroke="#ccc" stroke-width="1"/>
+          <text x="30" y="198" font-family="Arial" font-size="9" fill="#555">Zgoda na kontakt sms/mms... rozwiń</text>
+
+          <rect x="12" y="208" width="12" height="12" rx="2" fill="white" stroke="#ccc" stroke-width="1"/>
+          <text x="30" y="218" font-family="Arial" font-size="9" fill="#555">Zgoda na kontakt telefoniczny... rozwiń</text>
+
+          <rect x="12" y="228" width="12" height="12" rx="2" fill="white" stroke="#ccc" stroke-width="1"/>
+          <text x="30" y="238" font-family="Arial" font-size="9" fill="#555">Zgoda na kontakt mailowy... rozwiń</text>
+
+          <!-- reCAPTCHA -->
+          <rect x="12" y="252" width="296" height="44" rx="4" fill="#f9f9f9" stroke="#d3d3d3" stroke-width="1"/>
+          <rect x="22" y="264" width="20" height="20" rx="3" fill="white" stroke="#ccc" stroke-width="1"/>
+          <text x="50" y="278" font-family="Arial" font-size="11" fill="#333">Nie jestem robotem</text>
+          <text x="248" y="270" font-family="Arial" font-size="8" fill="#aaa">reCAPTCHA</text>
+          <text x="248" y="282" font-family="Arial" font-size="7" fill="#aaa">Prywatność</text>
+          <text x="248" y="292" font-family="Arial" font-size="7" fill="#aaa">Warunki</text>
+
+          <!-- Przycisk Wyślij -->
+          <rect x="12" y="308" width="296" height="38" rx="4" fill="#1a1a1a"/>
+          <text x="160" y="332" font-family="Arial" font-size="13" font-weight="700" fill="white" text-anchor="middle">Wyślij</text>
+
+          <!-- Etykiety punktów porzucenia (strzałki) -->
+          <!-- form_start -->
+          <circle cx="305" cy="64" r="6" fill="#BB0A21"/>
+          <text x="305" y="67" font-family="Arial" font-size="8" fill="white" text-anchor="middle" font-weight="700">1</text>
+
+          <!-- step 2 — zgody -->
+          <circle cx="305" cy="188" r="6" fill="#f57c00"/>
+          <text x="305" y="191" font-family="Arial" font-size="8" fill="white" text-anchor="middle" font-weight="700">2</text>
+
+          <!-- step 3 — reCAPTCHA -->
+          <circle cx="305" cy="274" r="6" fill="#f57c00"/>
+          <text x="305" y="277" font-family="Arial" font-size="8" fill="white" text-anchor="middle" font-weight="700">3</text>
+
+          <!-- step 4 — Wyślij = form_total -->
+          <circle cx="305" cy="327" r="6" fill="#2e7d32"/>
+          <text x="305" y="330" font-family="Arial" font-size="8" fill="white" text-anchor="middle" font-weight="700">4</text>
+
+          <!-- Legenda na dole -->
+          <rect x="0" y="368" width="320" height="72" fill="#f4f4f4"/>
+          <text x="12" y="385" font-family="Arial" font-size="9" font-weight="700" fill="#333">Legenda:</text>
+          <circle cx="20" cy="400" r="5" fill="#BB0A21"/>
+          <text x="30" y="404" font-family="Arial" font-size="9" fill="#555">1 — form_start (śledzone ✓)</text>
+          <circle cx="160" cy="400" r="5" fill="#f57c00"/>
+          <text x="170" y="404" font-family="Arial" font-size="9" fill="#555">2,3 — brak eventu ✗</text>
+          <circle cx="20" cy="418" r="5" fill="#2e7d32"/>
+          <text x="30" y="422" font-family="Arial" font-size="9" fill="#555">4 — form_total (śledzone ✓)</text>
+          <text x="160" y="418" font-family="Arial" font-size="9" fill="#BB0A21" font-weight="600">? — gdzie porzucają?</text>
+        </svg>
+        <p style="font-size:11px; color:#888; margin-top:8px;">Formularz kontaktowy — karta pojazdu (/oferta/…)</p>
+      </div>
+    </div>
+
+    <!-- PRAWA: lejek z liczbami + lista do eventowania -->
+    <div style="display:flex; flex-direction:column; gap:16px;">
+
+      <!-- Lejek z liczbami -->
+      <div class="card">
+        <div class="card-title"><span class="icon">📊</span> Lejek — co wiemy z GA4 (90 dni)</div>
+
+        <!-- Krok 1 -->
+        <div style="margin-bottom:6px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:12px; font-weight:700; color:#1a1a1a;">Wejście na stronę pojazdu</span>
+            <span style="font-family:monospace; font-size:13px; font-weight:700; color:#1a1a1a;">~247 897</span>
+          </div>
+          <div style="background:#e0e0e0; border-radius:4px; height:28px; overflow:hidden;">
+            <div style="width:100%; height:100%; background:#1a1a1a; display:flex; align-items:center; padding-left:10px;">
+              <span style="font-size:11px; color:white;">page_view — wszystkie odsłony</span>
+            </div>
+          </div>
+          <div style="font-size:10px; color:#888; margin-top:2px;">event: <code style="background:#f4f4f4; padding:1px 4px; border-radius:3px;">page_view</code> — auto GA4</div>
+        </div>
+
+        <div style="text-align:center; color:#BB0A21; font-size:16px; line-height:1; margin:2px 0;">↓</div>
+
+        <!-- Krok 2 -->
+        <div style="margin-bottom:6px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:12px; font-weight:700; color:#1a1a1a;">Kliknięcie w formularz</span>
+            <span style="font-family:monospace; font-size:16px; font-weight:700; color:#BB0A21;">27 589</span>
+          </div>
+          <div style="background:#e0e0e0; border-radius:4px; height:28px; overflow:hidden;">
+            <div style="width:100%; height:100%; background:#BB0A21; display:flex; align-items:center; padding-left:10px;">
+              <span style="font-size:11px; color:white;">form_start — 100% bazy</span>
+            </div>
+          </div>
+          <div style="font-size:10px; color:#888; margin-top:2px;">event: <code style="background:#fef2f2; color:#BB0A21; padding:1px 4px; border-radius:3px;">form_start</code> — śledzone ✓</div>
+        </div>
+
+        <div style="text-align:center; color:#f57c00; font-size:16px; line-height:1; margin:2px 0;">↓ <span style="font-size:10px; color:#f57c00;">❓ tu jest czarna dziura</span></div>
+
+        <!-- Krok 3 — BRAK DANYCH -->
+        <div style="margin-bottom:6px; opacity:0.6;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:12px; font-weight:700; color:#888;">Wypełnił pola + zaznaczył zgody</span>
+            <span style="font-family:monospace; font-size:13px; font-weight:700; color:#888;">? brak danych</span>
+          </div>
+          <div style="background:#e0e0e0; border-radius:4px; height:28px; overflow:hidden;">
+            <div style="width:60%; height:100%; background:#e0e0e0; border: 2px dashed #aaa; display:flex; align-items:center; padding-left:10px;">
+              <span style="font-size:11px; color:#888;">brak eventu — nie mierzymy</span>
+            </div>
+          </div>
+          <div style="font-size:10px; color:#f57c00; margin-top:2px;">⚠️ brak: <code style="background:#fffbeb; color:#92400e; padding:1px 4px; border-radius:3px;">form_step_2_zgody</code></div>
+        </div>
+
+        <div style="text-align:center; color:#f57c00; font-size:16px; line-height:1; margin:2px 0;">↓</div>
+
+        <!-- Krok 4 — BRAK DANYCH -->
+        <div style="margin-bottom:6px; opacity:0.6;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:12px; font-weight:700; color:#888;">Przeszedł reCAPTCHA v2</span>
+            <span style="font-family:monospace; font-size:13px; font-weight:700; color:#888;">? brak danych</span>
+          </div>
+          <div style="background:#e0e0e0; border-radius:4px; height:28px; overflow:hidden;">
+            <div style="width:40%; height:100%; background:#e0e0e0; border: 2px dashed #aaa; display:flex; align-items:center; padding-left:10px;">
+              <span style="font-size:11px; color:#888;">brak eventu — nie mierzymy</span>
+            </div>
+          </div>
+          <div style="font-size:10px; color:#f57c00; margin-top:2px;">⚠️ brak: <code style="background:#fffbeb; color:#92400e; padding:1px 4px; border-radius:3px;">form_step_3_recaptcha</code></div>
+        </div>
+
+        <div style="text-align:center; color:#2e7d32; font-size:16px; line-height:1; margin:2px 0;">↓</div>
+
+        <!-- Krok 5 — form_total -->
+        <div style="margin-bottom:4px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:12px; font-weight:700; color:#1a1a1a;">Wysłał formularz</span>
+            <span style="font-family:monospace; font-size:20px; font-weight:700; color:#2e7d32;">256</span>
+          </div>
+          <div style="background:#e0e0e0; border-radius:4px; height:28px; overflow:hidden;">
+            <div style="width:1%; height:100%; background:#2e7d32; min-width:80px; display:flex; align-items:center; padding-left:10px;">
+              <span style="font-size:11px; color:white;">form_total ✓</span>
+            </div>
+          </div>
+          <div style="font-size:10px; color:#888; margin-top:2px;">event: <code style="background:#e8f5e9; color:#2e7d32; padding:1px 4px; border-radius:3px;">form_total</code> — śledzone ✓</div>
+        </div>
+
+        <!-- CR podsumowanie -->
+        <div style="background:#f8f8f8; border-radius:6px; padding:10px 14px; margin-top:12px; border-left:3px solid #BB0A21;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:12px; color:#555;">CR form_start → form_total</span>
+            <span style="font-size:18px; font-weight:700; color:#BB0A21;">0.93%</span>
+          </div>
+          <div style="font-size:11px; color:#888; margin-top:4px;">27 589 → 256 | Dla strony /jazda-testowa: <strong style="color:#2e7d32;">10.6%</strong> — 10× lepiej</div>
+        </div>
+      </div>
+
+      <!-- Porzucenie przez chat -->
+      <div class="card">
+        <div class="card-title"><span class="icon">💬</span> Chat — czy zamiast formularza?</div>
+        <div style="display:flex; align-items:center; gap:16px; padding:4px 0 8px;">
+          <div style="text-align:center;">
+            <div style="font-size:28px; font-weight:700; color:#1a1a1a;">16 851</div>
+            <div style="font-size:11px; color:#888;">chat_otworzenie</div>
+          </div>
+          <div style="font-size:20px; color:#aaa;">vs</div>
+          <div style="text-align:center;">
+            <div style="font-size:28px; font-weight:700; color:#BB0A21;">256</div>
+            <div style="font-size:11px; color:#888;">form_total</div>
+          </div>
+        </div>
+        <div style="font-size:12px; color:#555; background:#fffbeb; border:1px solid #fde68a; border-radius:5px; padding:8px 10px;">
+          ⚠️ Brak eventu <code style="background:#fffbeb; color:#92400e;">chat_lead</code> — nie wiemy ile otwarć chatu kończy się leadem. Samo <code>chat_otworzenie</code> = tylko otwarcie widgetu.
+        </div>
+      </div>
+
+    </div><!-- /prawa kolumna -->
+  </div><!-- /główny układ -->
+
+  <!-- DOLNA CZĘŚĆ: co eventować po drodze -->
+  <div class="card" style="margin-bottom:24px;">
+    <div class="card-title"><span class="icon">🛠</span> Co eventować po drodze — plan GTM</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Krok w formularzu</th>
+          <th>Proponowany event GTM</th>
+          <th>Trigger</th>
+          <th>Priorytet</th>
+          <th>Po co?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700; color:#BB0A21;">1</td>
+          <td>Użytkownik klika w pole (focus)</td>
+          <td><code style="background:#fef2f2; color:#BB0A21; padding:2px 6px; border-radius:3px;">form_start</code></td>
+          <td>Focus na input[name=imie] lub input[name=tel]</td>
+          <td><span class="badge-green" style="background:#e8f5e9; color:#2e7d32; font-size:11px; padding:2px 8px; border-radius:10px;">✓ działa</span></td>
+          <td style="font-size:12px; color:#555;">Mierzymy intencję</td>
+        </tr>
+        <tr style="background:#fffbeb;">
+          <td style="font-weight:700; color:#f57c00;">2</td>
+          <td>Wypełnił wszystkie pola obowiązkowe</td>
+          <td><code style="background:#fffbeb; color:#92400e; padding:2px 6px; border-radius:3px;">form_fields_complete</code></td>
+          <td>Zmiana stanu pól — custom JS w GTM</td>
+          <td><span class="badge-red" style="font-size:11px; padding:2px 8px; border-radius:10px;">❌ brak</span></td>
+          <td style="font-size:12px; color:#555;">Wiemy czy problem to pola czy zgody</td>
+        </tr>
+        <tr style="background:#fffbeb;">
+          <td style="font-weight:700; color:#f57c00;">3</td>
+          <td>Zaznaczył zgodę obowiązkową (polityka)</td>
+          <td><code style="background:#fffbeb; color:#92400e; padding:2px 6px; border-radius:3px;">form_consent_checked</code></td>
+          <td>Click na checkbox[name=polityka]</td>
+          <td><span class="badge-red" style="font-size:11px; padding:2px 8px; border-radius:10px;">❌ brak</span></td>
+          <td style="font-size:12px; color:#555;">Mierzymy friction zgód RODO</td>
+        </tr>
+        <tr style="background:#fef2f2;">
+          <td style="font-weight:700; color:#BB0A21;">4</td>
+          <td>Próba kliknięcia "Wyślij" (przed captcha)</td>
+          <td><code style="background:#fef2f2; color:#BB0A21; padding:2px 6px; border-radius:3px;">form_submit_attempt</code></td>
+          <td>Click na button[type=submit]</td>
+          <td><span class="badge-red" style="font-size:11px; padding:2px 8px; border-radius:10px;">❌ brak</span></td>
+          <td style="font-size:12px; color:#555;">Ile osób próbuje, ale nie przechodzi reCAPTCHA?</td>
+        </tr>
+        <tr style="background:#fef2f2;">
+          <td style="font-weight:700; color:#BB0A21;">5</td>
+          <td>reCAPTCHA v2 — zaznaczono checkbox</td>
+          <td><code style="background:#fef2f2; color:#BB0A21; padding:2px 6px; border-radius:3px;">form_recaptcha_passed</code></td>
+          <td>grecaptcha callback / dataLayer push</td>
+          <td><span class="badge-red" style="font-size:11px; padding:2px 8px; border-radius:10px;">❌ brak</span></td>
+          <td style="font-size:12px; color:#555;">Czy reCAPTCHA blokuje konwersje?</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700; color:#2e7d32;">6</td>
+          <td>Formularz wysłany pomyślnie</td>
+          <td><code style="background:#e8f5e9; color:#2e7d32; padding:2px 6px; border-radius:3px;">form_total</code></td>
+          <td>Sukces AJAX / thank-you state</td>
+          <td><span class="badge-green" style="background:#e8f5e9; color:#2e7d32; font-size:11px; padding:2px 8px; border-radius:10px;">✓ działa</span></td>
+          <td style="font-size:12px; color:#555;">256 leadów / 90 dni</td>
+        </tr>
+        <tr style="background:#f5f3ff;">
+          <td style="font-weight:700; color:#7c3aed;">7</td>
+          <td>Porzucenie — focus był, submit nie</td>
+          <td><code style="background:#f5f3ff; color:#7c3aed; padding:2px 6px; border-radius:3px;">form_abandon</code></td>
+          <td>beforeunload gdy form_start bez form_total</td>
+          <td><span class="badge-red" style="font-size:11px; padding:2px 8px; border-radius:10px;">❌ brak</span></td>
+          <td style="font-size:12px; color:#555;">Ile użytkowników startuje i odpuszcza?</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:14px; padding:12px 16px; background:#fef2f2; border-radius:6px; border-left:3px solid #BB0A21; font-size:12px; color:#555; line-height:1.6;">
+      🎯 <strong style="color:#BB0A21;">Hipoteza główna:</strong> Między <code>form_start</code> (27 589) a <code>form_total</code> (256) ginie <strong>99.07%</strong> użytkowników.
+      Bez eventów kroków nie wiemy czy tracą ich <em>pola formularza</em>, <em>zgody RODO</em>, <em>reCAPTCHA v2</em> czy po prostu porzucają stronę po zapoznaniu się z ofertą.
+      Wdrożenie eventów 2–5 zajmie ~2h w GTM i odpowie na to pytanie.
+    </div>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /tab-funnel -->
+
+<!-- ===== TAB: FORMULARZE MoM ===== -->
+<div class="main-tab-panel" id="tab-mom">
+<div class="container">
+
+  <div class="section-label" style="margin-top:8px">📅 Formularze MoM — kwiecień 2025 – maj 2026 (13 miesięcy)</div>
+
+  <!-- KPI ROW -->
+  <div class="grid-4" style="margin-bottom:20px;">
+    <div class="kpi-card">
+      <div class="kpi-label">Łącznie leadów (13 mies.)</div>
+      <div class="kpi-value">1 313</div>
+      <div class="kpi-sub">form_total — wszystkie typy</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Średnia miesięczna</div>
+      <div class="kpi-value">101</div>
+      <div class="kpi-sub">bez kwi 2025 (outlier: 279)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Najlepszy miesiąc</div>
+      <div class="kpi-value" style="color:#2e7d32">279</div>
+      <div class="kpi-sub">Kwiecień 2025</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Maj 2026 (do 20.05)</div>
+      <div class="kpi-value" style="color:#f57c00">47</div>
+      <div class="kpi-sub">~70 projected pełny mies.</div>
+    </div>
+  </div>
+
+  <!-- WYKRES GŁÓWNY stacked bar -->
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title"><span class="icon">📊</span> Leady per miesiąc — podział na typy (stacked)</div>
+    <div style="position:relative; height:320px;">
+      <canvas id="momStackedChart"></canvas>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; padding-top:10px; border-top:1px solid var(--border);">
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#1a1a1a;display:inline-block"></span>Auta nowe (form_total)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#BB0A21;display:inline-block"></span>Jazda testowa</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#2563eb;display:inline-block"></span>APL (leasing)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#7c3aed;display:inline-block"></span>Serwis</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#d97706;display:inline-block"></span>Odkup</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#059669;display:inline-block"></span>Wyprzedaże</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#db2777;display:inline-block"></span>Perfect Lease</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#6b7280;display:inline-block"></span>APR / inne</span>
+    </div>
+  </div>
+
+  <!-- TABELA SZCZEGÓŁOWA -->
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title"><span class="icon">📋</span> Tabela szczegółowa — wszystkie typy formularzy</div>
+    <div style="overflow-x:auto;">
+      <table id="momTable" style="min-width:900px;">
+        <thead>
+          <tr>
+            <th>Miesiąc</th>
+            <th style="text-align:right; background:#1a1a1a; color:white;">form_total</th>
+            <th style="text-align:right; background:#fef2f2;">Jazda test.</th>
+            <th style="text-align:right; background:#eff6ff;">APL</th>
+            <th style="text-align:right; background:#f5f3ff;">Serwis</th>
+            <th style="text-align:right; background:#fffbeb;">Odkup</th>
+            <th style="text-align:right; background:#f0fdf4;">Wyprzedaże</th>
+            <th style="text-align:right; background:#fdf4ff;">P.Lease</th>
+            <th style="text-align:right;">APR</th>
+            <th style="text-align:right; color:#888;">MoM %</th>
+          </tr>
+        </thead>
+        <tbody id="momTableBody"></tbody>
+      </table>
+    </div>
+    <div style="font-size:11px; color:#888; margin-top:8px; padding-top:8px; border-top:1px solid var(--border);">
+      * Maj 2026 = dane do 20.05 (niepełny miesiąc) &nbsp;|&nbsp; Jazda testowa = form_jazda-testowa + Formularz_jazda_testowa &nbsp;|&nbsp; APL = form_APL_sent + formularz_apl
+    </div>
+  </div>
+
+  <!-- WYKRESY LINIOWE per typ -->
+  <div class="grid-2" style="margin-bottom:20px;">
+    <div class="card">
+      <div class="card-title"><span class="icon">📈</span> Jazda testowa + APL — trend MoM</div>
+      <div style="position:relative; height:200px;"><canvas id="momLineJTAPL"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">📈</span> Serwis + Odkup — trend MoM</div>
+      <div style="position:relative; height:200px;"><canvas id="momLineSerwis"></canvas></div>
+    </div>
+  </div>
+
+  <!-- METODOLOGIA GRUPOWANIA -->
+  <details style="background:white;border:1px solid #e0e0e0;border-radius:8px;padding:0;margin-bottom:20px;overflow:hidden;">
+    <summary style="padding:14px 20px;font-size:13px;font-weight:600;color:#1a1a1a;cursor:pointer;display:flex;align-items:center;gap:8px;list-style:none;user-select:none;">
+      <span style="color:#BB0A21;font-size:16px;">ℹ</span> Metodologia grupowania eventów GA4
+      <span style="margin-left:auto;font-size:11px;color:#6b6b6b;font-weight:400;">rozwiń ▾</span>
+    </summary>
+    <div style="padding:16px 20px 18px;border-top:1px solid #f0f0f0;background:#fafafa;">
+      <p style="font-size:12px;color:#6b6b6b;margin-bottom:12px;">Każda kolumna w tabeli i seria na wykresie odpowiada grupie eventów GA4 wg poniższych reguł:</p>
+      <table style="font-size:12px;border-collapse:collapse;width:100%;">
+        <thead>
+          <tr style="background:#f4f4f4;">
+            <th style="text-align:left;padding:7px 12px;color:#1a1a1a;font-weight:600;border-bottom:2px solid #BB0A21;width:180px;">Kolumna</th>
+            <th style="text-align:left;padding:7px 12px;color:#1a1a1a;font-weight:600;border-bottom:2px solid #BB0A21;">Eventy GA4 (suma)</th>
+            <th style="text-align:left;padding:7px 12px;color:#1a1a1a;font-weight:600;border-bottom:2px solid #BB0A21;width:260px;">Uwaga</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #ececec;">
+            <td style="padding:6px 12px;font-weight:600;color:#BB0A21;">Łącznie</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_total</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Główny KPI — sumaryczne wysłania formularzy</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;background:#fef9f9;">
+            <td style="padding:6px 12px;font-weight:600;">Jazda testowa</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_jazda-testowa + Formularz_jazda_testowa</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Deduplikacja — dwa eventy GTM dla tego samego formularza</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;">
+            <td style="padding:6px 12px;font-weight:600;">APL</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_APL_sent + formularz_apl</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Deduplikacja — Audi Perfect Lease, stare i nowe nazwy</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;background:#fef9f9;">
+            <td style="padding:6px 12px;font-weight:600;">Serwis</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_serwis</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Formularz umówienia wizyty serwisowej</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;">
+            <td style="padding:6px 12px;font-weight:600;">Odkup</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_odkup</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Formularz skupu pojazdu</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;background:#fef9f9;">
+            <td style="padding:6px 12px;font-weight:600;">Wyprzedaże</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_wyprzedaz-2024-A5 + form_wyprzedaz-2024-A6 + form_wyprzedaz-2024-Q5</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Suma wszystkich eventów form_wyprzedaz-*</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;">
+            <td style="padding:6px 12px;font-weight:600;">Perfect Lease</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_perfect_lease_Q5 + form_perfect_lease_Q3 + form_perfect_lease_A3 + form_perfect_lease_A6</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Suma wszystkich eventów form_perfect_lease_*</td>
+          </tr>
+          <tr style="background:#fef9f9;">
+            <td style="padding:6px 12px;font-weight:600;">APR</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_APR_sent</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Audi Perfect Rent</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:#999;margin-top:10px;">⚠️ Kolumna <strong>Łącznie</strong> = <code>form_total</code> (rzeczywisty KPI). Nie jest to suma pozostałych kolumn — te pokrywają podzbiór eventów z różnych formularzy.</p>
+    </div>
+  </details>
+
+  <!-- INSIGHT -->
+  <div class="insight-bar" style="margin-bottom:24px;">
+    <span class="insight-chip"><strong>Kwi 2025 outlier:</strong> 279 form_total — ponad 2.5× więcej niż średnia. Duży wolumen JT (155) sugeruje kampanię lub event.</span>
+    <span class="insight-chip"><strong>Stabilne core:</strong> od cze 2025 do mar 2026 każdy miesiąc 97–108 leadów — bardzo stały poziom.</span>
+    <span class="insight-chip"><strong>Kwi–maj 2026 ↓:</strong> 64 i 47* — wyraźny spadek. Kwi 2026 to tylko 23% kwi 2025.</span>
+    <span class="insight-chip"><strong>Serwis stabilny:</strong> 5–13 leadów miesięcznie — regularny, niezależny od sezonowości.</span>
+    <span class="insight-chip insight-note">⚠️ Maj 2026 = dane tylko do 20.05 (niepełny miesiąc). Projected ~70 przy obecnym tempie.</span>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /tab-mom -->
+
+<script>
+// ===== MoM DATA =====
+const MOM_DATA = {
+  labels: ['Kwi 2025','Maj 2025','Cze 2025','Lip 2025','Sie 2025','Wrz 2025','Paź 2025','Lis 2025','Gru 2025','Sty 2026','Lut 2026','Mar 2026','Kwi 2026','Maj 2026*'],
+  total:      [279, 124, 102,  97,  63, 100, 105, 106, 101, 106, 107, 108,  64,  47],
+  jt:         [155,  34,  36,  39,  22,  32,  18,  41,  33,  38,  25,  28,  16,   9],
+  apl:        [ 17,  52,  23,  19,  16,  24,  18,   8,  17,   6,  12,  15,   5,   8],
+  serwis:     [  5,   5,  12,  13,   7,   8,   7,  11,  13,   9,   8,   9,   8,   4],
+  odkup:      [  6,   7,   6,   4,   0,   3,   5,   7,   4,   4,   5,   3,   2,   5],
+  wyprzedaz:  [  3,   1,   0,   0,   0,   0,   1,   0,   0,   0,   6,  13,   3,   3],
+  pleasing:   [  0,   0,   5,   4,   1,   7,  10,   3,   8,   3,   3,   8,   1,   2],
+  apr:        [  2,   3,   1,   1,   0,   4,   1,   0,   2,   1,   2,   3,   1,   0]
+};
+
+(function initMoM() {
+  // Tabela
+  const tbody = document.getElementById('momTableBody');
+  MOM_DATA.labels.forEach((lbl, i) => {
+    const prev = i > 0 ? MOM_DATA.total[i-1] : null;
+    const mom = prev ? ((MOM_DATA.total[i] - prev) / prev * 100).toFixed(0) : '—';
+    const momColor = prev ? (MOM_DATA.total[i] >= prev ? '#2e7d32' : '#BB0A21') : '#888';
+    const momStr = prev ? (MOM_DATA.total[i] >= prev ? '+' : '') + mom + '%' : '—';
+    const isCurrent = lbl.includes('*');
+    tbody.innerHTML += `<tr ${isCurrent ? 'style="background:#fffbeb;"' : ''}>
+      <td style="font-weight:600; white-space:nowrap;">${lbl}</td>
+      <td style="text-align:right; font-weight:700; font-size:14px;">${MOM_DATA.total[i]}</td>
+      <td style="text-align:right; color:#BB0A21;">${MOM_DATA.jt[i]}</td>
+      <td style="text-align:right; color:#2563eb;">${MOM_DATA.apl[i]}</td>
+      <td style="text-align:right; color:#7c3aed;">${MOM_DATA.serwis[i]}</td>
+      <td style="text-align:right; color:#d97706;">${MOM_DATA.odkup[i]}</td>
+      <td style="text-align:right; color:#059669;">${MOM_DATA.wyprzedaz[i]}</td>
+      <td style="text-align:right; color:#db2777;">${MOM_DATA.pleasing[i]}</td>
+      <td style="text-align:right; color:#6b7280;">${MOM_DATA.apr[i]}</td>
+      <td style="text-align:right; font-weight:700; color:${momColor};">${momStr}</td>
+    </tr>`;
+  });
+
+  // Stacked bar chart
+  const ctxStack = document.getElementById('momStackedChart').getContext('2d');
+  new Chart(ctxStack, {
+    type: 'bar',
+    data: {
+      labels: MOM_DATA.labels,
+      datasets: [
+        { label: 'Jazda testowa', data: MOM_DATA.jt,        backgroundColor: '#BB0A21', stack: 's' },
+        { label: 'APL',          data: MOM_DATA.apl,       backgroundColor: '#2563eb', stack: 's' },
+        { label: 'Serwis',       data: MOM_DATA.serwis,    backgroundColor: '#7c3aed', stack: 's' },
+        { label: 'Odkup',        data: MOM_DATA.odkup,     backgroundColor: '#d97706', stack: 's' },
+        { label: 'Wyprzedaże',   data: MOM_DATA.wyprzedaz, backgroundColor: '#059669', stack: 's' },
+        { label: 'Perfect Lease',data: MOM_DATA.pleasing,  backgroundColor: '#db2777', stack: 's' },
+        { label: 'APR/inne',     data: MOM_DATA.apr,       backgroundColor: '#6b7280', stack: 's' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            footer: (items) => {
+              const total = items.reduce((s,i) => s + i.raw, 0);
+              const formTotal = MOM_DATA.total[items[0].dataIndex];
+              return `Suma typów: ${total} | form_total: ${formTotal}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { font: { size: 11 } } },
+        y: { stacked: true, beginAtZero: true, grid: { color: '#f0f0f0' },
+             ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+
+  // Linia JT + APL
+  const ctxJT = document.getElementById('momLineJTAPL').getContext('2d');
+  new Chart(ctxJT, {
+    type: 'line',
+    data: {
+      labels: MOM_DATA.labels,
+      datasets: [
+        { label: 'Jazda testowa', data: MOM_DATA.jt,  borderColor: '#BB0A21', backgroundColor: 'rgba(187,10,33,0.08)', tension: 0.3, fill: true, pointRadius: 3 },
+        { label: 'APL',          data: MOM_DATA.apl, borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.06)', tension: 0.3, fill: true, pointRadius: 3 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { size: 11 } } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 45 } },
+        y: { beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+
+  // Linia Serwis + Odkup
+  const ctxSerwis = document.getElementById('momLineSerwis').getContext('2d');
+  new Chart(ctxSerwis, {
+    type: 'line',
+    data: {
+      labels: MOM_DATA.labels,
+      datasets: [
+        { label: 'Serwis', data: MOM_DATA.serwis, borderColor: '#7c3aed', backgroundColor: 'rgba(124,58,237,0.08)', tension: 0.3, fill: true, pointRadius: 3 },
+        { label: 'Odkup',  data: MOM_DATA.odkup,  borderColor: '#d97706', backgroundColor: 'rgba(217,119,6,0.06)',  tension: 0.3, fill: true, pointRadius: 3 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { size: 11 } } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 45 } },
+        y: { beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
