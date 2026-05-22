@@ -2354,6 +2354,53 @@ function toggleSection(header) {
     <span class="insight-chip insight-note">⚠️ Maj 2026 = dane tylko do 20.05 (niepełny miesiąc). Projected ~70 przy obecnym tempie.</span>
   </div>
 
+
+  <!-- SECTION: ŹRÓDŁA RUCHU MoM -->
+  <div class="section-card" style="margin-bottom:24px;">
+    <div class="section-header">
+      <span class="section-title">📡 Formularze wg źródła ruchu — miesięcznie</span>
+      <span class="section-sub">form_total / sessionDefaultChannelGroup · kwi 2025 – maj 2026</span>
+    </div>
+    <div class="section-body">
+
+      <!-- WYKRES STACKED -->
+      <div style="height:280px;margin-bottom:24px;">
+        <canvas id="channelStackedChart"></canvas>
+      </div>
+
+      <!-- TABELA: TOTAL -->
+      <p style="font-size:12px;font-weight:700;color:#1a1a1a;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">Wszystkie formularze (form_total) wg kanału</p>
+      <div style="overflow-x:auto;margin-bottom:24px;">
+        <table style="font-size:12px;border-collapse:collapse;width:100%;min-width:700px;">
+          <thead>
+            <tr style="background:#1a1a1a;color:white;">
+              <th style="padding:9px 12px;text-align:left;font-weight:600;width:120px;">Miesiąc</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:600;background:#BB0A21;">Paid 💰</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:600;background:#2e7d32;">Organic 🌿</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:600;">Direct+inne</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:700;background:#333;">TOTAL</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:600;">% Paid</th>
+            </tr>
+          </thead>
+          <tbody id="channelTotalTbody">
+          </tbody>
+        </table>
+      </div>
+
+      <!-- LEGENDA KANAŁÓW -->
+      <details style="background:#fafafa;border:1px solid #e8e8e8;border-radius:6px;padding:0;margin-bottom:0;overflow:hidden;">
+        <summary style="padding:10px 16px;font-size:12px;font-weight:600;cursor:pointer;list-style:none;color:#6b6b6b;">Definicje grup kanałów ▾</summary>
+        <div style="padding:10px 16px 14px;font-size:11px;color:#6b6b6b;line-height:1.8;">
+          <strong style="color:#BB0A21;">Paid</strong> = Paid Search + Paid Social + Paid Other + Cross-network + Display + SMS<br>
+          <strong style="color:#2e7d32;">Organic</strong> = Organic Search + Organic Social<br>
+          <strong style="color:#1a1a1a;">Direct+inne</strong> = Direct + Referral + Unassigned + pozostałe<br>
+          <span style="margin-top:6px;display:block;">⚠️ Maj 2026 = dane do 20.05 (niepełny miesiąc)</span>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
 </div><!-- /container -->
 </div><!-- /tab-mom -->
 
@@ -2473,6 +2520,76 @@ const MOM_DATA = {
       }
     }
   });
+})();
+
+// ===== CHANNEL MoM DATA =====
+(function() {
+  const LABELS = ['Kwi 2025','Maj 2025','Cze 2025','Lip 2025','Sie 2025','Wrz 2025','Paź 2025','Lis 2025','Gru 2025','Sty 2026','Lut 2026','Mar 2026','Kwi 2026','Maj 2026*'];
+
+  // Paid = Paid Search + Paid Social + Paid Other + Cross-network + Display + SMS
+  // Organic = Organic Search + Organic Social
+  // Direct+inne = Direct + Referral + Unassigned + reszta
+  const CH = {
+    paid:    [147, 78, 56, 50, 41, 36, 68, 65, 63, 71, 83, 79, 39, 24],
+    organic: [ 35, 23, 32, 27, 18, 49, 18, 31, 31, 22, 17, 22, 14, 17],
+    other:   [ 97, 23, 14, 20,  4, 15, 19, 10,  7, 13,  7,  7, 11,  6],
+    total:   [279,124,102, 97, 63,100,105,106,101,106,107,108, 64, 47]
+  };
+
+  // --- Stacked bar chart ---
+  const ctxCh = document.getElementById('channelStackedChart');
+  if (ctxCh) {
+    new Chart(ctxCh.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: LABELS,
+        datasets: [
+          { label: 'Paid 💰',       data: CH.paid,    backgroundColor: 'rgba(187,10,33,0.82)',  stack: 'ch' },
+          { label: 'Organic 🌿',    data: CH.organic,  backgroundColor: 'rgba(46,125,50,0.80)',  stack: 'ch' },
+          { label: 'Direct+inne',   data: CH.other,    backgroundColor: 'rgba(107,107,107,0.60)', stack: 'ch' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'top', labels: { font: { size: 11 } } },
+          tooltip: {
+            callbacks: {
+              footer: function(items) {
+                const total = items.reduce((s, i) => s + i.parsed.y, 0);
+                return 'Total: ' + total;
+              }
+            }
+          }
+        },
+        scales: {
+          x: { stacked: true, grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 45 } },
+          y: { stacked: true, beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  // --- Build total table ---
+  const tbody = document.getElementById('channelTotalTbody');
+  if (tbody) {
+    LABELS.forEach(function(label, i) {
+      const paid = CH.paid[i], org = CH.organic[i], other = CH.other[i], tot = CH.total[i];
+      const paidPct = Math.round(paid / tot * 100);
+      const bg = i % 2 === 0 ? '#fff' : '#fafafa';
+      const isMay26 = label.includes('*');
+      tbody.innerHTML += '<tr style="background:' + bg + ';' + (isMay26 ? 'opacity:.75;' : '') + '">' +
+        '<td style="padding:7px 12px;font-weight:600;white-space:nowrap;">' + label + '</td>' +
+        '<td style="padding:7px 12px;text-align:right;color:#BB0A21;font-weight:700;">' + paid + '</td>' +
+        '<td style="padding:7px 12px;text-align:right;color:#2e7d32;font-weight:700;">' + org + '</td>' +
+        '<td style="padding:7px 12px;text-align:right;color:#6b6b6b;">' + other + '</td>' +
+        '<td style="padding:7px 12px;text-align:right;font-weight:700;background:#f4f4f4;">' + tot + '</td>' +
+        '<td style="padding:7px 12px;text-align:right;">' +
+          '<span style="background:' + (paidPct >= 60 ? '#fce4ec' : paidPct >= 40 ? '#fff8e1' : '#e8f5e9') + ';color:' + (paidPct >= 60 ? '#c62828' : paidPct >= 40 ? '#e65100' : '#2e7d32') + ';padding:2px 7px;border-radius:10px;font-size:11px;font-weight:600;">' + paidPct + '%</span>' +
+        '</td>' +
+      '</tr>';
+    });
+  }
 })();
 </script>
 
