@@ -310,7 +310,7 @@
 
   <!-- KPI ROW -->
   <div class="section-label">📊 Kluczowe metryki</div>
-  <div class="grid-4">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:20px;">
     <div class="kpi-card">
       <div class="kpi-label">Sesje</div>
       <div class="kpi-value" id="kpi-sessions">–</div>
@@ -321,13 +321,18 @@
       <div class="kpi-value" id="kpi-users">–</div>
       <div class="kpi-sub" id="kpi-users-sub"></div>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Konwersje (form_total)</div>
+    <div class="kpi-card" style="border-top:3px solid #BB0A21;">
+      <div class="kpi-label" style="color:#BB0A21;font-weight:700;">Konwersje TOTAL 🏆</div>
+      <div class="kpi-value" style="color:#BB0A21;" id="kpi-conv-total">427</div>
+      <div class="kpi-sub">wszystkie formularze · 90 dni</div>
+    </div>
+    <div class="kpi-card" style="border-top:3px solid #1a1a1a;">
+      <div class="kpi-label">Konwersje nowe auta</div>
       <div class="kpi-value" id="kpi-conv">–</div>
       <div class="kpi-sub" id="kpi-conv-sub"></div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Współczynnik konwersji</div>
+      <div class="kpi-label">CR nowe auta</div>
       <div class="kpi-value" id="kpi-cr">–</div>
       <div class="kpi-sub" id="kpi-cr-sub"></div>
     </div>
@@ -504,6 +509,30 @@
 <script>
 const DATA = {"meta": {"generated": "2026-05-26", "period_90d": "Ostatnie 90 dni (25 lut – 26 maj 2026)", "period_maj": "Maj 2026 (1–26 maj)"}, "summary": {"90d": {"sessions": 57052, "users": 57275, "conversions": 398, "cr": 0.70}, "maj": {"sessions": 12010, "users": 9750, "conversions": 91, "cr": 0.76}}, "devices": {"90d": [{"category": "mobile", "sessions": 39474}, {"category": "desktop", "sessions": 17294}, {"category": "tablet", "sessions": 507}], "maj": [{"category": "mobile", "sessions": 8247}, {"category": "desktop", "sessions": 3620}, {"category": "tablet", "sessions": 107}]}, "channels": {"90d": [{"channel": "Paid Search", "sessions": 33111, "conversions": 230, "activeUsers": 24073}, {"channel": "Organic Search", "sessions": 10655, "conversions": 87, "activeUsers": 6379}, {"channel": "Paid Social", "sessions": 6959, "conversions": 40, "activeUsers": 4558}, {"channel": "Direct", "sessions": 4548, "conversions": 27, "activeUsers": 2318}, {"channel": "Unassigned", "sessions": 623, "conversions": 0, "activeUsers": 505}, {"channel": "Organic Social", "sessions": 591, "conversions": 6, "activeUsers": 406}, {"channel": "Referral", "sessions": 257, "conversions": 10, "activeUsers": 139}, {"channel": "Cross-network", "sessions": 139, "conversions": 0, "activeUsers": 139}, {"channel": "SMS", "sessions": 85, "conversions": 0, "activeUsers": 45}, {"channel": "Display", "sessions": 25, "conversions": 0, "activeUsers": 15}, {"channel": "Email", "sessions": 17, "conversions": 0, "activeUsers": 6}, {"channel": "Paid Other", "sessions": 6, "conversions": 0, "activeUsers": 3}], "maj": [{"channel": "Paid Search", "sessions": 4574, "conversions": 35, "activeUsers": 3525}, {"channel": "Organic Search", "sessions": 2311, "conversions": 22, "activeUsers": 1474}, {"channel": "Paid Social", "sessions": 1235, "conversions": 4, "activeUsers": 893}, {"channel": "Direct", "sessions": 857, "conversions": 1, "activeUsers": 460}, {"channel": "Unassigned", "sessions": 290, "conversions": 0, "activeUsers": 262}, {"channel": "Organic Social", "sessions": 98, "conversions": 2, "activeUsers": 71}, {"channel": "Cross-network", "sessions": 85, "conversions": 0, "activeUsers": 85}, {"channel": "SMS", "sessions": 38, "conversions": 0, "activeUsers": 18}, {"channel": "Referral", "sessions": 13, "conversions": 5, "activeUsers": 5}]}, "demo_age": {"90d": [{"age": "18-24", "sessions": 1327}, {"age": "25-34", "sessions": 2982}, {"age": "35-44", "sessions": 5080}, {"age": "45-54", "sessions": 5533}, {"age": "55-64", "sessions": 2137}, {"age": "65+", "sessions": 3651}], "maj": [{"age": "18-24", "sessions": 197}, {"age": "25-34", "sessions": 485}, {"age": "35-44", "sessions": 854}, {"age": "45-54", "sessions": 831}, {"age": "55-64", "sessions": 355}, {"age": "65+", "sessions": 520}]}, "demo_gender": {"90d": [{"gender": "male", "sessions": 14908}, {"gender": "female", "sessions": 6056}], "maj": [{"gender": "male", "sessions": 2369}, {"gender": "female", "sessions": 929}]}, "geo": {"90d": [{"city": "Gdansk", "sessions": 13541}, {"city": "Warsaw", "sessions": 9385}, {"city": "Bydgoszcz", "sessions": 7132}, {"city": "Wroclaw", "sessions": 4288}, {"city": "Poznan", "sessions": 2483}, {"city": "Gdynia", "sessions": 2211}, {"city": "Pruszkow", "sessions": 1497}, {"city": "Katowice", "sessions": 1170}, {"city": "Lodz", "sessions": 1124}, {"city": "Krakow", "sessions": 974}], "maj": [{"city": "Gdansk", "sessions": 2317}, {"city": "Warsaw", "sessions": 1705}, {"city": "Bydgoszcz", "sessions": 1127}, {"city": "Wroclaw", "sessions": 682}, {"city": "Poznan", "sessions": 388}, {"city": "Gdynia", "sessions": 377}, {"city": "Katowice", "sessions": 251}, {"city": "Pruszkow", "sessions": 237}, {"city": "Lodz", "sessions": 168}, {"city": "Krakow", "sessions": 142}]}, "pages": {"90d": [{"page": "/oferta/wszystkie", "views": 57081, "users": 14052, "bounceRate": 1.9, "avgDurSec": 103}, {"page": "/oferta/wszystkie/", "views": 50873, "users": 24470, "bounceRate": 16.9, "avgDurSec": 86}, {"page": "/", "views": 12568, "users": 6266, "bounceRate": 12.4, "avgDurSec": 96}, {"page": "/oferta/wszystkie/page/2/", "views": 10701, "users": 5319, "bounceRate": 3.4, "avgDurSec": 60}, {"page": "/oferta/nowe/Audi/", "views": 7236, "users": 4134, "bounceRate": 2.7, "avgDurSec": 39}, {"page": "/oferta/wszystkie/page/3/", "views": 5267, "users": 2897, "bounceRate": 3.4, "avgDurSec": 54}, {"page": "/oferta/demonstracyjne/Audi/", "views": 3395, "users": 2182, "bounceRate": 2.7, "avgDurSec": 38}, {"page": "/salony/", "views": 3064, "users": 2181, "bounceRate": 13.9, "avgDurSec": 119}, {"page": "/oferta/wszystkie/page/4/", "views": 2766, "users": 1539, "bounceRate": 2.8, "avgDurSec": 53}, {"page": "/audiperfectlease/", "views": 2757, "users": 1915, "bounceRate": 15.5, "avgDurSec": 107}, {"page": "/oferta/wszystkie/Audi/", "views": 2025, "users": 1189, "bounceRate": 4.7, "avgDurSec": 133}, {"page": "/serwis/", "views": 1769, "users": 1185, "bounceRate": 19.7, "avgDurSec": 148}, {"page": "/oferta/wszystkie/page/5/", "views": 1706, "users": 1002, "bounceRate": 3.3, "avgDurSec": 57}, {"page": "/a3-2026/", "views": 1369, "users": 825, "bounceRate": 20.3, "avgDurSec": 83}, {"page": "/q4-etron-2026/", "views": 1274, "users": 875, "bounceRate": 20.5, "avgDurSec": 78}], "maj": [{"page": "/oferta/wszystkie", "views": 8552, "users": 1946, "bounceRate": 5.2, "avgDurSec": 113}, {"page": "/oferta/wszystkie/", "views": 5528, "users": 2654, "bounceRate": 16.3, "avgDurSec": 85}, {"page": "/", "views": 2852, "users": 1420, "bounceRate": 12.0, "avgDurSec": 103}, {"page": "/oferta/wszystkie/page/2/", "views": 1573, "users": 731, "bounceRate": 6.6, "avgDurSec": 65}, {"page": "/oferta/nowe/Audi/", "views": 1506, "users": 903, "bounceRate": 5.5, "avgDurSec": 37}, {"page": "/a3-2026/", "views": 1012, "users": 708, "bounceRate": 22.3, "avgDurSec": 82}, {"page": "/oferta/wszystkie/page/3/", "views": 864, "users": 452, "bounceRate": 6.6, "avgDurSec": 58}, {"page": "/q7-2026/", "views": 692, "users": 506, "bounceRate": 22.5, "avgDurSec": 67}, {"page": "/q5-2026-2/", "views": 641, "users": 424, "bounceRate": 23.9, "avgDurSec": 86}, {"page": "/oferta/demonstracyjne/Audi/", "views": 635, "users": 456, "bounceRate": 4.7, "avgDurSec": 30}, {"page": "/audiperfectlease/", "views": 601, "users": 426, "bounceRate": 15.3, "avgDurSec": 113}, {"page": "/wyprzedaz-q5/", "views": 600, "users": 416, "bounceRate": 23.9, "avgDurSec": 66}, {"page": "/oferta/wszystkie/page/4/", "views": 502, "users": 251, "bounceRate": 4.9, "avgDurSec": 52}, {"page": "/salony/", "views": 494, "users": 363, "bounceRate": 15.4, "avgDurSec": 141}, {"page": "/oferta/wszystkie/Audi/", "views": 404, "users": 262, "bounceRate": 6.7, "avgDurSec": 56}]}, "high_bounce": {"90d": [], "maj": [{"page": "/nowe-audi-q5-audi-city-gdansk/", "sessions": 6, "bounceRate": 100.0}, {"page": "/oferta/nowe/samochod/audi-q5-sportback-26-rabatu-audi-sound-matrix-21-kamery-skory-ambiente-pro/", "sessions": 12, "bounceRate": 75.0}, {"page": "/oferta/nowe/samochod/audi-q5-pakiet-tech-pluss-line-exterieurreflektory-matrix-led-4/", "sessions": 7, "bounceRate": 57.1}, {"page": "/oferta/nowe/samochod/audi-q8-tfsi-e-bang-olufsen-tylna-os-skretna-hak-head-up-wentylacja-i-masaze/", "sessions": 18, "bounceRate": 50.0}, {"page": "/oferta/nowe/samochod/audi-q5-skory-ambiente-kamera-cofani-a-4x4-audi-sound-system/", "sessions": 6, "bounceRate": 50.0}]}, "timeseries": {"90d": [{"date": "20260225", "sessions": 739, "users": 571, "conversions": 6}, {"date": "20260226", "sessions": 776, "users": 618, "conversions": 8}, {"date": "20260227", "sessions": 733, "users": 574, "conversions": 5}, {"date": "20260228", "sessions": 730, "users": 583, "conversions": 0}, {"date": "20260301", "sessions": 650, "users": 555, "conversions": 0}, {"date": "20260302", "sessions": 624, "users": 500, "conversions": 13}, {"date": "20260303", "sessions": 643, "users": 492, "conversions": 9}, {"date": "20260304", "sessions": 714, "users": 558, "conversions": 8}, {"date": "20260305", "sessions": 675, "users": 545, "conversions": 3}, {"date": "20260306", "sessions": 698, "users": 575, "conversions": 8}, {"date": "20260307", "sessions": 642, "users": 521, "conversions": 4}, {"date": "20260308", "sessions": 665, "users": 559, "conversions": 12}, {"date": "20260309", "sessions": 758, "users": 595, "conversions": 4}, {"date": "20260310", "sessions": 694, "users": 572, "conversions": 5}, {"date": "20260311", "sessions": 727, "users": 550, "conversions": 8}, {"date": "20260312", "sessions": 679, "users": 541, "conversions": 4}, {"date": "20260313", "sessions": 656, "users": 524, "conversions": 2}, {"date": "20260314", "sessions": 667, "users": 532, "conversions": 1}, {"date": "20260315", "sessions": 681, "users": 573, "conversions": 6}, {"date": "20260316", "sessions": 689, "users": 536, "conversions": 11}, {"date": "20260317", "sessions": 687, "users": 537, "conversions": 9}, {"date": "20260318", "sessions": 773, "users": 594, "conversions": 1}, {"date": "20260319", "sessions": 764, "users": 592, "conversions": 12}, {"date": "20260320", "sessions": 650, "users": 518, "conversions": 7}, {"date": "20260321", "sessions": 529, "users": 449, "conversions": 9}, {"date": "20260322", "sessions": 667, "users": 566, "conversions": 8}, {"date": "20260323", "sessions": 603, "users": 473, "conversions": 0}, {"date": "20260324", "sessions": 644, "users": 516, "conversions": 0}, {"date": "20260325", "sessions": 670, "users": 523, "conversions": 5}, {"date": "20260326", "sessions": 671, "users": 532, "conversions": 6}, {"date": "20260327", "sessions": 718, "users": 549, "conversions": 10}, {"date": "20260328", "sessions": 634, "users": 533, "conversions": 2}, {"date": "20260329", "sessions": 645, "users": 552, "conversions": 3}, {"date": "20260330", "sessions": 652, "users": 522, "conversions": 6}, {"date": "20260331", "sessions": 433, "users": 342, "conversions": 2}, {"date": "20260401", "sessions": 425, "users": 333, "conversions": 2}, {"date": "20260402", "sessions": 797, "users": 665, "conversions": 8}, {"date": "20260403", "sessions": 733, "users": 625, "conversions": 1}, {"date": "20260404", "sessions": 857, "users": 738, "conversions": 6}, {"date": "20260405", "sessions": 1005, "users": 859, "conversions": 9}, {"date": "20260406", "sessions": 948, "users": 813, "conversions": 8}, {"date": "20260407", "sessions": 903, "users": 726, "conversions": 2}, {"date": "20260408", "sessions": 866, "users": 729, "conversions": 2}, {"date": "20260409", "sessions": 803, "users": 660, "conversions": 6}, {"date": "20260410", "sessions": 889, "users": 730, "conversions": 5}, {"date": "20260411", "sessions": 1025, "users": 887, "conversions": 6}, {"date": "20260412", "sessions": 992, "users": 856, "conversions": 1}, {"date": "20260413", "sessions": 886, "users": 719, "conversions": 3}, {"date": "20260414", "sessions": 852, "users": 677, "conversions": 8}, {"date": "20260415", "sessions": 633, "users": 489, "conversions": 7}, {"date": "20260416", "sessions": 594, "users": 463, "conversions": 3}, {"date": "20260417", "sessions": 598, "users": 453, "conversions": 1}, {"date": "20260418", "sessions": 512, "users": 425, "conversions": 2}, {"date": "20260419", "sessions": 641, "users": 533, "conversions": 0}, {"date": "20260420", "sessions": 661, "users": 509, "conversions": 8}, {"date": "20260421", "sessions": 729, "users": 588, "conversions": 7}, {"date": "20260422", "sessions": 686, "users": 549, "conversions": 2}, {"date": "20260423", "sessions": 623, "users": 494, "conversions": 0}, {"date": "20260424", "sessions": 461, "users": 359, "conversions": 5}, {"date": "20260425", "sessions": 415, "users": 346, "conversions": 0}, {"date": "20260426", "sessions": 505, "users": 431, "conversions": 0}, {"date": "20260427", "sessions": 599, "users": 488, "conversions": 1}, {"date": "20260428", "sessions": 640, "users": 531, "conversions": 0}, {"date": "20260429", "sessions": 644, "users": 545, "conversions": 0}, {"date": "20260430", "sessions": 540, "users": 450, "conversions": 7}, {"date": "20260501", "sessions": 232, "users": 187, "conversions": 4}, {"date": "20260502", "sessions": 284, "users": 242, "conversions": 2}, {"date": "20260503", "sessions": 366, "users": 316, "conversions": 0}, {"date": "20260504", "sessions": 508, "users": 410, "conversions": 4}, {"date": "20260505", "sessions": 523, "users": 428, "conversions": 4}, {"date": "20260506", "sessions": 492, "users": 402, "conversions": 9}, {"date": "20260507", "sessions": 455, "users": 361, "conversions": 5}, {"date": "20260508", "sessions": 536, "users": 412, "conversions": 5}, {"date": "20260509", "sessions": 410, "users": 318, "conversions": 0}, {"date": "20260510", "sessions": 439, "users": 360, "conversions": 1}, {"date": "20260511", "sessions": 521, "users": 416, "conversions": 0}, {"date": "20260512", "sessions": 511, "users": 401, "conversions": 4}, {"date": "20260513", "sessions": 541, "users": 430, "conversions": 5}, {"date": "20260514", "sessions": 569, "users": 431, "conversions": 2}, {"date": "20260515", "sessions": 500, "users": 397, "conversions": 4}, {"date": "20260516", "sessions": 501, "users": 420, "conversions": 0}, {"date": "20260517", "sessions": 507, "users": 429, "conversions": 8}, {"date": "20260518", "sessions": 610, "users": 479, "conversions": 7}, {"date": "20260519", "sessions": 577, "users": 453, "conversions": 5}, {"date": "20260520", "sessions": 558, "users": 447, "conversions": 3}, {"date": "20260521", "sessions": 546, "users": 408, "conversions": 0}, {"date": "20260522", "sessions": 450, "users": 354, "conversions": 4}, {"date": "20260523", "sessions": 439, "users": 347, "conversions": 1}, {"date": "20260524", "sessions": 451, "users": 368, "conversions": 9}, {"date": "20260525", "sessions": 484, "users": 368, "conversions": 5}], "maj": [{"date": "20260501", "sessions": 232, "users": 187, "conversions": 4}, {"date": "20260502", "sessions": 284, "users": 242, "conversions": 2}, {"date": "20260503", "sessions": 366, "users": 316, "conversions": 0}, {"date": "20260504", "sessions": 508, "users": 410, "conversions": 4}, {"date": "20260505", "sessions": 523, "users": 428, "conversions": 4}, {"date": "20260506", "sessions": 492, "users": 402, "conversions": 9}, {"date": "20260507", "sessions": 455, "users": 361, "conversions": 5}, {"date": "20260508", "sessions": 536, "users": 412, "conversions": 5}, {"date": "20260509", "sessions": 410, "users": 318, "conversions": 0}, {"date": "20260510", "sessions": 439, "users": 360, "conversions": 1}, {"date": "20260511", "sessions": 521, "users": 416, "conversions": 0}, {"date": "20260512", "sessions": 511, "users": 401, "conversions": 4}, {"date": "20260513", "sessions": 541, "users": 430, "conversions": 5}, {"date": "20260514", "sessions": 569, "users": 431, "conversions": 2}, {"date": "20260515", "sessions": 500, "users": 397, "conversions": 4}, {"date": "20260516", "sessions": 501, "users": 420, "conversions": 0}, {"date": "20260517", "sessions": 507, "users": 429, "conversions": 8}, {"date": "20260518", "sessions": 610, "users": 479, "conversions": 7}, {"date": "20260519", "sessions": 577, "users": 453, "conversions": 5}, {"date": "20260520", "sessions": 558, "users": 447, "conversions": 3}, {"date": "20260521", "sessions": 546, "users": 408, "conversions": 0}, {"date": "20260522", "sessions": 450, "users": 354, "conversions": 4}, {"date": "20260523", "sessions": 439, "users": 347, "conversions": 1}, {"date": "20260524", "sessions": 451, "users": 368, "conversions": 9}, {"date": "20260525", "sessions": 484, "users": 368, "conversions": 5}]}, "dow": {"90d": [{"day": "Niedziela", "sessions": 8251, "conversions": 57}, {"day": "Poniedziałek", "sessions": 8590, "conversions": 70}, {"day": "Wtorek", "sessions": 8473, "conversions": 57}, {"day": "Środa", "sessions": 8453, "conversions": 58}, {"day": "Czwartek", "sessions": 8398, "conversions": 64}, {"day": "Piątek", "sessions": 7794, "conversions": 61}, {"day": "Sobota", "sessions": 7637, "conversions": 33}]}, "hours": {"90d": [{"hour": 0, "sessions": 845}, {"hour": 1, "sessions": 375}, {"hour": 2, "sessions": 209}, {"hour": 3, "sessions": 190}, {"hour": 4, "sessions": 186}, {"hour": 5, "sessions": 450}, {"hour": 6, "sessions": 1036}, {"hour": 7, "sessions": 2079}, {"hour": 8, "sessions": 2910}, {"hour": 9, "sessions": 3530}, {"hour": 10, "sessions": 3853}, {"hour": 11, "sessions": 3779}, {"hour": 12, "sessions": 4015}, {"hour": 13, "sessions": 3800}, {"hour": 14, "sessions": 3894}, {"hour": 15, "sessions": 3848}, {"hour": 16, "sessions": 3584}, {"hour": 17, "sessions": 3590}, {"hour": 18, "sessions": 3502}, {"hour": 19, "sessions": 3515}, {"hour": 20, "sessions": 3800}, {"hour": 21, "sessions": 3576}, {"hour": 22, "sessions": 2942}, {"hour": 23, "sessions": 1591}]}, "conv_pages": {"90d": [{"page": "/jazda-testowa/", "sessions": 434, "conversions": 60, "cr": 13.8}, {"page": "/audiperfectlease/", "sessions": 2214, "conversions": 22, "cr": 1.0}, {"page": "/serwis/", "sessions": 1434, "conversions": 20, "cr": 1.4}, {"page": "/odkup/", "sessions": 946, "conversions": 14, "cr": 1.5}, {"page": "/", "sessions": 8784, "conversions": 10, "cr": 0.1}, {"page": "/wyprzedaz-a5/", "sessions": 373, "conversions": 10, "cr": 2.7}, {"page": "/audi-perfect-rent/", "sessions": 777, "conversions": 9, "cr": 1.2}, {"page": "/audiperfectlease/q5/", "sessions": 894, "conversions": 8, "cr": 0.9}, {"page": "/audiperfectlease/a3/", "sessions": 837, "conversions": 8, "cr": 1.0}, {"page": "/wyprzedaz-a6/", "sessions": 751, "conversions": 8, "cr": 1.1}]}, "events": {"maj": [{"event": "page_view", "count": 51451, "users": 8375}, {"event": "user_engagement", "count": 37212, "users": 7656}, {"event": "view_item", "count": 25792, "users": 4921}, {"event": "session_start", "count": 12419, "users": 8357}, {"event": "scroll", "count": 12061, "users": 4138}, {"event": "view_search_results", "count": 12008, "users": 3433}, {"event": "first_visit", "count": 7200, "users": 7203}, {"event": "form_start", "count": 5296, "users": 2657}, {"event": "chat_otworzenie", "count": 3684, "users": 1835}, {"event": "Automated greeting", "count": 2901, "users": 2820}, {"event": "samochody-nowe_strona-glowna", "count": 1808, "users": 861}, {"event": "APL_zapytaj-oferta_open", "count": 510, "users": 376}, {"event": "click_zobacz_szczegoly", "count": 373, "users": 288}, {"event": "menu_dostepne_audi", "count": 196, "users": 146}, {"event": "form_submit", "count": 158, "users": 6}]}};
 
+
+// ===== FUNNEL DATA (wszystkie typy formularzy, 90 dni: 25 lut – 26 maj 2026) =====
+const FUNNEL_DATA = [
+  { key: 'form_total',     label: 'Nowe auta',           sublabel: 'form_total (karta pojazdu)',              count: 243,  users: 219,  color: '#1a1a1a',  icon: '🚗', url: '/oferta/nowe/' },
+  { key: 'form_auta_nowe', label: 'Nowe auta (model)',    sublabel: 'form_auta-nowe (strona modelu)',           count: 82,   users: 75,   color: '#374151',  icon: '🚘', url: '/oferta/nowe/Audi/' },
+  { key: 'form_jt',        label: 'Jazda testowa',        sublabel: 'form_jazda-testowa + Formularz_jt',        count: 58,   users: 58,   color: '#BB0A21',  icon: '🏎', url: '/jazda-testowa/' },
+  { key: 'form_apl',       label: 'Audi Perfect Lease',   sublabel: 'form_APL_sent + formularz_apl',            count: 30,   users: 24,   color: '#2563eb',  icon: '📃', url: '/audiperfectlease/' },
+  { key: 'form_serwis',    label: 'Serwis',               sublabel: 'form_serwis',                              count: 22,   users: 22,   color: '#7c3aed',  icon: '🔧', url: '/serwis/' },
+  { key: 'form_demo',      label: 'Auta demo',            sublabel: 'form_auta-demonstracyjne',                 count: 14,   users: 14,   color: '#6b7280',  icon: '🚙', url: '/oferta/demonstracyjne/' },
+  { key: 'form_odkup',     label: 'Odkup',                sublabel: 'form_odkup',                               count: 14,   users: 14,   color: '#d97706',  icon: '💰', url: '/odkup/' },
+  { key: 'form_wyprzedaz', label: 'Wyprzedaże',           sublabel: 'form_wyprzedaz-2024-A5/A6/Q5',             count: 20,   users: 18,   color: '#059669',  icon: '🏷', url: '/wyprzedaz-a5/' },
+  { key: 'form_pleasing',  label: 'Perfect Lease per model', sublabel: 'form_perfect_lease_A3/Q5/A6/Q3',        count: 12,   users: 12,   color: '#db2777',  icon: '✨', url: '/audiperfectlease/' },
+  { key: 'form_apr',       label: 'Audi Perfect Rent',    sublabel: 'form_APR_sent',                            count: 4,    users: 4,    color: '#f97316',  icon: '🔑', url: '/audi-perfect-rent/' },
+  { key: 'form_strona_gl', label: 'Strona główna',        sublabel: 'form_strona-glowna',                       count: 10,   users: 8,    color: '#64748b',  icon: '🏠', url: '/' }
+];
+const FUNNEL_CONTEXT = {
+  form_start:      26609,
+  users_form_start: 13851,
+  page_view:       237398,
+  sessions:        57309,
+  chat_otworzenie: 16550
+};
+const FUNNEL_TOTAL_ALL = FUNNEL_DATA.reduce((s,f) => s + f.count, 0);
+
 let currentPeriod = '90d';
 let charts = {};
 
@@ -532,7 +561,7 @@ function renderKPIs() {
   document.getElementById('kpi-users').textContent = fmt(d.users);
   document.getElementById('kpi-conv').textContent = fmt(d.conversions);
   document.getElementById('kpi-cr').textContent = d.cr + '%';
-  const lbl = currentPeriod === '90d' ? '(~90 dni)' : '(1–20 maj)';
+  const lbl = currentPeriod === '90d' ? '(90 dni)' : '(1–26 maj)';
   document.getElementById('kpi-sessions-sub').textContent = lbl;
   document.getElementById('kpi-users-sub').textContent = lbl;
   document.getElementById('kpi-conv-sub').textContent = 'form_total ' + lbl;
@@ -1723,14 +1752,14 @@ function toggleSection(header) {
     </div>
     <div class="section-body">
       <div class="alert alert-red">
-        <strong>16 851 otwarć chatu → ile zostało leadem? NIEZNANE.</strong><br>
+        <strong>16 550 otwarć chatu → ile zostało leadem? NIEZNANE.</strong><br>
         Brak jakiegokolwiek eventu po fazie otwarcia widgetu.
       </div>
       <div class="grid2">
         <div class="mini-card">
           <h4>Eventy śledzone</h4>
           <div class="ev-strip">
-            <span class="ev ev-micro">chat_otworzenie <span class="ev-num">16 851</span></span>
+            <span class="ev ev-micro">chat_otworzenie <span class="ev-num">16 550</span></span>
             <span class="ev ev-auto">Automated greeting <span class="ev-num">7 694</span></span>
             <span class="ev ev-auto">Chat <span class="ev-num">153 (inny event)</span></span>
           </div>
@@ -1766,7 +1795,7 @@ function toggleSection(header) {
           <div class="funnel-bar-wrap">
             <div class="funnel-bar" style="width:100%; background:#1a4a8a">100%</div>
           </div>
-          <div class="funnel-num">58 843</div>
+          <div class="funnel-num">57 052</div>
         </div>
         <div class="funnel-step">
           <div class="funnel-label">form_start (unikalni)</div>
@@ -1795,7 +1824,7 @@ function toggleSection(header) {
           <tr><th>Etap</th><th>Wywołania</th><th>Unikalni użytkownicy</th><th>CR od form_start</th></tr>
         </thead>
         <tbody>
-          <tr><td>form_start</td><td class="num">27 589</td><td class="num">14 414</td><td class="num">–</td></tr>
+          <tr><td>form_start</td><td class="num">26 609</td><td class="num">14 414</td><td class="num">–</td></tr>
           <tr><td>form_total</td><td class="num">256</td><td class="num">230</td><td class="num cr-high">1.6%</td></tr>
           <tr><td><span class="ev ev-warn" style="font-size:11px">⚠ form_submit (BUG)</span></td><td class="num">447</td><td class="num cr-low">15 (!!)</td><td class="num cr-low">BUG GTM</td></tr>
         </tbody>
@@ -1850,7 +1879,7 @@ function toggleSection(header) {
         <div class="priority-num p2">4</div>
         <div class="priority-text">
           <strong>LiveChat → chat_lead_created</strong>
-          16 851 otwarć bez żadnego śledzenia konwersji — największe ślepe pole
+          16 550 otwarć bez żadnego śledzenia konwersji — największe ślepe pole
         </div>
       </div>
       <div class="priority-item">
@@ -1902,294 +1931,121 @@ function toggleSection(header) {
 <div class="main-tab-panel" id="tab-funnel">
 <div class="container">
 
-  <div class="section-label" style="margin-top:8px">🔻 Lejek konwersji — Formularz kontaktowy (karta pojazdu)</div>
+  <!-- PASEK SUMMARY -->
+  <div class="section-label" style="margin-top:8px">🔻 Lejki konwersji — wszystkie typy formularzy</div>
 
-  <!-- GŁÓWNY UKŁAD: screenshot + lejek -->
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:24px; align-items:start;">
-
-    <!-- LEWA: screenshot formularza -->
-    <div class="card" style="padding:0; overflow:hidden;">
-      <div class="card-title" style="padding:14px 20px; margin-bottom:0; border-bottom:1px solid var(--border);">
-        <span class="icon">📋</span> Formularz "Zapytaj o ofertę" — karta pojazdu
-      </div>
-      <div style="padding:16px; background:#f8f8f8; text-align:center;">
-        <!-- Inline SVG mockup formularza oparty na screenshocie -->
-        <svg width="100%" viewBox="0 0 320 440" xmlns="http://www.w3.org/2000/svg" style="max-width:320px; display:block; margin:0 auto; border:1px solid #ddd; border-radius:6px; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-          <!-- Nagłówek -->
-          <rect x="0" y="0" width="320" height="36" fill="#1a1a1a"/>
-          <text x="16" y="23" font-family="Arial" font-size="13" font-weight="700" fill="white">Zapytaj o ofertę</text>
-
-          <!-- Pola formularza -->
-          <!-- Imię i nazwisko -->
-          <rect x="12" y="48" width="143" height="32" rx="4" fill="white" stroke="#ddd" stroke-width="1"/>
-          <text x="20" y="68" font-family="Arial" font-size="10" fill="#aaa">Imię i nazwisko *</text>
-
-          <!-- Telefon -->
-          <rect x="163" y="48" width="145" height="32" rx="4" fill="white" stroke="#ddd" stroke-width="1"/>
-          <text x="171" y="68" font-family="Arial" font-size="10" fill="#aaa">Telefon *</text>
-
-          <!-- Email -->
-          <rect x="12" y="90" width="296" height="32" rx="4" fill="white" stroke="#ddd" stroke-width="1"/>
-          <text x="20" y="110" font-family="Arial" font-size="10" fill="#aaa">Email</text>
-
-          <!-- Tekst zgody -->
-          <rect x="12" y="132" width="296" height="28" rx="3" fill="#f9f9f9" stroke="#eee" stroke-width="1"/>
-          <text x="20" y="150" font-family="Arial" font-size="9" fill="#666">Wysyłając formularz podajesz nam swoje dane...</text>
-
-          <!-- Checkboxy zgód -->
-          <rect x="12" y="168" width="12" height="12" rx="2" fill="white" stroke="#ccc" stroke-width="1"/>
-          <text x="30" y="178" font-family="Arial" font-size="9" fill="#555">Zapoznałem się z Polityką prywatności *</text>
-
-          <rect x="12" y="188" width="12" height="12" rx="2" fill="white" stroke="#ccc" stroke-width="1"/>
-          <text x="30" y="198" font-family="Arial" font-size="9" fill="#555">Zgoda na kontakt sms/mms... rozwiń</text>
-
-          <rect x="12" y="208" width="12" height="12" rx="2" fill="white" stroke="#ccc" stroke-width="1"/>
-          <text x="30" y="218" font-family="Arial" font-size="9" fill="#555">Zgoda na kontakt telefoniczny... rozwiń</text>
-
-          <rect x="12" y="228" width="12" height="12" rx="2" fill="white" stroke="#ccc" stroke-width="1"/>
-          <text x="30" y="238" font-family="Arial" font-size="9" fill="#555">Zgoda na kontakt mailowy... rozwiń</text>
-
-          <!-- reCAPTCHA -->
-          <rect x="12" y="252" width="296" height="44" rx="4" fill="#f9f9f9" stroke="#d3d3d3" stroke-width="1"/>
-          <rect x="22" y="264" width="20" height="20" rx="3" fill="white" stroke="#ccc" stroke-width="1"/>
-          <text x="50" y="278" font-family="Arial" font-size="11" fill="#333">Nie jestem robotem</text>
-          <text x="248" y="270" font-family="Arial" font-size="8" fill="#aaa">reCAPTCHA</text>
-          <text x="248" y="282" font-family="Arial" font-size="7" fill="#aaa">Prywatność</text>
-          <text x="248" y="292" font-family="Arial" font-size="7" fill="#aaa">Warunki</text>
-
-          <!-- Przycisk Wyślij -->
-          <rect x="12" y="308" width="296" height="38" rx="4" fill="#1a1a1a"/>
-          <text x="160" y="332" font-family="Arial" font-size="13" font-weight="700" fill="white" text-anchor="middle">Wyślij</text>
-
-          <!-- Etykiety punktów porzucenia (strzałki) -->
-          <!-- form_start -->
-          <circle cx="305" cy="64" r="6" fill="#BB0A21"/>
-          <text x="305" y="67" font-family="Arial" font-size="8" fill="white" text-anchor="middle" font-weight="700">1</text>
-
-          <!-- step 2 — zgody -->
-          <circle cx="305" cy="188" r="6" fill="#f57c00"/>
-          <text x="305" y="191" font-family="Arial" font-size="8" fill="white" text-anchor="middle" font-weight="700">2</text>
-
-          <!-- step 3 — reCAPTCHA -->
-          <circle cx="305" cy="274" r="6" fill="#f57c00"/>
-          <text x="305" y="277" font-family="Arial" font-size="8" fill="white" text-anchor="middle" font-weight="700">3</text>
-
-          <!-- step 4 — Wyślij = form_total -->
-          <circle cx="305" cy="327" r="6" fill="#2e7d32"/>
-          <text x="305" y="330" font-family="Arial" font-size="8" fill="white" text-anchor="middle" font-weight="700">4</text>
-
-          <!-- Legenda na dole -->
-          <rect x="0" y="368" width="320" height="72" fill="#f4f4f4"/>
-          <text x="12" y="385" font-family="Arial" font-size="9" font-weight="700" fill="#333">Legenda:</text>
-          <circle cx="20" cy="400" r="5" fill="#BB0A21"/>
-          <text x="30" y="404" font-family="Arial" font-size="9" fill="#555">1 — form_start (śledzone ✓)</text>
-          <circle cx="160" cy="400" r="5" fill="#f57c00"/>
-          <text x="170" y="404" font-family="Arial" font-size="9" fill="#555">2,3 — brak eventu ✗</text>
-          <circle cx="20" cy="418" r="5" fill="#2e7d32"/>
-          <text x="30" y="422" font-family="Arial" font-size="9" fill="#555">4 — form_total (śledzone ✓)</text>
-          <text x="160" y="418" font-family="Arial" font-size="9" fill="#BB0A21" font-weight="600">? — gdzie porzucają?</text>
-        </svg>
-        <p style="font-size:11px; color:#888; margin-top:8px;">Formularz kontaktowy — karta pojazdu (/oferta/…)</p>
-      </div>
+  <!-- KPI summary bar dla lejków -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px;" id="funnel-kpi-bar">
+    <div class="kpi-card" style="border-top:3px solid #BB0A21;">
+      <div class="kpi-label" style="color:#BB0A21;font-weight:700;">Konwersje TOTAL</div>
+      <div class="kpi-value" style="color:#BB0A21;" id="fkpi-total">–</div>
+      <div class="kpi-sub">wszystkie formularze · 90 dni</div>
     </div>
+    <div class="kpi-card">
+      <div class="kpi-label">form_start</div>
+      <div class="kpi-value" style="font-size:22px;">26 609</div>
+      <div class="kpi-sub">intencja wypełnienia · 13 851 users</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">CR form_start → send</div>
+      <div class="kpi-value" id="fkpi-cr" style="font-size:22px;">–</div>
+      <div class="kpi-sub">wszystkie formularze razem</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Chat otwarcia</div>
+      <div class="kpi-value" style="font-size:22px;">16 550</div>
+      <div class="kpi-sub">chat_otworzenie (nie = lead)</div>
+    </div>
+  </div>
 
-    <!-- PRAWA: lejek z liczbami + lista do eventowania -->
-    <div style="display:flex; flex-direction:column; gap:16px;">
-
-      <!-- Lejek z liczbami -->
-      <div class="card">
-        <div class="card-title"><span class="icon">📊</span> Lejek — co wiemy z GA4 (90 dni)</div>
-
-        <!-- Krok 1 -->
-        <div style="margin-bottom:6px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <span style="font-size:12px; font-weight:700; color:#1a1a1a;">Wejście na stronę pojazdu</span>
-            <span style="font-family:monospace; font-size:13px; font-weight:700; color:#1a1a1a;">~247 897</span>
-          </div>
-          <div style="background:#e0e0e0; border-radius:4px; height:28px; overflow:hidden;">
-            <div style="width:100%; height:100%; background:#1a1a1a; display:flex; align-items:center; padding-left:10px;">
-              <span style="font-size:11px; color:white;">page_view — wszystkie odsłony</span>
-            </div>
-          </div>
-          <div style="font-size:10px; color:#888; margin-top:2px;">event: <code style="background:#f4f4f4; padding:1px 4px; border-radius:3px;">page_view</code> — auto GA4</div>
-        </div>
-
-        <div style="text-align:center; color:#BB0A21; font-size:16px; line-height:1; margin:2px 0;">↓</div>
-
-        <!-- Krok 2 -->
-        <div style="margin-bottom:6px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <span style="font-size:12px; font-weight:700; color:#1a1a1a;">Kliknięcie w formularz</span>
-            <span style="font-family:monospace; font-size:16px; font-weight:700; color:#BB0A21;">27 589</span>
-          </div>
-          <div style="background:#e0e0e0; border-radius:4px; height:28px; overflow:hidden;">
-            <div style="width:100%; height:100%; background:#BB0A21; display:flex; align-items:center; padding-left:10px;">
-              <span style="font-size:11px; color:white;">form_start — 100% bazy</span>
-            </div>
-          </div>
-          <div style="font-size:10px; color:#888; margin-top:2px;">event: <code style="background:#fef2f2; color:#BB0A21; padding:1px 4px; border-radius:3px;">form_start</code> — śledzone ✓</div>
-        </div>
-
-        <div style="text-align:center; color:#f57c00; font-size:16px; line-height:1; margin:2px 0;">↓ <span style="font-size:10px; color:#f57c00;">❓ tu jest czarna dziura</span></div>
-
-        <!-- Krok 3 — BRAK DANYCH -->
-        <div style="margin-bottom:6px; opacity:0.6;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <span style="font-size:12px; font-weight:700; color:#888;">Wypełnił pola + zaznaczył zgody</span>
-            <span style="font-family:monospace; font-size:13px; font-weight:700; color:#888;">? brak danych</span>
-          </div>
-          <div style="background:#e0e0e0; border-radius:4px; height:28px; overflow:hidden;">
-            <div style="width:60%; height:100%; background:#e0e0e0; border: 2px dashed #aaa; display:flex; align-items:center; padding-left:10px;">
-              <span style="font-size:11px; color:#888;">brak eventu — nie mierzymy</span>
-            </div>
-          </div>
-          <div style="font-size:10px; color:#f57c00; margin-top:2px;">⚠️ brak: <code style="background:#fffbeb; color:#92400e; padding:1px 4px; border-radius:3px;">form_step_2_zgody</code></div>
-        </div>
-
-        <div style="text-align:center; color:#f57c00; font-size:16px; line-height:1; margin:2px 0;">↓</div>
-
-        <!-- Krok 4 — BRAK DANYCH -->
-        <div style="margin-bottom:6px; opacity:0.6;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <span style="font-size:12px; font-weight:700; color:#888;">Przeszedł reCAPTCHA v2</span>
-            <span style="font-family:monospace; font-size:13px; font-weight:700; color:#888;">? brak danych</span>
-          </div>
-          <div style="background:#e0e0e0; border-radius:4px; height:28px; overflow:hidden;">
-            <div style="width:40%; height:100%; background:#e0e0e0; border: 2px dashed #aaa; display:flex; align-items:center; padding-left:10px;">
-              <span style="font-size:11px; color:#888;">brak eventu — nie mierzymy</span>
-            </div>
-          </div>
-          <div style="font-size:10px; color:#f57c00; margin-top:2px;">⚠️ brak: <code style="background:#fffbeb; color:#92400e; padding:1px 4px; border-radius:3px;">form_step_3_recaptcha</code></div>
-        </div>
-
-        <div style="text-align:center; color:#2e7d32; font-size:16px; line-height:1; margin:2px 0;">↓</div>
-
-        <!-- Krok 5 — form_total -->
-        <div style="margin-bottom:4px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <span style="font-size:12px; font-weight:700; color:#1a1a1a;">Wysłał formularz</span>
-            <span style="font-family:monospace; font-size:20px; font-weight:700; color:#2e7d32;">256</span>
-          </div>
-          <div style="background:#e0e0e0; border-radius:4px; height:28px; overflow:hidden;">
-            <div style="width:1%; height:100%; background:#2e7d32; min-width:80px; display:flex; align-items:center; padding-left:10px;">
-              <span style="font-size:11px; color:white;">form_total ✓</span>
-            </div>
-          </div>
-          <div style="font-size:10px; color:#888; margin-top:2px;">event: <code style="background:#e8f5e9; color:#2e7d32; padding:1px 4px; border-radius:3px;">form_total</code> — śledzone ✓</div>
-        </div>
-
-        <!-- CR podsumowanie -->
-        <div style="background:#f8f8f8; border-radius:6px; padding:10px 14px; margin-top:12px; border-left:3px solid #BB0A21;">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-size:12px; color:#555;">CR form_start → form_total</span>
-            <span style="font-size:18px; font-weight:700; color:#BB0A21;">0.93%</span>
-          </div>
-          <div style="font-size:11px; color:#888; margin-top:4px;">27 589 → 256 | Dla strony /jazda-testowa: <strong style="color:#2e7d32;">10.6%</strong> — 10× lepiej</div>
-        </div>
-      </div>
-
-      <!-- Porzucenie przez chat -->
-      <div class="card">
-        <div class="card-title"><span class="icon">💬</span> Chat — czy zamiast formularza?</div>
-        <div style="display:flex; align-items:center; gap:16px; padding:4px 0 8px;">
-          <div style="text-align:center;">
-            <div style="font-size:28px; font-weight:700; color:#1a1a1a;">16 851</div>
-            <div style="font-size:11px; color:#888;">chat_otworzenie</div>
-          </div>
-          <div style="font-size:20px; color:#aaa;">vs</div>
-          <div style="text-align:center;">
-            <div style="font-size:28px; font-weight:700; color:#BB0A21;">256</div>
-            <div style="font-size:11px; color:#888;">form_total</div>
-          </div>
-        </div>
-        <div style="font-size:12px; color:#555; background:#fffbeb; border:1px solid #fde68a; border-radius:5px; padding:8px 10px;">
-          ⚠️ Brak eventu <code style="background:#fffbeb; color:#92400e;">chat_lead</code> — nie wiemy ile otwarć chatu kończy się leadem. Samo <code>chat_otworzenie</code> = tylko otwarcie widgetu.
-        </div>
-      </div>
-
-    </div><!-- /prawa kolumna -->
-  </div><!-- /główny układ -->
-
-  <!-- DOLNA CZĘŚĆ: co eventować po drodze -->
+  <!-- WYKRES PORÓWNAWCZY wszystkich typów -->
   <div class="card" style="margin-bottom:24px;">
-    <div class="card-title"><span class="icon">🛠</span> Co eventować po drodze — plan GTM</div>
+    <div class="card-title"><span class="icon">📊</span> Porównanie wszystkich formularzy — liczba wysłań (90 dni)</div>
+    <div style="position:relative;height:260px;">
+      <canvas id="funnelCompareChart"></canvas>
+    </div>
+  </div>
 
+  <!-- LEJKI GRID — jeden lejek per typ formularza -->
+  <div class="section-label">📋 Lejki per typ formularza</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:24px;" id="funnel-grid">
+    <!-- generowane przez JS -->
+  </div>
+
+  <!-- TABELA ZBIORCZA -->
+  <div class="card" style="margin-bottom:24px;">
+    <div class="card-title"><span class="icon">📋</span> Zestawienie zbiorcze — wszystkie typy formularzy</div>
+    <div style="overflow-x:auto;">
+      <table style="font-size:12px;border-collapse:collapse;width:100%;">
+        <thead>
+          <tr style="background:#1a1a1a;color:white;">
+            <th style="padding:8px 12px;text-align:left;">Typ formularza</th>
+            <th style="padding:8px 12px;text-align:left;font-size:10px;">Event GA4</th>
+            <th style="padding:8px 12px;text-align:right;">Wysłań</th>
+            <th style="padding:8px 12px;text-align:right;">Users</th>
+            <th style="padding:8px 12px;text-align:right;">% total</th>
+            <th style="padding:8px 12px;text-align:right;">CR vs form_start</th>
+            <th style="padding:8px 12px;text-align:left;">Strona</th>
+          </tr>
+        </thead>
+        <tbody id="funnel-table-body"></tbody>
+        <tfoot id="funnel-table-foot"></tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- PLAN GTM (zachowany) -->
+  <div class="card" style="margin-bottom:24px;">
+    <div class="card-title"><span class="icon">🛠</span> Co eventować po drodze — plan GTM (formularz kontaktowy / karta pojazdu)</div>
     <table>
       <thead>
         <tr>
-          <th>#</th>
-          <th>Krok w formularzu</th>
-          <th>Proponowany event GTM</th>
-          <th>Trigger</th>
-          <th>Priorytet</th>
-          <th>Po co?</th>
+          <th>#</th><th>Krok w formularzu</th><th>Proponowany event GTM</th><th>Trigger</th><th>Priorytet</th><th>Po co?</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td style="font-weight:700; color:#BB0A21;">1</td>
+          <td style="font-weight:700;color:#BB0A21;">1</td>
           <td>Użytkownik klika w pole (focus)</td>
-          <td><code style="background:#fef2f2; color:#BB0A21; padding:2px 6px; border-radius:3px;">form_start</code></td>
-          <td>Focus na input[name=imie] lub input[name=tel]</td>
-          <td><span class="badge-green" style="background:#e8f5e9; color:#2e7d32; font-size:11px; padding:2px 8px; border-radius:10px;">✓ działa</span></td>
-          <td style="font-size:12px; color:#555;">Mierzymy intencję</td>
+          <td><code style="background:#fef2f2;color:#BB0A21;padding:2px 6px;border-radius:3px;">form_start</code></td>
+          <td>Focus na input[name=imie] lub tel</td>
+          <td><span style="background:#e8f5e9;color:#2e7d32;font-size:11px;padding:2px 8px;border-radius:10px;">✓ działa</span></td>
+          <td style="font-size:12px;color:#555;">Mierzymy intencję</td>
         </tr>
         <tr style="background:#fffbeb;">
-          <td style="font-weight:700; color:#f57c00;">2</td>
-          <td>Wypełnił wszystkie pola obowiązkowe</td>
-          <td><code style="background:#fffbeb; color:#92400e; padding:2px 6px; border-radius:3px;">form_fields_complete</code></td>
-          <td>Zmiana stanu pól — custom JS w GTM</td>
-          <td><span class="badge-red" style="font-size:11px; padding:2px 8px; border-radius:10px;">❌ brak</span></td>
-          <td style="font-size:12px; color:#555;">Wiemy czy problem to pola czy zgody</td>
+          <td style="font-weight:700;color:#f57c00;">2</td>
+          <td>Wypełnił pola obowiązkowe</td>
+          <td><code style="background:#fffbeb;color:#92400e;padding:2px 6px;border-radius:3px;">form_fields_complete</code></td>
+          <td>Zmiana stanu pól — custom JS</td>
+          <td><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fee2e2;color:#991b1b;">❌ brak</span></td>
+          <td style="font-size:12px;color:#555;">Pola czy zgody powodują porzucenia?</td>
         </tr>
         <tr style="background:#fffbeb;">
-          <td style="font-weight:700; color:#f57c00;">3</td>
-          <td>Zaznaczył zgodę obowiązkową (polityka)</td>
-          <td><code style="background:#fffbeb; color:#92400e; padding:2px 6px; border-radius:3px;">form_consent_checked</code></td>
-          <td>Click na checkbox[name=polityka]</td>
-          <td><span class="badge-red" style="font-size:11px; padding:2px 8px; border-radius:10px;">❌ brak</span></td>
-          <td style="font-size:12px; color:#555;">Mierzymy friction zgód RODO</td>
-        </tr>
-        <tr style="background:#fef2f2;">
-          <td style="font-weight:700; color:#BB0A21;">4</td>
-          <td>Próba kliknięcia "Wyślij" (przed captcha)</td>
-          <td><code style="background:#fef2f2; color:#BB0A21; padding:2px 6px; border-radius:3px;">form_submit_attempt</code></td>
-          <td>Click na button[type=submit]</td>
-          <td><span class="badge-red" style="font-size:11px; padding:2px 8px; border-radius:10px;">❌ brak</span></td>
-          <td style="font-size:12px; color:#555;">Ile osób próbuje, ale nie przechodzi reCAPTCHA?</td>
-        </tr>
-        <tr style="background:#fef2f2;">
-          <td style="font-weight:700; color:#BB0A21;">5</td>
-          <td>reCAPTCHA v2 — zaznaczono checkbox</td>
-          <td><code style="background:#fef2f2; color:#BB0A21; padding:2px 6px; border-radius:3px;">form_recaptcha_passed</code></td>
-          <td>grecaptcha callback / dataLayer push</td>
-          <td><span class="badge-red" style="font-size:11px; padding:2px 8px; border-radius:10px;">❌ brak</span></td>
-          <td style="font-size:12px; color:#555;">Czy reCAPTCHA blokuje konwersje?</td>
+          <td style="font-weight:700;color:#f57c00;">3</td>
+          <td>reCAPTCHA v2 zaznaczona</td>
+          <td><code style="background:#fffbeb;color:#92400e;padding:2px 6px;border-radius:3px;">form_step_3_recaptcha</code></td>
+          <td>grecaptcha callback</td>
+          <td><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fee2e2;color:#991b1b;">❌ brak</span></td>
+          <td style="font-size:12px;color:#555;">reCAPTCHA jako friction — ile odpada?</td>
         </tr>
         <tr>
-          <td style="font-weight:700; color:#2e7d32;">6</td>
-          <td>Formularz wysłany pomyślnie</td>
-          <td><code style="background:#e8f5e9; color:#2e7d32; padding:2px 6px; border-radius:3px;">form_total</code></td>
-          <td>Sukces AJAX / thank-you state</td>
-          <td><span class="badge-green" style="background:#e8f5e9; color:#2e7d32; font-size:11px; padding:2px 8px; border-radius:10px;">✓ działa</span></td>
-          <td style="font-size:12px; color:#555;">256 leadów / 90 dni</td>
+          <td style="font-weight:700;color:#2e7d32;">4</td>
+          <td>Kliknął "Wyślij"</td>
+          <td><code style="background:#e8f5e9;color:#2e7d32;padding:2px 6px;border-radius:3px;">form_total</code></td>
+          <td>Submit event</td>
+          <td><span style="background:#e8f5e9;color:#2e7d32;font-size:11px;padding:2px 8px;border-radius:10px;">✓ działa</span></td>
+          <td style="font-size:12px;color:#555;">Finalna konwersja</td>
         </tr>
-        <tr style="background:#f5f3ff;">
-          <td style="font-weight:700; color:#7c3aed;">7</td>
-          <td>Porzucenie — focus był, submit nie</td>
-          <td><code style="background:#f5f3ff; color:#7c3aed; padding:2px 6px; border-radius:3px;">form_abandon</code></td>
-          <td>beforeunload gdy form_start bez form_total</td>
-          <td><span class="badge-red" style="font-size:11px; padding:2px 8px; border-radius:10px;">❌ brak</span></td>
-          <td style="font-size:12px; color:#555;">Ile użytkowników startuje i odpuszcza?</td>
+        <tr style="background:#fffbeb;">
+          <td style="font-weight:700;color:#f57c00;">5</td>
+          <td>Porzucił formularz</td>
+          <td><code style="background:#fffbeb;color:#92400e;padding:2px 6px;border-radius:3px;">form_abandon</code></td>
+          <td>beforeunload po form_start bez form_total</td>
+          <td><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fee2e2;color:#991b1b;">❌ brak</span></td>
+          <td style="font-size:12px;color:#555;">Ile i kiedy porzucają?</td>
         </tr>
       </tbody>
     </table>
-
-    <div style="margin-top:14px; padding:12px 16px; background:#fef2f2; border-radius:6px; border-left:3px solid #BB0A21; font-size:12px; color:#555; line-height:1.6;">
-      🎯 <strong style="color:#BB0A21;">Hipoteza główna:</strong> Między <code>form_start</code> (27 589) a <code>form_total</code> (256) ginie <strong>99.07%</strong> użytkowników.
-      Bez eventów kroków nie wiemy czy tracą ich <em>pola formularza</em>, <em>zgody RODO</em>, <em>reCAPTCHA v2</em> czy po prostu porzucają stronę po zapoznaniu się z ofertą.
-      Wdrożenie eventów 2–5 zajmie ~2h w GTM i odpowie na to pytanie.
-    </div>
   </div>
 
 </div><!-- /container -->
@@ -2591,6 +2447,188 @@ const MOM_DATA = {
     });
   }
 })();
+
+// ===== FUNNEL RENDERER =====
+(function initFunnel() {
+  const FS = FUNNEL_CONTEXT.form_start;
+  const total = FUNNEL_TOTAL_ALL;
+
+  // KPI bar
+  const kpiTotal = document.getElementById('fkpi-total');
+  const kpiCr    = document.getElementById('fkpi-cr');
+  if (kpiTotal) kpiTotal.textContent = total.toLocaleString('pl-PL');
+  if (kpiCr)    kpiCr.textContent = (total / FS * 100).toFixed(1) + '%';
+
+  // KPI bar główny (zakładka GA4) — total all
+  const kpiConvTotal = document.getElementById('kpi-conv-total');
+  if (kpiConvTotal) kpiConvTotal.textContent = total.toLocaleString('pl-PL');
+
+  // Wykres porównawczy
+  const ctxCmp = document.getElementById('funnelCompareChart');
+  if (ctxCmp) {
+    new Chart(ctxCmp.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: FUNNEL_DATA.map(f => f.label),
+        datasets: [{
+          label: 'Wysłanych formularzy (90 dni)',
+          data: FUNNEL_DATA.map(f => f.count),
+          backgroundColor: FUNNEL_DATA.map(f => f.color),
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              afterLabel: (item) => {
+                const f = FUNNEL_DATA[item.dataIndex];
+                const cr = (f.count / FS * 100).toFixed(2);
+                return `CR vs form_start: ${cr}% | Users: ${f.users}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: { beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  // Generuj lejki per typ
+  const grid = document.getElementById('funnel-grid');
+  if (grid) {
+    FUNNEL_DATA.forEach(f => {
+      const cr_fs   = (f.count / FS * 100).toFixed(2);
+      const pct_tot = (f.count / total * 100).toFixed(1);
+      const barW    = Math.max(2, Math.round(f.count / FUNNEL_DATA[0].count * 100));
+      const fsBarW  = Math.min(100, Math.round(FS / 30000 * 100));
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.cssText = 'padding:16px;';
+      card.innerHTML = `
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;border-bottom:2px solid ${f.color};padding-bottom:8px;">
+          <span style="font-size:20px;">${f.icon}</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:#1a1a1a;">${f.label}</div>
+            <div style="font-size:10px;color:#888;">${f.sublabel}</div>
+          </div>
+        </div>
+
+        <!-- Krok 1: Odsłony -->
+        <div style="margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <span style="font-size:11px;color:#555;">📄 Odsłony (page_view)</span>
+            <span style="font-size:12px;font-weight:700;color:#94a3b8;">237 398</span>
+          </div>
+          <div style="background:#e8ecf0;border-radius:3px;height:8px;">
+            <div style="width:100%;height:100%;background:#94a3b8;border-radius:3px;"></div>
+          </div>
+        </div>
+
+        <!-- Krok 2: form_start -->
+        <div style="text-align:center;font-size:11px;color:#BB0A21;margin:2px 0;">↓ tylko ${(FS/237398*100).toFixed(1)}% klika w formularz</div>
+        <div style="margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <span style="font-size:11px;color:#555;">👆 form_start</span>
+            <span style="font-size:12px;font-weight:700;color:#BB0A21;">26 609</span>
+          </div>
+          <div style="background:#e8ecf0;border-radius:3px;height:8px;">
+            <div style="width:${fsBarW}%;height:100%;background:#BB0A21;border-radius:3px;"></div>
+          </div>
+        </div>
+
+        <!-- Krok 3: CZARNA DZIURA (brak etapów) -->
+        <div style="text-align:center;font-size:11px;color:#f57c00;margin:2px 0;">↓ ❓ brak pomiaru etapów</div>
+        <div style="margin-bottom:8px;opacity:0.5;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <span style="font-size:11px;color:#888;">📝 Wypełnia pola… reCAPTCHA…</span>
+            <span style="font-size:11px;color:#888;">? brak danych</span>
+          </div>
+          <div style="background:#e8ecf0;border-radius:3px;height:8px;border:1px dashed #aaa;">
+          </div>
+        </div>
+
+        <!-- Krok 4: Wysłanie -->
+        <div style="text-align:center;font-size:11px;color:#2e7d32;margin:2px 0;">↓ CR = <strong>${cr_fs}%</strong></div>
+        <div style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <span style="font-size:11px;color:#555;">✅ Wysłany formularz</span>
+            <span style="font-size:16px;font-weight:700;color:${f.color};">${f.count.toLocaleString('pl-PL')}</span>
+          </div>
+          <div style="background:#e8ecf0;border-radius:3px;height:12px;">
+            <div style="width:${barW}%;height:100%;background:${f.color};border-radius:3px;"></div>
+          </div>
+        </div>
+
+        <!-- Statsy -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px;background:#f8f8f8;border-radius:6px;padding:8px;">
+          <div style="text-align:center;">
+            <div style="font-size:14px;font-weight:700;color:${f.color};">${f.count}</div>
+            <div style="font-size:9px;color:#888;">wysłań</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:14px;font-weight:700;color:#555;">${cr_fs}%</div>
+            <div style="font-size:9px;color:#888;">CR vs start</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:14px;font-weight:700;color:#555;">${pct_tot}%</div>
+            <div style="font-size:9px;color:#888;">% total</div>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  // Tabela zbiorcza
+  const tbody = document.getElementById('funnel-table-body');
+  const tfoot = document.getElementById('funnel-table-foot');
+  if (tbody) {
+    FUNNEL_DATA.forEach((f, i) => {
+      const cr  = (f.count / FS * 100).toFixed(2);
+      const pct = (f.count / total * 100).toFixed(1);
+      const bg  = i % 2 === 0 ? '#fff' : '#fafafa';
+      tbody.innerHTML += `<tr style="background:${bg};">
+        <td style="padding:7px 12px;font-weight:600;display:flex;align-items:center;gap:6px;">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${f.color};flex-shrink:0;"></span>
+          ${f.label}
+        </td>
+        <td style="padding:7px 12px;font-size:10px;color:#888;font-family:monospace;">${f.sublabel.split(' ')[0]}</td>
+        <td style="padding:7px 12px;text-align:right;font-weight:700;">${f.count.toLocaleString('pl-PL')}</td>
+        <td style="padding:7px 12px;text-align:right;color:#555;">${f.users}</td>
+        <td style="padding:7px 12px;text-align:right;">
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;">
+            <div style="width:50px;background:#e8ecf0;border-radius:3px;height:6px;">
+              <div style="width:${Math.round(f.count/total*100)}%;height:100%;background:${f.color};border-radius:3px;"></div>
+            </div>
+            <span>${pct}%</span>
+          </div>
+        </td>
+        <td style="padding:7px 12px;text-align:right;color:#2e7d32;">${cr}%</td>
+        <td style="padding:7px 12px;font-size:11px;color:#888;">
+          <a href="https://audiplichta.pl${f.url}" target="_blank" style="color:#BB0A21;text-decoration:none;">${f.url}</a>
+        </td>
+      </tr>`;
+    });
+  }
+  if (tfoot) {
+    tfoot.innerHTML = `<tr style="background:#1a1a1a;color:white;font-weight:700;">
+      <td style="padding:8px 12px;" colspan="2">RAZEM</td>
+      <td style="padding:8px 12px;text-align:right;">${total.toLocaleString('pl-PL')}</td>
+      <td style="padding:8px 12px;text-align:right;">–</td>
+      <td style="padding:8px 12px;text-align:right;">100%</td>
+      <td style="padding:8px 12px;text-align:right;">${(total/FS*100).toFixed(2)}%</td>
+      <td style="padding:8px 12px;">–</td>
+    </tr>`;
+  }
+})();
+
 </script>
 
 </body>
