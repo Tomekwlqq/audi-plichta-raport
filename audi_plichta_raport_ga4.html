@@ -1,0 +1,2841 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audi Plichta — Raport GA4</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --audi-red: #BB0A21;
+    --audi-dark: #1a1a1a;
+    --audi-gray: #6b6b6b;
+    --audi-light: #f4f4f4;
+    --audi-silver: #e8e8e8;
+    --card-bg: #ffffff;
+    --border: #e0e0e0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f0f0; color: #1a1a1a; }
+
+  /* HEADER */
+  .header { background: var(--audi-dark); color: white; padding: 24px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .header-left { display: flex; align-items: center; gap: 20px; }
+  .audi-rings { font-size: 28px; letter-spacing: -4px; color: white; opacity: 0.9; }
+  .header h1 { font-size: 20px; font-weight: 300; letter-spacing: 1px; }
+  .header h1 span { font-weight: 600; }
+  .header-meta { font-size: 12px; color: #aaa; text-align: right; }
+
+  /* PERIOD SWITCHER */
+  .switcher-bar { background: white; border-bottom: 3px solid var(--audi-red); padding: 0 32px; display: flex; align-items: center; gap: 0; }
+  .switcher-btn { padding: 16px 28px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; background: none; color: var(--audi-gray); border-bottom: 3px solid transparent; margin-bottom: -3px; letter-spacing: 0.5px; transition: all 0.2s; }
+  .switcher-btn.active { color: var(--audi-red); border-bottom-color: var(--audi-red); }
+  .switcher-btn:hover { color: var(--audi-dark); }
+  .switcher-label { margin-left: auto; font-size: 12px; color: var(--audi-gray); padding: 16px 0; }
+
+  /* LAYOUT */
+  .container { max-width: 1400px; margin: 0 auto; padding: 28px 24px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+  /* KPI CARDS */
+  .kpi-card { background: white; border-radius: 8px; padding: 20px 24px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--audi-red); }
+  .kpi-label { font-size: 11px; color: var(--audi-gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .kpi-value { font-size: 32px; font-weight: 700; color: var(--audi-dark); line-height: 1; }
+  .kpi-sub { font-size: 12px; color: var(--audi-gray); margin-top: 6px; }
+  .kpi-badge { display: inline-block; background: #e8f5e9; color: #2e7d32; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; margin-top: 4px; }
+
+  /* SECTION CARDS */
+  .card { background: white; border-radius: 8px; padding: 20px 24px; border: 1px solid var(--border); }
+  .card-title { font-size: 13px; font-weight: 700; color: var(--audi-dark); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--silver); display: flex; align-items: center; gap: 8px; }
+  .card-title .icon { color: var(--audi-red); }
+  .chart-wrap { position: relative; height: 240px; }
+  .chart-wrap-tall { position: relative; height: 300px; }
+  .chart-wrap-wide { position: relative; height: 220px; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--audi-light); padding: 8px 12px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--audi-gray); }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--audi-dark); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafafa; }
+  .badge-red { background: #fdecea; color: var(--audi-red); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+  .badge-green { background: #e8f5e9; color: #2e7d32; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+  .badge-gray { background: #f5f5f5; color: #666; font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+  .page-path { font-family: monospace; font-size: 11px; color: #444; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* BAR MINI */
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+  .bar-label { min-width: 120px; color: var(--audi-dark); font-weight: 500; }
+  .bar-label-sm { min-width: 80px; font-size: 12px; color: #555; }
+  .bar-track { flex: 1; background: var(--audi-silver); border-radius: 4px; height: 8px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--audi-red); border-radius: 4px; transition: width 0.5s; }
+  .bar-fill-blue { background: #1565c0; }
+  .bar-fill-green { background: #2e7d32; }
+  .bar-val { min-width: 55px; text-align: right; font-size: 12px; color: var(--audi-gray); font-weight: 600; }
+
+  /* HEATMAP */
+  .heatmap { display: grid; grid-template-columns: 60px repeat(24, 1fr); gap: 2px; font-size: 10px; }
+  .hmap-cell { border-radius: 3px; padding: 4px 2px; text-align: center; }
+
+  /* SECTION LABEL */
+  .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--audi-gray); margin: 28px 0 14px; padding-left: 4px; }
+
+  /* INSIGHT CHIPS */
+  .insight-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 4px; padding: 10px 14px; background: #f8f8f8; border-radius: 6px; border-left: 3px solid var(--audi-red); }
+  .insight-chip { font-size: 12px; color: #333; white-space: nowrap; }
+  .insight-chip strong { color: var(--audi-dark); }
+  .insight-chip.insight-note { color: #555; font-style: italic; white-space: normal; flex-basis: 100%; border-top: 1px solid #e8e8e8; margin-top: 4px; padding-top: 6px; }
+
+  /* WNIOSKI SECTION */
+  .wnioski-section { background: white; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 20px; overflow: hidden; }
+  .wnioski-header { background: var(--audi-dark); color: white; padding: 14px 20px; font-size: 14px; font-weight: 700; letter-spacing: 0.5px; }
+  .wnioski-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .wniosek-item { padding: 16px 20px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
+  .wniosek-item:nth-child(even) { border-right: none; }
+  .wniosek-item:last-child, .wniosek-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+  .wniosek-prio { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+  .wniosek-prio.high { color: #BB0A21; }
+  .wniosek-prio.med { color: #f57c00; }
+  .wniosek-prio.low { color: #2e7d32; }
+  .wniosek-title { font-size: 13px; font-weight: 700; color: var(--audi-dark); margin-bottom: 5px; }
+  .wniosek-desc { font-size: 12px; color: var(--audi-gray); line-height: 1.5; }
+
+  /* FOOTER */
+  .footer { text-align: center; padding: 32px; color: #aaa; font-size: 12px; }
+  .footer strong { color: var(--audi-red); }
+
+  /* MAIN TAB NAV */
+  .main-tab-nav { background: #1a1a1a; padding: 0 32px; display: flex; gap: 0; }
+  .main-tab-btn { padding: 14px 28px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; background: none; color: #888; border-bottom: 3px solid transparent; margin-bottom: -0px; letter-spacing: 0.3px; transition: all 0.2s; }
+  .main-tab-btn.active { color: #fff; border-bottom-color: var(--audi-red); }
+  .main-tab-btn:hover { color: #ccc; }
+  .main-tab-panel { display: none; }
+  .main-tab-panel.active { display: block; }
+
+  /* ARCH panel compat — CSS variables bridge */
+  #tab-map, #tab-dash, #tab-arch, #tab-funnel {
+    --accent: #BB0A21; --text: #1a1a1a; --text2: #6b6b6b;
+    --surface: #ffffff; --surface2: #f4f4f4; --border: #e0e0e0;
+    --blue: #2563eb; --blue-bg: #eff6ff;
+    --green: #16a34a; --green-bg: #f0fdf4;
+    --red-bg: #fef2f2; --red: #BB0A21;
+    --purple: #7c3aed; --purple-bg: #f5f3ff;
+    --bg: #f4f4f4;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  #tab-map .container, #tab-arch .container,
+  #tab-dash .container {
+    max-width: 1400px; margin: 0 auto; padding: 28px 24px;
+  }
+  #tab-map h2, #tab-arch h2,
+  #tab-dash h2 {
+    font-size: 15px; font-weight: 700; color: var(--text); margin: 20px 0 10px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  #tab-map .section, #tab-arch .section,
+  #tab-dash .section {
+    background: #fff; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 16px; overflow: hidden;
+  }
+  #tab-map .section-body, #tab-arch .section-body,
+  #tab-dash .section-body { padding: 16px; }
+  #tab-map .section-header, #tab-arch .section-header,
+  #tab-dash .section-header {
+    padding: 12px 16px; font-weight: 700; font-size: 13px; cursor: pointer;
+    background: #fafafa; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;
+  }
+  #tab-map .grid2, #tab-arch .grid2,
+  #tab-dash .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
+  #tab-map .grid3, #tab-arch .grid3,
+  #tab-dash .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  #tab-map .mini-card, #tab-arch .mini-card,
+  #tab-dash .mini-card {
+    background: #fff; border-radius: 8px; padding: 14px; border: 1px solid var(--border);
+  }
+  #tab-map .mini-card h4, #tab-arch .mini-card h4,
+  #tab-dash .mini-card h4 { font-size: 13px; margin-bottom: 4px; }
+  #tab-map .mini-card p, #tab-arch .mini-card p,
+  #tab-dash .mini-card p { font-size: 11px; color: var(--text2); }
+  #tab-map .badge, #tab-arch .badge,
+  #tab-dash .badge { display: inline-block; border-radius: 4px; padding: 3px 8px; font-size: 11px; font-weight: 600; }
+  #tab-map .badge-blue, #tab-arch .badge-blue,
+  #tab-dash .badge-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid #bfdbfe; }
+  #tab-map .badge-green, #tab-arch .badge-green,
+  #tab-dash .badge-green { background: var(--green-bg); color: var(--green); }
+  #tab-map .badge-red, #tab-arch .badge-red,
+  #tab-dash .badge-red { background: var(--red-bg); color: var(--accent); }
+  #tab-map .badge-yellow, #tab-arch .badge-yellow,
+  #tab-dash .badge-yellow { background: #fffbeb; color: #92400e; }
+  #tab-map .ev-strip, #tab-arch .ev-strip,
+  #tab-dash .ev-strip { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  #tab-map .ev, #tab-arch .ev,
+  #tab-dash .ev { font-size: 11px; padding: 3px 8px; border-radius: 4px; font-family: monospace; }
+  #tab-map .ev-micro, #tab-arch .ev-micro,
+  #tab-dash .ev-micro { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+  #tab-map .ev-lead, #tab-arch .ev-lead,
+  #tab-dash .ev-lead { background: #fef2f2; color: #BB0A21; border: 1px solid #fecaca; }
+  #tab-map .ev-warn, #tab-arch .ev-warn,
+  #tab-dash .ev-warn { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+  #tab-map .ev-num, #tab-arch .ev-num,
+  #tab-dash .ev-num { font-weight: 700; }
+  #tab-map .alert, #tab-arch .alert,
+  #tab-dash .alert { border-radius: 6px; padding: 10px 14px; font-size: 12px; margin-bottom: 8px; }
+  #tab-map .alert-red, #tab-arch .alert-red,
+  #tab-dash .alert-red { background: var(--red-bg); border: 1px solid #fecaca; color: #991b1b; }
+  #tab-map .alert-yellow, #tab-arch .alert-yellow,
+  #tab-dash .alert-yellow { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+  #tab-map .alert-blue, #tab-arch .alert-blue,
+  #tab-dash .alert-blue { background: var(--blue-bg); border: 1px solid #bfdbfe; color: #1e40af; }
+  #tab-dash .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  #tab-dash .kpi-card { background: #fff; border-radius: 8px; padding: 18px 20px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+  #tab-dash .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #e0e0e0; }
+  #tab-dash .kpi-card.accent::before { background: var(--accent); }
+  #tab-dash .kpi-card.blue::before { background: var(--blue); }
+  #tab-dash .kpi-card.green::before { background: var(--green); }
+  #tab-dash .kpi-card.yellow::before { background: #d97706; }
+  #tab-dash .kpi-label { font-size: 11px; color: var(--text2); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; }
+  #tab-dash .kpi-value { font-size: 28px; font-weight: 700; color: var(--text); line-height: 1; }
+  #tab-dash .kpi-sub { font-size: 11px; color: var(--text2); margin-top: 5px; }
+  #tab-dash .bar-chart { display: flex; flex-direction: column; gap: 8px; }
+  #tab-dash .bar-row { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+  #tab-dash .bar-name { min-width: 130px; color: var(--text); font-weight: 500; }
+  #tab-dash .bar-outer { flex: 1; background: var(--surface2); border-radius: 4px; height: 20px; overflow: hidden; }
+  #tab-dash .bar-inner { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 10px; color: #fff; white-space: nowrap; }
+  #tab-dash .bar-val { min-width: 36px; text-align: right; font-weight: 700; color: var(--text); }
+  #tab-dash table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  #tab-dash th { background: var(--surface2); padding: 7px 10px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text2); }
+  #tab-dash td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
+  #tab-dash .num { text-align: right; font-family: monospace; }
+  #tab-dash .cr-high { color: #16a34a; font-weight: 700; }
+  #tab-dash .cr-low { color: #BB0A21; font-weight: 700; }
+  #tab-dash code { background: var(--surface2); padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: 11px; }
+  #tab-dash .funnel { display: flex; flex-direction: column; gap: 6px; }
+  #tab-dash .funnel-step { display: flex; align-items: center; gap: 12px; }
+  #tab-dash .funnel-label { min-width: 200px; font-size: 12px; color: var(--text2); }
+  #tab-dash .funnel-bar-wrap { flex: 1; background: var(--surface2); border-radius: 4px; height: 28px; overflow: hidden; }
+  #tab-dash .funnel-bar { height: 100%; display: flex; align-items: center; padding-left: 10px; font-size: 11px; color: #fff; white-space: nowrap; min-width: 60px; }
+  #tab-dash .funnel-num { min-width: 60px; text-align: right; font-weight: 700; font-size: 13px; }
+  #tab-dash .collapse-btn { font-size: 11px; color: var(--text2); }
+  #tab-dash .section-title { font-size: 13px; font-weight: 700; }
+
+  /* ARCH TAB — extra styles */
+  #tab-arch .container { max-width: 1400px; margin: 0 auto; padding: 28px 24px; }
+  #tab-arch h2, #tab-arch h3 { font-size: 14px; font-weight: 700; color: var(--text); margin: 16px 0 8px; }
+  #tab-arch .section { background: #fff; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 14px; overflow: hidden; }
+  #tab-arch .section-body { padding: 14px 16px; }
+  #tab-arch .section-header { padding: 10px 16px; font-weight: 700; font-size: 13px; cursor: pointer; background: #fafafa; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; justify-content: space-between; }
+  #tab-arch .section-icon { font-size: 16px; }
+  #tab-arch .section-title { font-size: 13px; font-weight: 700; flex: 1; }
+  #tab-arch .section-url { font-family: monospace; font-size: 11px; color: var(--text2); background: #f4f4f4; padding: 2px 7px; border-radius: 4px; }
+  #tab-arch .collapse-btn { font-size: 11px; color: var(--text2); margin-left: auto; }
+  #tab-arch .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 10px; }
+  #tab-arch .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 10px; }
+  #tab-arch .mini-card { background: #fff; border-radius: 6px; padding: 12px; border: 1px solid var(--border); }
+  #tab-arch .mini-card h4 { font-size: 12px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+  #tab-arch .mini-card p { font-size: 11px; color: var(--text2); margin-top: 4px; }
+  #tab-arch .ev-strip { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+  #tab-arch .ev { font-size: 11px; padding: 3px 7px; border-radius: 4px; font-family: monospace; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 3px; }
+  #tab-arch .ev-micro { background: #f0fdf4; color: #16a34a; border-color: #bbf7d0; }
+  #tab-arch .ev-lead  { background: #fef2f2; color: #BB0A21; border-color: #fecaca; font-weight: 700; }
+  #tab-arch .ev-warn  { background: #fffbeb; color: #92400e; border-color: #fde68a; }
+  #tab-arch .ev-tel   { background: #f5f3ff; color: #7c3aed; border-color: #ddd6fe; }
+  #tab-arch .ev-miss  { background: #fef2f2; color: #BB0A21; border-color: #fecaca; font-style: italic; }
+  #tab-arch .ev-auto  { background: #f4f4f4; color: #6b6b6b; border-color: #e0e0e0; }
+  #tab-arch .ev-num   { font-weight: 700; }
+  #tab-arch .ev-label { font-size: 10px; font-weight: 400; font-family: sans-serif; margin-left: 2px; }
+  #tab-arch .alert { border-radius: 6px; padding: 9px 12px; font-size: 12px; margin-bottom: 6px; }
+  #tab-arch .alert-red    { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+  #tab-arch .alert-yellow { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+  #tab-arch .alert-blue   { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+  #tab-arch .badge { display: inline-block; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+  #tab-arch .badge-blue  { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+  #tab-arch .badge-green { background: #f0fdf4; color: #16a34a; }
+  #tab-arch .badge-red   { background: #fef2f2; color: #BB0A21; }
+  #tab-arch table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  #tab-arch th { background: #f4f4f4; padding: 7px 10px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #6b6b6b; }
+  #tab-arch td { padding: 7px 10px; border-bottom: 1px solid #e0e0e0; }
+  #tab-arch .num { text-align: right; font-family: monospace; }
+  #tab-arch .cr-high { color: #16a34a; font-weight: 700; }
+  #tab-arch .cr-low  { color: #BB0A21; font-weight: 700; }
+  #tab-arch code { background: #f4f4f4; padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: 11px; }
+  #tab-arch .funnel { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; }
+  #tab-arch .funnel-step { display: flex; align-items: center; gap: 10px; }
+  #tab-arch .funnel-bar-wrap { flex: 1; background: #f4f4f4; border-radius: 4px; overflow: hidden; height: 28px; }
+  #tab-arch .funnel-bar { height: 100%; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; font-size: 11px; font-weight: 700; color: #fff; }
+  #tab-arch .funnel-label { width: 200px; font-size: 11px; font-weight: 600; }
+  #tab-arch .funnel-num { width: 80px; text-align: right; font-family: monospace; font-size: 12px; font-weight: 700; }
+  #tab-arch .priority-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px; border-radius: 6px; margin-bottom: 8px; background: #f4f4f4; border: 1px solid #e0e0e0; }
+  #tab-arch .priority-num { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; color: #fff; }
+  #tab-arch .p1 { background: #BB0A21; }
+  #tab-arch .p2 { background: #d97706; }
+  #tab-arch .p3 { background: #16a34a; }
+  #tab-arch .priority-text { font-size: 12px; line-height: 1.5; color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="audi-rings">⬤⬤⬤⬤</div>
+    <div>
+      <h1><span>Audi Plichta</span> — Raport analityczny GA4</h1>
+      <div style="font-size:12px;color:#aaa;margin-top:4px;">audiplichta.pl · Property 355550660</div>
+    </div>
+  </div>
+  <div class="header-meta">
+    Wygenerowano: 26 maja 2026<br>
+    <span style="color:#666">Dane: Google Analytics 4</span>
+  </div>
+</div>
+
+<div class="main-tab-nav">
+  <button class="main-tab-btn active" onclick="switchMainTab('ga4', this)">📊 Analiza GA4</button>
+  <button class="main-tab-btn" onclick="switchMainTab('map', this)">🗺 Mapa strony</button>
+  <button class="main-tab-btn" onclick="switchMainTab('arch', this)">🏗 Architektura + Eventy</button>
+  <button class="main-tab-btn" onclick="switchMainTab('funnel', this)">🔻 Lejek formularza</button>
+  <button class="main-tab-btn" onclick="switchMainTab('mom', this)">📅 Formularze MoM</button>
+  <button class="main-tab-btn" onclick="switchMainTab('weryfikacja', this)">🔍 Weryfikacja formularzy</button>
+</div>
+
+<div class="main-tab-panel active" id="tab-ga4">
+
+<div class="switcher-bar">
+  <button class="switcher-btn active" onclick="switchPeriod('90d', this)">⏱ Ostatnie 90 dni</button>
+  <button class="switcher-btn" onclick="switchPeriod('maj', this)">📅 Maj 2026</button>
+  <div class="switcher-label" id="period-label">25 lut – 26 maj 2026</div>
+</div>
+
+<div class="container">
+
+  <!-- KPI ROW -->
+  <div class="section-label">📊 Kluczowe metryki</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:20px;">
+    <div class="kpi-card">
+      <div class="kpi-label">Sesje</div>
+      <div class="kpi-value" id="kpi-sessions">–</div>
+      <div class="kpi-sub" id="kpi-sessions-sub"></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Aktywni użytkownicy</div>
+      <div class="kpi-value" id="kpi-users">–</div>
+      <div class="kpi-sub" id="kpi-users-sub"></div>
+    </div>
+    <div class="kpi-card" style="border-top:3px solid #BB0A21;">
+      <div class="kpi-label" style="color:#BB0A21;font-weight:700;">Konwersje TOTAL 🏆</div>
+      <div class="kpi-value" style="color:#BB0A21;" id="kpi-conv-total">427</div>
+      <div class="kpi-sub">wszystkie formularze · 90 dni</div>
+    </div>
+    <div class="kpi-card" style="border-top:3px solid #1a1a1a;">
+      <div class="kpi-label">Konwersje nowe auta</div>
+      <div class="kpi-value" id="kpi-conv">–</div>
+      <div class="kpi-sub" id="kpi-conv-sub"></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">CR nowe auta</div>
+      <div class="kpi-value" id="kpi-cr">–</div>
+      <div class="kpi-sub" id="kpi-cr-sub"></div>
+    </div>
+  </div>
+
+  <!-- TIMESERIES -->
+  <div class="section-label">📈 Ruch w czasie</div>
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title"><span class="icon">▶</span> Sesje i konwersje dziennie</div>
+    <div class="chart-wrap-wide"><canvas id="chartTimeseries"></canvas></div>
+    <div class="insight-bar" id="ts-insight"></div>
+  </div>
+
+  <!-- CHANNELS + DEVICES -->
+  <div class="section-label">🔀 Źródła ruchu i urządzenia</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">▶</span> Kanały pozyskania</div>
+      <div id="channels-bars"></div>
+      <div class="insight-bar" id="channels-insight" style="margin-top:12px"></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">▶</span> Urządzenia</div>
+      <div class="chart-wrap"><canvas id="chartDevices"></canvas></div>
+      <div class="insight-bar" id="devices-insight" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <!-- CONVERSIONS -->
+  <div class="section-label">🎯 Konwersje według stron</div>
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title"><span class="icon">▶</span> Strony generujące konwersje (90 dni, dane łączne)</div>
+    <table id="conv-table">
+      <thead><tr><th>Strona</th><th style="text-align:right">Sesje</th><th style="text-align:right">Konwersje</th><th style="text-align:right">CR</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="insight-bar" id="conv-insight" style="margin-top:12px"></div>
+  </div>
+
+  <!-- TOP PAGES + HIGH BOUNCE -->
+  <div class="section-label">📄 Strony — ruch i zaangażowanie</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">▶</span> Top strony wg odsłon</div>
+      <table id="pages-table">
+        <thead><tr><th>Strona</th><th style="text-align:right">Odsłony</th><th style="text-align:right">Bounce</th><th style="text-align:right">Avg. czas</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">▶</span> Strony z wysokim bounce rate</div>
+      <table id="bounce-table">
+        <thead><tr><th>Strona</th><th style="text-align:right">Sesje</th><th style="text-align:right">Bounce rate</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="insight-bar" id="bounce-insight" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <!-- GEO -->
+  <div class="section-label">📍 Lokalizacja użytkowników</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">▶</span> Top 10 miast</div>
+      <div id="geo-bars"></div>
+      <div class="insight-bar" id="geo-insight" style="margin-top:12px"></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">▶</span> Sesje per miasto (wykres)</div>
+      <div class="chart-wrap"><canvas id="chartGeo"></canvas></div>
+    </div>
+  </div>
+
+  <!-- DEMOGRAPHICS -->
+  <div class="section-label">👥 Demografia użytkowników</div>
+  <div class="insight-bar" id="demo-insight" style="margin-bottom:14px"></div>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title"><span class="icon">▶</span> Wiek (znane sesje)</div>
+      <div class="chart-wrap"><canvas id="chartAge"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">▶</span> Płeć (znane sesje)</div>
+      <div class="chart-wrap"><canvas id="chartGender"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">▶</span> Interpretacja</div>
+      <div style="padding:8px 0; line-height:1.7; font-size:12px; color:#444;">
+        <p style="margin-bottom:10px;">🎯 <strong>Kluczowa grupa:</strong> mężczyźni 35–54 lat — decydenci zakupowi, leasing firmowy i prywatny.</p>
+        <p style="margin-bottom:10px;">👩 <strong>Kobiety 25–54:</strong> niedoceniany segment — osobna komunikacja (komfort, bezpieczeństwo, design).</p>
+        <p style="margin-bottom:10px;">📊 <strong>45–54 lat</strong> to szczyt aktywności — wyższy potencjał zakupu droższych modeli (A6, Q7, e-tron).</p>
+        <p>⚠️ <strong>Uwaga:</strong> ~64% sesji bez danych demograficznych — wymaga zgody Google Signals.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIME PATTERNS -->
+  <div class="section-label">⏰ Wzorce czasowe (90 dni)</div>
+  <div class="insight-bar" id="timepat-insight" style="margin-bottom:14px"></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">▶</span> Aktywność wg dnia tygodnia</div>
+      <div class="chart-wrap"><canvas id="chartDow"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">▶</span> Aktywność wg godziny</div>
+      <div class="chart-wrap"><canvas id="chartHour"></canvas></div>
+      <div class="insight-bar" id="hour-insight" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="section-label">🔔 Top eventy (maj 2026)</div>
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title"><span class="icon">▶</span> Najczęstsze eventy GA4</div>
+    <div id="events-bars"></div>
+    <div class="insight-bar" id="events-insight" style="margin-top:12px"></div>
+  </div>
+
+  <!-- WNIOSKI -->
+  <div class="section-label">🧠 Wnioski i rekomendacje CRO</div>
+  <div class="wnioski-section" style="margin-bottom:20px;">
+    <div class="wnioski-header">🔍 Kluczowe wnioski — audiplichta.pl · Dane GA4 · 26 maja 2026</div>
+    <div class="wnioski-grid">
+      <div class="wniosek-item">
+        <div class="wniosek-prio high">🔴 Priorytet KRYTYCZNY</div>
+        <div class="wniosek-title">reCAPTCHA v2 zabija konwersje</div>
+        <div class="wniosek-desc">Z 13 851 użytkowników startujących formularz tylko 400 kończy (CR 1.5%). Friction reCAPTCHA v2 jest głównym podejrzanym. Zamiana na v3 (niewidoczna) może podwoić liczbę leadów bez zmiany ruchu.</div>
+      </div>
+      <div class="wniosek-item">
+        <div class="wniosek-prio high">🔴 Priorytet KRYTYCZNY</div>
+        <div class="wniosek-title">/serwis-bydgoszcz/ — 1 000 sesji, 2 leady (CR 0.2%)</div>
+        <div class="wniosek-desc">Strona serwisu Bydgoszcz dramatycznie underperformuje — 50× gorzej niż /jazda-testowa/. Audit UX, sprawdzenie formularza, ewentualnie redirect na lepszą stronę. Niski priorytet ruchu, wysoki priorytet naprawy.</div>
+      </div>
+      <div class="wniosek-item">
+        <div class="wniosek-prio high">🔴 Priorytet WYSOKI</div>
+        <div class="wniosek-title">Chat — 16 550 otwarć, 0 mierzonych leadów</div>
+        <div class="wniosek-desc">LiveChat może być największym kanałem leadów — ale nie mierzymy żadnej konwersji z chatu. Dodanie eventu chat_lead_created może zmienić całe rozumienie lejka. 16 550 otwarć chatu w 90 dni — potencjał jest ogromny.</div>
+      </div>
+      <div class="wniosek-item">
+        <div class="wniosek-prio high">🔴 Priorytet WYSOKI</div>
+        <div class="wniosek-title">Paid Search = 58% ruchu i 58% leadów</div>
+        <div class="wniosek-desc">Strona jest silnie uzależniona od płatnego ruchu. Organic Search daje tylko ~19% sesji — słabe SEO tworzy ryzyko. Warto inwestować w content marketing (opisy modeli, poradniki) dla długoterminowego wzrostu organicznego.</div>
+      </div>
+      <div class="wniosek-item">
+        <div class="wniosek-prio med">🟡 Priorytet ŚREDNI</div>
+        <div class="wniosek-title">/jazda-testowa/ — CR 13.8% — niedofinansowana strona</div>
+        <div class="wniosek-desc">Tylko 434 sesji przy CR 13.8% — to najlepiej konwertująca strona w całym serwisie. Zwiększenie ruchu na tę stronę (kampania dedykowana, CTA na HP) może wygenerować +30–50 leadów miesięcznie.</div>
+      </div>
+      <div class="wniosek-item">
+        <div class="wniosek-prio med">🟡 Priorytet ŚREDNI</div>
+        <div class="wniosek-title">Mobile = 69% ruchu — czy UX jest dostosowany?</div>
+        <div class="wniosek-desc">Ponad 2/3 użytkowników przegląda ofertę na telefonie. Formularz z reCAPTCHA v2 na mobile to szczególnie zły UX. Warto przetestować flow formularza na urządzeniach iOS/Android i sprawdzić CLS/LCP mobile.</div>
+      </div>
+      <div class="wniosek-item">
+        <div class="wniosek-prio med">🟡 Priorytet ŚREDNI</div>
+        <div class="wniosek-title">Duplikaty eventów — śmiecenie danych</div>
+        <div class="wniosek-desc">form_jazda-testowa (28) ≈ Formularz_jazda_testowa (26) oraz form_APL_sent ≈ formularz_apl — podwójne liczenie zawyża dane. GTM audit i ujednolicenie nazewnictwa eventów jest niezbędne dla wiarygodności raportów.</div>
+      </div>
+      <div class="wniosek-item">
+        <div class="wniosek-prio low">🟢 Szansa</div>
+        <div class="wniosek-title">Warszawa: ~9 385 sesji bez lokalnego salonu</div>
+        <div class="wniosek-desc">Drugie miasto pod względem ruchu, bez salonu. To użytkownicy zainteresowani Audi — część trafi do konkurencji. Warto rozważyć landing page targetowany na Warszawę lub kampanię "dostawa do domu / test drive u Ciebie".</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Raport wygenerowany automatycznie przez <strong>Claude + GA4</strong> · audiplichta.pl · 26 maja 2026
+  </div>
+</div>
+
+<script>
+const DATA = {"meta": {"generated": "2026-05-26", "period_90d": "Ostatnie 90 dni (25 lut – 26 maj 2026)", "period_maj": "Maj 2026 (1–26 maj)"}, "summary": {"90d": {"sessions": 57052, "users": 57275, "conversions": 398, "cr": 0.70}, "maj": {"sessions": 12010, "users": 9750, "conversions": 91, "cr": 0.76}}, "devices": {"90d": [{"category": "mobile", "sessions": 39474}, {"category": "desktop", "sessions": 17294}, {"category": "tablet", "sessions": 507}], "maj": [{"category": "mobile", "sessions": 8247}, {"category": "desktop", "sessions": 3620}, {"category": "tablet", "sessions": 107}]}, "channels": {"90d": [{"channel": "Paid Search", "sessions": 33111, "conversions": 230, "activeUsers": 24073}, {"channel": "Organic Search", "sessions": 10655, "conversions": 87, "activeUsers": 6379}, {"channel": "Paid Social", "sessions": 6959, "conversions": 40, "activeUsers": 4558}, {"channel": "Direct", "sessions": 4548, "conversions": 27, "activeUsers": 2318}, {"channel": "Unassigned", "sessions": 623, "conversions": 0, "activeUsers": 505}, {"channel": "Organic Social", "sessions": 591, "conversions": 6, "activeUsers": 406}, {"channel": "Referral", "sessions": 257, "conversions": 10, "activeUsers": 139}, {"channel": "Cross-network", "sessions": 139, "conversions": 0, "activeUsers": 139}, {"channel": "SMS", "sessions": 85, "conversions": 0, "activeUsers": 45}, {"channel": "Display", "sessions": 25, "conversions": 0, "activeUsers": 15}, {"channel": "Email", "sessions": 17, "conversions": 0, "activeUsers": 6}, {"channel": "Paid Other", "sessions": 6, "conversions": 0, "activeUsers": 3}], "maj": [{"channel": "Paid Search", "sessions": 4574, "conversions": 35, "activeUsers": 3525}, {"channel": "Organic Search", "sessions": 2311, "conversions": 22, "activeUsers": 1474}, {"channel": "Paid Social", "sessions": 1235, "conversions": 4, "activeUsers": 893}, {"channel": "Direct", "sessions": 857, "conversions": 1, "activeUsers": 460}, {"channel": "Unassigned", "sessions": 290, "conversions": 0, "activeUsers": 262}, {"channel": "Organic Social", "sessions": 98, "conversions": 2, "activeUsers": 71}, {"channel": "Cross-network", "sessions": 85, "conversions": 0, "activeUsers": 85}, {"channel": "SMS", "sessions": 38, "conversions": 0, "activeUsers": 18}, {"channel": "Referral", "sessions": 13, "conversions": 5, "activeUsers": 5}]}, "demo_age": {"90d": [{"age": "18-24", "sessions": 1327}, {"age": "25-34", "sessions": 2982}, {"age": "35-44", "sessions": 5080}, {"age": "45-54", "sessions": 5533}, {"age": "55-64", "sessions": 2137}, {"age": "65+", "sessions": 3651}], "maj": [{"age": "18-24", "sessions": 197}, {"age": "25-34", "sessions": 485}, {"age": "35-44", "sessions": 854}, {"age": "45-54", "sessions": 831}, {"age": "55-64", "sessions": 355}, {"age": "65+", "sessions": 520}]}, "demo_gender": {"90d": [{"gender": "male", "sessions": 14908}, {"gender": "female", "sessions": 6056}], "maj": [{"gender": "male", "sessions": 2369}, {"gender": "female", "sessions": 929}]}, "geo": {"90d": [{"city": "Gdansk", "sessions": 13541}, {"city": "Warsaw", "sessions": 9385}, {"city": "Bydgoszcz", "sessions": 7132}, {"city": "Wroclaw", "sessions": 4288}, {"city": "Poznan", "sessions": 2483}, {"city": "Gdynia", "sessions": 2211}, {"city": "Pruszkow", "sessions": 1497}, {"city": "Katowice", "sessions": 1170}, {"city": "Lodz", "sessions": 1124}, {"city": "Krakow", "sessions": 974}], "maj": [{"city": "Gdansk", "sessions": 2317}, {"city": "Warsaw", "sessions": 1705}, {"city": "Bydgoszcz", "sessions": 1127}, {"city": "Wroclaw", "sessions": 682}, {"city": "Poznan", "sessions": 388}, {"city": "Gdynia", "sessions": 377}, {"city": "Katowice", "sessions": 251}, {"city": "Pruszkow", "sessions": 237}, {"city": "Lodz", "sessions": 168}, {"city": "Krakow", "sessions": 142}]}, "pages": {"90d": [{"page": "/oferta/wszystkie", "views": 57081, "users": 14052, "bounceRate": 1.9, "avgDurSec": 103}, {"page": "/oferta/wszystkie/", "views": 50873, "users": 24470, "bounceRate": 16.9, "avgDurSec": 86}, {"page": "/", "views": 12568, "users": 6266, "bounceRate": 12.4, "avgDurSec": 96}, {"page": "/oferta/wszystkie/page/2/", "views": 10701, "users": 5319, "bounceRate": 3.4, "avgDurSec": 60}, {"page": "/oferta/nowe/Audi/", "views": 7236, "users": 4134, "bounceRate": 2.7, "avgDurSec": 39}, {"page": "/oferta/wszystkie/page/3/", "views": 5267, "users": 2897, "bounceRate": 3.4, "avgDurSec": 54}, {"page": "/oferta/demonstracyjne/Audi/", "views": 3395, "users": 2182, "bounceRate": 2.7, "avgDurSec": 38}, {"page": "/salony/", "views": 3064, "users": 2181, "bounceRate": 13.9, "avgDurSec": 119}, {"page": "/oferta/wszystkie/page/4/", "views": 2766, "users": 1539, "bounceRate": 2.8, "avgDurSec": 53}, {"page": "/audiperfectlease/", "views": 2757, "users": 1915, "bounceRate": 15.5, "avgDurSec": 107}, {"page": "/oferta/wszystkie/Audi/", "views": 2025, "users": 1189, "bounceRate": 4.7, "avgDurSec": 133}, {"page": "/serwis/", "views": 1769, "users": 1185, "bounceRate": 19.7, "avgDurSec": 148}, {"page": "/oferta/wszystkie/page/5/", "views": 1706, "users": 1002, "bounceRate": 3.3, "avgDurSec": 57}, {"page": "/a3-2026/", "views": 1369, "users": 825, "bounceRate": 20.3, "avgDurSec": 83}, {"page": "/q4-etron-2026/", "views": 1274, "users": 875, "bounceRate": 20.5, "avgDurSec": 78}], "maj": [{"page": "/oferta/wszystkie", "views": 8552, "users": 1946, "bounceRate": 5.2, "avgDurSec": 113}, {"page": "/oferta/wszystkie/", "views": 5528, "users": 2654, "bounceRate": 16.3, "avgDurSec": 85}, {"page": "/", "views": 2852, "users": 1420, "bounceRate": 12.0, "avgDurSec": 103}, {"page": "/oferta/wszystkie/page/2/", "views": 1573, "users": 731, "bounceRate": 6.6, "avgDurSec": 65}, {"page": "/oferta/nowe/Audi/", "views": 1506, "users": 903, "bounceRate": 5.5, "avgDurSec": 37}, {"page": "/a3-2026/", "views": 1012, "users": 708, "bounceRate": 22.3, "avgDurSec": 82}, {"page": "/oferta/wszystkie/page/3/", "views": 864, "users": 452, "bounceRate": 6.6, "avgDurSec": 58}, {"page": "/q7-2026/", "views": 692, "users": 506, "bounceRate": 22.5, "avgDurSec": 67}, {"page": "/q5-2026-2/", "views": 641, "users": 424, "bounceRate": 23.9, "avgDurSec": 86}, {"page": "/oferta/demonstracyjne/Audi/", "views": 635, "users": 456, "bounceRate": 4.7, "avgDurSec": 30}, {"page": "/audiperfectlease/", "views": 601, "users": 426, "bounceRate": 15.3, "avgDurSec": 113}, {"page": "/wyprzedaz-q5/", "views": 600, "users": 416, "bounceRate": 23.9, "avgDurSec": 66}, {"page": "/oferta/wszystkie/page/4/", "views": 502, "users": 251, "bounceRate": 4.9, "avgDurSec": 52}, {"page": "/salony/", "views": 494, "users": 363, "bounceRate": 15.4, "avgDurSec": 141}, {"page": "/oferta/wszystkie/Audi/", "views": 404, "users": 262, "bounceRate": 6.7, "avgDurSec": 56}]}, "high_bounce": {"90d": [], "maj": [{"page": "/nowe-audi-q5-audi-city-gdansk/", "sessions": 6, "bounceRate": 100.0}, {"page": "/oferta/nowe/samochod/audi-q5-sportback-26-rabatu-audi-sound-matrix-21-kamery-skory-ambiente-pro/", "sessions": 12, "bounceRate": 75.0}, {"page": "/oferta/nowe/samochod/audi-q5-pakiet-tech-pluss-line-exterieurreflektory-matrix-led-4/", "sessions": 7, "bounceRate": 57.1}, {"page": "/oferta/nowe/samochod/audi-q8-tfsi-e-bang-olufsen-tylna-os-skretna-hak-head-up-wentylacja-i-masaze/", "sessions": 18, "bounceRate": 50.0}, {"page": "/oferta/nowe/samochod/audi-q5-skory-ambiente-kamera-cofani-a-4x4-audi-sound-system/", "sessions": 6, "bounceRate": 50.0}]}, "timeseries": {"90d": [{"date": "20260225", "sessions": 739, "users": 571, "conversions": 6}, {"date": "20260226", "sessions": 776, "users": 618, "conversions": 8}, {"date": "20260227", "sessions": 733, "users": 574, "conversions": 5}, {"date": "20260228", "sessions": 730, "users": 583, "conversions": 0}, {"date": "20260301", "sessions": 650, "users": 555, "conversions": 0}, {"date": "20260302", "sessions": 624, "users": 500, "conversions": 13}, {"date": "20260303", "sessions": 643, "users": 492, "conversions": 9}, {"date": "20260304", "sessions": 714, "users": 558, "conversions": 8}, {"date": "20260305", "sessions": 675, "users": 545, "conversions": 3}, {"date": "20260306", "sessions": 698, "users": 575, "conversions": 8}, {"date": "20260307", "sessions": 642, "users": 521, "conversions": 4}, {"date": "20260308", "sessions": 665, "users": 559, "conversions": 12}, {"date": "20260309", "sessions": 758, "users": 595, "conversions": 4}, {"date": "20260310", "sessions": 694, "users": 572, "conversions": 5}, {"date": "20260311", "sessions": 727, "users": 550, "conversions": 8}, {"date": "20260312", "sessions": 679, "users": 541, "conversions": 4}, {"date": "20260313", "sessions": 656, "users": 524, "conversions": 2}, {"date": "20260314", "sessions": 667, "users": 532, "conversions": 1}, {"date": "20260315", "sessions": 681, "users": 573, "conversions": 6}, {"date": "20260316", "sessions": 689, "users": 536, "conversions": 11}, {"date": "20260317", "sessions": 687, "users": 537, "conversions": 9}, {"date": "20260318", "sessions": 773, "users": 594, "conversions": 1}, {"date": "20260319", "sessions": 764, "users": 592, "conversions": 12}, {"date": "20260320", "sessions": 650, "users": 518, "conversions": 7}, {"date": "20260321", "sessions": 529, "users": 449, "conversions": 9}, {"date": "20260322", "sessions": 667, "users": 566, "conversions": 8}, {"date": "20260323", "sessions": 603, "users": 473, "conversions": 0}, {"date": "20260324", "sessions": 644, "users": 516, "conversions": 0}, {"date": "20260325", "sessions": 670, "users": 523, "conversions": 5}, {"date": "20260326", "sessions": 671, "users": 532, "conversions": 6}, {"date": "20260327", "sessions": 718, "users": 549, "conversions": 10}, {"date": "20260328", "sessions": 634, "users": 533, "conversions": 2}, {"date": "20260329", "sessions": 645, "users": 552, "conversions": 3}, {"date": "20260330", "sessions": 652, "users": 522, "conversions": 6}, {"date": "20260331", "sessions": 433, "users": 342, "conversions": 2}, {"date": "20260401", "sessions": 425, "users": 333, "conversions": 2}, {"date": "20260402", "sessions": 797, "users": 665, "conversions": 8}, {"date": "20260403", "sessions": 733, "users": 625, "conversions": 1}, {"date": "20260404", "sessions": 857, "users": 738, "conversions": 6}, {"date": "20260405", "sessions": 1005, "users": 859, "conversions": 9}, {"date": "20260406", "sessions": 948, "users": 813, "conversions": 8}, {"date": "20260407", "sessions": 903, "users": 726, "conversions": 2}, {"date": "20260408", "sessions": 866, "users": 729, "conversions": 2}, {"date": "20260409", "sessions": 803, "users": 660, "conversions": 6}, {"date": "20260410", "sessions": 889, "users": 730, "conversions": 5}, {"date": "20260411", "sessions": 1025, "users": 887, "conversions": 6}, {"date": "20260412", "sessions": 992, "users": 856, "conversions": 1}, {"date": "20260413", "sessions": 886, "users": 719, "conversions": 3}, {"date": "20260414", "sessions": 852, "users": 677, "conversions": 8}, {"date": "20260415", "sessions": 633, "users": 489, "conversions": 7}, {"date": "20260416", "sessions": 594, "users": 463, "conversions": 3}, {"date": "20260417", "sessions": 598, "users": 453, "conversions": 1}, {"date": "20260418", "sessions": 512, "users": 425, "conversions": 2}, {"date": "20260419", "sessions": 641, "users": 533, "conversions": 0}, {"date": "20260420", "sessions": 661, "users": 509, "conversions": 8}, {"date": "20260421", "sessions": 729, "users": 588, "conversions": 7}, {"date": "20260422", "sessions": 686, "users": 549, "conversions": 2}, {"date": "20260423", "sessions": 623, "users": 494, "conversions": 0}, {"date": "20260424", "sessions": 461, "users": 359, "conversions": 5}, {"date": "20260425", "sessions": 415, "users": 346, "conversions": 0}, {"date": "20260426", "sessions": 505, "users": 431, "conversions": 0}, {"date": "20260427", "sessions": 599, "users": 488, "conversions": 1}, {"date": "20260428", "sessions": 640, "users": 531, "conversions": 0}, {"date": "20260429", "sessions": 644, "users": 545, "conversions": 0}, {"date": "20260430", "sessions": 540, "users": 450, "conversions": 7}, {"date": "20260501", "sessions": 232, "users": 187, "conversions": 4}, {"date": "20260502", "sessions": 284, "users": 242, "conversions": 2}, {"date": "20260503", "sessions": 366, "users": 316, "conversions": 0}, {"date": "20260504", "sessions": 508, "users": 410, "conversions": 4}, {"date": "20260505", "sessions": 523, "users": 428, "conversions": 4}, {"date": "20260506", "sessions": 492, "users": 402, "conversions": 9}, {"date": "20260507", "sessions": 455, "users": 361, "conversions": 5}, {"date": "20260508", "sessions": 536, "users": 412, "conversions": 5}, {"date": "20260509", "sessions": 410, "users": 318, "conversions": 0}, {"date": "20260510", "sessions": 439, "users": 360, "conversions": 1}, {"date": "20260511", "sessions": 521, "users": 416, "conversions": 0}, {"date": "20260512", "sessions": 511, "users": 401, "conversions": 4}, {"date": "20260513", "sessions": 541, "users": 430, "conversions": 5}, {"date": "20260514", "sessions": 569, "users": 431, "conversions": 2}, {"date": "20260515", "sessions": 500, "users": 397, "conversions": 4}, {"date": "20260516", "sessions": 501, "users": 420, "conversions": 0}, {"date": "20260517", "sessions": 507, "users": 429, "conversions": 8}, {"date": "20260518", "sessions": 610, "users": 479, "conversions": 7}, {"date": "20260519", "sessions": 577, "users": 453, "conversions": 5}, {"date": "20260520", "sessions": 558, "users": 447, "conversions": 3}, {"date": "20260521", "sessions": 546, "users": 408, "conversions": 0}, {"date": "20260522", "sessions": 450, "users": 354, "conversions": 4}, {"date": "20260523", "sessions": 439, "users": 347, "conversions": 1}, {"date": "20260524", "sessions": 451, "users": 368, "conversions": 9}, {"date": "20260525", "sessions": 484, "users": 368, "conversions": 5}], "maj": [{"date": "20260501", "sessions": 232, "users": 187, "conversions": 4}, {"date": "20260502", "sessions": 284, "users": 242, "conversions": 2}, {"date": "20260503", "sessions": 366, "users": 316, "conversions": 0}, {"date": "20260504", "sessions": 508, "users": 410, "conversions": 4}, {"date": "20260505", "sessions": 523, "users": 428, "conversions": 4}, {"date": "20260506", "sessions": 492, "users": 402, "conversions": 9}, {"date": "20260507", "sessions": 455, "users": 361, "conversions": 5}, {"date": "20260508", "sessions": 536, "users": 412, "conversions": 5}, {"date": "20260509", "sessions": 410, "users": 318, "conversions": 0}, {"date": "20260510", "sessions": 439, "users": 360, "conversions": 1}, {"date": "20260511", "sessions": 521, "users": 416, "conversions": 0}, {"date": "20260512", "sessions": 511, "users": 401, "conversions": 4}, {"date": "20260513", "sessions": 541, "users": 430, "conversions": 5}, {"date": "20260514", "sessions": 569, "users": 431, "conversions": 2}, {"date": "20260515", "sessions": 500, "users": 397, "conversions": 4}, {"date": "20260516", "sessions": 501, "users": 420, "conversions": 0}, {"date": "20260517", "sessions": 507, "users": 429, "conversions": 8}, {"date": "20260518", "sessions": 610, "users": 479, "conversions": 7}, {"date": "20260519", "sessions": 577, "users": 453, "conversions": 5}, {"date": "20260520", "sessions": 558, "users": 447, "conversions": 3}, {"date": "20260521", "sessions": 546, "users": 408, "conversions": 0}, {"date": "20260522", "sessions": 450, "users": 354, "conversions": 4}, {"date": "20260523", "sessions": 439, "users": 347, "conversions": 1}, {"date": "20260524", "sessions": 451, "users": 368, "conversions": 9}, {"date": "20260525", "sessions": 484, "users": 368, "conversions": 5}]}, "dow": {"90d": [{"day": "Niedziela", "sessions": 8251, "conversions": 57}, {"day": "Poniedziałek", "sessions": 8590, "conversions": 70}, {"day": "Wtorek", "sessions": 8473, "conversions": 57}, {"day": "Środa", "sessions": 8453, "conversions": 58}, {"day": "Czwartek", "sessions": 8398, "conversions": 64}, {"day": "Piątek", "sessions": 7794, "conversions": 61}, {"day": "Sobota", "sessions": 7637, "conversions": 33}]}, "hours": {"90d": [{"hour": 0, "sessions": 845}, {"hour": 1, "sessions": 375}, {"hour": 2, "sessions": 209}, {"hour": 3, "sessions": 190}, {"hour": 4, "sessions": 186}, {"hour": 5, "sessions": 450}, {"hour": 6, "sessions": 1036}, {"hour": 7, "sessions": 2079}, {"hour": 8, "sessions": 2910}, {"hour": 9, "sessions": 3530}, {"hour": 10, "sessions": 3853}, {"hour": 11, "sessions": 3779}, {"hour": 12, "sessions": 4015}, {"hour": 13, "sessions": 3800}, {"hour": 14, "sessions": 3894}, {"hour": 15, "sessions": 3848}, {"hour": 16, "sessions": 3584}, {"hour": 17, "sessions": 3590}, {"hour": 18, "sessions": 3502}, {"hour": 19, "sessions": 3515}, {"hour": 20, "sessions": 3800}, {"hour": 21, "sessions": 3576}, {"hour": 22, "sessions": 2942}, {"hour": 23, "sessions": 1591}]}, "conv_pages": {"90d": [{"page": "/jazda-testowa/", "sessions": 434, "conversions": 60, "cr": 13.8}, {"page": "/audiperfectlease/", "sessions": 2214, "conversions": 22, "cr": 1.0}, {"page": "/serwis/", "sessions": 1434, "conversions": 20, "cr": 1.4}, {"page": "/odkup/", "sessions": 946, "conversions": 14, "cr": 1.5}, {"page": "/", "sessions": 8784, "conversions": 10, "cr": 0.1}, {"page": "/wyprzedaz-a5/", "sessions": 373, "conversions": 10, "cr": 2.7}, {"page": "/audi-perfect-rent/", "sessions": 777, "conversions": 9, "cr": 1.2}, {"page": "/audiperfectlease/q5/", "sessions": 894, "conversions": 8, "cr": 0.9}, {"page": "/audiperfectlease/a3/", "sessions": 837, "conversions": 8, "cr": 1.0}, {"page": "/wyprzedaz-a6/", "sessions": 751, "conversions": 8, "cr": 1.1}]}, "events": {"maj": [{"event": "page_view", "count": 51451, "users": 8375}, {"event": "user_engagement", "count": 37212, "users": 7656}, {"event": "view_item", "count": 25792, "users": 4921}, {"event": "session_start", "count": 12419, "users": 8357}, {"event": "scroll", "count": 12061, "users": 4138}, {"event": "view_search_results", "count": 12008, "users": 3433}, {"event": "first_visit", "count": 7200, "users": 7203}, {"event": "form_start", "count": 5296, "users": 2657}, {"event": "chat_otworzenie", "count": 3684, "users": 1835}, {"event": "Automated greeting", "count": 2901, "users": 2820}, {"event": "samochody-nowe_strona-glowna", "count": 1808, "users": 861}, {"event": "APL_zapytaj-oferta_open", "count": 510, "users": 376}, {"event": "click_zobacz_szczegoly", "count": 373, "users": 288}, {"event": "menu_dostepne_audi", "count": 196, "users": 146}, {"event": "form_submit", "count": 158, "users": 6}]}};
+
+
+// ===== FUNNEL DATA (wszystkie typy formularzy, 90 dni: 25 lut – 26 maj 2026) =====
+const FUNNEL_DATA = [
+  { key: 'form_total',     label: 'Nowe auta',           sublabel: 'form_total (karta pojazdu)',              count: 243,  users: 219,  color: '#1a1a1a',  icon: '🚗', url: '/oferta/nowe/' },
+  { key: 'form_auta_nowe', label: 'Nowe auta (model)',    sublabel: 'form_auta-nowe (strona modelu)',           count: 82,   users: 75,   color: '#374151',  icon: '🚘', url: '/oferta/nowe/Audi/' },
+  { key: 'form_jt',        label: 'Jazda testowa',        sublabel: 'form_jazda-testowa + Formularz_jt',        count: 58,   users: 58,   color: '#BB0A21',  icon: '🏎', url: '/jazda-testowa/' },
+  { key: 'form_apl',       label: 'Audi Perfect Lease',   sublabel: 'form_APL_sent + formularz_apl',            count: 30,   users: 24,   color: '#2563eb',  icon: '📃', url: '/audiperfectlease/' },
+  { key: 'form_serwis',    label: 'Serwis',               sublabel: 'form_serwis',                              count: 22,   users: 22,   color: '#7c3aed',  icon: '🔧', url: '/serwis/' },
+  { key: 'form_demo',      label: 'Auta demo',            sublabel: 'form_auta-demonstracyjne',                 count: 14,   users: 14,   color: '#6b7280',  icon: '🚙', url: '/oferta/demonstracyjne/' },
+  { key: 'form_odkup',     label: 'Odkup',                sublabel: 'form_odkup',                               count: 14,   users: 14,   color: '#d97706',  icon: '💰', url: '/odkup/' },
+  { key: 'form_wyprzedaz', label: 'Wyprzedaże',           sublabel: 'form_wyprzedaz-2024-A5/A6/Q5',             count: 20,   users: 18,   color: '#059669',  icon: '🏷', url: '/wyprzedaz-a5/' },
+  { key: 'form_pleasing',  label: 'Perfect Lease per model', sublabel: 'form_perfect_lease_A3/Q5/A6/Q3',        count: 12,   users: 12,   color: '#db2777',  icon: '✨', url: '/audiperfectlease/' },
+  { key: 'form_apr',       label: 'Audi Perfect Rent',    sublabel: 'form_APR_sent',                            count: 4,    users: 4,    color: '#f97316',  icon: '🔑', url: '/audi-perfect-rent/' },
+  { key: 'form_strona_gl', label: 'Strona główna',        sublabel: 'form_strona-glowna',                       count: 10,   users: 8,    color: '#64748b',  icon: '🏠', url: '/' }
+];
+const FUNNEL_CONTEXT = {
+  form_start:      26609,
+  users_form_start: 13851,
+  page_view:       237398,
+  sessions:        57309,
+  chat_otworzenie: 16550
+};
+const FUNNEL_TOTAL_ALL = FUNNEL_DATA.reduce((s,f) => s + f.count, 0);
+
+let currentPeriod = '90d';
+let charts = {};
+
+const periodLabels = {
+  '90d': '25 lut – 26 maj 2026',
+  'maj': '1–26 maj 2026'
+};
+
+function fmt(n) { return Number(n).toLocaleString('pl-PL'); }
+function secToMin(s) {
+  const m = Math.floor(s/60), sec = Math.round(s%60);
+  return m + ':' + String(sec).padStart(2,'0');
+}
+
+function switchPeriod(p, btn) {
+  currentPeriod = p;
+  document.querySelectorAll('.switcher-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('period-label').textContent = periodLabels[p];
+  renderAll();
+}
+
+function renderKPIs() {
+  const d = DATA.summary[currentPeriod];
+  document.getElementById('kpi-sessions').textContent = fmt(d.sessions);
+  document.getElementById('kpi-users').textContent = fmt(d.users);
+  document.getElementById('kpi-conv').textContent = fmt(d.conversions);
+  document.getElementById('kpi-cr').textContent = d.cr + '%';
+  const lbl = currentPeriod === '90d' ? '(90 dni)' : '(1–26 maj)';
+  document.getElementById('kpi-sessions-sub').textContent = lbl;
+  document.getElementById('kpi-users-sub').textContent = lbl;
+  document.getElementById('kpi-conv-sub').textContent = 'form_total ' + lbl;
+  document.getElementById('kpi-cr-sub').textContent = 'konwersje / sesje';
+}
+
+function destroyChart(id) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } }
+
+function renderTimeseries() {
+  destroyChart('ts');
+  const rows = DATA.timeseries[currentPeriod];
+  const labels = rows.map(r => {
+    const d = r.date;
+    return d.slice(4,6) + '.' + d.slice(6,8);
+  });
+  const totalSessions = rows.reduce((a,r)=>a+r.sessions,0);
+  const totalConv = rows.reduce((a,r)=>a+r.conversions,0);
+  const avgSessions = Math.round(totalSessions/rows.length);
+  const peakRow = rows.reduce((a,b)=>a.sessions>b.sessions?a:b);
+  const peakDate = peakRow.date.slice(4,6)+'.'+peakRow.date.slice(6,8);
+
+  // Insight box
+  const insightEl = document.getElementById('ts-insight');
+  if(insightEl) insightEl.innerHTML = `
+    <span class="insight-chip">📈 Śr. dzienna: <strong>${fmt(avgSessions)}</strong> sesji</span>
+    <span class="insight-chip">🏆 Szczyt: <strong>${fmt(peakRow.sessions)}</strong> (${peakDate})</span>
+    <span class="insight-chip">✅ Konwersje łącznie: <strong>${totalConv}</strong></span>
+    <span class="insight-chip insight-note">💡 Kampanie Paid Search napędzają ruch — spike'i widoczne w tygodniu roboczym</span>`;
+
+  const ctx = document.getElementById('chartTimeseries').getContext('2d');
+  charts['ts'] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Sesje', data: rows.map(r=>r.sessions), borderColor:'#BB0A21', backgroundColor:'rgba(187,10,33,0.08)', tension:0.3, yAxisID:'y', pointRadius:1, borderWidth:2 },
+        { label: 'Konwersje', data: rows.map(r=>r.conversions), borderColor:'#1565c0', backgroundColor:'rgba(21,101,192,0.15)', tension:0.3, yAxisID:'y2', pointRadius:3, borderWidth:2, borderDash:[4,2] }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ labels:{ font:{size:12} } },
+        tooltip:{ callbacks:{ label: ctx => ctx.dataset.label + ': ' + fmt(ctx.raw) } }
+      },
+      scales:{
+        y:{ position:'left', title:{display:true,text:'Sesje',font:{size:11}}, ticks:{font:{size:11}, callback:v=>fmt(v)} },
+        y2:{ position:'right', title:{display:true,text:'Konwersje',font:{size:11}}, grid:{drawOnChartArea:false}, ticks:{font:{size:11}} },
+        x:{ ticks:{ maxTicksLimit:15, font:{size:10} } }
+      }
+    }
+  });
+}
+
+function renderChannels() {
+  const rows = DATA.channels[currentPeriod];
+  const maxS = Math.max(...rows.map(r=>r.sessions));
+  const totalS = rows.reduce((a,r)=>a+r.sessions,0);
+  const topCh = rows[0];
+  const el = document.getElementById('channels-bars');
+
+  // Insight
+  const insightEl = document.getElementById('channels-insight');
+  if(insightEl) {
+    const paidPct = Math.round((rows.filter(r=>r.channel.includes('Paid')).reduce((a,r)=>a+r.sessions,0)/totalS)*100);
+    insightEl.innerHTML = `
+      <span class="insight-chip">🏆 Dominuje: <strong>${topCh.channel}</strong> — ${fmt(topCh.sessions)} sesji (${Math.round(topCh.sessions/totalS*100)}%)</span>
+      <span class="insight-chip">💰 Płatny ruch: <strong>${paidPct}%</strong> wszystkich sesji</span>
+      <span class="insight-chip insight-note">💡 Wysoka zależność od Paid Search — organika tylko ${Math.round(rows.find(r=>r.channel==='Organic Search')?.sessions/totalS*100||0)}% ruchu</span>`;
+  }
+
+  el.innerHTML = rows.map(r => {
+    const cr = r.sessions ? (r.conversions/r.sessions*100).toFixed(1) : 0;
+    const pct = Math.round(r.sessions/totalS*100);
+    return `<div class="bar-row">
+      <div class="bar-label" style="min-width:140px;font-size:12px;">${r.channel}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.sessions/maxS*100)}%"></div></div>
+      <div class="bar-val">${fmt(r.sessions)} <span style="color:#999;font-size:10px">(${pct}%)</span></div>
+      <span class="badge-${r.conversions>0?'green':'gray'}" style="min-width:70px;text-align:center">${r.conversions} leadów · CR ${cr}%</span>
+    </div>`;
+  }).join('');
+}
+
+function renderDevices() {
+  destroyChart('dev');
+  const rows = DATA.devices[currentPeriod];
+  const total = rows.reduce((a,r)=>a+r.sessions,0);
+  const colors = ['#BB0A21','#1565c0','#2e7d32'];
+  const labels = {'mobile':'📱 Mobile','desktop':'💻 Desktop','tablet':'📟 Tablet'};
+  const ctx = document.getElementById('chartDevices').getContext('2d');
+
+  // Insight
+  const mobile = rows.find(r=>r.category==='mobile');
+  const desktop = rows.find(r=>r.category==='desktop');
+  const insightEl = document.getElementById('devices-insight');
+  if(insightEl && mobile && desktop) {
+    const mobPct = Math.round(mobile.sessions/total*100);
+    insightEl.innerHTML = `
+      <span class="insight-chip">📱 Mobile: <strong>${mobPct}%</strong> sesji (${fmt(mobile.sessions)})</span>
+      <span class="insight-chip">💻 Desktop: <strong>${Math.round(desktop.sessions/total*100)}%</strong> (${fmt(desktop.sessions)})</span>
+      <span class="insight-chip insight-note">💡 Strona musi być perfekcyjna na mobile — ${mobPct}% użytkowników przegląda ofertę na telefonie</span>`;
+  }
+
+  charts['dev'] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: rows.map(r => labels[r.category]||r.category),
+      datasets:[{ data: rows.map(r=>r.sessions), backgroundColor: colors, borderWidth:2 }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ position:'bottom', labels:{font:{size:12}, padding:12,
+          generateLabels: chart => chart.data.labels.map((l,i) => ({
+            text: l + '  ' + Math.round(chart.data.datasets[0].data[i]/total*100) + '%',
+            fillStyle: colors[i], strokeStyle: colors[i], lineWidth:0, index:i
+          }))
+        }},
+        tooltip:{ callbacks:{ label: ctx => ` ${fmt(ctx.raw)} sesji (${Math.round(ctx.raw/total*100)}%)` } }
+      }
+    }
+  });
+}
+
+function renderGeo() {
+  const rows = DATA.geo[currentPeriod];
+  const maxS = Math.max(...rows.map(r=>r.sessions));
+  const totalS = rows.reduce((a,r)=>a+r.sessions,0);
+  const el = document.getElementById('geo-bars');
+
+  // Insight
+  const insightEl = document.getElementById('geo-insight');
+  if(insightEl) {
+    const gdanskArea = rows.filter(r=>r.city==='Gdansk'||r.city==='Gdynia').reduce((a,r)=>a+r.sessions,0);
+    insightEl.innerHTML = `
+      <span class="insight-chip">🏙 Gdańsk: <strong>${fmt(rows.find(r=>r.city==='Gdansk')?.sessions||0)}</strong> sesji (${Math.round((rows.find(r=>r.city==='Gdansk')?.sessions||0)/totalS*100)}%)</span>
+      <span class="insight-chip">🗺 Gdańsk+Gdynia: <strong>${fmt(gdanskArea)}</strong> (${Math.round(gdanskArea/totalS*100)}%)</span>
+      <span class="insight-chip">🏙 Bydgoszcz: <strong>${fmt(rows.find(r=>r.city==='Bydgoszcz')?.sessions||0)}</strong> — dobry wynik dla nowego salonu</span>
+      <span class="insight-chip insight-note">💡 Warszawa (${fmt(rows.find(r=>r.city==='Warsaw')?.sessions||0)}) — duży ruch bez lokalnego salonu, potencjał dla kampanii ogólnopolskich</span>`;
+  }
+
+  el.innerHTML = rows.map((r,i) => `
+    <div class="bar-row">
+      <div class="bar-label" style="min-width:100px;font-size:12px;">${r.city}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.sessions/maxS*100)}%; background:${i===0?'#BB0A21':i<3?'#1565c0':'#555'}"></div></div>
+      <div class="bar-val">${fmt(r.sessions)} <span style="color:#999;font-size:10px">(${Math.round(r.sessions/totalS*100)}%)</span></div>
+    </div>`).join('');
+
+  destroyChart('geo');
+  const ctx = document.getElementById('chartGeo').getContext('2d');
+  charts['geo'] = new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels: rows.map(r=>r.city),
+      datasets:[{label:'Sesje', data:rows.map(r=>r.sessions), backgroundColor: rows.map((_,i)=>i===0?'rgba(187,10,33,0.9)':i<3?'rgba(21,101,192,0.8)':'rgba(100,100,100,0.6)'), borderRadius:4}]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false, indexAxis:'y',
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>` ${fmt(ctx.raw)} sesji (${Math.round(ctx.raw/totalS*100)}%)`}}
+      },
+      scales:{
+        x:{ticks:{font:{size:10}, callback:v=>fmt(v)}},
+        y:{ticks:{font:{size:11}}}
+      }
+    }
+  });
+}
+
+function renderDemo() {
+  // Age
+  destroyChart('age');
+  const ageData = DATA.demo_age[currentPeriod]||DATA.demo_age['90d'];
+  const totalAge = ageData.reduce((a,r)=>a+r.sessions,0);
+  const peakAge = ageData.reduce((a,b)=>a.sessions>b.sessions?a:b);
+  const ctxAge = document.getElementById('chartAge').getContext('2d');
+
+  const insightEl = document.getElementById('demo-insight');
+  if(insightEl) {
+    const age3554 = ageData.filter(r=>r.age==='35-44'||r.age==='45-54').reduce((a,r)=>a+r.sessions,0);
+    insightEl.innerHTML = `
+      <span class="insight-chip">📊 Szczyt: <strong>${peakAge.age} lat</strong> — ${fmt(peakAge.sessions)} sesji (${Math.round(peakAge.sessions/totalAge*100)}%)</span>
+      <span class="insight-chip">🎯 35–54 lat: <strong>${Math.round(age3554/totalAge*100)}%</strong> ruchu — główna grupa docelowa</span>
+      <span class="insight-chip insight-note">💡 Treści i oferty leasingowe powinny być skierowane do 35–54 latków (decydenci zakupowi)</span>`;
+  }
+
+  charts['age'] = new Chart(ctxAge, {
+    type:'bar',
+    data:{
+      labels: ageData.map(r=>r.age),
+      datasets:[{
+        label:'Sesje',
+        data:ageData.map(r=>r.sessions),
+        backgroundColor: ageData.map(r=>r.age===peakAge.age?'rgba(187,10,33,0.9)':'rgba(187,10,33,0.5)'),
+        borderRadius:4
+      }]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>` ${fmt(ctx.raw)} sesji (${Math.round(ctx.raw/totalAge*100)}%)`}}
+      },
+      scales:{
+        x:{ticks:{font:{size:11}}},
+        y:{ticks:{font:{size:10}, callback:v=>fmt(v)}}
+      }
+    }
+  });
+
+  // Gender
+  destroyChart('gen');
+  const genData = DATA.demo_gender[currentPeriod]||DATA.demo_gender['90d'];
+  const totalGen = genData.reduce((a,r)=>a+r.sessions,0);
+  const ctxGen = document.getElementById('chartGender').getContext('2d');
+  charts['gen'] = new Chart(ctxGen, {
+    type:'doughnut',
+    data:{
+      labels: genData.map(r=>r.gender==='male'?'👨 Mężczyźni':'👩 Kobiety'),
+      datasets:[{data:genData.map(r=>r.sessions), backgroundColor:['#1565c0','#BB0A21'], borderWidth:2}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'bottom',labels:{font:{size:12},padding:12,
+          generateLabels: chart => chart.data.labels.map((l,i)=>({
+            text: l + '  ' + Math.round(chart.data.datasets[0].data[i]/totalGen*100)+'%',
+            fillStyle:['#1565c0','#BB0A21'][i], strokeStyle:['#1565c0','#BB0A21'][i], lineWidth:0, index:i
+          }))
+        }},
+        tooltip:{callbacks:{label:ctx=>` ${fmt(ctx.raw)} sesji (${Math.round(ctx.raw/totalGen*100)}%) — dane z próby GA4`}}
+      }
+    }
+  });
+}
+
+function renderTimePat() {
+  destroyChart('dow');
+  const dow = DATA.dow['90d'];
+  const maxDow = dow.reduce((a,b)=>a.conversions>b.conversions?a:b);
+  const minDow = dow.reduce((a,b)=>a.conversions<b.conversions?a:b);
+
+  const insightEl = document.getElementById('timepat-insight');
+  if(insightEl) {
+    const weekdayConv = dow.filter(r=>!['Sobota','Niedziela'].includes(r.day)).reduce((a,r)=>a+r.conversions,0);
+    const totalConv = dow.reduce((a,r)=>a+r.conversions,0);
+    insightEl.innerHTML = `
+      <span class="insight-chip">🏆 Najlepsza konwersja: <strong>${maxDow.day}</strong> (${maxDow.conversions} leadów)</span>
+      <span class="insight-chip">📉 Najsłabsza: <strong>${minDow.day}</strong> (${minDow.conversions} leadów)</span>
+      <span class="insight-chip">💼 Tydz. roboczy: <strong>${weekdayConv}/${totalConv}</strong> konwersji (${Math.round(weekdayConv/totalConv*100)}%)</span>
+      <span class="insight-chip insight-note">💡 Budżety reklamowe koncentruj w pon–pt, szczególnie wtorek i czwartek</span>`;
+  }
+
+  const ctxDow = document.getElementById('chartDow').getContext('2d');
+  charts['dow'] = new Chart(ctxDow, {
+    type:'bar',
+    data:{
+      labels: dow.map(r=>r.day),
+      datasets:[
+        {label:'Sesje', data:dow.map(r=>r.sessions), backgroundColor:'rgba(187,10,33,0.75)', borderRadius:4, yAxisID:'y'},
+        {label:'Konwersje', data:dow.map(r=>r.conversions), backgroundColor:'rgba(21,101,192,0.85)', borderRadius:4, yAxisID:'y2'}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${fmt(ctx.raw)}`}}
+      },
+      scales:{
+        y:{title:{display:true,text:'Sesje',font:{size:10}}, ticks:{callback:v=>fmt(v)}},
+        y2:{position:'right',title:{display:true,text:'Konwersje',font:{size:10}},grid:{drawOnChartArea:false}}
+      }
+    }
+  });
+
+  destroyChart('hr');
+  const hr = DATA.hours['90d'].sort((a,b)=>a.hour-b.hour);
+  const peakHour = hr.reduce((a,b)=>a.sessions>b.sessions?a:b);
+  const ctxHr = document.getElementById('chartHour').getContext('2d');
+  charts['hr'] = new Chart(ctxHr, {
+    type:'bar',
+    data:{
+      labels: hr.map(r=>r.hour+':00'),
+      datasets:[{
+        label:'Sesje',
+        data:hr.map(r=>r.sessions),
+        backgroundColor: hr.map(r=>(r.hour>=9&&r.hour<=20)?'rgba(187,10,33,0.8)':'rgba(187,10,33,0.3)'),
+        borderRadius:3
+      }]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>` ${fmt(ctx.raw)} sesji`}}
+      },
+      scales:{x:{ticks:{maxTicksLimit:12,font:{size:10}}},y:{ticks:{font:{size:10},callback:v=>fmt(v)}}}
+    }
+  });
+
+  const hrInsightEl = document.getElementById('hour-insight');
+  if(hrInsightEl) {
+    hrInsightEl.innerHTML = `
+      <span class="insight-chip">🕐 Szczyt: <strong>${peakHour.hour}:00–${peakHour.hour+1}:00</strong> (${fmt(peakHour.sessions)} sesji)</span>
+      <span class="insight-chip">☀️ Aktywne godziny: <strong>9:00–20:00</strong> (ciemniejsze słupki)</span>
+      <span class="insight-chip insight-note">💡 Zaplanuj retargeting i follow-up call na 10:00–14:00</span>`;
+  }
+}
+
+function renderPages() {
+  const rows = DATA.pages[currentPeriod];
+  const tbody = document.querySelector('#pages-table tbody');
+  tbody.innerHTML = rows.map(r => {
+    const br = r.bounceRate;
+    const brBadge = br > 20 ? `<span class="badge-red">${br}%</span>` : `<span class="badge-green">${br}%</span>`;
+    return `<tr>
+      <td><div class="page-path" title="${r.page}">${r.page}</div></td>
+      <td style="text-align:right;font-weight:600">${fmt(r.views)}</td>
+      <td style="text-align:right">${brBadge}</td>
+      <td style="text-align:right">${secToMin(r.avgDurSec)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderBounce() {
+  // Fallback: jeśli brak danych dla 90d, użyj maj lub wygeneruj z pages
+  let rows = DATA.high_bounce[currentPeriod];
+  if (!rows || rows.length === 0) {
+    // Weź z pages gdzie bounceRate > 15 i views < 2000
+    rows = (DATA.pages[currentPeriod] || DATA.pages['90d'])
+      .filter(r => r.bounceRate > 15)
+      .sort((a,b)=>b.bounceRate-a.bounceRate)
+      .slice(0,8)
+      .map(r => ({page: r.page, sessions: r.views, bounceRate: r.bounceRate}));
+  }
+  const tbody = document.querySelector('#bounce-table tbody');
+  if (rows.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#999;padding:20px">Brak stron z wysokim bounce rate w tym okresie</td></tr>';
+    return;
+  }
+  tbody.innerHTML = rows.map(r => {
+    const br = r.bounceRate;
+    const col = br > 50 ? '#BB0A21' : br > 30 ? '#f57c00' : '#888';
+    const icon = br > 50 ? '🔴' : br > 30 ? '🟡' : '⚪';
+    return `<tr>
+      <td><div class="page-path" title="${r.page}">${r.page}</div></td>
+      <td style="text-align:right">${fmt(r.sessions)}</td>
+      <td style="text-align:right"><span style="color:${col};font-weight:700;">${icon} ${br}%</span></td>
+    </tr>`;
+  }).join('');
+
+  const insightEl = document.getElementById('bounce-insight');
+  if(insightEl) {
+    const worst = rows[0];
+    insightEl.innerHTML = `
+      <span class="insight-chip">⚠️ Najgorsza strona: <strong>${worst.page}</strong> — bounce ${worst.bounceRate}%</span>
+      <span class="insight-chip insight-note">💡 Wysokie bounce rate na kartach pojazdów = niespójność reklamy z landing page lub zbyt wolne ładowanie</span>`;
+  }
+}
+
+function renderConvPages() {
+  const rows = DATA.conv_pages['90d'];
+  const tbody = document.querySelector('#conv-table tbody');
+  tbody.innerHTML = rows.map(r => {
+    const crClass = r.cr >= 5 ? 'badge-green' : r.cr >= 1 ? 'badge-gray' : 'badge-red';
+    const crIcon = r.cr >= 5 ? '🏆' : r.cr >= 2 ? '✅' : r.cr >= 1 ? '⚠️' : '🔴';
+    return `<tr>
+      <td><div class="page-path" title="${r.page}">${r.page}</div></td>
+      <td style="text-align:right">${fmt(r.sessions)}</td>
+      <td style="text-align:right;font-weight:700">${r.conversions}</td>
+      <td style="text-align:right"><span class="${crClass}">${crIcon} ${r.cr}%</span></td>
+    </tr>`;
+  }).join('');
+
+  const insightEl = document.getElementById('conv-insight');
+  if(insightEl) {
+    const best = rows[0];
+    const worst = rows[rows.length-1];
+    insightEl.innerHTML = `
+      <span class="insight-chip">🏆 Lider: <strong>${best.page}</strong> CR ${best.cr}% — wzorzec do naśladowania</span>
+      <span class="insight-chip">📉 Najsłabsza: <strong>${worst.page}</strong> — CR tylko ${worst.cr}%</span>
+      <span class="insight-chip insight-note">💡 /jazda-testowa/ to najlepsza strona konwersji (${rows[0].cr}%) — warto zwiększyć do niej ruch z kampanii</span>`;
+  }
+}
+
+function renderEvents() {
+  const rows = DATA.events['maj'];
+  const maxC = Math.max(...rows.map(r=>r.count));
+  const el = document.getElementById('events-bars');
+  const formRows = rows.filter(r=>r.event.startsWith('form'));
+  const formEvents = formRows.reduce((a,r)=>a+r.count,0);
+
+  const insightEl = document.getElementById('events-insight');
+  if(insightEl) {
+    const chatRow = rows.find(r=>r.event==='chat_otworzenie');
+    const formStart = rows.find(r=>r.event==='form_start');
+    insightEl.innerHTML = `
+      <span class="insight-chip">💬 Chat: <strong>${chatRow?fmt(chatRow.count):'-'}</strong> otwarć (${chatRow?fmt(chatRow.users):'-'} użytk.) — niezmierzony potencjał leadów</span>
+      <span class="insight-chip">📋 Form start: <strong>${formStart?fmt(formStart.count):'-'}</strong> → ile kończy? Brak form_step danych</span>
+      <span class="insight-chip insight-note">💡 Priorytet: dodać chat_lead_created i etapy formularza — to odkryje prawdziwy CR</span>`;
+  }
+
+  el.innerHTML = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;">` +
+    rows.map(r => `<div class="bar-row">
+      <div class="bar-label" style="min-width:180px;font-size:11px;font-family:monospace;">${r.event}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.count/maxC*100)}%;background:${r.event.startsWith('form')?'#2e7d32':r.event==='chat_otworzenie'?'#1565c0':'#BB0A21'}"></div></div>
+      <div class="bar-val" style="min-width:70px">${fmt(r.count)} <span style="color:#999;font-size:10px">${r.users?'('+fmt(r.users)+'u)':''}</span></div>
+    </div>`).join('') + '</div>';
+}
+
+function renderAll() {
+  renderKPIs();
+  renderTimeseries();
+  renderChannels();
+  renderDevices();
+  renderGeo();
+  renderDemo();
+  renderTimePat();
+  renderPages();
+  renderBounce();
+  renderConvPages();
+  renderEvents();
+}
+
+window.addEventListener('DOMContentLoaded', renderAll);
+
+function switchMainTab(tabId, btn) {
+  document.querySelectorAll('.main-tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.main-tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleSection(header) {
+  const body = header.nextElementSibling;
+  const btn = header.querySelector('.collapse-btn');
+  if (body.style.display === 'none') {
+    body.style.display = '';
+    if (btn) btn.textContent = '▼';
+  } else {
+    body.style.display = 'none';
+    if (btn) btn.textContent = '▶';
+  }
+}
+</script>
+
+</div><!-- /tab-ga4 -->
+
+<!-- ===== TAB: MAPA STRONY ===== -->
+<div class="main-tab-panel" id="tab-map">
+<div class="container">
+
+  <!-- NAGŁÓWEK / NAWIGACJA -->
+  <h2>Nagłówek / Nawigacja</h2>
+  <div class="section" style="border:2px solid var(--border)">
+    <div class="section-body" style="padding:12px">
+      <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:10px">
+        <span style="color:var(--accent); font-weight:900; font-size:18px; letter-spacing:-1px">AUDI</span>
+        <span style="font-size:11px; color:var(--text2)">☎ Serwis 58 350 25 55 &nbsp;|&nbsp; Sprzedaż 58 350 22</span>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-left:auto">
+          <span class="badge badge-blue">Dostępne Audi</span>
+          <span class="badge badge-blue">Oferty specjalne</span>
+          <span class="badge badge-blue">Audi Sport</span>
+        </div>
+      </div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px">
+        <span class="badge badge-blue">Audi dla Biznesu</span>
+        <span class="badge badge-blue">Serwis</span>
+        <span class="badge badge-blue">Jazda testowa</span>
+        <span class="badge badge-blue">Salony</span>
+        <span class="badge badge-green" style="font-size:12px; padding:4px 12px">Zapytaj o ofertę →</span>
+      </div>
+      <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:8px 12px; font-size:11px; color:var(--text2)">
+        <strong style="color:var(--text)">HERO SLIDER (9 SLAJDÓW) — PEŁNOEKRANOWY, CAROUSEL</strong><br>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px">
+          <span class="badge badge-red">Modele 2026 (-24%)</span>
+          <span class="badge badge-green">Q5 gotowe do odbioru</span>
+          <span class="badge badge-blue">Q7 Final Edition</span>
+          <span class="badge badge-yellow">A5 rocznik 2026</span>
+          <span class="badge badge-blue">Nowy salon Bydgoszcz</span>
+          <span class="badge badge-blue">Modele hybrydowe</span>
+          <span class="badge badge-blue">Serwis Audi Plichta</span>
+          <span class="badge badge-blue">Audi Grupa Plichta</span>
+          <span class="badge badge-red" style="border:1px solid var(--accent)">House of RS ← unikalne</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEKCJE STRONY GŁÓWNEJ -->
+  <h2>Sekcje strony głównej (z góry na dół)</h2>
+  <div class="grid3" style="margin-bottom:16px">
+    <div class="mini-card" style="border:1px solid var(--border); text-align:center; padding:14px">
+      <div style="font-size:22px; margin-bottom:6px">🚗</div>
+      <div style="font-size:12px; font-weight:700">Znajdź swoje Audi</div>
+      <div style="font-size:10px; color:var(--text2); margin-top:3px">Dropdown modeli × 17</div>
+    </div>
+    <div class="mini-card" style="border:2px solid var(--accent); text-align:center; padding:14px">
+      <div style="font-size:22px; margin-bottom:6px">📦</div>
+      <div style="font-size:12px; font-weight:700; color:var(--accent)">Nowe Audi gotowe do odbioru</div>
+      <div style="font-size:10px; color:var(--text2); margin-top:3px">Karousel 17 aut + CTA</div>
+    </div>
+    <div class="mini-card" style="border:1px solid var(--border); text-align:center; padding:14px">
+      <div style="font-size:22px; margin-bottom:6px">💳</div>
+      <div style="font-size:12px; font-weight:700">Możliwości zakupu</div>
+      <div style="font-size:10px; color:var(--text2); margin-top:3px">Finanse / leasing</div>
+    </div>
+    <div class="mini-card" style="border:1px solid var(--border); text-align:center; padding:14px">
+      <div style="font-size:22px; margin-bottom:6px">🏎</div>
+      <div style="font-size:12px; font-weight:700">Jazda testowa</div>
+      <div style="font-size:10px; color:var(--text2); margin-top:3px">CTA link</div>
+    </div>
+    <div class="mini-card" style="border:2px solid var(--accent); text-align:center; padding:14px">
+      <div style="font-size:22px; margin-bottom:6px">🏆</div>
+      <div style="font-size:12px; font-weight:700; color:var(--accent)">House of RS</div>
+      <div style="font-size:10px; color:var(--text2); margin-top:3px">Jedyny salon RS w PL</div>
+    </div>
+    <div class="mini-card" style="border:1px solid var(--border); text-align:center; padding:14px">
+      <div style="font-size:22px; margin-bottom:6px">🔧</div>
+      <div style="font-size:12px; font-weight:700">Sprawdź ofertę</div>
+      <div style="font-size:10px; color:var(--text2); margin-top:3px">Link do katalogu</div>
+    </div>
+    <div class="mini-card" style="border:2px solid var(--accent); text-align:center; padding:14px; grid-column:span 1">
+      <div style="font-size:22px; margin-bottom:6px">📋</div>
+      <div style="font-size:12px; font-weight:700; color:var(--accent)">Formularz kontaktowy</div>
+      <div style="font-size:10px; color:var(--text2); margin-top:3px">GŁÓWNY LEAD FORM ↓</div>
+    </div>
+    <div class="mini-card" style="border:1px solid var(--border); text-align:center; padding:14px">
+      <div style="font-size:22px; margin-bottom:6px">📍</div>
+      <div style="font-size:12px; font-weight:700">Kontakt / Salony</div>
+      <div style="font-size:10px; color:var(--text2); margin-top:3px">5 lokalizacji</div>
+    </div>
+  </div>
+
+  <!-- FORMULARZ + LEJEK -->
+  <div class="grid2" style="margin-bottom:16px">
+    <div>
+      <h2>Formularz leadowy (główny)</h2>
+      <div class="section" style="border:2px solid var(--accent)">
+        <div class="section-body">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:10px">📋 #kontakt — kotwica na stronie głównej</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:6px">
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:6px 8px; font-size:11px; color:var(--text2)">Imię *</div>
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:6px 8px; font-size:11px; color:var(--text2)">Nazwisko *</div>
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:6px 8px; font-size:11px; color:var(--text2)">Email</div>
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:6px 8px; font-size:11px; color:var(--text2)">Telefon *</div>
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:6px 8px; font-size:11px; color:var(--text2)">Wybierz salon *</div>
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:6px 8px; font-size:11px; color:var(--text2)">Wybierz dział *</div>
+          </div>
+          <div style="font-size:11px; color:var(--text2); margin-bottom:8px">+ 3 checkboxy zgód (SMS/MMS, IVR, Email) + reCAPTCHA</div>
+          <div class="alert alert-red" style="font-size:11px">⚠ Formularz wymaga JS. Wymagana zgoda polityki prywatności.</div>
+          <div class="ev-strip" style="margin-top:8px">
+            <span class="ev ev-micro">form_start</span>
+            <span class="ev ev-lead">form_total <span class="ev-num">256 / 90dni</span></span>
+            <span class="ev ev-warn">⚠ form_submit (bug)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>Lejek konwersji (lead journey)</h2>
+      <div class="section">
+        <div class="section-body" style="padding:8px">
+          <div style="display:flex; flex-direction:column; gap:0">
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:6px; background:var(--surface2)">
+              <div style="width:22px; height:22px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0">1</div>
+              <div style="flex:1; font-size:12px; font-weight:600">Wejście na stronę główną</div>
+              <div style="font-family:monospace; font-size:10px; color:var(--text2)">audiplichta.pl/</div>
+            </div>
+            <div style="text-align:center; font-size:14px; color:var(--text2); padding:2px">↓</div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:6px; background:var(--surface2)">
+              <div style="width:22px; height:22px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0">2</div>
+              <div style="flex:1; font-size:12px; font-weight:600">Przeglądanie oferty / modeli</div>
+              <div style="font-family:monospace; font-size:10px; color:var(--text2)">/oferta/nowe/</div>
+            </div>
+            <div style="text-align:center; font-size:14px; color:var(--text2); padding:2px">↓</div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:6px; background:var(--surface2)">
+              <div style="width:22px; height:22px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0">3</div>
+              <div style="flex:1; font-size:12px; font-weight:600">Karta pojazdu</div>
+              <div style="font-family:monospace; font-size:10px; color:var(--text2)">/oferta/nowe/samochod/…</div>
+            </div>
+            <div style="text-align:center; font-size:14px; color:var(--text2); padding:2px">↓</div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:6px; border:2px solid var(--accent); background:var(--red-bg)">
+              <div style="width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0">4</div>
+              <div style="flex:1; font-size:12px; font-weight:700; color:var(--accent)">Formularz główny (#kontakt)</div>
+              <div style="font-family:monospace; font-size:10px; color:var(--text2)">audiplichta.pl/#kontakt</div>
+            </div>
+            <div style="text-align:center; font-size:14px; color:var(--text2); padding:2px">↓</div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:6px; border:2px solid var(--green); background:var(--green-bg)">
+              <div style="width:22px; height:22px; border-radius:50%; background:var(--green); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0">5</div>
+              <div style="flex:1; font-size:12px; font-weight:700; color:var(--green)">Submit → LEAD ✓</div>
+              <div style="font-family:monospace; font-size:10px; color:var(--text2)">konwersja GA4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAPA PODSTRON -->
+  <h2>Mapa podstron (nawigacja główna)</h2>
+  <div class="grid3" style="margin-bottom:16px">
+    <div class="section">
+      <div class="section-body">
+        <div style="font-size:10px; font-weight:800; letter-spacing:1px; color:var(--text2); margin-bottom:10px">OFERTA / AUTA</div>
+        <div style="display:flex; flex-direction:column; gap:5px">
+          <div style="background:var(--blue-bg); border:1px solid var(--blue); border-radius:4px; padding:5px 10px; font-family:monospace; font-size:11px; color:var(--blue)">/oferta/nowe/Audi — 525 aut</div>
+          <div style="padding:5px 10px; font-family:monospace; font-size:11px; color:var(--text2)">/oferta/uzywane/Audi</div>
+          <div style="padding:5px 10px; font-family:monospace; font-size:11px; color:var(--text2)">/oferta/wszystkie/Audi</div>
+          <div style="background:var(--blue-bg); border:1px solid var(--blue); border-radius:4px; padding:5px 10px; font-family:monospace; font-size:11px; color:var(--blue)">/oferta/nowe/samochod/[slug]</div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-body">
+        <div style="font-size:10px; font-weight:800; letter-spacing:1px; color:var(--text2); margin-bottom:10px">KONWERSJA / LEADY</div>
+        <div style="display:flex; flex-direction:column; gap:5px">
+          <div style="background:var(--red-bg); border:1px solid var(--accent); border-radius:4px; padding:5px 10px; font-family:monospace; font-size:11px; color:var(--accent)">#kontakt (formularz główny)</div>
+          <div style="background:var(--red-bg); border:1px solid var(--accent); border-radius:4px; padding:5px 10px; font-family:monospace; font-size:11px; color:var(--accent)">/jazda-testowa</div>
+          <div style="padding:5px 10px; font-family:monospace; font-size:11px; color:var(--text2)">/centrum-flotowe</div>
+          <div style="padding:5px 10px; font-family:monospace; font-size:11px; color:var(--text2)">/house-of-rs</div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-body">
+        <div style="font-size:10px; font-weight:800; letter-spacing:1px; color:var(--text2); margin-bottom:10px">STRONY WSPARCIA</div>
+        <div style="display:flex; flex-direction:column; gap:5px">
+          <div style="padding:5px 10px; font-family:monospace; font-size:11px; color:var(--text2)">/serwis</div>
+          <div style="padding:5px 10px; font-family:monospace; font-size:11px; color:var(--text2)">/salony</div>
+          <div style="padding:5px 10px; font-family:monospace; font-size:11px; color:var(--text2)">/modele-hybrydowe</div>
+          <div style="padding:5px 10px; font-family:monospace; font-size:11px; color:var(--text2)">/nowy-salon-audi-bydgoszcz</div>
+          <div style="padding:5px 10px; font-family:monospace; font-size:11px; color:var(--text2)">/polityka-prywatnosci</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 SALONÓW -->
+  <h2>5 salonów Grupy Plichta</h2>
+  <div class="grid3" style="margin-bottom:16px">
+    <div class="mini-card"><h4>Audi Gdańsk Stadion</h4><p>ul. Marynarki Polskiej 90</p></div>
+    <div class="mini-card"><h4>Audi Centrum Gdańsk</h4><p>ul. Lubowidzka 44</p></div>
+    <div class="mini-card"><h4>Audi Centrum Gdynia</h4><p>ul. Łużycka 3A</p></div>
+    <div class="mini-card"><h4>Audi Bydgoszcz</h4><p>ul. Fordońska 262</p></div>
+    <div class="mini-card"><h4>Audi Select:plus Bydgoszcz</h4><p>ul. Nowotoruńska 15</p></div>
+    <div class="mini-card"><h4>Social media</h4><p>FB + IG (2 kanały)</p></div>
+  </div>
+
+  <!-- TECH STACK -->
+  <h2>Tech stack (z kodu źródłowego)</h2>
+  <div class="section">
+    <div class="section-body">
+      <div style="display:flex; flex-wrap:wrap; gap:8px">
+        <span class="badge badge-yellow" style="font-size:12px; padding:5px 10px">WordPress + Divi Builder</span>
+        <span class="badge badge-blue" style="font-size:12px; padding:5px 10px">Google Tag Manager</span>
+        <span class="badge badge-blue" style="font-size:12px; padding:5px 10px">GA4 (gtag.js)</span>
+        <span class="badge badge-blue" style="font-size:12px; padding:5px 10px">Cookiebot</span>
+        <span class="badge badge-green" style="font-size:12px; padding:5px 10px">LiveChat (cdn.livechatinc.com)</span>
+        <span class="badge badge-red" style="font-size:12px; padding:5px 10px">reCAPTCHA v2</span>
+        <span class="badge badge-yellow" style="font-size:12px; padding:5px 10px">Formularz wymaga JS</span>
+        <span class="badge badge-red" style="font-size:12px; padding:5px 10px">2× nagłówek nav (duplikat desktop/mobile)</span>
+        <span class="badge badge-yellow" style="font-size:12px; padding:5px 10px">iframe lokalizator ukryty (uSApiLocator)</span>
+        <span class="badge badge-blue" style="font-size:12px; padding:5px 10px">Kalkulator rat (/wp-content/…loan-calculator.js)</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /tab-map -->
+
+<!-- ===== TAB: ARCHITEKTURA + EVENTY GA4 ===== -->
+<div class="main-tab-panel" id="tab-arch">
+<div class="container">
+
+  <!-- LEGENDA EVENTÓW -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🏷</span>
+      <span class="section-title">Legenda eventów GA4</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="ev-strip">
+        <span class="ev ev-lead">form_total <span class="ev-label">Lead formularzowy</span></span>
+        <span class="ev ev-micro">form_start <span class="ev-label">Mikro-konwersja</span></span>
+        <span class="ev ev-tel">phone_* <span class="ev-label">Lead telefoniczny</span></span>
+        <span class="ev ev-miss">❌ brak_eventu <span class="ev-label">Nie śledzone</span></span>
+        <span class="ev ev-warn">⚠ form_submit <span class="ev-label">Zaburzony — nie używać!</span></span>
+        <span class="ev ev-auto">page_view <span class="ev-label">Auto GA4</span></span>
+      </div>
+      <div class="alert alert-red" style="margin-top:8px">
+        ⚠️ <strong>form_submit = 447 wywołań, tylko 15 użytkowników</strong> — bug GTM (pętla), nie jest KPI leadów.<br>
+        Prawdziwa miara konwersji: <code>form_total</code> = 256 wysłań / 230 unikalnych użytkowników.
+      </div>
+    </div>
+  </div>
+
+  <!-- 00. NAWIGACJA GLOBALNA -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🧭</span>
+      <span class="section-title">00. Nawigacja globalna</span>
+      <span class="section-url">header / footer / mobile nav</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>Menu górne</h4>
+          <div class="ev-strip">
+            <span class="ev ev-micro">menu_dostepne_audi <span class="ev-num">695</span></span>
+            <span class="ev ev-micro">menu_salony <span class="ev-num">351</span></span>
+            <span class="ev ev-micro">menu_odkup <span class="ev-num">301</span></span>
+            <span class="ev ev-micro">menu_oferty_specjalne <span class="ev-num">220</span></span>
+            <span class="ev ev-micro">menu_jazda_testowa <span class="ev-num">87</span></span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>Brakujące eventy</h4>
+          <div class="ev-strip">
+            <span class="ev ev-miss">❌ menu_serwis</span>
+            <span class="ev ev-miss">❌ menu_fleet</span>
+            <span class="ev ev-miss">❌ search_click</span>
+            <span class="ev ev-miss">❌ footer_link_click</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01. STRONA GŁÓWNA -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🏠</span>
+      <span class="section-title">01. Strona główna</span>
+      <span class="section-url">/</span>
+      <span class="badge badge-blue">12 konwersji · CR 0.1%</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <p>Slider 9 slajdów + 5 sekcji CTA. Ruch organiczny i direct. 12 646 odsłon/90 dni.</p>
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>CTA / Kliknięcia śledzone</h4>
+          <div class="ev-strip">
+            <span class="ev ev-micro">samochody-nowe_strona-glowna <span class="ev-num">7 115</span></span>
+            <span class="ev ev-micro">jazda_testowa_strona_glowna <span class="ev-num">173</span></span>
+            <span class="ev ev-micro">kontakt_strona_glowna <span class="ev-num">157</span></span>
+            <span class="ev ev-micro">sprawdz_oferte_strona_glowna <span class="ev-num">95</span></span>
+            <span class="ev ev-micro">mozliwosc_zakupu_strona_glowna <span class="ev-num">63</span></span>
+            <span class="ev ev-micro">click_slider_strona_glowna <span class="ev-num">550</span></span>
+            <span class="ev ev-micro">zobacz_wszys_odbior_strona-glowna <span class="ev-num">254</span></span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>Formularz kontaktowy HP</h4>
+          <div class="ev-strip">
+            <span class="ev ev-micro">form_start <span class="ev-num">429</span></span>
+            <span class="ev ev-lead">form_total <span class="ev-num">12</span></span>
+            <span class="ev ev-lead">form_strona-glowna <span class="ev-num">12</span></span>
+            <span class="ev ev-warn">⚠ form_submit <span class="ev-num">400 (!)</span></span>
+          </div>
+          <div class="alert alert-red" style="margin-top:6px; font-size:11px">
+            form_submit = 400 przy 12 konwersjach → bug GTM na HP
+          </div>
+        </div>
+      </div>
+      <div class="mini-card" style="margin-top:8px">
+        <h4>Brakujące eventy</h4>
+        <div class="ev-strip">
+          <span class="ev ev-miss">❌ slider_view (który slajd oglądano)</span>
+          <span class="ev ev-miss">❌ video_play (jeśli są)</span>
+          <span class="ev ev-miss">❌ scroll_depth per sekcja</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02. KATALOG OFERTY -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🚗</span>
+      <span class="section-title">02. Katalog oferty</span>
+      <span class="section-url">/oferta/wszystkie</span>
+      <span class="badge badge-blue">główna strona ruchu</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <p>Listing wszystkich pojazdów. Filtry: model, rocznik, cena, nadwozie. 93% wszystkich form_start pochodzi z tej strony.</p>
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>Eventy śledzone</h4>
+          <div class="ev-strip">
+            <span class="ev ev-auto">page_view <span class="ev-num">~60 000+</span></span>
+            <span class="ev ev-auto">view_search_results <span class="ev-num">80 324</span></span>
+            <span class="ev ev-auto">view_item <span class="ev-num">143 724</span></span>
+            <span class="ev ev-micro">form_start <span class="ev-num">25 502</span></span>
+            <span class="ev ev-micro">chat_otworzenie <span class="ev-num">~9 126</span></span>
+            <span class="ev ev-micro">button_auta-demonstracyjne_szczegoly <span class="ev-num">858</span></span>
+            <span class="ev ev-micro">button_auta-nowe_szczegoly <span class="ev-num">538</span></span>
+            <span class="ev ev-micro">click_zobacz_szczegoly <span class="ev-num">990</span></span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>Brakujące eventy</h4>
+          <div class="ev-strip">
+            <span class="ev ev-miss">❌ filter_apply (który filtr używany)</span>
+            <span class="ev ev-miss">❌ filter_model / filter_price</span>
+            <span class="ev ev-miss">❌ sort_change</span>
+            <span class="ev ev-miss">❌ pagination_next</span>
+            <span class="ev ev-miss">❌ vehicle_id w form_start</span>
+          </div>
+          <div class="alert alert-yellow" style="margin-top:6px; font-size:11px">
+            form_start 25 502 — skąd pochodzi? Każda karta pojazdu w liście może auto-triggerować event przy scroll.
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-blue" style="margin-top:8px">
+        ⚠️ <strong>Trailing slash problem:</strong> <code>/oferta/wszystkie</code> i <code>/oferta/wszystkie/</code> = dwa osobne wiersze w GA4 — zsumuj przy raportowaniu.
+      </div>
+    </div>
+  </div>
+
+  <!-- 03. KARTA POJAZDU -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">📋</span>
+      <span class="section-title">03. Karta pojazdu</span>
+      <span class="section-url">/oferta/nowe/[model]/[slug]/</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <p>Strony szczegółowe pojazdów nowych i demonstracyjnych. Formularz kontaktowy z reCAPTCHA v2 i 3 zgodami RODO.</p>
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>Eventy śledzone</h4>
+          <div class="ev-strip">
+            <span class="ev ev-auto">view_item <span class="ev-num">143 724 łącznie</span></span>
+            <span class="ev ev-micro">form_start <span class="ev-num">na karcie</span></span>
+            <span class="ev ev-lead">form_auta-nowe <span class="ev-num">91</span></span>
+            <span class="ev ev-lead">form_auta-demonstracyjne <span class="ev-num">16</span></span>
+            <span class="ev ev-micro">klik_zadzwon_oferty <span class="ev-num">215</span></span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>Brakujące eventy</h4>
+          <div class="ev-strip">
+            <span class="ev ev-miss">❌ vehicle_id w form_start / form_total</span>
+            <span class="ev ev-miss">❌ form_step_2_zgody</span>
+            <span class="ev ev-miss">❌ form_step_3_recaptcha</span>
+            <span class="ev ev-miss">❌ form_abandon</span>
+            <span class="ev ev-miss">❌ form_error_displayed</span>
+            <span class="ev ev-miss">❌ outbound_click_configurator</span>
+            <span class="ev ev-miss">❌ click_gallery_photo</span>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-red" style="margin-top:8px">
+        🔴 <strong>reCAPTCHA v2</strong> widoczna na formularzu = największa bariera konwersji na mobile. Priorytet: zamienić na v3 (niewidoczna).
+      </div>
+    </div>
+  </div>
+
+  <!-- 04. JAZDA TESTOWA -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🏎</span>
+      <span class="section-title">04. Jazda testowa</span>
+      <span class="section-url">/jazda-testowa/</span>
+      <span class="badge badge-green">★ CR 10.6% — NAJLEPSZY!</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <p>Dedykowana strona formularza jazdy testowej. Najwyższy CR na stronie: 56 konwersji / 528 odsłon.</p>
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>Eventy śledzone</h4>
+          <div class="ev-strip">
+            <span class="ev ev-micro">form_start <span class="ev-num">127</span></span>
+            <span class="ev ev-lead">form_jazda-testowa <span class="ev-num">28</span></span>
+            <span class="ev ev-warn">Formularz_jazda_testowa <span class="ev-num">26</span></span>
+            <span class="ev ev-auto">page_view <span class="ev-num">528</span></span>
+          </div>
+          <div class="alert alert-yellow" style="margin-top:6px; font-size:11px">
+            <strong>Duplikat GTM:</strong> form_jazda-testowa (28) + Formularz_jazda_testowa (26) = prawdopodobnie ten sam formularz, 2 tagi GTM. Faktyczne wysłania: ~28-30 (nie 54!).
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>Lejek na tej stronie</h4>
+          <table>
+            <tr><td>Odsłony</td><td class="num">528</td></tr>
+            <tr><td>form_start</td><td class="num">127</td></tr>
+            <tr><td>form_jazda-testowa</td><td class="num">28</td></tr>
+            <tr><td>CR (odsłony→konwersja)</td><td class="num cr-high">10.6%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05. AUDI PERFECT LEASE -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">💳</span>
+      <span class="section-title">05. Audi Perfect Lease</span>
+      <span class="section-url">/audiperfectlease/ + /audiperfectlease/[model]/</span>
+      <span class="badge badge-blue">28 konwersji · CR 1.0%</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>Eventy śledzone — główna APL</h4>
+          <div class="ev-strip">
+            <span class="ev ev-micro">APL_zapytaj-oferta_open <span class="ev-num">1 733</span></span>
+            <span class="ev ev-micro">click_zobacz_szczegoly <span class="ev-num">990</span></span>
+            <span class="ev ev-micro">BE_zapytaj-oferta_open <span class="ev-num">10</span></span>
+            <span class="ev ev-micro">form_start <span class="ev-num">40</span></span>
+            <span class="ev ev-lead">form_APL_sent <span class="ev-num">28</span></span>
+            <span class="ev ev-warn">formularz_apl <span class="ev-num">4 (duplikat?)</span></span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>Eventy per model (podstrony APL)</h4>
+          <table>
+            <tr><th>Model</th><th>form_APL_sent</th><th>form_perfect_lease</th></tr>
+            <tr><td>Q5</td><td class="num">–</td><td class="num">4</td></tr>
+            <tr><td>Q3</td><td class="num">–</td><td class="num">2</td></tr>
+            <tr><td>A3</td><td class="num">–</td><td class="num">3</td></tr>
+            <tr><td>A6</td><td class="num">–</td><td class="num">2</td></tr>
+            <tr><td>Główna APL</td><td class="num">14</td><td class="num">–</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="mini-card" style="margin-top:8px">
+        <h4>Brakujące eventy</h4>
+        <div class="ev-strip">
+          <span class="ev ev-miss">❌ APL_model_selected</span>
+          <span class="ev ev-miss">❌ APL_period_selected</span>
+          <span class="ev ev-miss">❌ APL_download_offer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06. AUDI PERFECT RENT -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🔑</span>
+      <span class="section-title">06. Audi Perfect Rent</span>
+      <span class="section-url">/audi-perfect-rent/</span>
+      <span class="badge badge-blue">5 konwersji · CR 1.2%</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>Eventy śledzone</h4>
+          <div class="ev-strip">
+            <span class="ev ev-micro">form_start <span class="ev-num">?</span></span>
+            <span class="ev ev-lead">form_APR_sent <span class="ev-num">5</span></span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>Brakujące</h4>
+          <div class="ev-strip">
+            <span class="ev ev-miss">❌ APR_car_selected</span>
+            <span class="ev ev-miss">❌ APR_date_selected</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07. SERWIS -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🔧</span>
+      <span class="section-title">07. Serwis</span>
+      <span class="section-url">/serwis/ · /serwis-bydgoszcz/</span>
+      <span class="badge badge-red">⚠ Bydgoszcz CR 0.2%!</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>/serwis/ — Gdańsk/Gdynia (poprawnie działa)</h4>
+          <div class="ev-strip">
+            <span class="ev ev-micro">form_start <span class="ev-num">37</span></span>
+            <span class="ev ev-lead">form_serwis <span class="ev-num">23</span></span>
+            <span class="ev ev-tel">Audi-Centrum-Gdansk_infolinia-serwisowa <span class="ev-num">18</span></span>
+            <span class="ev ev-tel">Audi-Centrum-Gdynia_infolinia-serwisowa <span class="ev-num">22</span></span>
+            <span class="ev ev-tel">Audi-Gdansk-Stadion_infolinia-serwisowa <span class="ev-num">30</span></span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>/serwis-bydgoszcz/ — PROBLEM ⚠️</h4>
+          <table>
+            <tr><td>Odsłony</td><td class="num">1 002</td></tr>
+            <tr><td>Konwersje GA4</td><td class="num cr-low">2</td></tr>
+            <tr><td>CR</td><td class="num cr-low">0.2%</td></tr>
+            <tr><td>chat_otworzenie</td><td class="num">234</td></tr>
+            <tr><td>form_serwis z tej strony</td><td class="num cr-low">~2</td></tr>
+            <tr><td>Audi-Bydgoszcz_infolinia-serwisowa</td><td class="num">12</td></tr>
+          </table>
+          <div class="alert alert-red" style="margin-top:6px; font-size:11px">
+            1 000 odsłon, 2 konwersje formularza. Użytkownicy otwierają chat (234) zamiast formularza. Strona wymaga audytu UX.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08. SALONY -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">📍</span>
+      <span class="section-title">08. Salony</span>
+      <span class="section-url">/salony/</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <p>5 lokalizacji: Gdańsk, Gdynia, Bydgoszcz, Gdańsk Stadion, Gdańsk Matarnia</p>
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>Kliknięcia "Wyznacz trasę" (90 dni)</h4>
+          <div class="ev-strip">
+            <span class="ev ev-micro">Audi-Centrum-Gdansk_trasa <span class="ev-num">20</span></span>
+            <span class="ev ev-micro">Audi-Centrum-Gdynia_trasa <span class="ev-num">16</span></span>
+            <span class="ev ev-micro">Audi-Gdansk-Stadion_trasa <span class="ev-num">15</span></span>
+            <span class="ev ev-micro">Audi-Bydgoszcz_trasa <span class="ev-num">9</span></span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>Telefony handlowe (90 dni)</h4>
+          <div class="ev-strip">
+            <span class="ev ev-tel">Audi-Centrum-Gdansk_infolinia-handlowa <span class="ev-num">15</span></span>
+            <span class="ev ev-tel">Audi-Gdansk-Stadion_infolinia-handlowa <span class="ev-num">12</span></span>
+            <span class="ev ev-tel">Audi-Centrum-Gdynia_infolinia-handlowa <span class="ev-num">10</span></span>
+            <span class="ev ev-tel">Audi-Bydgoszcz_infolinia-handlowa <span class="ev-num">3</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="mini-card" style="margin-top:8px">
+        <h4>Brakujące eventy</h4>
+        <div class="ev-strip">
+          <span class="ev ev-miss">❌ Gdańsk Matarnia — brak eventów telefonu</span>
+          <span class="ev ev-miss">❌ salon_hours_view</span>
+          <span class="ev ev-miss">❌ click_chat_salon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09. ODKUP -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🔄</span>
+      <span class="section-title">09. Odkup aut</span>
+      <span class="section-url">/odkup/</span>
+      <span class="badge badge-blue">12 konwersji · CR 1.1%</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="ev-strip">
+        <span class="ev ev-micro">form_start <span class="ev-num">?</span></span>
+        <span class="ev ev-lead">form_odkup <span class="ev-num">12</span></span>
+        <span class="ev ev-micro">menu_odkup <span class="ev-num">301 (klik z menu)</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. CENTRUM FLOTOWE -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🏢</span>
+      <span class="section-title">10. Centrum flotowe</span>
+      <span class="section-url">/centrum-flotowe/</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>Eventy śledzone</h4>
+          <div class="ev-strip">
+            <span class="ev ev-tel">phone_centrum_flotowe <span class="ev-num">26</span></span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>Brakujące eventy</h4>
+          <div class="ev-strip">
+            <span class="ev ev-miss">❌ form_flota (brak formularza flotowego w GA4!)</span>
+            <span class="ev ev-miss">❌ fleet_brochure_download</span>
+            <span class="ev ev-miss">❌ fleet_contact_click</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. WYPRZEDAŻE -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">💥</span>
+      <span class="section-title">11. Wyprzedaże</span>
+      <span class="section-url">/wyprzedaz-a5/ · /wyprzedaz-a6/ · /q4-etron-2026/</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr><th>Strona</th><th>Konwersje</th><th>Odsłony</th><th>CR</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>/wyprzedaz-a5/</td>
+            <td class="num">10</td>
+            <td class="num">548</td>
+            <td class="num cr-high">1.8%</td>
+          </tr>
+          <tr>
+            <td>/wyprzedaz-a6/</td>
+            <td class="num">8</td>
+            <td class="num">927</td>
+            <td class="num">0.9%</td>
+          </tr>
+          <tr>
+            <td>/q4-etron-2026/</td>
+            <td class="num">6</td>
+            <td class="num">1 127</td>
+            <td class="num">0.5%</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="ev-strip" style="margin-top:8px">
+        <span class="ev ev-lead">form_wyprzedaz-2024-A5 <span class="ev-num">10</span></span>
+        <span class="ev ev-lead">form_wyprzedaz-2024-A6 <span class="ev-num">6</span></span>
+        <span class="ev ev-lead">form_wyprzedaz-2024-Q5 <span class="ev-num">4</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12. HOUSE OF RS -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🏁</span>
+      <span class="section-title">12. House of RS</span>
+      <span class="section-url">/house-of-rs/</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="ev-strip">
+        <span class="ev ev-lead">form_house_of-RS <span class="ev-num">1</span></span>
+        <span class="ev ev-miss">❌ RS_model_interest_click</span>
+        <span class="ev ev-miss">❌ RS_video_play</span>
+        <span class="ev ev-miss">❌ RS_event_registration</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. NOWY SALON BYDGOSZCZ -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🏗</span>
+      <span class="section-title">13. Nowy salon Bydgoszcz</span>
+      <span class="section-url">/nowy-salon-bydgoszcz/</span>
+      <span class="badge badge-red">0 konwersji</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="alert alert-yellow">
+        Strona informacyjna bez formularza i CTA konwersyjnego. 0 zmierzonych leadów.
+      </div>
+      <div class="ev-strip">
+        <span class="ev ev-miss">❌ brak formularza / CTA</span>
+        <span class="ev ev-miss">❌ brak subskrypcji "poinformuj o otwarciu"</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. LIVECHAT -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">💬</span>
+      <span class="section-title">14. LiveChat — globalny</span>
+      <span class="section-url">Widget globalny na całej stronie</span>
+      <span class="badge badge-red">DUŻE ŚLEPE POLE</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="alert alert-red">
+        <strong>16 550 otwarć chatu → ile zostało leadem? NIEZNANE.</strong><br>
+        Brak jakiegokolwiek eventu po fazie otwarcia widgetu.
+      </div>
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>Eventy śledzone</h4>
+          <div class="ev-strip">
+            <span class="ev ev-micro">chat_otworzenie <span class="ev-num">16 550</span></span>
+            <span class="ev ev-auto">Automated greeting <span class="ev-num">7 694</span></span>
+            <span class="ev ev-auto">Chat <span class="ev-num">153 (inny event)</span></span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>Brakujące eventy (krytyczne)</h4>
+          <div class="ev-strip">
+            <span class="ev ev-miss">❌ chat_message_sent</span>
+            <span class="ev ev-miss">❌ chat_lead_created</span>
+            <span class="ev ev-miss">❌ chat_ticket_opened</span>
+            <span class="ev ev-miss">❌ chat_agent_response_time</span>
+          </div>
+          <p style="margin-top:6px; font-size:11px">
+            LiveChat może być głównym kanałem leadów (16k otwarć vs 256 formularzowych). Brak pomiaru = ślepe pole.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 15. LEJEK KONWERSJI -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">📉</span>
+      <span class="section-title">15. Lejek konwersji — dane weryfikowane</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <p>Zakres danych: 90 dni (luty–maj 2026). Wszystkie liczby pobrane z GA4 live.</p>
+      <div class="funnel">
+        <div class="funnel-step">
+          <div class="funnel-label">Sesje</div>
+          <div class="funnel-bar-wrap">
+            <div class="funnel-bar" style="width:100%; background:#1a4a8a">100%</div>
+          </div>
+          <div class="funnel-num">57 052</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-label">form_start (unikalni)</div>
+          <div class="funnel-bar-wrap">
+            <div class="funnel-bar" style="width:24%; background:#2563eb">24%</div>
+          </div>
+          <div class="funnel-num">14 414</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-label">chat_otworzenie (unikalni)</div>
+          <div class="funnel-bar-wrap">
+            <div class="funnel-bar" style="width:14%; background:#7c3aed">14%</div>
+          </div>
+          <div class="funnel-num">8 492</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-label">form_total (unikalni)</div>
+          <div class="funnel-bar-wrap">
+            <div class="funnel-bar" style="width:0.4%; background:#16a34a; min-width:50px">0.4%</div>
+          </div>
+          <div class="funnel-num">230</div>
+        </div>
+      </div>
+      <table style="margin-top:12px">
+        <thead>
+          <tr><th>Etap</th><th>Wywołania</th><th>Unikalni użytkownicy</th><th>CR od form_start</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>form_start</td><td class="num">26 609</td><td class="num">14 414</td><td class="num">–</td></tr>
+          <tr><td>form_total</td><td class="num">256</td><td class="num">230</td><td class="num cr-high">1.6%</td></tr>
+          <tr><td><span class="ev ev-warn" style="font-size:11px">⚠ form_submit (BUG)</span></td><td class="num">447</td><td class="num cr-low">15 (!!)</td><td class="num cr-low">BUG GTM</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-red" style="margin-top:8px">
+        CR formularz = 1.6% (nie 2.2%). Nie używaj form_submit jako KPI — bug GTM.
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. ŚLEPE PLAMY I PRIORYTETY CRO -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">🎯</span>
+      <span class="section-title">16. Ślepe plamy + Priorytety CRO</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <h3>Brakujące eventy — krytyczne dla pomiaru leadów</h3>
+      <div class="ev-strip" style="margin-bottom:16px">
+        <span class="ev ev-miss">❌ form_step_2_zgody</span>
+        <span class="ev ev-miss">❌ form_step_3_recaptcha</span>
+        <span class="ev ev-miss">❌ form_abandon</span>
+        <span class="ev ev-miss">❌ chat_lead_created</span>
+        <span class="ev ev-miss">❌ form_error_displayed</span>
+        <span class="ev ev-miss">❌ vehicle_id w form_start</span>
+      </div>
+
+      <h3>Priorytety CRO (do realizacji)</h3>
+      <div class="priority-item">
+        <div class="priority-num p1">1</div>
+        <div class="priority-text">
+          <strong>Śledzenie etapów formularza</strong>
+          form_step_2_zgody + form_step_3_recaptcha + form_abandon → wiemy gdzie porzucają
+        </div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num p1">2</div>
+        <div class="priority-text">
+          <strong>reCAPTCHA v2 → v3</strong>
+          Widoczna CAPTCHA = friction na mobile. v3 jest niewidoczna. CR może wzrosnąć 2-3x.
+        </div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num p1">3</div>
+        <div class="priority-text">
+          <strong>Naprawa /serwis-bydgoszcz/</strong>
+          1 002 odsłon, 2 konwersje (CR 0.2%) — audit UX + formularz serwisowy
+        </div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num p2">4</div>
+        <div class="priority-text">
+          <strong>LiveChat → chat_lead_created</strong>
+          16 550 otwarć bez żadnego śledzenia konwersji — największe ślepe pole
+        </div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num p2">5</div>
+        <div class="priority-text">
+          <strong>vehicle_id w form_start / form_total</strong>
+          Dodać parametr ID pojazdu do eventów formularzowych → wiemy które auta konwertują
+        </div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num p3">6</div>
+        <div class="priority-text">
+          <strong>Ujednolicić duplikaty eventów GTM</strong>
+          form_jazda-testowa ≈ Formularz_jazda_testowa | formularz_apl ≈ form_APL_sent
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 17. TECH STACK -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-icon">⚙️</span>
+      <span class="section-title">17. Tech stack</span>
+      <span class="collapse-btn">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid3">
+        <div class="mini-card">
+          <h4>CMS</h4>
+          <p>WordPress + Divi Builder</p>
+        </div>
+        <div class="mini-card">
+          <h4>Analityka</h4>
+          <p>GA4 (property/355550660)<br>GTM (tagi formularzy)</p>
+        </div>
+        <div class="mini-card">
+          <h4>Dodatkowe</h4>
+          <p>LiveChat widget<br>reCAPTCHA v2 (do zamiany)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /tab-arch -->
+
+<!-- ===== TAB: LEJEK FORMULARZA ===== -->
+<div class="main-tab-panel" id="tab-funnel">
+<div class="container">
+
+  <!-- PASEK SUMMARY -->
+  <div class="section-label" style="margin-top:8px">🔻 Lejki konwersji — wszystkie typy formularzy</div>
+
+  <!-- KPI summary bar dla lejków -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px;" id="funnel-kpi-bar">
+    <div class="kpi-card" style="border-top:3px solid #BB0A21;">
+      <div class="kpi-label" style="color:#BB0A21;font-weight:700;">Konwersje TOTAL</div>
+      <div class="kpi-value" style="color:#BB0A21;" id="fkpi-total">–</div>
+      <div class="kpi-sub">wszystkie formularze · 90 dni</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">form_start</div>
+      <div class="kpi-value" style="font-size:22px;">26 609</div>
+      <div class="kpi-sub">intencja wypełnienia · 13 851 users</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">CR form_start → send</div>
+      <div class="kpi-value" id="fkpi-cr" style="font-size:22px;">–</div>
+      <div class="kpi-sub">wszystkie formularze razem</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Chat otwarcia</div>
+      <div class="kpi-value" style="font-size:22px;">16 550</div>
+      <div class="kpi-sub">chat_otworzenie (nie = lead)</div>
+    </div>
+  </div>
+
+  <!-- WYKRES PORÓWNAWCZY wszystkich typów -->
+  <div class="card" style="margin-bottom:24px;">
+    <div class="card-title"><span class="icon">📊</span> Porównanie wszystkich formularzy — liczba wysłań (90 dni)</div>
+    <div style="position:relative;height:260px;">
+      <canvas id="funnelCompareChart"></canvas>
+    </div>
+  </div>
+
+  <!-- LEJKI GRID — jeden lejek per typ formularza -->
+  <div class="section-label">📋 Lejki per typ formularza</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:24px;" id="funnel-grid">
+    <!-- generowane przez JS -->
+  </div>
+
+  <!-- TABELA ZBIORCZA -->
+  <div class="card" style="margin-bottom:24px;">
+    <div class="card-title"><span class="icon">📋</span> Zestawienie zbiorcze — wszystkie typy formularzy</div>
+    <div style="overflow-x:auto;">
+      <table style="font-size:12px;border-collapse:collapse;width:100%;">
+        <thead>
+          <tr style="background:#1a1a1a;color:white;">
+            <th style="padding:8px 12px;text-align:left;">Typ formularza</th>
+            <th style="padding:8px 12px;text-align:left;font-size:10px;">Event GA4</th>
+            <th style="padding:8px 12px;text-align:right;">Wysłań</th>
+            <th style="padding:8px 12px;text-align:right;">Users</th>
+            <th style="padding:8px 12px;text-align:right;">% total</th>
+            <th style="padding:8px 12px;text-align:right;">CR vs form_start</th>
+            <th style="padding:8px 12px;text-align:left;">Strona</th>
+          </tr>
+        </thead>
+        <tbody id="funnel-table-body"></tbody>
+        <tfoot id="funnel-table-foot"></tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- PLAN GTM (zachowany) -->
+  <div class="card" style="margin-bottom:24px;">
+    <div class="card-title"><span class="icon">🛠</span> Co eventować po drodze — plan GTM (formularz kontaktowy / karta pojazdu)</div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>Krok w formularzu</th><th>Proponowany event GTM</th><th>Trigger</th><th>Priorytet</th><th>Po co?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700;color:#BB0A21;">1</td>
+          <td>Użytkownik klika w pole (focus)</td>
+          <td><code style="background:#fef2f2;color:#BB0A21;padding:2px 6px;border-radius:3px;">form_start</code></td>
+          <td>Focus na input[name=imie] lub tel</td>
+          <td><span style="background:#e8f5e9;color:#2e7d32;font-size:11px;padding:2px 8px;border-radius:10px;">✓ działa</span></td>
+          <td style="font-size:12px;color:#555;">Mierzymy intencję</td>
+        </tr>
+        <tr style="background:#fffbeb;">
+          <td style="font-weight:700;color:#f57c00;">2</td>
+          <td>Wypełnił pola obowiązkowe</td>
+          <td><code style="background:#fffbeb;color:#92400e;padding:2px 6px;border-radius:3px;">form_fields_complete</code></td>
+          <td>Zmiana stanu pól — custom JS</td>
+          <td><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fee2e2;color:#991b1b;">❌ brak</span></td>
+          <td style="font-size:12px;color:#555;">Pola czy zgody powodują porzucenia?</td>
+        </tr>
+        <tr style="background:#fffbeb;">
+          <td style="font-weight:700;color:#f57c00;">3</td>
+          <td>reCAPTCHA v2 zaznaczona</td>
+          <td><code style="background:#fffbeb;color:#92400e;padding:2px 6px;border-radius:3px;">form_step_3_recaptcha</code></td>
+          <td>grecaptcha callback</td>
+          <td><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fee2e2;color:#991b1b;">❌ brak</span></td>
+          <td style="font-size:12px;color:#555;">reCAPTCHA jako friction — ile odpada?</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:#2e7d32;">4</td>
+          <td>Kliknął "Wyślij"</td>
+          <td><code style="background:#e8f5e9;color:#2e7d32;padding:2px 6px;border-radius:3px;">form_total</code></td>
+          <td>Submit event</td>
+          <td><span style="background:#e8f5e9;color:#2e7d32;font-size:11px;padding:2px 8px;border-radius:10px;">✓ działa</span></td>
+          <td style="font-size:12px;color:#555;">Finalna konwersja</td>
+        </tr>
+        <tr style="background:#fffbeb;">
+          <td style="font-weight:700;color:#f57c00;">5</td>
+          <td>Porzucił formularz</td>
+          <td><code style="background:#fffbeb;color:#92400e;padding:2px 6px;border-radius:3px;">form_abandon</code></td>
+          <td>beforeunload po form_start bez form_total</td>
+          <td><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fee2e2;color:#991b1b;">❌ brak</span></td>
+          <td style="font-size:12px;color:#555;">Ile i kiedy porzucają?</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /tab-funnel -->
+
+<!-- ===== TAB: WERYFIKACJA FORMULARZY ===== -->
+<div class="main-tab-panel" id="tab-weryfikacja">
+<div class="container">
+
+  <div class="section-label" style="margin-top:8px">🔍 Weryfikacja formularzy — lista Audi vs GA4 (1–26 maj 2026)</div>
+
+  <!-- SUMMARY BAR -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:20px;">
+    <div class="kpi-card" style="border-top:3px solid #BB0A21;">
+      <div class="kpi-label" style="color:#BB0A21;font-weight:700;">form_total GA4</div>
+      <div class="kpi-value" style="color:#BB0A21;">60</div>
+      <div class="kpi-label">eventy łącznie</div>
+    </div>
+    <div class="kpi-card" style="border-top:3px solid #1a4a8a;">
+      <div class="kpi-label" style="color:#1a4a8a;font-weight:700;">Lista Audi (suma)</div>
+      <div class="kpi-value" style="color:#1a4a8a;">52</div>
+      <div class="kpi-label">9 zmatchowanych eventów</div>
+    </div>
+    <div class="kpi-card" style="border-top:3px solid #d97706;">
+      <div class="kpi-label" style="color:#d97706;font-weight:700;">Niezmatchowane</div>
+      <div class="kpi-value" style="color:#d97706;">8</div>
+      <div class="kpi-label">GA4 ma, Audi nie pokazuje</div>
+    </div>
+    <div class="kpi-card" style="border-top:3px solid #16a34a;">
+      <div class="kpi-label" style="color:#16a34a;font-weight:700;">form_start</div>
+      <div class="kpi-value" style="color:#16a34a;">5 323</div>
+      <div class="kpi-label">interakcje z formularzem</div>
+    </div>
+  </div>
+
+  <!-- SEKCJA 1: ZMATCHOWANE -->
+  <div class="card" style="margin-bottom:24px;">
+    <div class="card-title"><span class="icon">✅</span> Zmatchowane — lista Audi = GA4 (9 formularzy, 1–26 maj 2026)</div>
+    <p style="font-size:12px;color:#6b6b6b;margin:0 0 12px 0;">Eventy które Audi raportuje i które potwierdzamy w GA4. Lejek: form_start (5 323) → form_total (60) → konkretny event.</p>
+
+    <!-- WYKRES SŁUPKOWY -->
+    <div style="position:relative;height:220px;margin-bottom:20px;">
+      <canvas id="weryChart"></canvas>
+    </div>
+
+    <!-- LEJKI GRID -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;" id="wery-grid">
+      <!-- generowane JS -->
+    </div>
+  </div>
+
+  <!-- SEKCJA 2: NIEZMATCHOWANE -->
+  <div class="card" style="margin-bottom:24px;border-top:3px solid #d97706;">
+    <div class="card-title"><span class="icon">⚠️</span> Niezmatchowane — GA4 widzi, Audi nie raportuje</div>
+    <p style="font-size:12px;color:#6b6b6b;margin:0 0 12px 0;">Te eventy istnieją w GA4 w maju 2026, ale nie pojawiły się na liście formularzy od Audi. Wymagają wyjaśnienia.</p>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead>
+        <tr style="background:#f4f4f4;">
+          <th style="padding:8px 12px;text-align:left;">Event GA4</th>
+          <th style="padding:8px 12px;text-align:right;">Liczba (maj)</th>
+          <th style="padding:8px 12px;text-align:left;">Uwaga</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e0e0e0;">
+          <td style="padding:8px 12px;"><code>Formularz_jazda_testowa</code></td>
+          <td style="padding:8px 12px;text-align:right;font-weight:700;color:#d97706;">6</td>
+          <td style="padding:8px 12px;font-size:12px;color:#6b6b6b;">Prawdopodobny duplikat <code>form_jazda-testowa</code> — inny tag GTM. Łącznie JT = 13.</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0e0e0;">
+          <td style="padding:8px 12px;"><code>form_APR_sent</code></td>
+          <td style="padding:8px 12px;text-align:right;color:#6b6b6b;">0</td>
+          <td style="padding:8px 12px;font-size:12px;color:#6b6b6b;">Audi Perfect Rent — brak konwersji w maju (był 5 w 90-dniach)</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0e0e0;">
+          <td style="padding:8px 12px;"><code>form_strona-glowna</code></td>
+          <td style="padding:8px 12px;text-align:right;color:#6b6b6b;">0</td>
+          <td style="padding:8px 12px;font-size:12px;color:#6b6b6b;">Formularz kontaktowy strony głównej — brak w maju</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0e0e0;">
+          <td style="padding:8px 12px;"><code>form_wyprzedaz-2024-A5</code></td>
+          <td style="padding:8px 12px;text-align:right;color:#6b6b6b;">0</td>
+          <td style="padding:8px 12px;font-size:12px;color:#6b6b6b;">Wyprzedaż A5 — brak aktywności w maju</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0e0e0;">
+          <td style="padding:8px 12px;"><code>form_wyprzedaz-2024-A6</code></td>
+          <td style="padding:8px 12px;text-align:right;color:#6b6b6b;">0</td>
+          <td style="padding:8px 12px;font-size:12px;color:#6b6b6b;">Wyprzedaż A6 — brak aktywności w maju</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0e0e0;">
+          <td style="padding:8px 12px;"><code>form_perfect_lease_Q3</code></td>
+          <td style="padding:8px 12px;text-align:right;color:#6b6b6b;">0</td>
+          <td style="padding:8px 12px;font-size:12px;color:#6b6b6b;">Perfect Lease Q3 — brak w maju</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0e0e0;">
+          <td style="padding:8px 12px;"><code>form_perfect_lease_A6</code></td>
+          <td style="padding:8px 12px;text-align:right;color:#6b6b6b;">0</td>
+          <td style="padding:8px 12px;font-size:12px;color:#6b6b6b;">Perfect Lease A6 — brak w maju</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 12px;"><code>formularz_apl</code></td>
+          <td style="padding:8px 12px;text-align:right;color:#6b6b6b;">0</td>
+          <td style="padding:8px 12px;font-size:12px;color:#6b6b6b;">Stary/duplikat tag APL — brak w maju</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr style="background:#fff8ed;font-weight:700;">
+          <td style="padding:8px 12px;">⚠️ Niewyjaśniona różnica GA4</td>
+          <td style="padding:8px 12px;text-align:right;color:#d97706;">+2</td>
+          <td style="padding:8px 12px;font-size:12px;color:#6b6b6b;">form_total=60, suma specyficznych=58. Możliwy błąd tagowania lub zaokrąglenie GA4.</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- PYTANIA DO AUDI -->
+  <div class="card" style="border-top:3px solid #BB0A21;">
+    <div class="card-title"><span class="icon">❓</span> Pytania do Audi / do wyjaśnienia</div>
+    <ol style="font-size:13px;line-height:1.8;padding-left:20px;">
+      <li><strong>Formularz jazdy testowej ma 2 tagi GTM</strong> — <code>form_jazda-testowa</code> (7) i <code>Formularz_jazda_testowa</code> (6). Czy to ten sam formularz? Łącznie = <strong>13 konwersji</strong>, a Audi raportuje tylko 7.</li>
+      <li><strong>form_total=60 vs suma Audi=52</strong> — skąd różnica 8? Prosimy o wyjaśnienie czy <code>form_total</code> agreguje też eventy spoza listy.</li>
+      <li><strong>Czy eventy z zerowymi wynikami w maju są nadal aktywne?</strong> — APR, wyprzedaże A5/A6, Perfect Lease Q3/A6, form strona główna.</li>
+    </ol>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /tab-weryfikacja -->
+
+<script>
+(function initWeryfikacja() {
+  const FS = 5323;
+  const WERY_DATA = [
+    { label: 'Nowe auta',         event: 'form_auta-nowe',          count: 14, users: 14, color: '#BB0A21' },
+    { label: 'AudiPerfectLease',  event: 'form_APL_sent',           count: 10, users: 7,  color: '#2563eb' },
+    { label: 'Odkup',             event: 'form_odkup',              count: 8,  users: 8,  color: '#d97706' },
+    { label: 'Jazda testowa',     event: 'form_jazda-testowa',      count: 7,  users: 7,  color: '#16a34a' },
+    { label: 'Serwis',            event: 'form_serwis',             count: 4,  users: 4,  color: '#7c3aed' },
+    { label: 'Auta demo',         event: 'form_auta-demonstracyjne',count: 3,  users: 3,  color: '#6b7280' },
+    { label: 'Wyprzedaż Q5',      event: 'form_wyprzedaz-2024-Q5',  count: 3,  users: 2,  color: '#059669' },
+    { label: 'Perfect Lease Q5',  event: 'form_perfect_lease_Q5',   count: 2,  users: 2,  color: '#db2777' },
+    { label: 'Perfect Lease A3',  event: 'form_perfect_lease_A3',   count: 1,  users: 1,  color: '#f97316' },
+  ];
+
+  // Wykres
+  const ctx = document.getElementById('weryChart');
+  if (ctx && window.Chart) {
+    new Chart(ctx.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: WERY_DATA.map(d => d.label),
+        datasets: [{
+          label: 'Wysłanych formularzy (1–26 maj)',
+          data: WERY_DATA.map(d => d.count),
+          backgroundColor: WERY_DATA.map(d => d.color),
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: {
+          afterLabel: item => {
+            const d = WERY_DATA[item.dataIndex];
+            return `CR vs form_start: ${(d.count/FS*100).toFixed(2)}% | Users: ${d.users}`;
+          }
+        }}},
+        scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+      }
+    });
+  }
+
+  // Lejki grid
+  const grid = document.getElementById('wery-grid');
+  if (grid) {
+    WERY_DATA.forEach(d => {
+      const cr = (d.count / FS * 100).toFixed(2);
+      const barW = Math.max(2, Math.round(d.count / WERY_DATA[0].count * 100));
+      grid.innerHTML += `
+        <div style="background:#f9f9f9;border-radius:8px;padding:14px;border:1px solid #e0e0e0;">
+          <div style="font-weight:700;font-size:13px;margin-bottom:4px;">${d.label}</div>
+          <div style="font-family:monospace;font-size:11px;color:#6b6b6b;margin-bottom:10px;">${d.event}</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:110px;font-size:11px;color:#6b6b6b;">form_start</div>
+              <div style="flex:1;background:#e0e0e0;border-radius:3px;height:22px;overflow:hidden;">
+                <div style="width:100%;height:100%;background:#1a4a8a;display:flex;align-items:center;padding-left:8px;font-size:11px;color:#fff;">100%</div>
+              </div>
+              <div style="width:50px;text-align:right;font-size:12px;font-weight:700;">5 323</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:110px;font-size:11px;color:#6b6b6b;">form_total (maj)</div>
+              <div style="flex:1;background:#e0e0e0;border-radius:3px;height:22px;overflow:hidden;">
+                <div style="width:${Math.round(60/FS*100*5)}%;min-width:40px;height:100%;background:#BB0A21;display:flex;align-items:center;padding-left:8px;font-size:11px;color:#fff;">${(60/FS*100).toFixed(1)}%</div>
+              </div>
+              <div style="width:50px;text-align:right;font-size:12px;font-weight:700;">60</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:110px;font-size:11px;font-weight:700;">${d.label}</div>
+              <div style="flex:1;background:#e0e0e0;border-radius:3px;height:22px;overflow:hidden;">
+                <div style="width:${barW}%;min-width:40px;height:100%;background:${d.color};display:flex;align-items:center;padding-left:8px;font-size:11px;color:#fff;">${cr}%</div>
+              </div>
+              <div style="width:50px;text-align:right;font-size:12px;font-weight:700;">${d.count}</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:11px;color:#6b6b6b;">👤 ${d.users} użytkowników | CR: <strong>${cr}%</strong> vs form_start</div>
+        </div>`;
+    });
+  }
+})();
+</script>
+
+<!-- ===== TAB: FORMULARZE MoM ===== -->
+<div class="main-tab-panel" id="tab-mom">
+<div class="container">
+
+  <div class="section-label" style="margin-top:8px">📅 Formularze MoM — kwiecień 2025 – maj 2026 (13 miesięcy)</div>
+
+  <!-- KPI ROW -->
+  <div class="grid-4" style="margin-bottom:20px;">
+    <div class="kpi-card">
+      <div class="kpi-label">Łącznie leadów (13 mies.)</div>
+      <div class="kpi-value">1 313</div>
+      <div class="kpi-sub">form_total — wszystkie typy</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Średnia miesięczna</div>
+      <div class="kpi-value">101</div>
+      <div class="kpi-sub">bez kwi 2025 (outlier: 279)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Najlepszy miesiąc</div>
+      <div class="kpi-value" style="color:#2e7d32">279</div>
+      <div class="kpi-sub">Kwiecień 2025</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Maj 2026 (do 26.05)</div>
+      <div class="kpi-value" style="color:#f57c00">59</div>
+      <div class="kpi-sub">dane do 26 maja 2026</div>
+    </div>
+  </div>
+
+  <!-- WYKRES GŁÓWNY stacked bar -->
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title"><span class="icon">📊</span> Leady per miesiąc — podział na typy (stacked)</div>
+    <div style="position:relative; height:320px;">
+      <canvas id="momStackedChart"></canvas>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; padding-top:10px; border-top:1px solid var(--border);">
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#1a1a1a;display:inline-block"></span>Auta nowe (form_total)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#BB0A21;display:inline-block"></span>Jazda testowa</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#2563eb;display:inline-block"></span>APL (leasing)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#7c3aed;display:inline-block"></span>Serwis</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#d97706;display:inline-block"></span>Odkup</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#059669;display:inline-block"></span>Wyprzedaże</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#db2777;display:inline-block"></span>Perfect Lease</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:11px;"><span style="width:12px;height:12px;border-radius:2px;background:#6b7280;display:inline-block"></span>APR / inne</span>
+    </div>
+  </div>
+
+  <!-- TABELA SZCZEGÓŁOWA -->
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-title"><span class="icon">📋</span> Tabela szczegółowa — wszystkie typy formularzy</div>
+    <div style="overflow-x:auto;">
+      <table id="momTable" style="min-width:900px;">
+        <thead>
+          <tr>
+            <th>Miesiąc</th>
+            <th style="text-align:right; background:#1a1a1a; color:white;">form_total</th>
+            <th style="text-align:right; background:#fef2f2;">Jazda test.</th>
+            <th style="text-align:right; background:#eff6ff;">APL</th>
+            <th style="text-align:right; background:#f5f3ff;">Serwis</th>
+            <th style="text-align:right; background:#fffbeb;">Odkup</th>
+            <th style="text-align:right; background:#f0fdf4;">Wyprzedaże</th>
+            <th style="text-align:right; background:#fdf4ff;">P.Lease</th>
+            <th style="text-align:right;">APR</th>
+            <th style="text-align:right; color:#888;">MoM %</th>
+          </tr>
+        </thead>
+        <tbody id="momTableBody"></tbody>
+      </table>
+    </div>
+    <div style="font-size:11px; color:#888; margin-top:8px; padding-top:8px; border-top:1px solid var(--border);">
+      * Maj 2026 = dane do 26.05 (niepełny miesiąc) &nbsp;|&nbsp; Jazda testowa = form_jazda-testowa + Formularz_jazda_testowa &nbsp;|&nbsp; APL = form_APL_sent + formularz_apl
+    </div>
+  </div>
+
+  <!-- WYKRESY LINIOWE per typ -->
+  <div class="grid-2" style="margin-bottom:20px;">
+    <div class="card">
+      <div class="card-title"><span class="icon">📈</span> Jazda testowa + APL — trend MoM</div>
+      <div style="position:relative; height:200px;"><canvas id="momLineJTAPL"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">📈</span> Serwis + Odkup — trend MoM</div>
+      <div style="position:relative; height:200px;"><canvas id="momLineSerwis"></canvas></div>
+    </div>
+  </div>
+
+  <!-- METODOLOGIA GRUPOWANIA -->
+  <details style="background:white;border:1px solid #e0e0e0;border-radius:8px;padding:0;margin-bottom:20px;overflow:hidden;">
+    <summary style="padding:14px 20px;font-size:13px;font-weight:600;color:#1a1a1a;cursor:pointer;display:flex;align-items:center;gap:8px;list-style:none;user-select:none;">
+      <span style="color:#BB0A21;font-size:16px;">ℹ</span> Metodologia grupowania eventów GA4
+      <span style="margin-left:auto;font-size:11px;color:#6b6b6b;font-weight:400;">rozwiń ▾</span>
+    </summary>
+    <div style="padding:16px 20px 18px;border-top:1px solid #f0f0f0;background:#fafafa;">
+      <p style="font-size:12px;color:#6b6b6b;margin-bottom:12px;">Każda kolumna w tabeli i seria na wykresie odpowiada grupie eventów GA4 wg poniższych reguł:</p>
+      <table style="font-size:12px;border-collapse:collapse;width:100%;">
+        <thead>
+          <tr style="background:#f4f4f4;">
+            <th style="text-align:left;padding:7px 12px;color:#1a1a1a;font-weight:600;border-bottom:2px solid #BB0A21;width:180px;">Kolumna</th>
+            <th style="text-align:left;padding:7px 12px;color:#1a1a1a;font-weight:600;border-bottom:2px solid #BB0A21;">Eventy GA4 (suma)</th>
+            <th style="text-align:left;padding:7px 12px;color:#1a1a1a;font-weight:600;border-bottom:2px solid #BB0A21;width:260px;">Uwaga</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #ececec;">
+            <td style="padding:6px 12px;font-weight:600;color:#BB0A21;">Łącznie</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_total</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Główny KPI — sumaryczne wysłania formularzy</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;background:#fef9f9;">
+            <td style="padding:6px 12px;font-weight:600;">Jazda testowa</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_jazda-testowa + Formularz_jazda_testowa</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Deduplikacja — dwa eventy GTM dla tego samego formularza</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;">
+            <td style="padding:6px 12px;font-weight:600;">APL</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_APL_sent + formularz_apl</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Deduplikacja — Audi Perfect Lease, stare i nowe nazwy</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;background:#fef9f9;">
+            <td style="padding:6px 12px;font-weight:600;">Serwis</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_serwis</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Formularz umówienia wizyty serwisowej</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;">
+            <td style="padding:6px 12px;font-weight:600;">Odkup</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_odkup</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Formularz skupu pojazdu</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;background:#fef9f9;">
+            <td style="padding:6px 12px;font-weight:600;">Wyprzedaże</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_wyprzedaz-2024-A5 + form_wyprzedaz-2024-A6 + form_wyprzedaz-2024-Q5</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Suma wszystkich eventów form_wyprzedaz-*</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ececec;">
+            <td style="padding:6px 12px;font-weight:600;">Perfect Lease</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_perfect_lease_Q5 + form_perfect_lease_Q3 + form_perfect_lease_A3 + form_perfect_lease_A6</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Suma wszystkich eventów form_perfect_lease_*</td>
+          </tr>
+          <tr style="background:#fef9f9;">
+            <td style="padding:6px 12px;font-weight:600;">APR</td>
+            <td style="padding:6px 12px;font-family:monospace;color:#444;">form_APR_sent</td>
+            <td style="padding:6px 12px;color:#6b6b6b;">Audi Perfect Rent</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:#999;margin-top:10px;">⚠️ Kolumna <strong>Łącznie</strong> = <code>form_total</code> (rzeczywisty KPI). Nie jest to suma pozostałych kolumn — te pokrywają podzbiór eventów z różnych formularzy.</p>
+    </div>
+  </details>
+
+  <!-- INSIGHT -->
+  <div class="insight-bar" style="margin-bottom:24px;">
+    <span class="insight-chip"><strong>Kwi 2025 outlier:</strong> 279 form_total — ponad 2.5× więcej niż średnia. Duży wolumen JT (155) sugeruje kampanię lub event.</span>
+    <span class="insight-chip"><strong>Stabilne core:</strong> od cze 2025 do mar 2026 każdy miesiąc 97–108 leadów — bardzo stały poziom.</span>
+    <span class="insight-chip"><strong>Kwi–maj 2026 ↓:</strong> 64 i 59* — wyraźny spadek. Kwi 2026 to tylko 23% kwi 2025.</span>
+    <span class="insight-chip"><strong>Serwis stabilny:</strong> 5–13 leadów miesięcznie — regularny, niezależny od sezonowości.</span>
+    <span class="insight-chip insight-note">⚠️ Maj 2026 = dane do 26.05 (niepełny miesiąc).</span>
+  </div>
+
+
+  <!-- SECTION: ŹRÓDŁA RUCHU MoM -->
+  <div class="section-card" style="margin-bottom:24px;">
+    <div class="section-header">
+      <span class="section-title">📡 Formularze wg źródła ruchu — miesięcznie</span>
+      <span class="section-sub">form_total / sessionDefaultChannelGroup · kwi 2025 – maj 2026</span>
+    </div>
+    <div class="section-body">
+
+      <!-- WYKRES STACKED -->
+      <div style="height:280px;margin-bottom:24px;">
+        <canvas id="channelStackedChart"></canvas>
+      </div>
+
+      <!-- TABELA: TOTAL -->
+      <p style="font-size:12px;font-weight:700;color:#1a1a1a;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">Wszystkie formularze (form_total) wg kanału</p>
+      <div style="overflow-x:auto;margin-bottom:24px;">
+        <table style="font-size:12px;border-collapse:collapse;width:100%;min-width:700px;">
+          <thead>
+            <tr style="background:#1a1a1a;color:white;">
+              <th style="padding:9px 12px;text-align:left;font-weight:600;width:120px;">Miesiąc</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:600;background:#BB0A21;">Paid 💰</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:600;background:#2e7d32;">Organic 🌿</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:600;">Direct+inne</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:700;background:#333;">TOTAL</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:600;">% Paid</th>
+            </tr>
+          </thead>
+          <tbody id="channelTotalTbody">
+          </tbody>
+        </table>
+      </div>
+
+      <!-- LEGENDA KANAŁÓW -->
+      <details style="background:#fafafa;border:1px solid #e8e8e8;border-radius:6px;padding:0;margin-bottom:0;overflow:hidden;">
+        <summary style="padding:10px 16px;font-size:12px;font-weight:600;cursor:pointer;list-style:none;color:#6b6b6b;">Definicje grup kanałów ▾</summary>
+        <div style="padding:10px 16px 14px;font-size:11px;color:#6b6b6b;line-height:1.8;">
+          <strong style="color:#BB0A21;">Paid</strong> = Paid Search + Paid Social + Paid Other + Cross-network + Display + SMS<br>
+          <strong style="color:#2e7d32;">Organic</strong> = Organic Search + Organic Social<br>
+          <strong style="color:#1a1a1a;">Direct+inne</strong> = Direct + Referral + Unassigned + pozostałe<br>
+          <span style="margin-top:6px;display:block;">⚠️ Maj 2026 = dane do 26.05 (niepełny miesiąc)</span>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /tab-mom -->
+
+<script>
+// ===== MoM DATA =====
+const MOM_DATA = {
+  labels: ['Kwi 2025','Maj 2025','Cze 2025','Lip 2025','Sie 2025','Wrz 2025','Paź 2025','Lis 2025','Gru 2025','Sty 2026','Lut 2026','Mar 2026','Kwi 2026','Maj 2026*'],
+  total:      [279, 124, 102,  97,  63, 100, 105, 106, 101, 106, 107, 108,  64,  59],
+  jt:         [155,  34,  36,  39,  22,  32,  18,  41,  33,  38,  25,  28,  16,   7],
+  apl:        [ 17,  52,  23,  19,  16,  24,  18,   8,  17,   6,  12,  15,   5,  10],
+  serwis:     [  5,   5,  12,  13,   7,   8,   7,  11,  13,   9,   8,   9,   8,   4],
+  odkup:      [  6,   7,   6,   4,   0,   3,   5,   7,   4,   4,   5,   3,   2,   8],
+  wyprzedaz:  [  3,   1,   0,   0,   0,   0,   1,   0,   0,   0,   6,  13,   3,   3],
+  pleasing:   [  0,   0,   5,   4,   1,   7,  10,   3,   8,   3,   3,   8,   1,   3],
+  apr:        [  2,   3,   1,   1,   0,   4,   1,   0,   2,   1,   2,   3,   1,   0]
+};
+
+(function initMoM() {
+  // Tabela
+  const tbody = document.getElementById('momTableBody');
+  MOM_DATA.labels.forEach((lbl, i) => {
+    const prev = i > 0 ? MOM_DATA.total[i-1] : null;
+    const mom = prev ? ((MOM_DATA.total[i] - prev) / prev * 100).toFixed(0) : '—';
+    const momColor = prev ? (MOM_DATA.total[i] >= prev ? '#2e7d32' : '#BB0A21') : '#888';
+    const momStr = prev ? (MOM_DATA.total[i] >= prev ? '+' : '') + mom + '%' : '—';
+    const isCurrent = lbl.includes('*');
+    tbody.innerHTML += `<tr ${isCurrent ? 'style="background:#fffbeb;"' : ''}>
+      <td style="font-weight:600; white-space:nowrap;">${lbl}</td>
+      <td style="text-align:right; font-weight:700; font-size:14px;">${MOM_DATA.total[i]}</td>
+      <td style="text-align:right; color:#BB0A21;">${MOM_DATA.jt[i]}</td>
+      <td style="text-align:right; color:#2563eb;">${MOM_DATA.apl[i]}</td>
+      <td style="text-align:right; color:#7c3aed;">${MOM_DATA.serwis[i]}</td>
+      <td style="text-align:right; color:#d97706;">${MOM_DATA.odkup[i]}</td>
+      <td style="text-align:right; color:#059669;">${MOM_DATA.wyprzedaz[i]}</td>
+      <td style="text-align:right; color:#db2777;">${MOM_DATA.pleasing[i]}</td>
+      <td style="text-align:right; color:#6b7280;">${MOM_DATA.apr[i]}</td>
+      <td style="text-align:right; font-weight:700; color:${momColor};">${momStr}</td>
+    </tr>`;
+  });
+
+  // Stacked bar chart
+  const ctxStack = document.getElementById('momStackedChart').getContext('2d');
+  new Chart(ctxStack, {
+    type: 'bar',
+    data: {
+      labels: MOM_DATA.labels,
+      datasets: [
+        { label: 'Jazda testowa', data: MOM_DATA.jt,        backgroundColor: '#BB0A21', stack: 's' },
+        { label: 'APL',          data: MOM_DATA.apl,       backgroundColor: '#2563eb', stack: 's' },
+        { label: 'Serwis',       data: MOM_DATA.serwis,    backgroundColor: '#7c3aed', stack: 's' },
+        { label: 'Odkup',        data: MOM_DATA.odkup,     backgroundColor: '#d97706', stack: 's' },
+        { label: 'Wyprzedaże',   data: MOM_DATA.wyprzedaz, backgroundColor: '#059669', stack: 's' },
+        { label: 'Perfect Lease',data: MOM_DATA.pleasing,  backgroundColor: '#db2777', stack: 's' },
+        { label: 'APR/inne',     data: MOM_DATA.apr,       backgroundColor: '#6b7280', stack: 's' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            footer: (items) => {
+              const total = items.reduce((s,i) => s + i.raw, 0);
+              const formTotal = MOM_DATA.total[items[0].dataIndex];
+              return `Suma typów: ${total} | form_total: ${formTotal}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { font: { size: 11 } } },
+        y: { stacked: true, beginAtZero: true, grid: { color: '#f0f0f0' },
+             ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+
+  // Linia JT + APL
+  const ctxJT = document.getElementById('momLineJTAPL').getContext('2d');
+  new Chart(ctxJT, {
+    type: 'line',
+    data: {
+      labels: MOM_DATA.labels,
+      datasets: [
+        { label: 'Jazda testowa', data: MOM_DATA.jt,  borderColor: '#BB0A21', backgroundColor: 'rgba(187,10,33,0.08)', tension: 0.3, fill: true, pointRadius: 3 },
+        { label: 'APL',          data: MOM_DATA.apl, borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.06)', tension: 0.3, fill: true, pointRadius: 3 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { size: 11 } } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 45 } },
+        y: { beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+
+  // Linia Serwis + Odkup
+  const ctxSerwis = document.getElementById('momLineSerwis').getContext('2d');
+  new Chart(ctxSerwis, {
+    type: 'line',
+    data: {
+      labels: MOM_DATA.labels,
+      datasets: [
+        { label: 'Serwis', data: MOM_DATA.serwis, borderColor: '#7c3aed', backgroundColor: 'rgba(124,58,237,0.08)', tension: 0.3, fill: true, pointRadius: 3 },
+        { label: 'Odkup',  data: MOM_DATA.odkup,  borderColor: '#d97706', backgroundColor: 'rgba(217,119,6,0.06)',  tension: 0.3, fill: true, pointRadius: 3 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { size: 11 } } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 45 } },
+        y: { beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+})();
+
+// ===== CHANNEL MoM DATA =====
+(function() {
+  const LABELS = ['Kwi 2025','Maj 2025','Cze 2025','Lip 2025','Sie 2025','Wrz 2025','Paź 2025','Lis 2025','Gru 2025','Sty 2026','Lut 2026','Mar 2026','Kwi 2026','Maj 2026*'];
+
+  // Paid = Paid Search + Paid Social + Paid Other + Cross-network + Display + SMS
+  // Organic = Organic Search + Organic Social
+  // Direct+inne = Direct + Referral + Unassigned + reszta
+  const CH = {
+    paid:    [147, 78, 56, 50, 41, 36, 68, 65, 63, 71, 83, 79, 39, 30],
+    organic: [ 35, 23, 32, 27, 18, 49, 18, 31, 31, 22, 17, 22, 14, 21],
+    other:   [ 97, 23, 14, 20,  4, 15, 19, 10,  7, 13,  7,  7, 11,  8],
+    total:   [279,124,102, 97, 63,100,105,106,101,106,107,108, 64, 59]
+  };
+
+  // --- Stacked bar chart ---
+  const ctxCh = document.getElementById('channelStackedChart');
+  if (ctxCh) {
+    new Chart(ctxCh.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: LABELS,
+        datasets: [
+          { label: 'Paid 💰',       data: CH.paid,    backgroundColor: 'rgba(187,10,33,0.82)',  stack: 'ch' },
+          { label: 'Organic 🌿',    data: CH.organic,  backgroundColor: 'rgba(46,125,50,0.80)',  stack: 'ch' },
+          { label: 'Direct+inne',   data: CH.other,    backgroundColor: 'rgba(107,107,107,0.60)', stack: 'ch' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'top', labels: { font: { size: 11 } } },
+          tooltip: {
+            callbacks: {
+              footer: function(items) {
+                const total = items.reduce((s, i) => s + i.parsed.y, 0);
+                return 'Total: ' + total;
+              }
+            }
+          }
+        },
+        scales: {
+          x: { stacked: true, grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 45 } },
+          y: { stacked: true, beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  // --- Build total table ---
+  const tbody = document.getElementById('channelTotalTbody');
+  if (tbody) {
+    LABELS.forEach(function(label, i) {
+      const paid = CH.paid[i], org = CH.organic[i], other = CH.other[i], tot = CH.total[i];
+      const paidPct = Math.round(paid / tot * 100);
+      const bg = i % 2 === 0 ? '#fff' : '#fafafa';
+      const isMay26 = label.includes('*');
+      tbody.innerHTML += '<tr style="background:' + bg + ';' + (isMay26 ? 'opacity:.75;' : '') + '">' +
+        '<td style="padding:7px 12px;font-weight:600;white-space:nowrap;">' + label + '</td>' +
+        '<td style="padding:7px 12px;text-align:right;color:#BB0A21;font-weight:700;">' + paid + '</td>' +
+        '<td style="padding:7px 12px;text-align:right;color:#2e7d32;font-weight:700;">' + org + '</td>' +
+        '<td style="padding:7px 12px;text-align:right;color:#6b6b6b;">' + other + '</td>' +
+        '<td style="padding:7px 12px;text-align:right;font-weight:700;background:#f4f4f4;">' + tot + '</td>' +
+        '<td style="padding:7px 12px;text-align:right;">' +
+          '<span style="background:' + (paidPct >= 60 ? '#fce4ec' : paidPct >= 40 ? '#fff8e1' : '#e8f5e9') + ';color:' + (paidPct >= 60 ? '#c62828' : paidPct >= 40 ? '#e65100' : '#2e7d32') + ';padding:2px 7px;border-radius:10px;font-size:11px;font-weight:600;">' + paidPct + '%</span>' +
+        '</td>' +
+      '</tr>';
+    });
+  }
+})();
+
+// ===== FUNNEL RENDERER =====
+(function initFunnel() {
+  const FS = FUNNEL_CONTEXT.form_start;
+  const total = FUNNEL_TOTAL_ALL;
+
+  // KPI bar
+  const kpiTotal = document.getElementById('fkpi-total');
+  const kpiCr    = document.getElementById('fkpi-cr');
+  if (kpiTotal) kpiTotal.textContent = total.toLocaleString('pl-PL');
+  if (kpiCr)    kpiCr.textContent = (total / FS * 100).toFixed(1) + '%';
+
+  // KPI bar główny (zakładka GA4) — total all
+  const kpiConvTotal = document.getElementById('kpi-conv-total');
+  if (kpiConvTotal) kpiConvTotal.textContent = total.toLocaleString('pl-PL');
+
+  // Wykres porównawczy
+  const ctxCmp = document.getElementById('funnelCompareChart');
+  if (ctxCmp) {
+    new Chart(ctxCmp.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: FUNNEL_DATA.map(f => f.label),
+        datasets: [{
+          label: 'Wysłanych formularzy (90 dni)',
+          data: FUNNEL_DATA.map(f => f.count),
+          backgroundColor: FUNNEL_DATA.map(f => f.color),
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              afterLabel: (item) => {
+                const f = FUNNEL_DATA[item.dataIndex];
+                const cr = (f.count / FS * 100).toFixed(2);
+                return `CR vs form_start: ${cr}% | Users: ${f.users}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: { beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  // Generuj lejki per typ
+  const grid = document.getElementById('funnel-grid');
+  if (grid) {
+    FUNNEL_DATA.forEach(f => {
+      const cr_fs   = (f.count / FS * 100).toFixed(2);
+      const pct_tot = (f.count / total * 100).toFixed(1);
+      const barW    = Math.max(2, Math.round(f.count / FUNNEL_DATA[0].count * 100));
+      const fsBarW  = Math.min(100, Math.round(FS / 30000 * 100));
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.cssText = 'padding:16px;';
+      card.innerHTML = `
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;border-bottom:2px solid ${f.color};padding-bottom:8px;">
+          <span style="font-size:20px;">${f.icon}</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:#1a1a1a;">${f.label}</div>
+            <div style="font-size:10px;color:#888;">${f.sublabel}</div>
+          </div>
+        </div>
+
+        <!-- Krok 1: Odsłony -->
+        <div style="margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <span style="font-size:11px;color:#555;">📄 Odsłony (page_view)</span>
+            <span style="font-size:12px;font-weight:700;color:#94a3b8;">237 398</span>
+          </div>
+          <div style="background:#e8ecf0;border-radius:3px;height:8px;">
+            <div style="width:100%;height:100%;background:#94a3b8;border-radius:3px;"></div>
+          </div>
+        </div>
+
+        <!-- Krok 2: form_start -->
+        <div style="text-align:center;font-size:11px;color:#BB0A21;margin:2px 0;">↓ tylko ${(FS/237398*100).toFixed(1)}% klika w formularz</div>
+        <div style="margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <span style="font-size:11px;color:#555;">👆 form_start</span>
+            <span style="font-size:12px;font-weight:700;color:#BB0A21;">26 609</span>
+          </div>
+          <div style="background:#e8ecf0;border-radius:3px;height:8px;">
+            <div style="width:${fsBarW}%;height:100%;background:#BB0A21;border-radius:3px;"></div>
+          </div>
+        </div>
+
+        <!-- Krok 3: CZARNA DZIURA (brak etapów) -->
+        <div style="text-align:center;font-size:11px;color:#f57c00;margin:2px 0;">↓ ❓ brak pomiaru etapów</div>
+        <div style="margin-bottom:8px;opacity:0.5;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <span style="font-size:11px;color:#888;">📝 Wypełnia pola… reCAPTCHA…</span>
+            <span style="font-size:11px;color:#888;">? brak danych</span>
+          </div>
+          <div style="background:#e8ecf0;border-radius:3px;height:8px;border:1px dashed #aaa;">
+          </div>
+        </div>
+
+        <!-- Krok 4: Wysłanie -->
+        <div style="text-align:center;font-size:11px;color:#2e7d32;margin:2px 0;">↓ CR = <strong>${cr_fs}%</strong></div>
+        <div style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <span style="font-size:11px;color:#555;">✅ Wysłany formularz</span>
+            <span style="font-size:16px;font-weight:700;color:${f.color};">${f.count.toLocaleString('pl-PL')}</span>
+          </div>
+          <div style="background:#e8ecf0;border-radius:3px;height:12px;">
+            <div style="width:${barW}%;height:100%;background:${f.color};border-radius:3px;"></div>
+          </div>
+        </div>
+
+        <!-- Statsy -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px;background:#f8f8f8;border-radius:6px;padding:8px;">
+          <div style="text-align:center;">
+            <div style="font-size:14px;font-weight:700;color:${f.color};">${f.count}</div>
+            <div style="font-size:9px;color:#888;">wysłań</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:14px;font-weight:700;color:#555;">${cr_fs}%</div>
+            <div style="font-size:9px;color:#888;">CR vs start</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:14px;font-weight:700;color:#555;">${pct_tot}%</div>
+            <div style="font-size:9px;color:#888;">% total</div>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  // Tabela zbiorcza
+  const tbody = document.getElementById('funnel-table-body');
+  const tfoot = document.getElementById('funnel-table-foot');
+  if (tbody) {
+    FUNNEL_DATA.forEach((f, i) => {
+      const cr  = (f.count / FS * 100).toFixed(2);
+      const pct = (f.count / total * 100).toFixed(1);
+      const bg  = i % 2 === 0 ? '#fff' : '#fafafa';
+      tbody.innerHTML += `<tr style="background:${bg};">
+        <td style="padding:7px 12px;font-weight:600;display:flex;align-items:center;gap:6px;">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${f.color};flex-shrink:0;"></span>
+          ${f.label}
+        </td>
+        <td style="padding:7px 12px;font-size:10px;color:#888;font-family:monospace;">${f.sublabel.split(' ')[0]}</td>
+        <td style="padding:7px 12px;text-align:right;font-weight:700;">${f.count.toLocaleString('pl-PL')}</td>
+        <td style="padding:7px 12px;text-align:right;color:#555;">${f.users}</td>
+        <td style="padding:7px 12px;text-align:right;">
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;">
+            <div style="width:50px;background:#e8ecf0;border-radius:3px;height:6px;">
+              <div style="width:${Math.round(f.count/total*100)}%;height:100%;background:${f.color};border-radius:3px;"></div>
+            </div>
+            <span>${pct}%</span>
+          </div>
+        </td>
+        <td style="padding:7px 12px;text-align:right;color:#2e7d32;">${cr}%</td>
+        <td style="padding:7px 12px;font-size:11px;color:#888;">
+          <a href="https://audiplichta.pl${f.url}" target="_blank" style="color:#BB0A21;text-decoration:none;">${f.url}</a>
+        </td>
+      </tr>`;
+    });
+  }
+  if (tfoot) {
+    tfoot.innerHTML = `<tr style="background:#1a1a1a;color:white;font-weight:700;">
+      <td style="padding:8px 12px;" colspan="2">RAZEM</td>
+      <td style="padding:8px 12px;text-align:right;">${total.toLocaleString('pl-PL')}</td>
+      <td style="padding:8px 12px;text-align:right;">–</td>
+      <td style="padding:8px 12px;text-align:right;">100%</td>
+      <td style="padding:8px 12px;text-align:right;">${(total/FS*100).toFixed(2)}%</td>
+      <td style="padding:8px 12px;">–</td>
+    </tr>`;
+  }
+})();
+
+</script>
+
+</body>
+</html>
