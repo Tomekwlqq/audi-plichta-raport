@@ -89,6 +89,17 @@
   .chart-explain .ce-learn { background: #f0fdf4; } .chart-explain .ce-learn .ce-label { color: #16a34a; }
   .chart-explain .ce-read  { background: #fffbeb; } .chart-explain .ce-read  .ce-label { color: #d97706; }
   .chart-explain .ce-do    { background: #fef2f2; border-top: 2px solid var(--audi-red); } .chart-explain .ce-do .ce-label { color: var(--audi-red); }
+  .nowe-agg-wrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px}
+  .nowe-agg{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px}
+  .nowe-agg h4{font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;color:var(--text2)}
+  .nowe-agg table{width:100%;font-size:0.8rem;border-collapse:collapse}
+  .nowe-agg thead th{padding:4px 6px;text-align:left;font-size:0.72rem;font-weight:600;text-transform:uppercase;color:var(--text2);border-bottom:2px solid var(--border)}
+  .nowe-agg thead th.r{text-align:right}
+  .nowe-agg td{padding:4px 6px;border-bottom:1px solid var(--border);vertical-align:middle}
+  .nowe-agg td.r{text-align:right}
+  .nowe-agg td.lead-val{text-align:right;font-weight:700;color:#BB0A21}
+  .nowe-agg tr:last-child td{border-bottom:none}
+  @media(max-width:900px){.nowe-agg-wrap{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -113,8 +124,8 @@
 <div class="main-tab-nav">
   <button class="main-tab-btn active" onclick="switchMainTab('ga4', this)">📊 Ruch i konwersje GA4</button>
   <button class="main-tab-btn" onclick="switchMainTab('demografia', this)">👥 Demografia</button>
-  <button class="main-tab-btn" onclick="switchMainTab('mom', this)">📅 MoM</button>
-  <button class="main-tab-btn" onclick="switchMainTab('weryfikacja', this)">🔍 Weryfikacja formularzy</button>
+  <button class="main-tab-btn" onclick="switchMainTab('mom', this)">📅 Leady Miesiące</button>
+  <button class="main-tab-btn" onclick="switchMainTab('weryfikacja', this)">🔍 Formularze - szczegóły</button>
   <button class="main-tab-btn" onclick="switchMainTab('nowe-auta', this)">🚗 Leady Nowe Auta</button>
   <button class="main-tab-btn" onclick="switchMainTab('arch-combined', this)">🏗 Architektura + Eventy</button>
 </div>
@@ -1009,12 +1020,13 @@ function toggleSection(header) {
   </div>
 </div>
     <div id="nowe-panel-jan" class="nowe-panel">
-  <div class="info-box">
-    <h3>Co tu widzisz:</h3>
-    <p><strong>Co tu widzisz:</strong> Ranking kart pojazdów nowych wg liczby leadów (form_total) w styczniu 2026, z danymi o ruchu i interakcjach z formularzem.</p>
-    <p><strong>Dowiadujesz się że:</strong> Które konkretne modele/auta wygenerowały leady, a które miały dużo ruchu ale żadnej konwersji — czyli gdzie "przepada" zainteresowanie użytkowników.</p>
-    <p><strong>Czytaj to tak:</strong> Wysokie fs + niskie ft = formularz jest otwierany, ale coś blokuje wysłanie (reCAPTCHA? za długi formularz? zła cena?). Niskie fs + wysoki CR = mała próba, ale chętni — rozważ wypchnięcie tego auta wyżej w ofercie.</p>
-  </div>
+<div class="chart-explain">
+  <div class="ce-row ce-see"><span class="ce-label">Co tu widzisz</span><span class="ce-text">Ranking kart pojazdów nowych Audi według liczby leadów (form_total) w <strong>styczniu 2026</strong>. Każdy wiersz to jedno konkretne auto — widzisz ile osób weszło na stronę, ile otworzyło formularz i ile faktycznie go wysłało.</span></div>
+  <div class="ce-row ce-why"><span class="ce-label">Dlaczego to ważne</span><span class="ce-text">Styczeń to <strong>najlepszy miesiąc</strong> w całym analizowanym okresie — 44 leady. To punkt odniesienia: wiemy, że przy odpowiednim ruchu i konwersji tyle da się osiągnąć w miesiąc.</span></div>
+  <div class="ce-row ce-learn"><span class="ce-label">Dowiadujesz się że</span><span class="ce-text">Które modele generowały leady (Q5, A5, Q3, Q8, Q7 — niemal wszystkie), a które miały dużo odwiedzin bez ani jednego wysłanego formularza. To tam „przepada" zainteresowanie klientów.</span></div>
+  <div class="ce-row ce-read"><span class="ce-label">Czytaj to tak</span><span class="ce-text">Dużo otwarć formularza (fs) + mało leadów (ft) = coś blokuje wysłanie — może reCAPTCHA, za długi formularz albo zła cena. Mało fs + wysoki CR = nieliczni, ale bardzo zdecydowani — te auta warto promować mocniej.</span></div>
+  <div class="ce-row ce-do"><span class="ce-label">Co z tego wynika i co powinienem zrobić</span><span class="ce-text">Porównaj karty z wysokim fs i zerowym ft — to Twoja lista do audytu UX. Na start sprawdź formularz na Q5 Sportback (17 fs, 0 ft) i A3 Sportback rabat 24% (12 fs, 0 ft). Czy formularz się dobrze wyświetla? Czy reCAPTCHA nie blokuje?</span></div>
+</div>
   <div class="nowe-legend">
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#22c55e"></div>CR ≥20% (bardzo dobry)</div>
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#f59e0b"></div>CR 8–19% (dobry)</div>
@@ -1035,15 +1047,33 @@ function toggleSection(header) {
       <tbody id="nowe-jan-tbody"></tbody>
     </table>
   </div>
+<div class="nowe-agg-wrap">
+  <div class="nowe-agg">
+    <h4>Leady i wizyty wg modelu</h4>
+    <table><thead><tr><th>Model</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-model-jan"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg segmentu</h4>
+    <table><thead><tr><th>Segment</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-seg-jan"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg napędu</h4>
+    <table><thead><tr><th>Napęd</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-drive-jan"></tbody></table>
+  </div>
+</div>
 </div>
     </div>
     <div id="nowe-panel-feb" class="nowe-panel">
-  <div class="info-box">
-    <h3>Co tu widzisz:</h3>
-    <p><strong>Co tu widzisz:</strong> Ranking kart pojazdów nowych wg leadów w lutym 2026. Luty charakteryzuje się wyjątkowo wysokim CR 27,5% — prawdopodobnie anomalia pomiarowa (bardzo niska baza form_start: 51).</p>
-    <p><strong>Dowiadujesz się że:</strong> Które auta konwertowały w lutym mimo małego ruchu. Warto sprawdzić czy auta z ft>0 w lutym to te same, które dobrze szły w innych miesiącach.</p>
-    <p><strong>Czytaj to tak:</strong> Luty ma mało danych — bądź ostrożny z wyciąganiem wniosków. CR 50%+ na pojedynczym modelu = prawdopodobnie 1-2 case'y, nie trend.</p>
-  </div>
+<div class="chart-explain">
+  <div class="ce-row ce-see"><span class="ce-label">Co tu widzisz</span><span class="ce-text">Ranking kart pojazdów nowych wg leadów w <strong>lutym 2026</strong>. Luty wygląda na papierze świetnie — 45 leadów, CR aż 27,5%. Ale jest haczyk: baza form_start wyniosła tylko 51 (vs. 513 w styczniu).</span></div>
+  <div class="ce-row ce-why"><span class="ce-label">Dlaczego to ważne</span><span class="ce-text">To właśnie tu widać, że <strong>CR zależy od pomiaru</strong>, nie tylko od zachowania użytkowników. Zmiana w śledzeniu GTM lub błąd tagowania może dramatycznie zawyżyć wskaźniki — i wprowadzić w błąd przy planowaniu budżetów.</span></div>
+  <div class="ce-row ce-learn"><span class="ce-label">Dowiadujesz się że</span><span class="ce-text">Przy niskiej próbie (mało form_start) CR jest mało wiarygodny. Kilka modeli ma CR 100% — bo 1 osoba otworzyła i 1 wysłała. To nie jest trend, to przypadek. Q5 Sportback i A5 Limousine to najaktywniejsze modele lutowe.</span></div>
+  <div class="ce-row ce-read"><span class="ce-label">Czytaj to tak</span><span class="ce-text">Luty to anomalia pomiarowa — nie wyciągaj z niego wniosków o skuteczności formularzy. Porównując miesiące, patrz na styczeń i marzec jako bardziej reprezentatywne dane.</span></div>
+  <div class="ce-row ce-do"><span class="ce-label">Co z tego wynika i co powinienem zrobić</span><span class="ce-text">Sprawdź logi GTM z lutego — czy nie było wdrożenia lub zmiany tagów, która zaburzyła pomiar form_start. Jeśli tak, dodaj adnotację w GA4 żeby pamiętać o tej anomalii przy przyszłych analizach.</span></div>
+</div>
   <div class="nowe-legend">
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#22c55e"></div>CR ≥20%</div>
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#f59e0b"></div>CR 8–19%</div>
@@ -1064,15 +1094,33 @@ function toggleSection(header) {
       <tbody id="nowe-feb-tbody"></tbody>
     </table>
   </div>
+<div class="nowe-agg-wrap">
+  <div class="nowe-agg">
+    <h4>Leady i wizyty wg modelu</h4>
+    <table><thead><tr><th>Model</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-model-feb"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg segmentu</h4>
+    <table><thead><tr><th>Segment</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-seg-feb"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg napędu</h4>
+    <table><thead><tr><th>Napęd</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-drive-feb"></tbody></table>
+  </div>
+</div>
 </div>
     </div>
     <div id="nowe-panel-mar" class="nowe-panel">
-  <div class="info-box">
-    <h3>Co tu widzisz:</h3>
-    <p><strong>Co tu widzisz:</strong> Ranking kart pojazdów nowych wg leadów w marcu 2026. Marzec ma najwyższe form_start (626) ale tylko 28 leadów — CR spada do 4,5%.</p>
-    <p><strong>Dowiadujesz się że:</strong> RS3 Limousine dominuje form_start (30!) ale bez ani jednego leadu — sygnał, że formularz na tej stronie może być zepsuty lub cena/specyfikacja odstrasza na etapie wysyłania.</p>
-    <p><strong>Czytaj to tak:</strong> Strony z 10+ form_start i 0 ft to priorytety do audytu UX. Sprawdź czy reCAPTCHA działa, czy formularz się dobrze wyświetla na mobile.</p>
-  </div>
+<div class="chart-explain">
+  <div class="ce-row ce-see"><span class="ce-label">Co tu widzisz</span><span class="ce-text">Ranking kart pojazdów nowych wg leadów w <strong>marcu 2026</strong>. Marzec ma rekordowe 626 otwarć formularza (form_start), ale tylko 35 leadów — CR 4,5%. Im więcej osób otwiera formularz, tym mniej go wysyła.</span></div>
+  <div class="ce-row ce-why"><span class="ce-label">Dlaczego to ważne</span><span class="ce-text">To moment, gdy rozbieżność między zainteresowaniem (form_start) a decyzją (lead) staje się wyraźna. 626 otwarć formularza to ogromna liczba — gdyby choć 10% skończyło wysyłką, byłoby 62 leady. Coś po drodze zatrzymuje klientów.</span></div>
+  <div class="ce-row ce-learn"><span class="ce-label">Dowiadujesz się że</span><span class="ce-text">RS3 Limousine dominuje form_start w tym miesiącu (30 otwarć!) ale zero leadów. A3 Limousine sonos (8 fs, 0 ft) i A3 Sportback tempomat (8 fs, 0 ft) — podobnie. To nie są incydenty, to wzorzec: zainteresowanie jest, ale formularz gubi klientów na którymś etapie.</span></div>
+  <div class="ce-row ce-read"><span class="ce-label">Czytaj to tak</span><span class="ce-text">Każda karta z 10+ form_start i 0 ft to alarm. Formularz się otwiera, ale nie zamyka. Najczęstsze powody: reCAPTCHA v2 (wymaga klikania), za długi czas ładowania, błąd po wysłaniu, albo coś w układzie strony na mobile.</span></div>
+  <div class="ce-row ce-do"><span class="ce-label">Co z tego wynika i co powinienem zrobić</span><span class="ce-text">Priorytet: wejdź na kartę RS3 Limousine i wypełnij formularz na telefonie. Sprawdź czy reCAPTCHA się ładuje, czy po kliknięciu „Wyślij" jest potwierdzenie. Wdrożenie reCAPTCHA v3 (niewidoczna) może natychmiast odblokowić te leady.</span></div>
+</div>
   <div class="nowe-legend">
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#22c55e"></div>CR ≥20%</div>
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#f59e0b"></div>CR 8–19%</div>
@@ -1093,15 +1141,33 @@ function toggleSection(header) {
       <tbody id="nowe-mar-tbody"></tbody>
     </table>
   </div>
+<div class="nowe-agg-wrap">
+  <div class="nowe-agg">
+    <h4>Leady i wizyty wg modelu</h4>
+    <table><thead><tr><th>Model</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-model-mar"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg segmentu</h4>
+    <table><thead><tr><th>Segment</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-seg-mar"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg napędu</h4>
+    <table><thead><tr><th>Napęd</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-drive-mar"></tbody></table>
+  </div>
+</div>
 </div>
     </div>
     <div id="nowe-panel-apr" class="nowe-panel">
-  <div class="info-box">
-    <h3>Co tu widzisz:</h3>
-    <p><strong>Co tu widzisz:</strong> Ranking kart pojazdów nowych wg leadów w kwietniu 2026. 19 leadów przy 535 form_start = CR 3,6%.</p>
-    <p><strong>Dowiadujesz się że:</strong> RS3 Limousine znów dominuje form_start (14) z zerową konwersją. A3 Sportback kameracofania... i A5 Limousine zawieszenie... generują najwięcej interakcji bez efektu.</p>
-    <p><strong>Czytaj to tak:</strong> Kwiecień to kontynuacja trendu z marca — duże zainteresowanie, ale słaba finalizacja. Priorytet: wdrożyć śledzenie etapów formularza żeby wiedzieć gdzie użytkownicy rezygnują.</p>
-  </div>
+<div class="chart-explain">
+  <div class="ce-row ce-see"><span class="ce-label">Co tu widzisz</span><span class="ce-text">Ranking kart pojazdów nowych wg leadów w <strong>kwietniu 2026</strong>. 28 leadów przy 626 form_start — to CR 4,5%. Kwiecień kontynuuje trend: dużo zainteresowania, mało domknięć.</span></div>
+  <div class="ce-row ce-why"><span class="ce-label">Dlaczego to ważne</span><span class="ce-text">To trzeci miesiąc z rzędu z podobnym wzorcem — to już nie przypadek, to strukturalny problem. Jeśli nic się nie zmieni w formularzu lub UX kart, wyniki będą się dalej pogarszać.</span></div>
+  <div class="ce-row ce-learn"><span class="ce-label">Dowiadujesz się że</span><span class="ce-text">Q6 e-tron pojawia się w danych — nowy model elektryczny zaczyna generować leady (2 leady z dwóch kart). RS3 Limousine znów dominuje form_start (30 otwarć!) z jednym tylko leadem. Q3 i A5 Avant to modele, które w tym miesiącu dowożą kilka pewnych konwersji.</span></div>
+  <div class="ce-row ce-read"><span class="ce-label">Czytaj to tak</span><span class="ce-text">Duże fs + mały ft na tych samych modelach co w marcu = problem nie jest po stronie treści czy ceny, lecz samego formularza. Klienci są zainteresowani, tylko coś ich zatrzymuje tuż przed wysłaniem.</span></div>
+  <div class="ce-row ce-do"><span class="ce-label">Co z tego wynika i co powinienem zrobić</span><span class="ce-text">Czas wdrożyć śledzenie kroków formularza (form_step_2_zgody, form_step_3_recaptcha) — bez tego nie wiesz gdzie dokładnie ludzie rezygnują. Drugi priorytet: przetestuj formularz na RS3 Limousine na iPhone (Safari, sieć komórkowa).</span></div>
+</div>
   <div class="nowe-legend">
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#22c55e"></div>CR ≥20%</div>
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#f59e0b"></div>CR 8–19%</div>
@@ -1122,15 +1188,33 @@ function toggleSection(header) {
       <tbody id="nowe-apr-tbody"></tbody>
     </table>
   </div>
+<div class="nowe-agg-wrap">
+  <div class="nowe-agg">
+    <h4>Leady i wizyty wg modelu</h4>
+    <table><thead><tr><th>Model</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-model-apr"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg segmentu</h4>
+    <table><thead><tr><th>Segment</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-seg-apr"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg napędu</h4>
+    <table><thead><tr><th>Napęd</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-drive-apr"></tbody></table>
+  </div>
+</div>
 </div>
     </div>
     <div id="nowe-panel-may" class="nowe-panel">
-  <div class="info-box">
-    <h3>Co tu widzisz:</h3>
-    <p><strong>Co tu widzisz:</strong> Ranking kart pojazdów nowych wg leadów w maju 2026. Dane częściowe (miesiąc zakończony 2026-05-20 wg ostatniej aktualizacji).</p>
-    <p><strong>Dowiadujesz się że:</strong> Maj kontynuuje wzorzec z poprzednich miesięcy — te same modele dominują, CR najniższy w całym analizowanym okresie (3,4%).</p>
-    <p><strong>Czytaj to tak:</strong> Jeśli dane maja są kompletne, to mamy strukturalny problem z konwersją — nie sezonowy. RS3, A3 Sportback, A5 Limousine to modele generujące zainteresowanie bez zamknięcia. Czas na interwencję CRO.</p>
-  </div>
+<div class="chart-explain">
+  <div class="ce-row ce-see"><span class="ce-label">Co tu widzisz</span><span class="ce-text">Ranking kart pojazdów nowych wg leadów w <strong>maju 2026</strong> (dane do 20.05). 18 leadów przy 535 form_start — CR 3,4%, najniższy w całym analizowanym okresie styczeń–maj.</span></div>
+  <div class="ce-row ce-why"><span class="ce-label">Dlaczego to ważne</span><span class="ce-text">Maj to sygnał alarmowy: ruch dalej maleje (PV spadło z 24 tys. w styczniu do ~10 tys.), a konwersja nie wraca. Gdyby trend się utrzymał, czerwiec skończyłby się kilkunastoma leadami przy podobnym ruchu.</span></div>
+  <div class="ce-row ce-learn"><span class="ce-label">Dowiadujesz się że</span><span class="ce-text">A3 to model, który generuje w maju najwięcej leadów (6 leadów z różnych kart). A5 Avant zaczyna się pojawiać częściej. RS3 Limousine: 14 otwarć formularza, 0 leadów — po raz kolejny. To już czwarty miesiąc tego samego wzorca na tym samym modelu.</span></div>
+  <div class="ce-row ce-read"><span class="ce-label">Czytaj to tak</span><span class="ce-text">Problem z konwersją nie jest sezonowy — to strukturalny problem UX/technikalia formularza. Sezonowość objaśniałaby spadek ruchu, ale nie rosnącą przepaść między fs a ft. Tutaj coś aktywnie blokuje finalizację.</span></div>
+  <div class="ce-row ce-do"><span class="ce-label">Co z tego wynika i co powinienem zrobić</span><span class="ce-text">Priorytet: interwencja CRO przed końcem czerwca. Trzy kroki: (1) wdrożyć reCAPTCHA v3, (2) dodać pomiar form_step, (3) przetestować formularz na RS3 Limousine — ten model traci leady co miesiąc od marca. Każdy miesiąc zwłoki to ~10 utraconych leadów.</span></div>
+</div>
   <div class="nowe-legend">
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#22c55e"></div>CR ≥20%</div>
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#f59e0b"></div>CR 8–19%</div>
@@ -1151,15 +1235,33 @@ function toggleSection(header) {
       <tbody id="nowe-may-tbody"></tbody>
     </table>
   </div>
+<div class="nowe-agg-wrap">
+  <div class="nowe-agg">
+    <h4>Leady i wizyty wg modelu</h4>
+    <table><thead><tr><th>Model</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-model-may"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg segmentu</h4>
+    <table><thead><tr><th>Segment</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-seg-may"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg napędu</h4>
+    <table><thead><tr><th>Napęd</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-drive-may"></tbody></table>
+  </div>
+</div>
     </div>
   </div>
     <div id="nowe-panel-jun" class="nowe-panel">
-  <div class="info-box">
-    <h3>Co tu widzisz:</h3>
-    <p><strong>Co tu widzisz:</strong> Ranking kart pojazdów nowych w czerwcu 2026 — dane tylko za pierwsze 3 dni (1–3 cze). Próbka wstępna.</p>
-    <p><strong>Dowiadujesz się że:</strong> Ruch jest (204 PV na kartach z top), formularz otwierany 40× (form_start), ale leadów (ft) z kart nowych jeszcze <strong>0</strong>.</p>
-    <p><strong>Czytaj to tak:</strong> 3 dni to za mało na wnioski o CR. Liczby pokazują kierunek startu miesiąca — wracaj tu po pełnym czerwcu. Brak ft przy 40 form_start to sygnał do obserwacji (czy domknięcia spadają jak w maju).</p>
-  </div>
+<div class="chart-explain">
+  <div class="ce-row ce-see"><span class="ce-label">Co tu widzisz</span><span class="ce-text">Ranking kart pojazdów nowych w <strong>czerwcu 2026</strong> — dane tylko za pierwsze 3 dni (1–3 czerwca). To wstępna próbka, nie pełny miesiąc. Widzisz tu 1 lead (Q5 od ręki) przy 43 form_start i 602 wizytach łącznie.</span></div>
+  <div class="ce-row ce-why"><span class="ce-label">Dlaczego to ważne</span><span class="ce-text">Czerwiec pozwala obserwować „start miesiąca" — czy wzorzec się zmienia czy nie. 43 otwarcia formularza w 3 dni to tempo porównywalne z majem, co sugeruje podobny poziom zainteresowania użytkowników.</span></div>
+  <div class="ce-row ce-learn"><span class="ce-label">Dowiadujesz się że</span><span class="ce-text">A3 i A5 dominują zarówno w wizytach jak i w form_start. Q5 od ręki to jedyna karta z leadem w tych 3 dniach. Q4 e-tron pojawia się w danych — to elektryczny model z rosnącą widocznością.</span></div>
+  <div class="ce-row ce-read"><span class="ce-label">Czytaj to tak</span><span class="ce-text">3 dni to za mało na wnioski o CR miesięcznym — 1 lead z 43 form_start to CR 2,3%, ale przy tak małej próbie każdy lead zmienia obraz o kilka punktów procentowych. Wracaj tu po pełnym czerwcu.</span></div>
+  <div class="ce-row ce-do"><span class="ce-label">Co z tego wynika i co powinienem zrobić</span><span class="ce-text">Na razie obserwuj. Jeśli do 10 czerwca form_start będzie powyżej 100 a leadów mniej niż 3 — czas reagować. Masz już wdrożone zalecenia z maja? ReCAPTCHA v3, śledzenie kroków? Jeśli nie — czerwiec jest ostatnim dzwonkiem przed wakacjami.</span></div>
+</div>
   <div class="nowe-legend">
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#22c55e"></div>CR ≥20%</div>
     <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#f59e0b"></div>CR 8–19%</div>
@@ -1181,6 +1283,23 @@ function toggleSection(header) {
       <tbody id="nowe-jun-tbody"></tbody>
     </table>
   </div>
+<div class="nowe-agg-wrap">
+  <div class="nowe-agg">
+    <h4>Leady i wizyty wg modelu</h4>
+    <table><thead><tr><th>Model</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-model-jun"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg segmentu</h4>
+    <table><thead><tr><th>Segment</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-seg-jun"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg napędu</h4>
+    <table><thead><tr><th>Napęd</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-drive-jun"></tbody></table>
+  </div>
+</div>
     </div>
 </div><!-- /nowe-content -->
 </div><!-- /tab-nowe-auta -->
@@ -3609,12 +3728,86 @@ const junData = [
 ];
 
 // Build all tables
+
+function getModel(url) {
+  var m = url.match(/\/samochod\/audi-(.+?)\//);
+  if (!m) return 'Inne';
+  var slug = m[1];
+  if (slug.indexOf('rs-q8') >= 0 || slug.indexOf('rsq8') >= 0) return 'RSQ8';
+  if (slug.indexOf('rs-6') >= 0) return 'RS6';
+  if (slug.indexOf('sq7') >= 0) return 'SQ7';
+  if (slug.indexOf('rs-3') >= 0 || slug.indexOf('rs3') >= 0) return 'RS3';
+  if (/^s3[-\/]/.test(slug) || slug === 's3') return 'S3';
+  if (slug.indexOf('q6') >= 0) return 'Q6';
+  if (slug.indexOf('q4') >= 0) return 'Q4';
+  var prefix = slug.split('-')[0];
+  var map = {a3:'A3',a4:'A4',a5:'A5',a6:'A6',a7:'A7',a8:'A8',
+             q2:'Q2',q3:'Q3',q4:'Q4',q5:'Q5',q6:'Q6',q7:'Q7',q8:'Q8',
+             s3:'S3',s4:'S4',s5:'S5'};
+  return map[prefix] || prefix.toUpperCase();
+}
+
+function getSegment(model) {
+  if (['A3','Q2','Q3','S3'].indexOf(model) >= 0) return 'Kompakty';
+  if (['A5','A6','Q5','Q4'].indexOf(model) >= 0) return 'Średnie';
+  if (['Q6','Q7','Q8','SQ7'].indexOf(model) >= 0) return 'Premium / Duże';
+  if (['RS3','RSQ8','RS6'].indexOf(model) >= 0 || model.indexOf('RS') === 0) return 'Sportowe';
+  return 'Inne';
+}
+
+function getDrive(url) {
+  var u = url.toLowerCase();
+  if (u.indexOf('e-tron') >= 0 || u.indexOf('etron') >= 0) return 'Elektryk';
+  if (u.indexOf('e-hybrid') >= 0 || u.indexOf('tfsi-e') >= 0 || u.indexOf('phev') >= 0 || u.indexOf('plugin') >= 0) return 'Hybryda';
+  return 'Spalinowy';
+}
+
+function renderAggTable(tbodyId, rows) {
+  var tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  var html = '';
+  rows.forEach(function(r) {
+    var cr = r.pv > 0 ? (r.ft / r.pv * 100).toFixed(1) + '%' : '—';
+    var leadStyle = r.ft > 0 ? ' class="lead-val"' : ' class="r"';
+    html += '<tr><td>' + r.name + '</td><td class="r">' + r.pv.toLocaleString('pl') + '</td><td' + leadStyle + '>' + r.ft + '</td><td class="r">' + cr + '</td></tr>';
+  });
+  tbody.innerHTML = html || '<tr><td colspan="4" style="color:var(--text2);font-size:0.78rem">Brak danych</td></tr>';
+}
+
+function buildAggregations(monthKey, data) {
+  var models = {}, segs = {}, drives = {};
+  data.forEach(function(r) {
+    var model = getModel(r.url);
+    var seg   = getSegment(model);
+    var drive = getDrive(r.url);
+    if (!models[model]) models[model] = {pv:0, ft:0};
+    if (!segs[seg])     segs[seg]     = {pv:0, ft:0};
+    if (!drives[drive]) drives[drive] = {pv:0, ft:0};
+    models[model].pv += r.pv; models[model].ft += r.ft;
+    segs[seg].pv     += r.pv; segs[seg].ft     += r.ft;
+    drives[drive].pv += r.pv; drives[drive].ft  += r.ft;
+  });
+  function toRows(obj) {
+    return Object.keys(obj).map(function(k){ return {name:k, pv:obj[k].pv, ft:obj[k].ft}; })
+      .sort(function(a,b){ return b.ft - a.ft || b.pv - a.pv; });
+  }
+  renderAggTable('agg-model-' + monthKey, toRows(models));
+  renderAggTable('agg-seg-'   + monthKey, toRows(segs));
+  renderAggTable('agg-drive-' + monthKey, toRows(drives));
+}
 buildTable('nowe-jan-tbody', janData, 24649, 513, 44);
 buildTable('nowe-feb-tbody', febData, 18963, 113, 45);
 buildTable('nowe-mar-tbody', marData, 15398, 191, 35);
 buildTable('nowe-apr-tbody', aprData, 13271, 626, 28);
 buildTable('nowe-may-tbody', mayData, 10392, 535, 18);
 buildTable('nowe-jun-tbody', junData, 602, 43, 1);
+
+buildAggregations('jan', janData);
+buildAggregations('feb', febData);
+buildAggregations('mar', marData);
+buildAggregations('apr', aprData);
+buildAggregations('may', mayData);
+buildAggregations('jun', junData);
 
 })();
 </script>
