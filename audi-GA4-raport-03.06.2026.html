@@ -138,7 +138,7 @@
   <button class="month-btn" onclick="switchGA4Month('mar', this)">Mar 2026</button>
   <button class="month-btn" onclick="switchGA4Month('apr', this)">Kwi 2026</button>
   <button class="month-btn active" onclick="switchGA4Month('may', this)">Maj 2026</button>
-  <button class="month-btn" onclick="switchGA4Month('jun', this)" title="dane od 1 cze (3 dni)">Cze 2026 *</button>
+  <button class="month-btn" onclick="switchGA4Month('jun', this)">Cze 2026</button>
   <button class="month-btn" style="border-color:#64748b;color:#64748b;" onclick="switchGA4Month('90d', this)">Σ 90 dni</button>
 </div>
 
@@ -351,7 +351,7 @@ const GA4_MONTHLY = {
   mar: { sessions: 19817, users: 13620, pv:  92200, form_start:  9240, form_total: 108, label: 'Marzec 2026', ts_key: 'mar' },
   apr: { sessions: 21618, users: 14837, pv:  95100, form_start: 10573, form_total:  64, label: 'Kwiecień 2026', ts_key: 'apr' },
   may: { sessions: 14942, users:  9934, pv:  51451, form_start:  6348, form_total:  78, label: 'Maj 2026', ts_key: 'may' },
-  jun: { sessions:  1121, users:   852, pv:   3960, form_start:   545, form_total:   8, label: 'Cze 2026 (3 dni)', ts_key: 'jun', partial: true },
+  jun: { sessions:  1269, users:   686, pv:   5443, form_start:   626, form_total:   8, label: 'Cze 2026 (do 4 cze)', ts_key: 'jun', partial: true },
   '90d': { sessions: 57052, users: 57275, pv: 247897, form_start: 26609, form_total: 427, label: 'Ostatnie 90 dni (lut–maj)', ts_key: '90d' }
 };
 
@@ -880,7 +880,7 @@ function toggleSection(header) {
     <button class="month-btn" onclick="switchNoweTab('mar', this)">Mar 2026</button>
     <button class="month-btn" onclick="switchNoweTab('apr', this)">Kwi 2026</button>
     <button class="month-btn" onclick="switchNoweTab('may', this)">Maj 2026</button>
-    <button class="month-btn" onclick="switchNoweTab('jun', this)" title="dane od 1 cze (3 dni)">Cze 2026 *</button>
+    <button class="month-btn" onclick="switchNoweTab('jun', this)">Cze 2026</button>
     <button class="month-btn nowe-summary-btn active" onclick="switchNoweTab('summary', this)">Σ Podsumowanie</button>
   </div>
   <div class="nowe-content">
@@ -940,9 +940,9 @@ function toggleSection(header) {
     </div>
     <div class="nowe-card">
       <h4>Miesiąc</h4>
-      <div class="month">Czerwiec *</div>
+      <div class="month">Czerwiec</div>
       <div class="metrics">
-        <div class="metric"><span>Wizyty (PV)</span><span>~204 (3 dni)</span></div>
+        <div class="metric"><span>Wizyty (PV)</span><span>828</span></div>
         <div class="metric"><span>Form_start</span><span>40</span></div>
         <div class="metric"><span>Leady (ft)</span><span>0</span></div>
       </div>
@@ -1261,10 +1261,10 @@ function toggleSection(header) {
   </div>
     <div id="nowe-panel-jun" class="nowe-panel">
 <div class="chart-explain">
-  <div class="ce-row ce-see"><span class="ce-label">Co tu widzisz</span><span class="ce-text">Ranking kart pojazdów nowych w <strong>czerwcu 2026</strong> — dane tylko za pierwsze 3 dni (1–3 czerwca). To wstępna próbka, nie pełny miesiąc. Widzisz tu 1 lead (Q5 od ręki) przy 43 form_start i 602 wizytach łącznie.</span></div>
-  <div class="ce-row ce-why"><span class="ce-label">Dlaczego to ważne</span><span class="ce-text">Czerwiec pozwala obserwować „start miesiąca" — czy wzorzec się zmienia czy nie. 43 otwarcia formularza w 3 dni to tempo porównywalne z majem, co sugeruje podobny poziom zainteresowania użytkowników.</span></div>
-  <div class="ce-row ce-learn"><span class="ce-label">Dowiadujesz się że</span><span class="ce-text">A3 i A5 dominują zarówno w wizytach jak i w form_start. Q5 od ręki to jedyna karta z leadem w tych 3 dniach. Q4 e-tron pojawia się w danych — to elektryczny model z rosnącą widocznością.</span></div>
-  <div class="ce-row ce-read"><span class="ce-label">Czytaj to tak</span><span class="ce-text">3 dni to za mało na wnioski o CR miesięcznym — 1 lead z 43 form_start to CR 2,3%, ale przy tak małej próbie każdy lead zmienia obraz o kilka punktów procentowych. Wracaj tu po pełnym czerwcu.</span></div>
+  <div class="ce-row ce-see"><span class="ce-label">Co tu widzisz</span><span class="ce-text">Ranking kart pojazdów nowych w <strong>czerwcu 2026</strong> — dane od początku miesiąca (stan na 4 czerwca rano). To wciąż wstępna próbka, miesiąc trwa. Widzisz tu 1 lead (Q5 od ręki) przy 49 form_start i 828 wizytach na kartach.</span></div>
+  <div class="ce-row ce-why"><span class="ce-label">Dlaczego to ważne</span><span class="ce-text">Czerwiec pozwala obserwować „start miesiąca" — czy wzorzec się zmienia czy nie. Tempo otwarć formularza jest porównywalne z majem, co sugeruje podobny poziom zainteresowania użytkowników.</span></div>
+  <div class="ce-row ce-learn"><span class="ce-label">Dowiadujesz się że</span><span class="ce-text">A3 i A5 dominują zarówno w wizytach jak i w form_start. Q5 od ręki to na razie jedyna karta z leadem w czerwcu. Q4 e-tron pojawia się w danych — to elektryczny model z rosnącą widocznością.</span></div>
+  <div class="ce-row ce-read"><span class="ce-label">Czytaj to tak</span><span class="ce-text">Początek miesiąca to za mało na wnioski o CR miesięcznym — 1 lead z 49 form_start to CR 2,0%, ale przy tak małej próbie każdy lead zmienia obraz o kilka punktów procentowych. Wracaj tu po pełnym czerwcu.</span></div>
   <div class="ce-row ce-do"><span class="ce-label">Co z tego wynika i co powinienem zrobić</span><span class="ce-text">Na razie obserwuj. Jeśli do 10 czerwca form_start będzie powyżej 100 a leadów mniej niż 3 — czas reagować. Masz już wdrożone zalecenia z maja? ReCAPTCHA v3, śledzenie kroków? Jeśli nie — czerwiec jest ostatnim dzwonkiem przed wakacjami.</span></div>
 </div>
   <div class="nowe-legend">
@@ -2244,9 +2244,9 @@ function toggleSection(header) {
     <button class="month-btn" onclick="switchWeryMonth('mar', this)">Mar 2026</button>
     <button class="month-btn" onclick="switchWeryMonth('apr', this)">Kwi 2026</button>
     <button class="month-btn active" onclick="switchWeryMonth('may', this)">Maj 2026</button>
-    <button class="month-btn" onclick="switchWeryMonth('jun', this)" title="dane od 1 cze (2 dni)">Cze 2026 *</button>
+    <button class="month-btn" onclick="switchWeryMonth('jun', this)">Cze 2026</button>
   </div>
-  <p style="font-size:11px;color:#888;margin:-12px 0 16px 0;">* Cze 2026 — dane od 1 cze, tylko 2 dni</p>
+  <p style="font-size:11px;color:#888;margin:-12px 0 16px 0;">Cze 2026 — dane od początku miesiąca (stan na 4 cze)</p>
 
   <!-- TABELA WERYFIKACYJNA -->
   <div class="card" style="margin-bottom:24px;">
@@ -3805,7 +3805,7 @@ buildTable('nowe-feb-tbody', febData, 18963, 113, 45);
 buildTable('nowe-mar-tbody', marData, 15398, 191, 35);
 buildTable('nowe-apr-tbody', aprData, 13271, 626, 28);
 buildTable('nowe-may-tbody', mayData, 10392, 535, 18);
-buildTable('nowe-jun-tbody', junData, 602, 43, 1);
+buildTable('nowe-jun-tbody', junData, 828, 49, 1);
 
 buildAggregations('jan', janData);
 buildAggregations('feb', febData);
