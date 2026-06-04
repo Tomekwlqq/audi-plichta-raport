@@ -123,7 +123,7 @@
 
 <div class="main-tab-nav">
   <button class="main-tab-btn active" onclick="switchMainTab('ga4', this)">📊 Ruch i konwersje GA4</button>
-  <button class="main-tab-btn" onclick="switchMainTab('demografia', this)">👥 Demografia</button>
+  <button class="main-tab-btn" onclick="switchMainTab('demografia', this)">👥 Demografia 1-6.2026</button>
   <button class="main-tab-btn" onclick="switchMainTab('mom', this)">📅 Leady Miesiące</button>
   <button class="main-tab-btn" onclick="switchMainTab('weryfikacja', this)">🔍 Formularze - szczegóły</button>
   <button class="main-tab-btn" onclick="switchMainTab('nowe-auta', this)">🚗 Leady Nowe Auta</button>
@@ -261,7 +261,8 @@
     <div class="insight-bar" id="events-insight" style="margin-top:12px"></div>
   </div>
 
-  <!-- WNIOSKI -->
+  <!-- WNIOSKI (tylko widok 90 dni) -->
+  <div id="ga4-wnioski-wrap" style="display:none;">
   <div class="section-label">🧠 Wnioski i rekomendacje CRO</div>
   <div class="wnioski-section" style="margin-bottom:20px;">
     <div class="wnioski-header">🔍 Kluczowe wnioski — audiplichta.pl · Dane GA4 · 26 maja 2026</div>
@@ -308,6 +309,7 @@
       </div>
     </div>
   </div>
+  </div><!-- /ga4-wnioski-wrap -->
 
   <!-- FOOTER -->
   <div class="footer">
@@ -391,6 +393,9 @@ function switchGA4Month(m, btn) {
   if (btn) btn.classList.add('active');
   // Map month key to old period key for legacy renderers
   currentPeriod = (m === 'may') ? 'maj' : '90d';
+  // Wnioski CRO tylko w widoku zbiorczym 90 dni — w miesiącach ukryte
+  var wn = document.getElementById('ga4-wnioski-wrap');
+  if (wn) wn.style.display = (m === '90d') ? '' : 'none';
   renderGA4All();
 }
 
