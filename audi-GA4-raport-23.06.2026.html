@@ -254,6 +254,22 @@
 
 <!-- GEO, Demographics, and Time Patterns moved to tab-demografia -->
 
+  <!-- LANDING PAGES MODELOWE 2026 -->
+  <div class="section-label">🏁 Landing page modelowe 2026 — ruch w czerwcu (1–22 cze)</div>
+  <div class="card" style="margin-bottom:20px;">
+    <p style="font-size:12px;color:#6b6b6b;margin:0 0 12px 0;">Dedykowane strony kampanijne per model (główne <code>/model-2026/</code> + warianty bydgoskie <code>-bdg</code>). Słupek = sesje, linia = CR% (leady/sesje). Lead = <strong>keyEvents</strong> (GA4 key event na tej stronie).</p>
+    <div class="chart-explain">
+      <div class="ce-row ce-see"><span class="ce-label">Co tu widzisz</span><span class="ce-text">Każdy słupek to jedna landing page modelowa 2026 i jej ruch (sesje) w czerwcu. Czerwona linia to CR% — jaki procent sesji skończył się leadem. LP główne (np. /a3-2026/) mają duży ruch; warianty bydgoskie (-bdg) to świeżo uruchomione strony z małym ruchem.</span></div>
+      <div class="ce-row ce-why"><span class="ce-label">Dlaczego to ważne</span><span class="ce-text">To są płatne strony docelowe kampanii modelowych — tu trafia ruch z reklam. Jeśli LP ma dużo sesji ale niskie CR, pieniądze z kampanii wyciekają. Porównanie obok siebie pokazuje, która kampania modelowa realnie domyka leady.</span></div>
+      <div class="ce-row ce-learn"><span class="ce-label">Dowiadujesz się że</span><span class="ce-text">A3 2026 ma najwięcej ruchu (902 sesje), ale niskie CR (0,33%). Q5 i Q7 też mocne ruchowo, słabe konwersyjnie. Najwyższe CR mają warianty -bdg (q5-bdg 1,41%, q3-bdg 1,02%) — ale na minimalnym ruchu (kilkadziesiąt sesji), więc to statystycznie niepewne. Q4 e-tron: 206 sesji, 0 leadów.</span></div>
+      <div class="ce-row ce-read"><span class="ce-label">Czytaj to tak</span><span class="ce-text">Patrz na PARĘ: wysoki słupek + niska linia = duży ruch który nie konwertuje (problem CRO). Niski słupek + wysoka linia = mała próbka, nie wyciągaj wniosków. LP -bdg mają tak mały ruch, że ich CR jest przypadkowy.</span></div>
+      <div class="ce-row ce-do"><span class="ce-label">Co z tego wynika i co powinienem zrobić</span><span class="ce-text">Zacznij od A3/Q5/Q7 — duży płatny ruch, niskie CR = największy potencjał. Sprawdź te LP pod kątem formularza (widoczność CTA, długość, reCAPTCHA). Q4 e-tron z 0 leadów przy 206 sesjach wymaga pilnej kontroli — czy formularz działa. Warianty -bdg: najpierw zwiększyć ruch, potem oceniać konwersję.</span></div>
+    </div>
+    <div style="position:relative;height:340px;margin-bottom:8px;">
+      <canvas id="chartLpModele"></canvas>
+    </div>
+  </div>
+
   <!-- EVENTS -->
   <div class="section-label">🔔 Top eventy (maj 2026)</div>
   <div class="card" style="margin-bottom:20px;">
@@ -642,6 +658,36 @@ function renderEvents() {
       <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.count/maxC*100)}%;background:${r.event.startsWith('form')?'#1a1a1a':r.event==='chat_otworzenie'?'#6b7280':'#BB0A21'}"></div></div>
       <div class="bar-val" style="min-width:70px">${fmt(r.count)} <span style="color:#999;font-size:10px">${r.users?'('+fmt(r.users)+'u)':''}</span></div>
     </div>`).join('') + '</div>';
+}
+
+const LP_MODELE_DATA = [["A3 2026", 902, 3], ["Q5 2026", 786, 2], ["Q7 2026", 635, 2], ["A5 2026", 357, 2], ["Q8 2026", 297, 1], ["Q4 e-tron 2026", 206, 0], ["Q3 2026", 200, 1], ["A3 bdg", 125, 0], ["Q3 bdg", 98, 1], ["Q5 bdg", 71, 1], ["Q7 bdg", 54, 0], ["A5 bdg", 44, 0], ["Q8 bdg", 33, 0]];
+function renderLpModele() {
+  const ctx = document.getElementById('chartLpModele');
+  if (!ctx) return;
+  if (window._lpModeleInst) window._lpModeleInst.destroy();
+  const labels = LP_MODELE_DATA.map(d => d[0]);
+  const ses = LP_MODELE_DATA.map(d => d[1]);
+  const cr = LP_MODELE_DATA.map(d => d[1] > 0 ? +(100*d[2]/d[1]).toFixed(2) : 0);
+  const colors = LP_MODELE_DATA.map(d => d[0].indexOf('bdg') >= 0 ? '#9ca3af' : '#BB0A21');
+  window._lpModeleInst = new Chart(ctx.getContext('2d'), {
+    data: {
+      labels,
+      datasets: [
+        { type:'bar', label:'Sesje', data:ses, backgroundColor:colors, borderRadius:3, yAxisID:'y', order:2 },
+        { type:'line', label:'CR %', data:cr, borderColor:'#1a1a1a', backgroundColor:'#1a1a1a', yAxisID:'y2', tension:0.3, pointRadius:3, borderWidth:2, order:1 }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ labels:{font:{size:12}} },
+        tooltip:{ callbacks:{ label: c => c.dataset.label==='CR %' ? 'CR: '+c.raw+'%' : 'Sesje: '+fmt(c.raw) } } },
+      scales:{
+        x:{ ticks:{font:{size:10}, maxRotation:45, minRotation:30} },
+        y:{ position:'left', title:{display:true,text:'Sesje',font:{size:11}}, ticks:{font:{size:11}, callback:v=>fmt(v)} },
+        y2:{ position:'right', title:{display:true,text:'CR %',font:{size:11}}, grid:{drawOnChartArea:false}, ticks:{font:{size:11}, callback:v=>v+'%'} }
+      }
+    }
+  });
 }
 
 function renderGA4All() {
