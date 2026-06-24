@@ -123,6 +123,7 @@
 
 <div class="main-tab-nav">
   <button class="main-tab-btn active" onclick="switchMainTab('ga4', this)">📊 Ruch i konwersje GA4</button>
+  <button class="main-tab-btn" onclick="switchMainTab('akcje', this)">🎯 Akcje aktualny miesiąc</button>
   <button class="main-tab-btn" onclick="switchMainTab('demografia', this)">👥 Demografia 1-6.2026</button>
   <button class="main-tab-btn" onclick="switchMainTab('mom', this)">📅 Leady Miesiące</button>
   <button class="main-tab-btn" onclick="switchMainTab('weryfikacja', this)">🔍 Formularze - szczegóły</button>
@@ -841,6 +842,96 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 let _demoRendered = false;
+
+// ===== AKCJE — form_total per LP, podział Gdańsk/Bydgoszcz =====
+const AKCJE_DATA = {
+  jun: {
+    label: 'Czerwiec 2026 (1–22)',
+    gda: [["A3 2026",902,3],["Q5 2026",786,2],["Q7 2026",635,2],["A5 2026",357,2],["Q8 2026",297,1],["Q4 e-tron 2026",206,0],["Q3 2026",200,1]],
+    bdg: [["A3 bdg",125,0],["Q4 bdg",122,1],["Q3 bdg",98,1],["Q5 bdg",71,1],["Q7 bdg",54,0],["A5 bdg",44,0],["Q8 bdg",33,0]]
+  }
+};
+let currentAkcjeMonth = 'jun';
+
+// plugin: wartości na słupkach
+const akcjeValueLabels = {
+  id: 'akcjeValueLabels',
+  afterDatasetsDraw(chart) {
+    const {ctx} = chart;
+    ctx.save();
+    chart.data.datasets.forEach((ds, di) => {
+      const meta = chart.getDatasetMeta(di);
+      meta.data.forEach((bar, i) => {
+        const v = ds.data[i];
+        if (v === null || v === undefined) return;
+        ctx.fillStyle = '#1a1a1a';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(v, bar.x, bar.y - 4);
+      });
+    });
+    ctx.restore();
+  }
+};
+
+function renderAkcjeChart(canvasId, rows, accent) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (window['_akcjeInst_'+canvasId]) window['_akcjeInst_'+canvasId].destroy();
+  window['_akcjeInst_'+canvasId] = new Chart(ctx.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: rows.map(r => r[0]),
+      datasets: [
+        { label:'Sesje', data: rows.map(r=>r[1]), backgroundColor: accent, borderRadius:3, yAxisID:'y' },
+        { label:'Konwersje', data: rows.map(r=>r[2]), backgroundColor:'#9ca3af', borderRadius:3, yAxisID:'y2' }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      layout:{padding:{top:18}},
+      plugins:{ legend:{labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.raw)}} },
+      scales:{
+        x:{ ticks:{font:{size:10},maxRotation:40,minRotation:25} },
+        y:{ position:'left', title:{display:true,text:'Sesje',font:{size:10}}, ticks:{font:{size:10},callback:v=>fmt(v)} },
+        y2:{ position:'right', title:{display:true,text:'Konwersje',font:{size:10}}, grid:{drawOnChartArea:false}, ticks:{font:{size:10}} }
+      }
+    },
+    plugins:[akcjeValueLabels]
+  });
+}
+
+function renderAkcjeTable(tableId, rows) {
+  const el = document.getElementById(tableId);
+  if (!el) return;
+  const totS = rows.reduce((a,r)=>a+r[1],0), totK = rows.reduce((a,r)=>a+r[2],0);
+  let h = '<thead><tr style="border-bottom:2px solid #1a1a1a;text-align:right;"><th style="text-align:left;padding:6px 8px;">Landing page</th><th style="padding:6px 8px;">Sesje</th><th style="padding:6px 8px;">Konw.</th><th style="padding:6px 8px;">CR</th></tr></thead><tbody>';
+  rows.forEach(r => {
+    const cr = r[1]>0 ? (100*r[2]/r[1]).toFixed(2)+'%' : '—';
+    const crColor = r[2]===0 ? '#9ca3af' : (100*r[2]/r[1])>=1 ? '#2e7d32' : '#BB0A21';
+    h += '<tr style="border-bottom:1px solid #eee;text-align:right;"><td style="text-align:left;padding:6px 8px;font-weight:600;">'+r[0]+'</td><td style="padding:6px 8px;">'+fmt(r[1])+'</td><td style="padding:6px 8px;font-weight:700;">'+r[2]+'</td><td style="padding:6px 8px;color:'+crColor+';font-weight:700;">'+cr+'</td></tr>';
+  });
+  const totCR = totS>0 ? (100*totK/totS).toFixed(2)+'%' : '—';
+  h += '<tr style="border-top:2px solid #1a1a1a;text-align:right;font-weight:700;"><td style="text-align:left;padding:6px 8px;">RAZEM</td><td style="padding:6px 8px;">'+fmt(totS)+'</td><td style="padding:6px 8px;">'+totK+'</td><td style="padding:6px 8px;">'+totCR+'</td></tr></tbody>';
+  el.innerHTML = h;
+}
+
+function renderAkcje() {
+  const d = AKCJE_DATA[currentAkcjeMonth] || AKCJE_DATA['jun'];
+  renderAkcjeChart('chartAkcjeGda', d.gda, '#BB0A21');
+  renderAkcjeChart('chartAkcjeBdg', d.bdg, '#1a1a1a');
+  renderAkcjeTable('tabAkcjeGda', d.gda);
+  renderAkcjeTable('tabAkcjeBdg', d.bdg);
+}
+
+function switchAkcjeMonth(m, btn) {
+  currentAkcjeMonth = m;
+  document.querySelectorAll('.akcje-mb').forEach(b=>b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderAkcje();
+}
+
 function switchMainTab(tabId, btn) {
   document.querySelectorAll('.main-tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.main-tab-btn').forEach(b => b.classList.remove('active'));
@@ -849,6 +940,9 @@ function switchMainTab(tabId, btn) {
   if (tabId === 'demografia' && !_demoRendered) {
     _demoRendered = true;
     renderDemografiaTab();
+  }
+  if (tabId === 'akcje') {
+    renderAkcje();
   }
 }
 
@@ -871,6 +965,30 @@ function toggleSection(header) {
 
 
 <!-- ===== TAB: DEMOGRAFIA ===== -->
+<div class="main-tab-panel" id="tab-akcje">
+<div class="container">
+  <div class="section-label" style="margin-top:8px;">🎯 Akcje (form_total per landing page) — podział Gdańsk / Bydgoszcz</div>
+  <div class="month-switcher" style="margin:10px 0 18px 0;">
+    <button class="month-btn akcje-mb active" onclick="switchAkcjeMonth('jun', this)">Cze 2026</button>
+  </div>
+  <p style="font-size:12px;color:#6b6b6b;margin:0 0 14px 0;">Każda akcyjna landing page i jej wynik: <strong>duży słupek = sesje</strong>, <strong>mały słupek = konwersje</strong> (form_total z tego URL). Góra = <strong>Gdańsk / Trójmiasto</strong> (LP główne), dół = <strong>Bydgoszcz</strong> (warianty -bdg). Po prawej te same liczby w tabeli.</p>
+
+  <!-- GDAŃSK -->
+  <div style="font-weight:700;color:var(--audi-red);margin:8px 0;font-size:15px;">📍 Gdańsk / Trójmiasto</div>
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card"><div style="position:relative;height:300px;"><canvas id="chartAkcjeGda"></canvas></div></div>
+    <div class="card"><table class="akcje-tab" id="tabAkcjeGda" style="width:100%;border-collapse:collapse;font-size:13px;"></table></div>
+  </div>
+
+  <!-- BYDGOSZCZ -->
+  <div style="font-weight:700;color:#1a1a1a;margin:8px 0;font-size:15px;">📍 Bydgoszcz</div>
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card"><div style="position:relative;height:300px;"><canvas id="chartAkcjeBdg"></canvas></div></div>
+    <div class="card"><table class="akcje-tab" id="tabAkcjeBdg" style="width:100%;border-collapse:collapse;font-size:13px;"></table></div>
+  </div>
+</div>
+</div><!-- /tab-akcje -->
+
 <div class="main-tab-panel" id="tab-demografia">
 <div class="container">
   <div class="section-label" style="margin-top:8px;">📍 Lokalizacja użytkowników — cały 2026 (1 sty – 3 cze 2026)</div>
