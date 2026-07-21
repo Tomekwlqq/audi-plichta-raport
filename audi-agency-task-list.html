@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista zadań Agencji — Audi Grupa Plichta</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #1a1a1a; line-height: 1.5; padding: 32px 20px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  
+  h1 { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { font-size: 14px; color: #666; margin-bottom: 8px; }
+  .meta { display: flex; gap: 20px; flex-wrap: wrap; background: #f5f5f5; padding: 12px 18px; border-radius: 8px; margin-bottom: 28px; font-size: 13px; color: #555; }
+  .meta b { color: #333; }
+
+  .obszar { margin-bottom: 32px; }
+  .obszar h2 { font-size: 17px; font-weight: 600; padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; color: #fff; display: flex; align-items: center; gap: 8px; }
+
+  .obszar.h1 { border-left: 4px solid #1a73e8; }
+  .obszar.h1 h2 { background: #1a73e8; }
+  .obszar.h2 { border-left: 4px solid #188038; }
+  .obszar.h2 h2 { background: #188038; }
+  .obszar.h3 { border-left: 4px solid #e37400; }
+  .obszar.h3 h2 { background: #e37400; }
+  .obszar.h4 { border-left: 4px solid #9334e6; }
+  .obszar.h4 h2 { background: #9334e6; }
+  .obszar.h5 { border-left: 4px solid #c5221f; }
+  .obszar.h5 h2 { background: #c5221f; }
+  .obszar.h6 { border-left: 4px solid #1967d2; }
+  .obszar.h6 h2 { background: #1967d2; }
+
+  .freq-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+  .freq-col { min-width: 0; }
+  .freq-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 0 4px 0; margin-bottom: 6px; }
+  .freq-label.s { color: #1a73e8; }
+  .freq-label.d { color: #188038; }
+  .freq-label.w { color: #e37400; }
+  .freq-label.m { color: #9334e6; }
+
+  .task { font-size: 13px; padding: 6px 10px; margin-bottom: 4px; border-radius: 4px; border: 1px solid #eee; background: #fafafa; line-height: 1.4; }
+  .task:hover { background: #f0f0f0; border-color: #ddd; }
+
+  .footnote { margin-top: 24px; padding: 14px 18px; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 13px; color: #555; line-height: 1.6; }
+  .footnote strong { color: #333; }
+  .footnote .col { display: inline-block; width: 120px; font-weight: 600; }
+  .footnote .col.d { color: #188038; }
+  .footnote .col.w { color: #e37400; }
+  .footnote .col.m { color: #9334e6; }
+
+  @media (max-width: 700px) {
+    .freq-row { grid-template-columns: 1fr; gap: 14px; }
+    .freq-label { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Lista zadań Agencji</h1>
+<div class="subtitle">Audi Grupa Plichta — na podstawie briefu klienta (10.06.2026)</div>
+<div class="meta"><span><b>Obszary:</b> 6</span><span><b>Częstotliwości:</b> startowe · codzienne · cotygodniowe · comiesięczne</span></div>
+
+<!-- ======================== -->
+<div class="obszar h1">
+<h2>📣 1. REKLAMA — Google Ads + Meta Ads</h2>
+
+<div class="freq-row">
+<div class="freq-col">
+<div class="freq-label s">▶ Startowe</div>
+<div class="task">Audyt struktury Google Ads — kampanie, Quality Score, słowa negatywne</div>
+<div class="task">Audyt Meta Ads — struktura, pixele, katalog produktów</div>
+<div class="task">Wdrożenie rozdziału serwis/sprzedaż — wykluczenia, osobne konwersje, labelowanie</div>
+<div class="task">Offline conversion tracking — konwersje CRM → Ads</div>
+<div class="task">Ustawienie mikro + makrokonwersji wg briefu</div>
+<div class="task">Podpięcie danych z call trackingu do konwersji</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label d">🔁 Codzienne</div>
+<div class="task">Monitoring wydatków względem dziennego budżetu</div>
+<div class="task">Sprawdzanie kosztów per kampania — alert jeśli CPL >20%</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label w">📆 Tygodniowe</div>
+<div class="task">SQR — przegląd wyszukiwanych haseł, dodawanie negatywów</div>
+<div class="task">Analiza serwis/sprzedaż — jakie frazy sprowadzają ruch serwisowy</div>
+<div class="task">Przegląd Performance Max — kanibalizacja Search + organic</div>
+<div class="task">Meta Lead Ads — tylko auta gotowe, cap ≤6k/mc</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label m">📊 Miesięczne</div>
+<div class="task">Rekomendacja alokacji budżetu na kolejny miesiąc</div>
+<div class="task">Priorytety modelowe z New Car Sales → przebudowa kampanii</div>
+<div class="task">Raport: wydatki vs leady vs CPL zweryfikowany</div>
+<div class="task">Raport CPS per model</div>
+<div class="task">Rekomendacje korekty stawek + bid strategy</div>
+<div class="task">Przegląd i czyszczenie kampanii — wyłączanie nieskutecznych</div>
+</div>
+</div>
+</div>
+
+<!-- ======================== -->
+<div class="obszar h2">
+<h2>📊 2. ANALITYKA — GA4 + GTM + Call Tracking + CRM</h2>
+
+<div class="freq-row">
+<div class="freq-col">
+<div class="freq-label s">▶ Startowe</div>
+<div class="task">Pełny audyt GA4 + GTM — anomalie, not set, Consent Mode</div>
+<div class="task">Wdrożenie call trackingu z przypisaniem źródła i słowa</div>
+<div class="task">Integracja CRM → Signal Lake / GA4 / Ads</div>
+<div class="task">Ustawienie makrokonwersji (formularz, jazda testowa, tel, mail)</div>
+<div class="task">Ustawienie mikrokonwersji (wyświetlenie oferty, filtry, CTA, czat)</div>
+<div class="task">Mapa eventów GA4 + KPI — baseline 90 dni</div>
+<div class="task">Stworzenie Signal Lake — znormalizowany schemat per źródło</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label d">🔁 Codzienne</div>
+<div class="task" style="color:#999; font-style:italic;">(brak zadań daily — dane analityczne mają naturalny rytm tygodniowy)</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label w">📆 Tygodniowe</div>
+<div class="task">Przegląd danych GA4 — anomalie, skoki/spadki, braki danych</div>
+<div class="task">Walidacja call trackingu — czy poprawnie taguje źródła</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label m">📊 Miesięczne</div>
+<div class="task">Raport GA4 miesięczny — ruch, konwersje, formularze, lejek</div>
+<div class="task">Raport źródeł ruchu — co dowozi leady, co serwis</div>
+<div class="task">Aktualizacja mapy eventów — nowe konwersje/narzędzia</div>
+<div class="task">Zestawienie: ruch organiczny vs płatny — kanibalizacja</div>
+</div>
+</div>
+</div>
+
+<!-- ======================== -->
+<div class="obszar h3">
+<h2>🎨 3. CRO / UX / TREŚĆ</h2>
+
+<div class="freq-row">
+<div class="freq-col">
+<div class="freq-label s">▶ Startowe</div>
+<div class="task">Audyt formularzy — konwersja, błędy, reCAPTCHA, pola</div>
+<div class="task">Audyt narzędzia czatu + wdrożenie auto-okien behawioralnych</div>
+<div class="task">Optymalizacja strony podziękowania po formularzu</div>
+<div class="task">Mapa ścieżki shoppera per źródło — co robi user po wejściu</div>
+<div class="task">Baseline CR formularza + jazdy testowej + pozostałe makro</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label d">🔁 Codzienne</div>
+<div class="task" style="color:#999; font-style:italic;">(brak zadań daily — CRO to analiza + rekomendacje w cyklu tyg/mies)</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label w">📆 Tygodniowe</div>
+<div class="task">Przegląd zachowań użytkowników — Clarity / Hotjar / GA4</div>
+<div class="task">Rekomendacje zmian UI/UX dla zespołu wdrożeniowego</div>
+<div class="task">Przegląd LP ofertowych — CR, treść, CTA, mobile</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label m">📊 Miesięczne</div>
+<div class="task">Raport CRO: co testowano, co działa, co spada, co dalej</div>
+<div class="task">Propozycje testów A/B — formularz, CTA, układ LP</div>
+<div class="task">Raport: ciepłe leady vs surowe — jakość vs wolumen</div>
+<div class="task">Rekomendacje contentowe na kolejny miesiąc</div>
+</div>
+</div>
+</div>
+
+<!-- ======================== -->
+<div class="obszar h4">
+<h2>📍 4. GEO / LOKALNE SEO / AI SEARCH</h2>
+
+<div class="freq-row">
+<div class="freq-col">
+<div class="freq-label s">▶ Startowe</div>
+<div class="task">Audyt wizytówek Google Business Profile — wszystkie salony</div>
+<div class="task">Optymalizacja wizytówek — kategorie, opisy, godziny, zdjęcia</div>
+<div class="task">Audyt SEO — ocena ruchu organicznego pod intencję zakupową</div>
+<div class="task">Przygotowanie strony pod GEO / AI Search — schema markup</div>
+<div class="task">Strategia pozycjonowania lokalnego — frazy, regiony (65/35)</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label d">🔁 Codzienne</div>
+<div class="task" style="color:#999; font-style:italic;">(brak — GEO/SEO to cykl tygodniowy i miesięczny)</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label w">📆 Tygodniowe</div>
+<div class="task">Monitoring widoczności lokalnej — zmiany w rankingu map</div>
+<div class="task">Sprawdzanie pojawialności w AI Overviews / ChatGPT / Perplexity</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label m">📊 Miesięczne</div>
+<div class="task">Raport GEO: widoczność lokalna, AI Search, ruch organiczny</div>
+<div class="task">Aktualizacja strategii słów kluczowych lokalnych</div>
+<div class="task">Raport pojawialności AI — miesiąc do miesiąca</div>
+<div class="task">Rekomendacje treści lokalnych pod AI Search</div>
+</div>
+</div>
+</div>
+
+<!-- ======================== -->
+<div class="obszar h5">
+<h2>🧭 5. STRATEGIA / NADZÓR / RAPORTOWANIE</h2>
+
+<div class="freq-row">
+<div class="freq-col">
+<div class="freq-label s">▶ Startowe</div>
+<div class="task">Ustalenie modelu współpracy — role, podmioty, IP, SLA</div>
+<div class="task">Ustalenie rytmu raportowania i komunikacji</div>
+<div class="task">Onboarding kierowcy mediowego — konsola, flagi, zasady</div>
+<div class="task">Ustalenie granic autonomii — co AI robi sam, co wymaga akceptu</div>
+<div class="task">Wyznaczenie metryk sukcesu + baseline (CPL, CPS, CR)</div>
+<div class="task">Ustawienie launchd / cron auto-refresh dashboard</div>
+<div class="task">Uruchomienie konsoli MVP</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label d">🔁 Codzienne</div>
+<div class="task">Sterowanie strategiczne — odpowiedzi na pytania klienta</div>
+<div class="task">Monitoring bramki nadzoru — czy akcje odblokowane</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label w">📆 Tygodniowe</div>
+<div class="task">Puls tygodniowy — przegląd flag i anomalii + rekomendacje</div>
+<div class="task">Spotkanie z kierowcą mediowym — stan kampanii, co zmienić</div>
+<div class="task">Eskalacje ad hoc do nadzorcy Audi (jeśli potrzeba)</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label m">📊 Miesięczne</div>
+<div class="task">Raport dla Dealera Principal: CPS, CPL, wydatki, jakość leadów</div>
+<div class="task">Przegląd CPS per model / per salon</div>
+<div class="task">Plan działań na kolejny miesiąc — akcept nadzorcy</div>
+<div class="task">Spotkanie strategiczne z nadzorcą Audi</div>
+</div>
+</div>
+</div>
+
+<!-- ======================== -->
+<div class="obszar h6">
+<h2>🤖 6. SYSTEM / KONSOLA — warstwa AI</h2>
+
+<div class="freq-row">
+<div class="freq-col">
+<div class="freq-label s">▶ Startowe</div>
+<div class="task">Postawienie 6 agentów AI (asystent, dane, traffic, GEO, ścieżki, UX)</div>
+<div class="task">Budowa Signal Lake — integracje źródeł</div>
+<div class="task">Budowa widoków konsoli — Cockpit, Serwis/Sprzedaż, Lejek</div>
+<div class="task">Budowa biblioteki zasad decyzyjnych (patterns)</div>
+<div class="task">Wdrożenie podwójnej bramki nadzoru (Agencja → Audi)</div>
+<div class="task">Integracja z New Car Sales API — wsad priorytetów modelowych</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label d">🔁 Codzienne</div>
+<div class="task" style="color:#999; font-style:italic;">(system pracuje autonomicznie — monitoring w rytmie tygodniowym)</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label w">📆 Tygodniowe</div>
+<div class="task">Dostrajanie reguł decyzyjnych agentów na podstawie danych</div>
+<div class="task">Przegląd anomalii wykrytych przez system — trafność + false positive</div>
+</div>
+
+<div class="freq-col">
+<div class="freq-label m">📊 Miesięczne</div>
+<div class="task">Przegląd systemu — false positive, niedociągnięcia reguł</div>
+<div class="task">Rozwój nowych reguł / krosowań między warstwami</div>
+<div class="task">Raport systemowy — co wykrył, co zarekomendował, co się zmaterializowało</div>
+</div>
+</div>
+</div>
+
+<!-- ======================== -->
+<div class="footnote">
+<strong>Rytm tygodnia:</strong><br>
+<span class="col d">🔁 Codziennie</span> wydatki + alerty CPL<br>
+<span class="col w">📆 Poniedziałek</span> przegląd weekendu, korekty kampanii<br>
+<span class="col w">📆 Środa</span> puls tygodniowy, anomalie, rekomendacje CRO/GEO<br>
+<span class="col w">📆 Piątek</span> podsumowanie, plan na weekend, eskalacje<br><br>
+<strong>Rytm miesiąca:</strong><br>
+<span class="col m">📊 1–5</span> raport miesięczny, CPS, rozliczenie<br>
+<span class="col m">📊 5–10</span> plan działań, priorytety modelowe<br>
+<span class="col m">📊 15–20</span> spotkanie strategiczne z nadzorcą Audi
+</div>
+
+</div>
+</body>
+</html>
