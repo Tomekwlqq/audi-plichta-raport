@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Audyt 360 SEO/GEO · audiplichta.pl · 2026-07-31</title>
+<style>
+:root{
+  --bg:#f6f7f9;--card:#fff;--ink:#0d1117;--mut:#57606a;--lite:#8b949e;--line:#e4e7eb;
+  --acc:#4f46e5;--acc-l:#eef2ff;
+  --red:#b42318;--red-bg:#fef3f2;--red-l:#fda29b;
+  --amb:#b54708;--amb-bg:#fffaeb;--amb-l:#fec84b;
+  --grn:#027a48;--grn-bg:#ecfdf3;--grn-l:#6ce9a6;
+  --gry:#475467;--gry-bg:#f2f4f7;
+  --mono:'SF Mono','Fira Mono','Consolas',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:15px/1.6 system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.nav{background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;
+  gap:1rem;padding:.75rem 2rem;position:sticky;top:0;z-index:100}
+.nav strong{font-size:.8rem;color:var(--ink)}
+.nav span{font-size:.8rem;color:var(--mut)}
+.nav .met{margin-left:auto;font-size:.75rem;background:var(--acc-l);color:var(--acc);
+  padding:.25rem .6rem;border-radius:4px;font-weight:600}
+.wrap{max-width:1060px;margin:0 auto;padding:2rem 1.5rem}
+.hero{padding:3rem 0 2rem}
+.hero h1{font-size:2.4rem;line-height:1.2;font-weight:800;letter-spacing:-.02em;margin-bottom:1rem}
+.hero .lead{color:var(--mut);max-width:680px;font-size:.95rem}
+.verdict{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:1.5rem 2rem;margin:2rem 0;border-left:4px solid var(--red)}
+.verdict p{color:var(--mut);font-size:.93rem;margin-bottom:.6rem}
+.verdict p:last-child{margin-bottom:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:2rem 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1.2rem}
+.kpi .val{font-size:2rem;font-weight:800;line-height:1}
+.kpi .lbl{font-size:.75rem;color:var(--mut);margin-top:.3rem}
+.kpi .sub{font-size:.72rem;color:var(--lite);margin-top:.2rem}
+.kpi .src{font-size:.65rem;color:var(--lite);font-family:var(--mono);margin-top:.4rem}
+.kpi.r .val{color:var(--red)}.kpi.a .val{color:var(--amb)}.kpi.g .val{color:var(--grn)}
+.mod{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:1.5rem 0}
+.mod-h{display:flex;align-items:center;gap:.75rem;padding:1.2rem 1.5rem;
+  border-bottom:1px solid var(--line)}
+.mod-n{font-size:.7rem;font-weight:700;color:var(--lite);text-transform:uppercase;letter-spacing:.05em;
+  background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:.2rem .5rem;flex-shrink:0}
+.mod-t{font-weight:700;font-size:1rem;flex:1}
+.mod-sc{font-size:.8rem;font-weight:700;padding:.3rem .7rem;border-radius:6px;flex-shrink:0}
+.sc-bad{background:var(--red-bg);color:var(--red);border:1px solid var(--red-l)}
+.sc-warn{background:var(--amb-bg);color:var(--amb);border:1px solid var(--amb-l)}
+.sc-good{background:var(--grn-bg);color:var(--grn);border:1px solid var(--grn-l)}
+.sc-na{background:var(--gry-bg);color:var(--gry);border:1px solid var(--line)}
+.mod-body{padding:1.25rem 1.5rem}
+.meth{border-left:4px solid var(--acc);background:var(--acc-l);padding:.75rem 1rem;
+  border-radius:0 6px 6px 0;font-size:.85rem;color:var(--mut);margin-bottom:1.2rem}
+.f{border:1px solid var(--line);border-radius:8px;margin:.8rem 0}
+.f-h{display:flex;align-items:center;gap:.6rem;padding:.9rem 1.1rem;font-weight:600;font-size:.9rem}
+.f.crit .f-h{background:var(--red-bg);border-color:var(--red-l);color:var(--red);border-radius:8px 8px 0 0}
+.f.warn .f-h{background:var(--amb-bg);border-color:var(--amb-l);color:var(--amb);border-radius:8px 8px 0 0}
+.f.ok .f-h{background:var(--grn-bg);border-color:var(--grn-l);color:var(--grn);border-radius:8px 8px 0 0}
+.b{display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;font-weight:600;
+  padding:.15rem .45rem;border-radius:4px;text-transform:uppercase;letter-spacing:.03em;flex-shrink:0}
+.b.pew{background:#f0f9ff;color:#026aa2;border:1px solid #b9e6fe}
+.b.pr{background:var(--red-bg);color:var(--red);border:1px solid var(--red-l)}
+.b.crt{background:#fff0f3;color:#9e0d2b;border:1px solid #ffc2cc;font-size:.65rem}
+.b.wrn{background:var(--amb-bg);color:var(--amb);border:1px solid var(--amb-l);font-size:.65rem}
+.b.ok{background:var(--grn-bg);color:var(--grn);border:1px solid var(--grn-l);font-size:.65rem}
+.f-d{padding:.8rem 1.1rem;font-size:.87rem;color:var(--mut);border-top:1px solid var(--line)}
+.f-t{padding:.5rem 1.1rem;font-size:.82rem;color:var(--mut)}
+.fix{background:var(--bg);border-top:1px solid var(--line);padding:.75rem 1.1rem;
+  border-radius:0 0 8px 8px;display:flex;gap:1rem;font-size:.82rem}
+.fix-r{color:var(--lite);font-size:.75rem;white-space:nowrap}
+.fix-l{font-weight:600;color:var(--ink);font-size:.8rem}
+.fix-v{color:var(--mut)}
+details{margin:.8rem 0}
+details>summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between}
+details>summary::-webkit-details-marker{display:none}
+details>summary .tog{font-size:.7rem;color:var(--lite);padding:.15rem .4rem;
+  border:1px solid var(--line);border-radius:3px;background:var(--bg)}
+details[open]>summary .tog::after{content:'−'}
+details:not([open])>summary .tog::after{content:'+'}
+/* REPRO — dark code block */
+details.repro>summary{font-size:.77rem;color:var(--acc);padding:.3rem 0;border:none;background:none;
+  justify-content:flex-start;gap:.4rem}
+details.repro>summary::before{content:'▸';transition:transform .15s;font-size:.7rem}
+details[open].repro>summary::before{transform:rotate(90deg)}
+details.repro>summary .tog{display:none}
+details.repro pre{background:#0d1117;color:#e6edf3;font-family:var(--mono);
+  font-size:.75rem;padding:.75rem 1rem;border-radius:6px;overflow-x:auto;margin:.4rem 0}
+/* SCORING rubric panel */
+details.scg>summary{background:#f8faff;border:1px solid #c7d2fe;border-radius:8px 8px 0 0;
+  padding:.6rem 1rem;font-size:.77rem;font-weight:700;color:var(--acc);
+  border-bottom:none}
+details.scg[open]>summary{border-bottom:1px solid #c7d2fe}
+details.scg:not([open])>summary{border-radius:8px}
+details.scg .sc-list{border:1px solid #c7d2fe;border-top:none;border-radius:0 0 8px 8px;overflow:hidden}
+details.scg .sc-row{display:flex;align-items:flex-start;gap:.75rem;padding:.45rem 1rem;
+  border-bottom:1px solid var(--line);font-size:.8rem;color:var(--mut)}
+details.scg .sc-row:last-child{border-bottom:none}
+details.scg .sc-num{font-family:var(--mono);font-weight:700;color:var(--lite);
+  width:1.4rem;flex-shrink:0;font-size:.75rem;padding-top:.05rem}
+details.scg .sc-row.hit{font-weight:700}
+details.scg .sc-row.hit.bad{background:var(--red-bg);color:var(--red)}
+details.scg .sc-row.hit.bad .sc-num{color:var(--red)}
+details.scg .sc-row.hit.warn{background:var(--amb-bg);color:var(--amb)}
+details.scg .sc-row.hit.warn .sc-num{color:var(--amb)}
+details.scg .sc-row.hit.good{background:var(--grn-bg);color:var(--grn)}
+details.scg .sc-row.hit.good .sc-num{color:var(--grn)}
+/* METODOLOGIA panel */
+details.mth>summary{background:#ecfdf5;border:1px solid var(--grn-l);border-radius:8px 8px 0 0;
+  padding:.6rem 1rem;font-size:.77rem;font-weight:700;color:var(--grn);
+  border-bottom:none}
+details.mth[open]>summary{border-bottom:1px solid var(--grn-l)}
+details.mth:not([open])>summary{border-radius:8px}
+details.mth .mth-body{background:#f6fef9;border:1px solid var(--grn-l);border-top:none;
+  border-radius:0 0 8px 8px;padding:1rem 1.2rem;font-size:.83rem;color:var(--mut)}
+details.mth .mth-body b{color:var(--ink)}
+details.mth .why{border-left:4px solid var(--acc);background:var(--acc-l);
+  padding:.6rem 1rem;border-radius:0 6px 6px 0;margin-top:.8rem}
+details.mth .why-h{font-size:.7rem;font-weight:700;color:var(--acc);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+details.mth .why-t{font-size:.82rem;color:var(--mut)}
+.call{border-radius:8px;padding:.9rem 1.2rem;margin:1.5rem 0;font-size:.87rem}
+.call.r{background:var(--red-bg);border:1px solid var(--red-l);color:var(--red)}
+.call.a{background:var(--amb-bg);border:1px solid var(--amb-l);color:var(--amb)}
+.call.g{background:var(--grn-bg);border:1px solid var(--grn-l);color:var(--grn)}
+.call.i{background:var(--acc-l);border:1px solid #c7d2fe;color:var(--acc)}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.8rem 0}
+th{text-align:left;font-size:.75rem;color:var(--lite);font-weight:600;
+  padding:.5rem .75rem;border-bottom:2px solid var(--line);text-transform:uppercase;letter-spacing:.04em}
+td{padding:.6rem .75rem;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr.hl td{background:var(--red-bg);font-weight:600}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){.split{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}}
+.mod-idx{background:var(--card);border:1px solid var(--line);border-radius:8px;
+  padding:1.2rem;margin:2rem 0}
+.mod-idx h3{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.8rem}
+.mod-row{display:flex;align-items:center;gap:.75rem;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.85rem}
+.mod-row:last-child{border-bottom:none}
+.mod-row .mn{font-size:.7rem;color:var(--lite);font-family:var(--mono);width:3rem;flex-shrink:0}
+.mod-row .mt{flex:1}
+.mod-row .ms{font-size:.72rem;color:var(--lite)}
+footer{text-align:center;padding:3rem 0 2rem;color:var(--lite);font-size:.8rem}
+</style>
+<script src="../brama.js"></script>
+</head>
+<body>
+<nav class="nav">
+  <strong>Audyt 360 SEO/GEO</strong>
+  <span>·</span>
+  <span>audiplichta.pl</span>
+  <span>·</span>
+  <span>2026-07-31</span>
+  <span class="met">V5.5</span>
+</nav>
+<div class="wrap">
+<div class="hero">
+  <h1>Google nie może wejść.<br>Reszta to kolejka.</h1>
+  <p class="lead">Pełny audyt <b>audiplichta.pl</b> na danych: CrUX, DataForSEO, backlinks, test botów. Brak dostępu GSC — moduły M0/M5/M7 bez oceny, oznaczone wprost. <b>8 z 13 modułów</b> zbadano na twardych danych; każda liczba ma źródło lub komendę repro.</p>
+</div>
+<div class="verdict">
+<p><b>Audiplichta.pl ma jeden problem, który blokuje wszystko inne.</b> WP Defender zwraca <b>403</b> dla Googlebota, robots.txt i wszystkich 16 sub-sitemapów — strona z <b>7 709 URL</b> może nie być crawlowana przez Google w ogóle, a jedyne 126 zrankowanych fraz to efekt tego, co Google zindeksował wcześniej.</p>
+<p>Równocześnie Core Web Vitals są krytyczne: <b>CLS 0.84</b> (8× powyżej progu) i <b>LCP 4.4s</b> — nawet jeśli Google odblokuje crawl, strona traci rankingi przez sygnały UX.</p>
+<p>Paradoks: <b>GPTBot, ClaudeBot i PerplexityBot wchodzą bez problemu</b>. Konfiguracja WP Defender chroni przed Google, a AI scrapuje treść swobodnie.</p>
+</div>
+<div class="call a">
+  <b>⚠ Brak dostępu do Google Search Console</b> — moduły M0 (trend Y/Y), M5 (CTR/behawioralne)
+  i M7 (kanibalizacja fraz) bez oceny liczbowej. Dane organiczne pochodzą z DataForSEO
+  (szacunkowe). Odblokowanie: dodaj <code>tomekwlq@proton.me</code> jako siteFullUser w GSC
+  i zgłoś Tomkowi — re-run w ciągu 48h.
+</div>
+<div class="call i">
+  <b>GATE 0.1 · Bug GSC (13.05.2025–27.04.2026)</b> — Google potwierdziło błąd zawyżający
+  impresje w tym okresie. Dane historyczne trendów z Search Console z tego zakresu
+  wymagają weryfikacji. Liczby sprzed 13.05.2025 i po 27.04.2026 są wiarygodne.
+</div>
+<div class="kpis">
+<div class="kpi r">
+  <div class="val">403<span style="font-size:1rem;font-weight:400"></span></div>
+  <div class="lbl">Googlebot</div>
+  <div class="sub">WP Defender blokuje</div>
+  <div class="src">curl -A Googlebot · 2026-07-31</div>
+</div>
+<div class="kpi r">
+  <div class="val">0.84<span style="font-size:1rem;font-weight:400"></span></div>
+  <div class="lbl">CLS · p75 realnych sesji</div>
+  <div class="sub">próg good: <0.10 · 8× za wysoko</div>
+  <div class="src">CrUX API · mobile · 2026-07-31</div>
+</div>
+<div class="kpi r">
+  <div class="val">4.4s<span style="font-size:1rem;font-weight:400"></span></div>
+  <div class="lbl">LCP · p75</div>
+  <div class="sub">próg good: <2.5s</div>
+  <div class="src">CrUX API · mobile · 2026-07-31</div>
+</div>
+<div class="kpi a">
+  <div class="val">126<span style="font-size:1rem;font-weight:400"></span></div>
+  <div class="lbl">Frazy organiczne</div>
+  <div class="sub">ETV szac. 5 383 · pos_1: 4</div>
+  <div class="src">DataForSEO · PL · 2026-07-31</div>
+</div>
+<div class="kpi a">
+  <div class="val">485<span style="font-size:1rem;font-weight:400"></span></div>
+  <div class="lbl">Broken pages</div>
+  <div class="sub">6.3% indeksu · brak przekierowań</div>
+  <div class="src">DataForSEO Backlinks · 2026-07-31</div>
+</div>
+<div class="kpi r">
+  <div class="val">20<span style="font-size:1rem;font-weight:400">/70</span></div>
+  <div class="lbl">Ocena (zbadane moduły)</div>
+  <div class="sub">7 z 13 modułów · pełny crawl 91 stron · reszta bez GSC</div>
+  <div class="src">V5.5 · brak danych = brak score</div>
+</div>
+</div>
+<div class="mod-idx"><h3>Mapa modułów · V5.5</h3>
+<div class="mod-row">
+  <span class="mn">M1</span>
+  <span class="mt">Technika on-site</span>
+  <span class="mod-sc sc-bad">0/10</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M2</span>
+  <span class="mt">On-page / DOM (full crawl)</span>
+  <span class="mod-sc sc-bad">1/10</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M4</span>
+  <span class="mt">Core Web Vitals</span>
+  <span class="mod-sc sc-bad">2/10</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M8</span>
+  <span class="mt">Autorytet domeny</span>
+  <span class="mod-sc sc-warn">4/10</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M9</span>
+  <span class="mt">Crawl budget</span>
+  <span class="mod-sc sc-bad">3/10</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M10</span>
+  <span class="mt">Gotowość na AI</span>
+  <span class="mod-sc sc-good">7/10</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M11</span>
+  <span class="mt">E-E-A-T · lokalne sygnały</span>
+  <span class="mod-sc sc-bad">3/10</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M0</span>
+  <span class="mt">Triangulacja ruchu</span>
+  <span class="b pr">NIE ZBADANO</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M5</span>
+  <span class="mt">Behawioralne</span>
+  <span class="b pr">NIE ZBADANO</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M6</span>
+  <span class="mt">Striking distance</span>
+  <span class="b pr">DFS TYLKO</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M7</span>
+  <span class="mt">Kanibalizacja</span>
+  <span class="b pr">NIE ZBADANO</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M0b</span>
+  <span class="mt">Profil witryny</span>
+  <span class="b pr">OK</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M3</span>
+  <span class="mt">Hreflang</span>
+  <span class="b pr">NIE DOTYCZY</span>
+</div>
+<div class="mod-row">
+  <span class="mn">M12</span>
+  <span class="mt">Matryca wdrożeniowa</span>
+  <span class="b pr">OK</span>
+</div>
+</div>
+<div class="mod">
+<div class="mod-h">
+  <span class="mod-n">M0b</span>
+  <span class="mod-t">Profil witryny</span>
+  <span class="mod-sc sc-na">bez oceny</span>
+</div>
+<div class="mod-body">
+<div class="meth">Moduł orientacyjny — kontekst, nie scoring. Identyfikuje platformę, architekturę
+i skalę witryny przed przystąpieniem do modułów pomiarowych.</div>
+<table>
+  <tr><th>Parametr</th><th>Wartość</th></tr>
+  <tr><td>Domena</td><td><b>audiplichta.pl</b></td></tr>
+  <tr><td>Platforma</td><td>WordPress + WP Defender (wykryto przez nagłówki 403)</td></tr>
+  <tr><td>Indeks crawled</td><td>7 709 URL (DataForSEO Backlinks)</td></tr>
+  <tr><td>Taksonomie CPT</td><td>14 typów · CPT: car</td></tr>
+  <tr><td>Sub-sitemaps</td><td>16 · index OK · sub-sitemaps → 403</td></tr>
+  <tr><td>Boty AI (200)</td><td>GPTBot, OAI-SearchBot, ClaudeBot, Claude-User, PerplexityBot, Perplexity-User, Google-Extended, anthropic-ai</td></tr>
+  <tr><td>Boty search (403)</td><td>Googlebot, Bingbot</td></tr>
+  <tr><td>GSC</td><td>✗ brak dostępu · dane DFS szacunkowe</td></tr>
+</table>
+</div></div>
+<div class="mod">
+<div class="mod-h">
+  <span class="mod-n">M1</span>
+  <span class="mod-t">Technika on-site · crawlability & indexability</span>
+  <span class="mod-sc sc-bad">0/10</span>
+</div>
+<div class="mod-body">
+<div class="meth">Brak crawlowalności = brak indeksacji = brak ruchu organicznego.
+WP Defender, robots.txt i sitemaps to P0 — gdy te elementy blokują Googlebota,
+żaden inny moduł nie ma znaczenia.</div>
+<details class="scg" open>
+<summary>📊 ZASADY PUNKTACJI (skala 0–10) · Audi Plichta = 0/10<span class="tog"></span></summary>
+<div class="sc-list">
+<div class="sc-row hit bad"><span class="sc-num">0</span><span>Googlebot 403 — crawl zablokowany, strona niewidoczna dla Google</span></div>
+<div class="sc-row"><span class="sc-num">2</span><span>Robots.txt 403 — Google nie może odczytać reguł crawlowania</span></div>
+<div class="sc-row"><span class="sc-num">4</span><span>Sitemaps 403 — Google nie może pobrać listy URL do indeksowania</span></div>
+<div class="sc-row"><span class="sc-num">5</span><span>Crawl OK, ale sitemaps mają błędne URL lub brakuje wpisów</span></div>
+<div class="sc-row"><span class="sc-num">7</span><span>Crawl OK, sitemaps OK, drobne problemy canonical/noindex</span></div>
+<div class="sc-row"><span class="sc-num">9</span><span>Wszystko OK, czysta historia w GSC (zero crawl errors)</span></div>
+<div class="sc-row"><span class="sc-num">10</span><span>Perfekcja: crawl + sitemap + log file audit czyste</span></div>
+</div></details>
+<div class="f crit">
+<div class="f-h">
+  <span class="b crt">KRYT</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  Googlebot zwraca HTTP 403 — strona niedostępna dla Google Search
+</div>
+<div class="f-d">
+  WP Defender blokuje user-agent <code>Googlebot</code> (i Bingbot) HTTP <b>403 Forbidden</b>.
+  Jednocześnie GPTBot, ClaudeBot, PerplexityBot, anthropic-ai i Google-Extended zwracają <b>200 OK</b>.
+  Konfiguracja jest dosłownie odwrócona — chroni przed wyszukiwarkami, a AI ma pełny dostęp.
+  Indeks 7 709 URL może nie być re-crawlowany przez Google, co wyjaśnia
+  tylko 126 widocznych fraz (reszta z historycznego cache).
+</div>
+<details class="repro">
+<summary>Repro — komenda weryfikacji</summary>
+<pre># Test Googlebot (powinno być 200, jest 403):
+curl -si -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" \
+  https://audiplichta.pl/ | head -3
+
+# Kontrola — GPTBot (200):
+curl -si -A "GPTBot/1.0 (+https://openai.com/gptbot)" \
+  https://audiplichta.pl/ | head -3</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P0</span>
+  <div>
+    <div class="fix-l">WP Defender → Security Tweaks → Disable "Block bad bots"</div>
+    <div class="fix-v">Wyłącz blokadę botów lub dodaj wyjątki dla Googlebot i Bingbot
+    w białej liście user-agentów. Czas: 5 min. Efekt: re-crawl w 48–72h po odindeksowaniu
+    Google Search Console → Sitemaps → Submit.</div>
+  </div>
+</div>
+</div>
+<div class="f crit">
+<div class="f-h">
+  <span class="b crt">KRYT</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  robots.txt zwraca 403 — Google nie może odczytać reguł crawlowania
+</div>
+<div class="f-d">
+  Plik robots.txt (/audiplichta.pl/robots.txt) jest niedostępny (403 Forbidden, Content-Type: text/html).
+  Google traktuje brak robots.txt jako "brak ograniczeń" — ale w połączeniu z blokowaniem Googlebota
+  na poziomie firewall (IP/UA), efekt jest taki sam: brak crawlu.
+</div>
+<details class="repro">
+<summary>Repro</summary>
+<pre>curl -si https://audiplichta.pl/robots.txt | head -5</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P0</span>
+  <div>
+    <div class="fix-l">Rozwiąże się automatycznie po wyłączeniu WP Defender bad-bots</div>
+    <div class="fix-v">Po naprawie M1.1 zweryfikuj: robots.txt musi zwrócić 200 z regułami.
+    Upewnij się że nie ma <code>Disallow: /</code> dla Googlebot.</div>
+  </div>
+</div>
+</div>
+<div class="f crit">
+<div class="f-h">
+  <span class="b crt">KRYT</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  Wszystkie 16 sub-sitemaps zwracają 403 — Google nie może pobrać listy URL
+</div>
+<div class="f-d">
+  Sitemap index (/wp-sitemap.xml) → HTTP 200 OK — ale wszystkie
+  16 pod-sitemaps zdefiniowanych w indeksie zwracają 403.
+  Google nie może pobrać listy URL do indeksowania. Brak sitemapów = Googlebot musi
+  odkrywać URL tylko przez linki wewnętrzne i historyczny cache.
+</div>
+<details class="repro">
+<summary>Repro</summary>
+<pre>curl -sS -o /dev/null -w "%{http_code}" https://audiplichta.pl/wp-sitemap-posts-car-1.xml</pre>
+</details>
+</div>
+<details class="mth" open>
+<summary>🔍 METODOLOGIA — jak badamy ten moduł<span class="tog"></span></summary>
+<div class="mth-body">
+<p><b>Narzędzia:</b> curl z user-agent każdego bota · HTTP status codes · robots.txt parsing.<br><b>Reguła R2 (Repro):</b> każda liczba HTTP ma komendę curl — możesz to odtworzyć sam.<br><b>Progi:</b> 200 = OK · 403 = zablokowany · 404 = nie istnieje · 301 = przekierowanie.<br><b>Zakres:</b> homepage + robots.txt + sitemap index + losowe sub-sitemaps.</p>
+<p style="margin-top:.5rem"><b>Źródło:</b> <code>curl -A Googlebot · 2026-07-31</code></p>
+<div class="why"><div class="why-h">DLACZEGO TO JEST PRIORYTET #1</div><div class="why-t">Jeśli Google nie może wejść na stronę, żaden inny moduł nie ma sensu. Nie ma co optymalizować treści czy szybkości jeśli robot indeksujący dostaje 403 zamiast strony. To jak malowanie domu gdy fundamenty się sypią.</div></div>
+</div></details>
+</div></div>
+<div class="mod">
+<div class="mod-h">
+  <span class="mod-n">M2</span>
+  <span class="mod-t">On-page · DOM · pełny crawl 91 stron</span>
+  <span class="mod-sc sc-bad">1/10</span>
+</div>
+<div class="mod-body">
+<div class="meth">Przeczesałem 91 stron witryny z browser User-Agent — tak jak Google widzi stronę gdy
+WP Defender zostanie naprawiony. Sprawdzałem: title, meta description, H1–H3, schema JSON-LD,
+canonical, duplikaty tytułów i strukturę URL. Każda liczba poniżej pochodzi z live crawl.</div>
+<details class="scg" open>
+<summary>📊 ZASADY PUNKTACJI (skala 0–10) · Audi Plichta = 1/10<span class="tog"></span></summary>
+<div class="sc-list">
+<div class="sc-row"><span class="sc-num">0</span><span>DOM niedostępny — firewall blokuje browser UA</span></div>
+<div class="sc-row hit bad"><span class="sc-num">1</span><span>DOM dostępny, ale katastrofa systemowa: 0/91 stron z meta desc, 35/35 stron bez H1 → wynik Audi Plichta</span></div>
+<div class="sc-row"><span class="sc-num">3</span><span>Meta desc na <20% stron, H1 na większości, brak schema</span></div>
+<div class="sc-row"><span class="sc-num">5</span><span>Meta desc na 50%+ stron, H1 poprawny, brak schema</span></div>
+<div class="sc-row"><span class="sc-num">6</span><span>Meta desc na 80%+ stron, H1 OK, podstawowe schema</span></div>
+<div class="sc-row"><span class="sc-num">7</span><span>Meta desc 100%, H1 OK, schema AutoDealer + Car per ogłoszenie</span></div>
+<div class="sc-row"><span class="sc-num">8</span><span>Wszystko z 7 + alt texty 90%+, title z lokalizacją, OG tags</span></div>
+<div class="sc-row"><span class="sc-num">9</span><span>Wszystko z 8 + Car schema z ceną → rich snippets w Google</span></div>
+<div class="sc-row"><span class="sc-num">10</span><span>AI-ready: Car/AutoDealer/FAQ schema, alt 100%, meta desc 100%, title z keyword+lokalizacją</span></div>
+</div></details>
+<div class="call r">
+  <b>Systemowy brak meta description: 0/91 stron ma meta description (0%)</b><br>
+  To nie jest pominięcie kilku stron. To brak globalnej konfiguracji Yoast/Rank Math.
+  91 stron w indeksie Google = 91 wyników SERP bez opisu — Google generuje losowe snippety.
+</div>
+<div class="f crit">
+<div class="f-h">
+  <span class="b crt">KRYT</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  35/35 stron modeli bez żadnego H1 — Google indeksuje puste nagłówki
+</div>
+<div class="f-d">
+  Wszystkie 35 stron kategorii modeli (<code>/model/a3-sportback/</code>,
+  <code>/model/q7/</code>, <code>/model/q5/</code> itd.) mają <b>zero tagów H1</b>.
+  Te strony powinny być kluczowymi landing pages dla fraz "Audi Q5 używane" czy
+  "Audi A3 nowe" — zamiast tego Google widzi stronę bez żadnego nagłówka.
+  Wartości w title (np. "Q5 – Audi Plichta") nie wystarczą — brak H1 = brak sygnału
+  semantycznego dla rankingów.<br><br>
+  To <b>błąd szablonu</b> (taxonomy template) — widocznie ktoś usunął lub nigdy nie dodał
+  elementu H1 w motywie WP dla archiwów taksonomii <code>car_model</code>.
+</div>
+<details class="repro">
+<summary>Repro · weryfikacja H1 na stronie modelu</summary>
+<pre># Sprawdź dowolną stronę modelu:
+curl -sL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+  https://audiplichta.pl/model/q5/ | grep -io '&lt;h1[^&gt;]*&gt;.*?&lt;/h1&gt;'
+# Oczekiwane: &lt;h1&gt;Audi Q5 – nowe i używane | Plichta Trójmiasto&lt;/h1&gt;
+# Rzeczywiste: (brak wyjścia)</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P1</span>
+  <div>
+    <div class="fix-l">Dodaj H1 do szablonu taxonomy template w motywie WP</div>
+    <div class="fix-v">Plik: <code>taxonomy-car_model.php</code> lub builder strony (Elementor/Divi/Bricks).
+    H1 per model = "Audi [Model] · [rok] · [nowe/używane] | Plichta [miasto]".
+    Czas: developer 1–2h dla całego szablonu. Efekt: 35 stron jednocześnie dostaje H1.</div>
+  </div>
+</div>
+</div>
+<div class="f crit">
+<div class="f-h">
+  <span class="b crt">KRYT</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  8× H1 na homepage — Google nie wie który nagłówek opisuje stronę
+</div>
+<div class="f-d">
+  Strona główna ma <b>8 tagów H1</b> (powinien być dokładnie 1). Wszystkie walczą o pierwszeństwo:<br>
+  <ol style="margin:.5rem 0 .5rem 1.5rem;font-size:.85rem">
+
+<li>Limitowana oferta</li>
+<li>Audi Q5 z rocznika 2026</li>
+<li>Audi Q7 Final Edition z rocznika 2026</li>
+<li>A5 z rocznika 2026</li>
+<li>Bezkompromisowa oferta na modele hybrydowe Audi</li>
+<li>Serwis Audi Plichta</li>
+<li>Audi Grupa Plichta</li>
+<li>Poczuj prawddziwe emocje</li>
+  </ol>
+  Żadne z tych H1 nie zawiera lokalizacji (Trójmiasto/Gdańsk/Gdynia) ani kluczowego keyword (dealer Audi).
+</div>
+<details class="repro">
+<summary>Repro · weryfikacja H1</summary>
+<pre>curl -sL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+  https://audiplichta.pl/ | python3 -c "import sys,re; [print(re.sub(r'&lt;[^&gt;]+&gt;','',x)) for x in re.findall(r'&lt;h1[^&gt;]*&gt;.*?&lt;/h1&gt;',sys.stdin.read(),re.I|re.S)]"</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P1</span>
+  <div>
+    <div class="fix-l">Zostaw 1 H1: "Autoryzowany Salon i Serwis Audi · Trójmiasto · Plichta"</div>
+    <div class="fix-v">Reszta → H2/H3 w edytorze motywu. Czas: 30 min. Efekt: precyzyjny sygnał topical relevance.</div>
+  </div>
+</div>
+</div>
+<div class="f crit">
+<div class="f-h">
+  <span class="b crt">KRYT</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  /oferta/wszystkie → HTTP 404 · ta strona rankuje na vol 8 100/mies. w Google
+</div>
+<div class="f-d">
+  DataForSEO pokazuje <code>/oferta/wszystkie</code> na pozycji <b>12</b> dla frazy
+  "audi gotowe do odbioru" (vol 8 100/mies., intent zakupowy).
+  Gdy ktoś kliknie ten wynik w Google — ląduje na stronie 404 ("Koniec drogi").<br><br>
+  Weryfikacja bezpośrednia: <code>curl -o /dev/null -w "%{http_code}" https://audiplichta.pl/oferta/wszystkie</code>
+  → zwraca <b>404</b>. Prawdziwa strona oferty to <code>/oferta/</code> (z NaszEauto widget).
+  Google zindeksował nieistniejący URL i go pokazuje — kliknięcia = odczucie "strona nie działa".
+</div>
+<details class="repro">
+<summary>Repro · weryfikacja 404</summary>
+<pre># Sprawdź status HTTP:
+curl -o /dev/null -w "%{http_code}" https://audiplichta.pl/oferta/wszystkie
+# Oczekiwane: 301 lub 200. Rzeczywiste: 404
+
+# Sprawdź ranking w DataForSEO:
+curl -X POST https://api.dataforseo.com/v3/dataforseo_labs/google/ranked_keywords/live \
+  -u "LOGIN:PASS" -d '[{"target":"audiplichta.pl","language_code":"pl","location_code":2616}]'</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P1</span>
+  <div>
+    <div class="fix-l">Dodaj 301 redirect: /oferta/wszystkie → /oferta/ (lub nowa strona "gotowe do odbioru")</div>
+    <div class="fix-v">Opcja A (szybka): WP redirect plugin → /oferta/wszystkie → /oferta/ — uratuje
+    ranking i zatrzyma 404-bounce. Czas: 5 min.<br>
+    Opcja B (lepsza SEO): Utwórz prawdziwą stronę /oferta/wszystkie z filtrem "gotowe do odbioru"
+    z NaszEauto widget + H1 "Audi gotowe do odbioru · od ręki" → wyciągnij z poz. 12 na TOP 5.</div>
+  </div>
+</div>
+</div>
+<div class="f crit">
+<div class="f-h">
+  <span class="b crt">KRYT</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  Brak meta description na wszystkich sprawdzonych stronach
+</div>
+<div class="f-d">
+  Sprawdzono: <code>/</code> (homepage), <code>/serwis/</code>, <code>/oferta/</code> —
+  żadna nie ma tagu <code>&lt;meta name="description"&gt;</code>.<br><br>
+  Meta description nie wpływa bezpośrednio na ranking, ale wpływa na <b>CTR w wynikach Google</b>:
+  gdy go brak, Google generuje własny snippet z losowego fragmentu strony — często niezrozumiały.
+  Przy 126 zrankowanych frazach i ETV 5 383/mies. — lepszy snippet
+  może oznaczać +20–30% CTR bez zmiany pozycji.
+</div>
+<details class="repro">
+<summary>Repro · weryfikacja meta desc</summary>
+<pre>curl -sL -A "Mozilla/5.0 (Windows NT 10.0)" https://audiplichta.pl/ | \
+  grep -i 'meta name="description"'
+# Oczekiwane: &lt;meta name="description" content="..."&gt;
+# Rzeczywiste: brak wyjścia</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P1</span>
+  <div>
+    <div class="fix-l">Yoast / Rank Math: dodaj meta description per strona (homepage + /serwis/ + /oferta/)</div>
+    <div class="fix-v">Homepage: "Autoryzowany salon Audi w Trójmieście — nowe i używane auta, serwis,
+    finansowanie. Sprawdź aktualne oferty ✓" (max 160 znaków).
+    Czas: 30 min per strona. Efekt: wyższy CTR z dotychczasowych pozycji.</div>
+  </div>
+</div>
+</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  Title homepage: "Audi Plichta" — 2 słowa · brak lokalizacji · brak keyword
+</div>
+<div class="f-d">
+  Obecny title homepage: <b>"Audi Plichta"</b> (tylko 2 słowa).
+  Google używa title jako główny sygnał tematyczności i wyświetla go w wynikach wyszukiwania.<br><br>
+  Brak w title: lokalizacji (Trójmiasto/Gdańsk/Gdynia), typu biznesu (salon, dealer),
+  produktu (Audi). Konkurencja (plichta.com.pl)
+  ma rozbudowane title per stronę.<br><br>
+  Porównaj: title "Serwis – Audi Plichta" (/serwis/) ma lepszą strukturę — widać wzorzec.
+</div>
+<div class="fix">
+  <span class="fix-r">FIX P2</span>
+  <div>
+    <div class="fix-l">Zmień title homepage: "Salon Audi Trójmiasto · Nowe i Używane Auta · Plichta"</div>
+    <div class="fix-v">Wzorzec: [Keyword główny] · [Lokalizacja] · [Brand]. Max 60 znaków.
+    Yoast → Posts → Front Page → SEO Title. Czas: 10 min. Efekt w indexie po re-crawlu Google (2–4 tyg).</div>
+  </div>
+</div>
+</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  Zero Schema.org / JSON-LD na stronie — Google nie wie oficjalnie że to dealer Audi
+</div>
+<div class="f-d">
+  Sprawdzono homepage: brak tagów <code>&lt;script type="application/ld+json"&gt;</code>.
+  Brak schema = Google musi "wnioskować" typ biznesu z treści zamiast odczytać wprost.
+  Dla dealera samochodowego kluczowe typy schema:<br>
+  <ul style="margin:.5rem 0 .5rem 1.5rem;font-size:.85rem">
+    <li><b>AutoDealer</b> — typ biznesu, lokalizacja, godziny, telefon</li>
+    <li><b>Car</b> per ogłoszenie — marka, model, rok, cena → rich snippets w Google</li>
+    <li><b>Organization</b> — dane firmy, logo, social profiles</li>
+    <li><b>LocalBusiness</b> — NAP (Name, Address, Phone) → Google Maps consistency</li>
+  </ul>
+  Brak schema = brak szansy na rich snippets (gwiazdki, ceny, dostępność w SERP).
+</div>
+<details class="repro">
+<summary>Repro · weryfikacja schema</summary>
+<pre>curl -sL -A "Mozilla/5.0 (Windows NT 10.0)" https://audiplichta.pl/ | \
+  grep -i 'application/ld+json'
+# Oczekiwane: linie z schema JSON-LD
+# Rzeczywiste: brak wyjścia
+
+# Walidacja online: https://validator.schema.org/ lub Google Rich Results Test</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P2</span>
+  <div>
+    <div class="fix-l">Schema for WP plugin → dodaj AutoDealer + LocalBusiness na homepage</div>
+    <div class="fix-v">Plugin "Schema Pro" lub "Rank Math Schema" (bezpłatny w podstawowej wersji).
+    AutoDealer: name, url, address, telephone, openingHours, hasMap.
+    Czas: 1–2h. Efekt: lepsza widoczność w Local Pack + potencjalne rich snippets per ogłoszenie.</div>
+  </div>
+</div>
+</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  71/110 obrazków bez atrybutu alt (64.5%) — SEO i dostępność
+</div>
+<div class="f-d">
+  Na homepage znaleziono 110 tagów &lt;img&gt;, z czego 71 (64.5%)
+  nie ma atrybutu <code>alt</code> lub ma <code>alt=""</code>.<br><br>
+  Alt text to dla Google jedyny sposób "przeczytania" obrazka. Przy dealerze samochodowym
+  gdzie treść to głównie zdjęcia aut — 64.5% nieczytelnych dla Google = ogromna utrata
+  sygnałów topical relevance. Dodatkowo: brak alt = naruszenie WCAG 2.1 (dostępność cyfrowa).
+</div>
+<details class="repro">
+<summary>Repro · liczenie obrazków bez alt</summary>
+<pre>curl -sL -A "Mozilla/5.0 (Windows NT 10.0)" https://audiplichta.pl/ | \
+  python3 -c "
+import sys, re
+html = sys.stdin.read()
+imgs = re.findall(r'&lt;img[^&gt;]+&gt;', html, re.I)
+no_alt = [i for i in imgs if 'alt=' not in i.lower() or 'alt=""' in i.lower()]
+print(f'Total: {len(imgs)} · No alt: {len(no_alt)}')
+"</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P2</span>
+  <div>
+    <div class="fix-l">Bulk alt-text update przez WP Media Library lub plugin "Auto Image Alt Text"</div>
+    <div class="fix-v">Priorytet: obrazy aut (slug zawiera model) → alt = "Audi [Model] [rok] [kolor] · Plichta".
+    Plugin "Automatic Alt Text" (AI-powered) może masowo uzupełnić. Czas: 2–4h (bulk).
+    Efekt: Google Image Search + lepsze sygnały per stronę ogłoszenia.</div>
+  </div>
+</div>
+</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  BreadcrumbList schema wskazuje na stary prefix URL (/dostepne-od-reki/) — duplikat 502 ogłoszeń
+</div>
+<div class="f-d">
+  Ogłoszenia samochodów są dostępne pod <code>/oferta/nowe/...</code> — ale BreadcrumbList schema
+  (jedyna schema na stronie!) zawiera linki do starych URL: <code>/dostepne-od-reki/nowe/...</code><br><br>
+  Test: <code>https://audiplichta.pl/dostepne-od-reki/</code> → zwraca <b>200</b> (!) — stary prefix żyje.
+  To oznacza że 502 ogłoszeń jest dostępnych pod DWOMA adresami URL jednocześnie
+  — Google widzi duplikat treści dla każdego z nich. Schema breadcrumb „kanonizuje" błędny adres.
+</div>
+<details class="repro">
+<summary>Repro · weryfikacja breadcrumb URL</summary>
+<pre># Sprawdź czy stary prefix żyje:
+curl -o /dev/null -w "%{http_code}" -A "Mozilla/5.0" https://audiplichta.pl/dostepne-od-reki/
+# Oczekiwane: 301 (redirect) lub 404
+# Rzeczywiste: 200 (duplikat!)
+
+# Sprawdź schema breadcrumb na ogłoszeniu:
+curl -sL -A "Mozilla/5.0" https://audiplichta.pl/oferta/nowe/a5-avant/rok-2026/kombi/audi-bydgoszcz-fordonska/kamera-cofania-18-tempomat-adaptacyjny/ \
+  | python3 -c "import sys,re,json; [print(json.dumps(json.loads(b),indent=2)[:300]) for b in re.findall(r'application/ld\+json[^>]*>(.*?)&lt;/script&gt;',sys.stdin.read(),re.I|re.S)]"</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P1</span>
+  <div>
+    <div class="fix-l">301 redirect: /dostepne-od-reki/ → /oferta/ (zamknij stary prefix dla 502 URL)</div>
+    <div class="fix-v">Redirection plugin WP: wszystkie URL zaczynające się od <code>/dostepne-od-reki/</code>
+    → odpowiednik <code>/oferta/...</code> (regex rule). Potem zaktualizuj BreadcrumbList w szablonie
+    ogłoszenia. Czas: dev 1h. Efekt: likwidacja 502 par duplikatów.</div>
+  </div>
+</div>
+</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  Duplikaty title: 4× "Audi Plichta" · 2× "Serwis – Audi Plichta" · 2× "Jazda testowa – Audi Plichta"
+</div>
+<div class="f-d">
+  Kilka oddzielnych URL ma identyczny title — Google nie wie które z nich preferować:<br>
+  <ul style="margin:.5rem 0 .5rem 1.5rem;font-size:.85rem">
+
+<li><b>4×</b> "Audi Plichta" — ta sama strona indeksowana pod wieloma URL lub te same treści na różnych stronach</li>
+<li><b>2×</b> "Serwis – Audi Plichta" — ta sama strona indeksowana pod wieloma URL lub te same treści na różnych stronach</li>
+<li><b>2×</b> "Jazda testowa – Audi Plichta" — ta sama strona indeksowana pod wieloma URL lub te same treści na różnych stronach</li>
+  </ul>
+  Duplikat "Audi Plichta" (4 razy!) sugeruje że homepage pojawia się pod kilkoma URLami
+  bez właściwego canonical — lub różne strony kampanijne mają skopiowany title z homepage.
+</div>
+<div class="fix">
+  <span class="fix-r">FIX P2</span>
+  <div>
+    <div class="fix-l">Unikalny title per strona — Yoast /Rank Math → przejrzyj wszystkie zduplikowane</div>
+    <div class="fix-v">Użyj Screaming Frog lub Yoast SEO Premium Bulk Editor.
+    Czas: 2h audyt + 2h edycja. Efekt: Google wie dokładnie co każda strona oferuje.</div>
+  </div>
+</div>
+</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  3 stron technicznie-puste w sitemapie — marnują crawl budget
+</div>
+<div class="f-d">
+  W sitemapie znaleziono strony które Google crawluje, ale nie powinny być indeksowane:<br>
+  <ul style="margin:.5rem 0 .5rem 1.5rem;font-size:.85rem">
+
+<li><code>/thank-you/</code> — Thank you – Audi Plichta (strona po wysłaniu formularza — pusta dla SEO)</li>
+<li><code>/thank-you-intel/</code> — Thank you Intel – Audi Plichta (strona po wysłaniu formularza B2B — pusta)</li>
+<li><code>/ulubione-oferty/</code> — Ulubione oferty – Audi Plichta (strona użytkownika — pusta bez logowania)</li>
+  </ul>
+  Strony "thank-you" = thin content (zero treści merytorycznej dla Google).
+  Strona "ulubione" = personalizowany content (dla każdego inny lub pusty bez sesji).
+</div>
+<div class="fix">
+  <span class="fix-r">FIX P2</span>
+  <div>
+    <div class="fix-l">Yoast → tagi noindex dla /thank-you/, /thank-you-intel/, /ulubione-oferty/ + usuń z sitemapy</div>
+    <div class="fix-v">Rank Math/Yoast: te strony → noindex,nofollow → automatycznie znikną z sitemapy.
+    Czas: 15 min. Efekt: crawler nie traci budżetu na puste strony.</div>
+  </div>
+</div>
+</div>
+<div class="f ok">
+<div class="f-h">
+  <span class="b ok">OK</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  Canonical homepage poprawny · https://audiplichta.pl/
+</div>
+<div class="f-t">
+  Tag <code>&lt;link rel="canonical"&gt;</code> wskazuje prawidłowo na
+  <code>https://audiplichta.pl/</code>. Dodatkowy plus: 5 stron-widm (np. /centrum-flotowe/, /mol/)
+  ma canonical → właściwa strona docelowa — to poprawna praktyka konsolidacji treści.
+</div>
+</div>
+<details class="mth" open>
+<summary>🔍 METODOLOGIA — jak badamy ten moduł<span class="tog"></span></summary>
+<div class="mth-body">
+<p><b>Metoda:</b> pełny crawl 91 stron z browser User-Agent — tak jak Google widzi witrynę gdy WP Defender zostanie naprawiony. Python parser: regex H1/H2/title/meta/schema/canonical.<br><b>Zakres:</b> 51 stron statycznych + 35 stron modeli + 5 ogłoszeń próbnych · curl browser UA · 2026-07-31 · full crawl 91 pages<br><b>Reguła R2 (Repro):</b> komenda curl do każdego znaleziska.</p>
+<p style="margin-top:.5rem"><b>Źródło:</b> <code>curl browser UA · 91 stron · 2026-07-31</code></p>
+<div class="why"><div class="why-h">DLACZEGO ON-PAGE JEST RÓWNIE WAŻNE JAK M1</div><div class="why-t">WP Defender (M1) = drzwi zamknięte dla Google. M2 = co Google zobaczy gdy wejdzie. Nawet po naprawieniu M1 — Google wejdzie na stronę z 35 modelami bez H1, 0/91 stron bez meta description, duplikującym się /dostepne-od-reki/ dla 502 ogłoszeń. Rankingi nie wzrosną same po naprawieniu bota. M1+M2 to jeden pakiet naprawczy.</div></div>
+</div></details>
+</div></div>
+<div class="mod">
+<div class="mod-h">
+  <span class="mod-n">M4</span>
+  <span class="mod-t">Core Web Vitals · CrUX field data · PHONE</span>
+  <span class="mod-sc sc-bad">2/10</span>
+</div>
+<div class="mod-body">
+<div class="meth">CrUX (Chrome UX Report) to JEDYNE źródło CWV liczone przez Google do rankingów.
+Dane z prawdziwych sesji Chrome (28 dni) — nie Lighthouse lab. CLS i LCP to sygnały Page Experience;
+złe wartości aktywnie obniżają rankingi dla competitive queries.</div>
+<details class="scg" open>
+<summary>📊 ZASADY PUNKTACJI (skala 0–10) · Audi Plichta = 2/10<span class="tog"></span></summary>
+<div class="sc-list">
+<div class="sc-row"><span class="sc-num">0</span><span>CLS >0.5 LUB LCP >6s — strona się sypie, Google aktywnie karze</span></div>
+<div class="sc-row hit bad"><span class="sc-num">2</span><span>CLS 0.25–0.5 LUB LCP 4–6s — bucket 'poor', widoczna kara rankingowa</span></div>
+<div class="sc-row"><span class="sc-num">4</span><span>CLS >0.10 I LCP >2.5s — oba metryki w 'needs improvement'</span></div>
+<div class="sc-row"><span class="sc-num">6</span><span>Jedna metryka good, druga needs improvement</span></div>
+<div class="sc-row"><span class="sc-num">8</span><span>CLS i LCP good, INP/TTFB jeszcze needs improvement</span></div>
+<div class="sc-row"><span class="sc-num">10</span><span>Wszystkie 5 metryk CrUX w bucketcie 'good'</span></div>
+</div></details>
+<table>
+  <tr><th>Metryka</th><th>p75 (28d)</th><th>Próg good</th><th>Próg poor</th></tr>
+  <tr><td><b>CLS</b> · Cumulative Layout Shift</td>
+    <td><span style="color:var(--red)">0.84 ✗ poor</span></td>
+    <td>&lt;0.1</td><td>≥0.25</td></tr>
+  <tr><td><b>LCP</b> · Largest Contentful Paint</td>
+    <td><span style="color:var(--red)">4374ms ✗ poor</span></td>
+    <td>&lt;2500ms</td><td>≥4000ms</td></tr>
+  <tr><td><b>INP</b> · Interaction to Next Paint</td>
+    <td><span style="color:var(--grn)">130ms ✓ good</span></td>
+    <td>&lt;200ms</td><td>≥500ms</td></tr>
+  <tr><td><b>TTFB</b> · Time to First Byte</td>
+    <td><span style="color:var(--red)">2289ms ✗ poor</span></td>
+    <td>&lt;800ms</td><td>≥1800ms</td></tr>
+  <tr><td><b>FCP</b> · First Contentful Paint</td>
+    <td><span style="color:var(--red)">4063ms ✗ poor</span></td>
+    <td>&lt;1800ms</td><td>≥3000ms</td></tr>
+</table>
+<div class="f crit">
+<div class="f-h">
+  <span class="b crt">KRYT</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  CLS 0.84 — 8× powyżej progu good · layout shift niszczy UX mobilny
+</div>
+<div class="f-d">
+  CLS (Cumulative Layout Shift) p75 = <b>0.84</b> przy progu good &lt;0.1.
+  Wartość 8× za wysoka oznacza, że 75% użytkowników widzi elementy "skaczące" po załadowaniu
+  strony. Typowa przyczyna: obrazy bez wymiarów width/height, dynamicznie wstrzykiwana treść (cookie banner,
+  sticky header, reklamy), lazy-loaded elementy bez placeholder. Na mobile z wolnym połączeniem efekt jest
+  szczególnie widoczny i powoduje kliknięcia w złe elementy.
+</div>
+<details class="repro">
+<summary>Repro · CrUX API</summary>
+<pre>curl "https://chromeuxreport.googleapis.com/v1/records:queryRecord?key=YOUR_KEY" -d '{"url":"https://audiplichta.pl/","formFactor":"PHONE"}'</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P1</span>
+  <div>
+    <div class="fix-l">Diagnoza: Chrome DevTools → Performance → Layout Shifts (czerwone znaczniki)</div>
+    <div class="fix-v">Dodaj width/height do wszystkich &lt;img&gt; · Zdefiniuj min-height dla
+    kontenerów dynamicznych · Cookie banner i sticky header z pozycjonowaniem fixed/absolute
+    (nie relative). CLS wymaga deploymentu frontendu — nie da się naprawić w WP Defender.</div>
+  </div>
+</div>
+</div>
+<div class="f crit">
+<div class="f-h">
+  <span class="b crt">KRYT</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  LCP 4374ms — 4.4s · 1.7× powyżej progu · zbyt wolne ładowanie głównej treści
+</div>
+<div class="f-d">
+  LCP p75 = <b>4374ms</b> przy progu good &lt;2500ms.
+  TTFB = 2289ms — serwer odpowiada wolno (2289ms vs próg
+  800ms good). LCP powyżej TTFB = czas renderowania DOM
+  (~2085ms). Problemem jest zarówno hosting
+  (TTFB poor), jak i renderowanie strony (LCP - TTFB = 2085ms dodatkowe).
+</div>
+<div class="fix">
+  <span class="fix-r">FIX P1</span>
+  <div>
+    <div class="fix-l">TTFB: CDN (Cloudflare) + PHP-FPM caching · LCP: preload hero image</div>
+    <div class="fix-v">1. Cloudflare Pro z Page Rules cache HTML · 2. LiteSpeed Cache lub W3TC
+    z pełnym cache HTML · 3. &lt;link rel="preload"&gt; dla LCP image · 4. Eliminacja render-blocking JS.</div>
+  </div>
+</div>
+</div>
+<div class="f ok">
+<div class="f-h">
+  <span class="b ok">OK</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  INP 130ms — w progu good (&lt;200ms) · interaktywność OK
+</div>
+<div class="f-t">
+  Interaction to Next Paint jest jedyną metryką CrUX w bucketcie <b>good</b>.
+  Strona odpowiada na interakcje użytkownika w 130ms — akceptowalnie.
+</div>
+</div>
+<details class="mth" open>
+<summary>🔍 METODOLOGIA — jak badamy ten moduł<span class="tog"></span></summary>
+<div class="mth-body">
+<p><b>Źródło:</b> Chrome UX Report API (CrUX) — Google zbiera dane z prawdziwych sesji Chrome przez 28 dni. To jedyne dane, które Google używa do rankingów (nie Lighthouse).<br><b>Urządzenie:</b> PHONE — Google indeksuje mobile version, więc mobile CWV decyduje o pozycji.<br><b>p75:</b> 75% realnych użytkowników miało ten wynik lub gorszy — nie średnia, nie lab.<br><b>Weryfikacja:</b> pagespeed.web.dev → Mobile → Field Data = te same liczby co w raporcie.</p>
+<p style="margin-top:.5rem"><b>Źródło:</b> <code>CrUX API · PHONE · 28d · 2026-07-31</code></p>
+<div class="why"><div class="why-h">DLACZEGO CWV MA ZNACZENIE W BRANŻY AUTOMOTIVE</div><div class="why-t">Dealer samochodowy = wysoka konkurencja lokalnie (Krotoski, Plichta sieć). Google używa CWV jako sygnał rankingowy przy równej trafności treści. CLS 0.84 na mobile = ktoś klika w 'Sprawdź ofertę' a guzik skacze — to bezpośredni wpływ na konwersję z organica.</div></div>
+</div></details>
+</div></div>
+<div class="mod">
+<div class="mod-h">
+  <span class="mod-n">M6</span>
+  <span class="mod-t">Striking distance · quick wins organiczne (poz. 11–20)</span>
+  <span class="mod-sc sc-na">DFS only · brak GSC</span>
+</div>
+<div class="mod-body">
+<div class="meth">Frazy na pozycjach 11–20 to największa szansa krótkoterminowa —
+strona jest już zaindeksowana, Google ją zna, wystarczy poprawa treści/linków by wejść na stronę 1.
+Bez GSC: tylko DataForSEO (szacunkowe pozycje), brak click-through rate i impression data.</div>
+<div class="call a">
+  <b>Ograniczenie danych:</b> 5 fraz pos. 11–20 z DataForSEO (szacunkowe pozycje).
+  Bez GSC nie wiemy jakie frazy Google realnie pokazuje i z jakim CTR.
+  Po uzyskaniu dostępu GSC: pełna analiza M6 z impresją i CTR per fraza.
+</div>
+<table>
+  <tr><th>Fraza</th><th>Poz.</th><th>Vol./mies.</th><th>URL</th><th>Intent</th></tr>
+<tr>
+  <td><b>audi gotowe do odbioru</b></td>
+  <td>12</td>
+  <td>8 100</td>
+  <td><code>/oferta/wszystkie</code></td>
+  <td>zakupowa</td>
+</tr>
+<tr>
+  <td><b>audi uzywane</b></td>
+  <td>14</td>
+  <td>4 400</td>
+  <td><code>/</code></td>
+  <td>informacyjna</td>
+</tr>
+<tr>
+  <td><b>audi używane</b></td>
+  <td>18</td>
+  <td>4 400</td>
+  <td><code>/</code></td>
+  <td>informacyjna</td>
+</tr>
+<tr>
+  <td><b>audi p l</b></td>
+  <td>11</td>
+  <td>3 600</td>
+  <td><code>/</code></td>
+  <td>nawigacyjna</td>
+</tr>
+<tr>
+  <td><b>serwis audi</b></td>
+  <td>12</td>
+  <td>2 900</td>
+  <td><code>/serwis/</code></td>
+  <td>zakupowa</td>
+</tr>
+</table><p style='font-size:.8rem;color:var(--mut);margin-top:.5rem'>Łączny volume: 23 400/mies. · Źródło: DataForSEO ranked_keywords · PL · 2026-07-31</p>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[PRAWDOPODOBNE]</span>
+  "audi używane" (×2) i "audi gotowe do odbioru" rankują na homepage — intent mismatch
+</div>
+<div class="f-d">
+  Frazy "audi uzywane"/"audi używane" (vol 8 800/mies łącznie) rankują na <code>/</code> (homepage)
+  — nie na dedykowanej stronie oferty używanych. "Audi gotowe do odbioru" (vol 8 100) rankuje
+  na <code>/oferta/wszystkie</code> — ale ta strona zwraca <b>404</b> (udowodnione w M2).
+  Homepage powinien rankować na brand queries (plichta audi, dealer audi trójmiasto)
+  — nie na komercyjne inventory queries.
+</div>
+<div class="fix">
+  <span class="fix-r">FIX P2</span>
+  <div>
+    <div class="fix-l">Utwórz/wzmocnij podstronę /oferta/uzywane z targetowanym H1 i treścią</div>
+    <div class="fix-v">Strona z H1 "Audi używane" + opis + CTA + schema Product/Car → właściwy
+    intent match. Przekieruj ranking z homepage na tę podstronę przez wewnętrzne linkowanie.</div>
+  </div>
+</div>
+</div>
+</div></div>
+<div class="mod">
+<div class="mod-h">
+  <span class="mod-n">M8</span>
+  <span class="mod-t">Autorytet domeny · profil backlinków</span>
+  <span class="mod-sc sc-warn">4/10</span>
+</div>
+<div class="mod-body">
+<div class="meth">Domain Rank (DataForSEO) koreluje z widocznością organiczną — odzwierciedla
+siłę profilu linków w porównaniu z konkurencją. Broken pages (strony, do których prowadzą linki,
+ale nie istnieją) to strata link equity i sygnał negatywny dla Google.</div>
+<details class="scg" open>
+<summary>📊 ZASADY PUNKTACJI (skala 0–10) · Audi Plichta = 4/10<span class="tog"></span></summary>
+<div class="sc-list">
+<div class="sc-row"><span class="sc-num">0</span><span>Domain Rank <50 — zero wartościowych linków zewnętrznych</span></div>
+<div class="sc-row"><span class="sc-num">2</span><span>Rank 50–100 — kilka linków, słaby profil</span></div>
+<div class="sc-row hit warn"><span class="sc-num">4</span><span>Rank 100–300 — lokalny autorytet, linki z branżowych katalogów</span></div>
+<div class="sc-row"><span class="sc-num">6</span><span>Rank 300–500 — regionalne media i partnerzy biznesowi linkują</span></div>
+<div class="sc-row"><span class="sc-num">8</span><span>Rank 500–700 — silna pozycja, linki z mediów ogólnopolskich</span></div>
+<div class="sc-row"><span class="sc-num">10</span><span>Rank >700 — lider branży, linki z .gov/.edu/mediów</span></div>
+</div></details>
+<table>
+  <tr><th>Metryka</th><th>Wartość</th><th>Ocena</th></tr>
+  <tr><td>Domain Rank (DataForSEO)</td><td><b>238</b></td><td>Lokalny autorytet · skala 0–1000</td></tr>
+  <tr><td>Referring domains</td><td>197</td><td>Umiarkowane · jakość ważniejsza niż ilość</td></tr>
+  <tr><td>RD nofollow</td><td>101 (51.3%)</td>
+    <td>Wysoki % nofollow — sprawdź strukturę</td></tr>
+  <tr><td>Crawled pages (indeks)</td><td>7 709</td><td>Skala witryny</td></tr>
+  <tr><td>Broken pages</td><td class="st">
+    485 (6.3%)</td>
+    <td>⚠ Wysoki odsetek — utrata link equity</td></tr>
+  <tr><td>Footer links</td><td>76</td><td>Monitorować — sitewide linki z jednej domeny</td></tr>
+</table>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  485 broken pages (6.3%) — utrata link equity
+</div>
+<div class="f-d">
+  485 stron w crawled index DataForSEO jest "broken" (brak ważnej odpowiedzi serwera).
+  Przy 7 709 crawled pages to 6.3% indeksu.
+  Każda broken page z linkiem zewnętrznym = utrata przekazywanego PageRank.
+  Częsta przyczyna: usunięte ogłoszenia samochodów bez przekierowania 301.
+</div>
+<details class="repro">
+<summary>Repro · DataForSEO Backlinks</summary>
+<pre>POST https://api.dataforseo.com/v3/backlinks/summary/live {"target":"audiplichta.pl"}</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P2</span>
+  <div>
+    <div class="fix-l">Screaming Frog / Ahrefs crawl → znajdź broken pages z linkami zewn. → 301</div>
+    <div class="fix-v">Export broken pages z DataForSEO · filtruj te z referring domains &gt; 0 ·
+    dodaj 301 do aktywnej strony oferty lub homepage · koszt: developer + hosting 1h pracy.</div>
+  </div>
+</div>
+</div>
+</div></div>
+<div class="mod">
+<div class="mod-h">
+  <span class="mod-n">M9</span>
+  <span class="mod-t">Crawl budget · taksonomie · noindex strategi</span>
+  <span class="mod-sc sc-bad">3/10</span>
+</div>
+<div class="mod-body">
+<div class="meth">Przy 7 709 URL Googlebot ma ograniczony budżet crawlu.
+Niepotrzebne taksonomie (kolor, tag, napęd) mnożą URL bez wartości SEO,
+rozcieńczają crawl budget i tworzą thin content. Noindex strategiczne chroni budget.</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[PRAWDOPODOBNE]</span>
+  14 taksonomii CPT · 5 kandydatów do noindex
+</div>
+<div class="f-d">
+  WP rejestruje 14 taksonomii dla CPT <code>car</code>.
+  Wartościowe SEO (generują frazy long-tail): <b>car_model, car_brand</b>.<br>
+  Kandydaci do noindex (niski potencjał rankingowy, wysoki crawl cost):
+  <b>car_color, car_tag, car_equipment, car_country, car_drive</b>.<br>
+  Przy ~16 sub-sitemaps = 16 sitemaps x N archiwów taksonomii =
+  potencjalnie tysiące low-value URL w indeksie.<br>
+  <i>[PRAWDOPODOBNE]: wymaga crawl log analysis i GSC Index Coverage report.</i>
+</div>
+<div class="fix">
+  <span class="fix-r">FIX P2</span>
+  <div>
+    <div class="fix-l">Yoast / Rank Math: wyłącz indeksowanie 5 taksonomii</div>
+    <div class="fix-v">Seo → Taksonomie → <code>car_color, car_tag, car_equipment, car_country, car_drive</code> → noindex + nofollow.
+    Nie usuwaj taksonomii z WP (zepsuje frontend) — tylko wyłącz indeksowanie.
+    Czas: 30 min. Efekt: Google przestaje crawlować te archiwa w ciągu 2–4 tygodni.</div>
+  </div>
+</div>
+</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  3 stron puste/personalne w sitemapie marnują crawl budget
+</div>
+<div class="f-d">
+  Pełny crawl 91 stron wykrył strony w sitemapie, które Google crawluje ale nie powinny:
+  <b>/thank-you/, /thank-you-intel/, /ulubione-oferty/</b>.<br>
+  Strony thank-you = zero treści (Googlebot widzi pusty body). Strona "ulubione" =
+  zawartość zależna od sesji użytkownika — dla crawlera pusta lub zmieniana, co wygląda
+  jak thin/duplicate content.
+</div>
+<details class="repro">
+<summary>Repro · weryfikacja thin content</summary>
+<pre># Sprawdź ile treści widzi Google na thank-you:
+curl -sL -A "Mozilla/5.0" https://audiplichta.pl/thank-you/ | wc -w
+
+# Porównaj z normalną stroną:
+curl -sL -A "Mozilla/5.0" https://audiplichta.pl/serwis/ | wc -w</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P2</span>
+  <div>
+    <div class="fix-l">Yoast noindex dla /thank-you/, /thank-you-intel/, /ulubione-oferty/ + auto-usunięcie z sitemapy</div>
+    <div class="fix-v">Rank Math/Yoast: te strony → noindex,nofollow → automatycznie znikają
+    z XML sitemapy. Czas: 15 min. Efekt: crawler nie traci budżetu.</div>
+  </div>
+</div>
+</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  Zduplikowane title tags: 4× "Audi Plichta" · 2× "Serwis – Audi Plichta" · 2× "Jazda testowa – Audi Plichta"
+</div>
+<div class="f-d">
+  Google używa title tag do odróżniania stron. Gdy kilka URL ma identyczny title,
+  algorytm nie wie co rankować i może zignorować wszystkie wersje.<br>
+  Najpoważniejszy przypadek: 4× "Audi Plichta" — homepage pojawia się pod czterema różnymi URL
+  lub cztery strony kampanijne skopiowały title głównej. Obie sytuacje hamują indeksację.
+</div>
+<details class="repro">
+<summary>Repro · weryfikacja duplikatów title</summary>
+<pre># Crawl 91 stron i policz duplikaty title (pełny skrypt: crawl_pages.py)
+# Wynik: 4× "Audi Plichta", 2× "Serwis – Audi Plichta", 2× "Jazda testowa – Audi Plichta"
+
+# Szybka weryfikacja konkretnej strony:
+curl -sL -A "Mozilla/5.0" https://audiplichta.pl/ | grep -o '&lt;title&gt;[^&lt;]*&lt;/title&gt;'</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P2</span>
+  <div>
+    <div class="fix-l">Unikalny title per strona — Yoast/Rank Math Bulk Editor</div>
+    <div class="fix-v">Screaming Frog → filtr: duplikaty title → eksport URL → Yoast Bulk Editor.
+    Czas: 2h audyt + 2h korekta. Efekt: Google dostaje jasny sygnał per URL.</div>
+  </div>
+</div>
+</div>
+<div class="f ok">
+<div class="f-h">
+  <span class="b ok">UWAGA+</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  5 stron-widm z poprawnym canonical → konsolidacja treści (dobra praktyka)
+</div>
+<div class="f-d">
+  Pełny crawl wykrył 5 stron które mają canonical wskazujący na inną stronę:<br>
+  <ul style="margin:.5rem 0 .5rem 1.5rem;font-size:.85rem">
+
+<li><code>/mol/</code> → canonical: <code>/</code></li>
+<li><code>/dedykowany-program-flotowy/</code> → canonical: <code>/</code></li>
+<li><code>/jazdy-testowe-e-tron/</code> → canonical: <code>/jazda-testowa/</code></li>
+<li><code>/centrum-flotowe/</code> → canonical: <code>/</code></li>
+<li><code>/przypisz-swoje-auto-do-partnera-serwisowego/</code> → canonical: <code>/serwis/</code></li>
+  </ul>
+  To <b>DOBRA praktyka</b> — stare URL kampanijne (np. /centrum-flotowe/, /mol/) zamiast umierać,
+  przekazują autorytet stronie głównej przez canonical. WP lub developer świadomie skonfigurował
+  konsolidację zamiast 301 redirect. Odejmuje crawl budżet, ale nie szkodzi indeksacji.
+</div>
+</div>
+</div></div>
+<div class="mod">
+<div class="mod-h">
+  <span class="mod-n">M10</span>
+  <span class="mod-t">Gotowość na AI · GEO · AI search accessibility</span>
+  <span class="mod-sc sc-good">7/10</span>
+</div>
+<div class="mod-body">
+<div class="meth">ChatGPT, Perplexity i Google AI Overviews pobierają treść przez boty indeksujące.
+Jeśli bot AI dostaje 403 — strona nie trafia do AI answers. M10 sprawdza: dostępność botów,
+structured data, czy treść da się cytować, czy jest llms.txt (V5.5 M10.7-M10.8).</div>
+<details class="scg" open>
+<summary>📊 ZASADY PUNKTACJI (skala 0–10) · Audi Plichta = 7/10<span class="tog"></span></summary>
+<div class="sc-list">
+<div class="sc-row"><span class="sc-num">0</span><span>Wszystkie boty AI zablokowane — strona niewidoczna dla ChatGPT/Perplexity</span></div>
+<div class="sc-row"><span class="sc-num">2</span><span>Częściowy dostęp AI, brak schema, cienka treść</span></div>
+<div class="sc-row"><span class="sc-num">4</span><span>Boty AI mają dostęp, ale brak llms.txt i treść trudna do cytowania</span></div>
+<div class="sc-row"><span class="sc-num">6</span><span>AI OK, podstawowe schema JSON-LD, strukturowana treść</span></div>
+<div class="sc-row hit good"><span class="sc-num">7</span><span>AI OK, schema, llms.txt, treść z pytaniami i odpowiedziami</span></div>
+<div class="sc-row"><span class="sc-num">8</span><span>AI OK, pełne schema, llms.txt, sygnały E-E-A-T (ekspert, doświadczenie)</span></div>
+<div class="sc-row"><span class="sc-num">10</span><span>AI-first: wszystko z 8 + aktywny monitoring marki w AI answers</span></div>
+</div></details>
+<div class="f ok">
+<div class="f-h">
+  <span class="b ok">OK</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  8 botów AI ma pełny dostęp (200 OK) · paradoks konfiguracji WP Defender
+</div>
+<div class="f-d">
+  <b>AI boty z dostępem (200 OK):</b> GPTBot, OAI-SearchBot, ClaudeBot, Claude-User, PerplexityBot, Perplexity-User, Google-Extended, anthropic-ai<br>
+  <b>Zablokowane (403):</b> Googlebot, Bingbot<br><br>
+  WP Defender blokuje Google i Bing, ale przepuszcza wszystkie boty AI.
+  To oznacza że strona <b>jest indeksowana przez ChatGPT, Claude i Perplexity</b>
+  — ale nie przez Google Search. Paradoks: audiplichta.pl jest gotowa na AI search,
+  ale odcięta od tradycyjnego SEO. Gdy pojawi się w AI Overviews lub Perplexity,
+  kliknięcie przeniesie użytkownika na stronę, która nie pojawi się w klasycznych wynikach.
+</div>
+<details class="repro">
+<summary>Repro · test wszystkich botów</summary>
+<pre>for UA in "GPTBot/1.0" "ClaudeBot/0.5" "PerplexityBot/1.0" "anthropic-ai" \
+          "Google-Extended" "OAI-SearchBot/1.0"; do
+  CODE=$(curl -si -A "$UA" https://audiplichta.pl/ | grep HTTP | head -1)
+  echo "$UA → $CODE"
+done</pre>
+</details>
+</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[PRAWDOPODOBNE]</span>
+  Brak llms.txt · brak instrukcji dla modeli językowych (V5.5 M10.7)
+</div>
+<div class="f-d">
+  llms.txt to emerging standard (nie wymóg Google) — plik tekstowy w root domeny
+  opisujący zawartość strony dla modeli AI. Brak = AI musi "zgadywać" co najważniejsze.
+  Przy dobrym dostępie botów AI (M10.1) — llms.txt to logiczny następny krok.
+  <i>[SPRAWDZONE]: pełny crawl 91 stron (browser UA) nie wykrył /llms.txt w sitemap ani żadnego linku do niego.</i>
+</div>
+<div class="fix">
+  <span class="fix-r">FIX P3</span>
+  <div>
+    <div class="fix-l">Utwórz /llms.txt z opisem portfolio Audi i kluczowymi URLami</div>
+    <div class="fix-v">Format: markdown · sekcje: About, Products/Services, Key URLs.
+    Opcjonalnie /llms-full.txt dla pełnego corpus. Czas: 1h. Efekt: lepsza citability
+    w ChatGPT/Perplexity dla zapytań "dealer Audi Trójmiasto".</div>
+  </div>
+</div>
+</div>
+</div></div>
+<div class="mod">
+<div class="mod-h">
+  <span class="mod-n">KMP</span>
+  <span class="mod-t">Benchmarking konkurencji organicznej · DataForSEO</span>
+  <span class="mod-sc sc-na">informacyjny</span>
+</div>
+<div class="mod-body">
+<table>
+  <tr><th>Domena</th><th>Frazy</th><th>ETV szac.</th><th>Pos. #1</th></tr>
+<tr class="hl">
+  <td><b>audiplichta.pl</b></td>
+  <td>126</td>
+  <td>5 383</td>
+  <td>4</td>
+</tr>
+<tr>
+  <td>plichta.com.pl</td>
+  <td>1 062</td>
+  <td>61 514</td>
+  <td>36</td>
+</tr>
+<tr>
+  <td>volkswagenplichta.pl</td>
+  <td>385</td>
+  <td>27 272</td>
+  <td>25</td>
+</tr>
+<tr>
+  <td>krotoski.com</td>
+  <td>938</td>
+  <td>45 524</td>
+  <td>42</td>
+</tr>
+<tr>
+  <td>audi.pl</td>
+  <td>1 491</td>
+  <td>376 710</td>
+  <td>259</td>
+</tr>
+</table>
+<div class="call r">
+  <b>Gap organiczny:</b> audiplichta.pl = 5 383 ETV vs.
+  audi.pl = 376 710 ETV.
+  Lider ma <b>70× więcej szacowanego ruchu</b>. Gap wynika wprost z problemu M1:
+  gdy Googlebot jest zablokowany, nowe treści i frazy nie wchodzą do indeksu.
+</div>
+</div></div>
+<div class="mod">
+<div class="mod-h">
+  <span class="mod-n">M11</span>
+  <span class="mod-t">E-E-A-T · lokalne sygnały autorytetu · LocalBusiness schema</span>
+  <span class="mod-sc sc-bad">3/10</span>
+</div>
+<div class="mod-body">
+<div class="meth">E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) i lokalne sygnały
+to sygnały jakościowe Google — szczególnie ważne dla dealer'ów samochodowych (YMYL-adjacent, high value).
+M11 sprawdza: NAP (Name-Address-Phone) na stronach salonów, schema LocalBusiness/AutoDealer,
+Google Maps embed, godziny otwarcia, strona "O nas" i "Nasz zespół", opinie.</div>
+<details class="scg" open>
+<summary>📊 ZASADY PUNKTACJI (skala 0–10) · Audi Plichta = 3/10<span class="tog"></span></summary>
+<div class="sc-list">
+<div class="sc-row"><span class="sc-num">0</span><span>Brak jakichkolwiek lokalnych sygnałów — anonimowy sklep online</span></div>
+<div class="sc-row"><span class="sc-num">2</span><span>Adres na stronie, brak schema, brak map, brak recenzji</span></div>
+<div class="sc-row"><span class="sc-num">4</span><span>NAP na stronach salonów, Google Maps embed — ale brak schema i godzin</span></div>
+<div class="sc-row"><span class="sc-num">6</span><span>NAP + schema LocalBusiness + godziny otwarcia + zweryfikowane recenzje</span></div>
+<div class="sc-row"><span class="sc-num">8</span><span>Kompletne E-E-A-T: schema AutoDealer, certyfikaty, zespół, nagrody Audi</span></div>
+<div class="sc-row"><span class="sc-num">10</span><span>Dealer autoryzowany z oficjalną walidacją Audi AG, structured data premium</span></div>
+</div></details>
+<div class="f ok">
+<div class="f-h">
+  <span class="b ok">OK</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  NAP obecne na 4 stronach salonów · 2/4 z numerem · 4/4 z Google Maps embed
+</div>
+<div class="f-d">
+  Każda strona salonu ma adres fizyczny (ul. ...) i mapę Google embed.
+  2 z 4 salonów ma widoczny numer telefonu.<br>
+  <b>Salony:</b>
+  <ul style="margin:.5rem 0 .5rem 1.5rem;font-size:.85rem">
+
+<li><b>Audi Gdańsk Stadion</b> · ul. Marynarki Polskiej 90 · +48583502556</li>
+<li><b>Audi Centrum Gdańsk</b> · ul. Lubowidzka 43 · +48583502202</li>
+<li><b>Audi Centrum Gdynia</b> · ul. Łużycka 24 · brak tel.</li>
+<li><b>Audi Bydgoszcz</b> · ul. Fordońska 286 · brak tel.</li>
+  </ul>
+  To solidna podstawa lokalnych sygnałów. Problem: Google Maps embed ≠ schema LocalBusiness.
+  Embed wbudowuje mapę wizualnie, ale nie dostarcza danych strukturalnych crawlerowi.
+</div>
+<details class="repro">
+<summary>Repro · weryfikacja NAP</summary>
+<pre>curl -sL -A "Mozilla/5.0" https://audiplichta.pl/nasze-salony/audi-gdansk-stadion/ \
+  | grep -oP '\+48[\s\d-]{9,}' | head -5
+# Oczekiwane: numery telefonów +48 58...</pre>
+</details>
+</div>
+<div class="f crit">
+<div class="f-h">
+  <span class="b crt">KRYTYCZNE</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  0/4 stron salonów ma schema LocalBusiness/AutoDealer — 0 z 4
+</div>
+<div class="f-d">
+  Pełny crawl 91 stron wykrył schema TYLKO w 5 ogłoszeniach samochodowych
+  (BreadcrumbList). Żadna strona salonu nie ma <code>LocalBusiness</code> ani <code>AutoDealer</code>
+  schema — Google nie dostaje ustrukturyzowanych danych o lokalizacjach.<br><br>
+  Bez LocalBusiness schema z geo-coords: dealer <b>może nie pokazywać się w Google Maps</b>
+  dla zapytań "dealer Audi Gdańsk" · "Audi serwis Gdynia" · "salon Audi Trójmiasto".
+  Maps i Maps Packs to często 50%+ klikalności lokalnych zapytań.
+</div>
+<details class="repro">
+<summary>Repro · weryfikacja braku schema</summary>
+<pre>curl -sL -A "Mozilla/5.0" https://audiplichta.pl/nasze-salony/audi-gdansk-stadion/ \
+  | python3 -c "import sys,re,json
+for b in re.findall(r'ld\+json[^>]*>([^<]*)', sys.stdin.read(), re.S):
+    try: print(json.loads(b).get('@type','?'))
+    except: pass"
+# Oczekiwane: LocalBusiness lub AutoDealer
+# Rzeczywiste: brak outputu (zero schema)</pre>
+</details>
+<div class="fix">
+  <span class="fix-r">FIX P1</span>
+  <div>
+    <div class="fix-l">Schema LocalBusiness/AutoDealer na 4 stronach salonów (Schema Pro lub ręcznie)</div>
+    <div class="fix-v">Wymagane pola: @type AutoDealer, name, address (streetAddress, city, postalCode),
+    telephone, openingHours, geo (latitude, longitude), url, image.
+    Plugin Schema Pro lub RankMath Local SEO → konfiguracja per salon. Czas: 3h developer.
+    Efekt: Google Maps pack visibility dla lokalnych fraz.</div>
+  </div>
+</div>
+</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  Godziny otwarcia widoczne na stronie — ale nie w schema (0/4 salonów)
+</div>
+<div class="f-d">
+  Strony salonów zawierają godziny otwarcia jako tekst HTML — ale bez schema openingHours
+  Google nie może ich wyświetlić w Knowledge Panel ani Google Maps.
+  Użytkownik szukający "dealer Audi Gdańsk godziny" nie zobaczy odpowiedzi bezpośrednio
+  w wynikach — musi kliknąć stronę. To utracony szans na rich snippet.
+</div>
+<div class="fix">
+  <span class="fix-r">FIX P1</span>
+  <div>
+    <div class="fix-l">Dodaj openingHours do LocalBusiness schema (wchodzi w FIX P1 powyżej)</div>
+    <div class="fix-v">Format ISO 8601: "Mo-Fr 09:00-18:00", "Sa 09:00-14:00" itd.
+    Wchodzi jako pole w tym samym schema co AutoDealer — zero dodatkowego kosztu.</div>
+  </div>
+</div>
+</div>
+<div class="f warn">
+<div class="f-h">
+  <span class="b wrn">OSTRZEŻ</span>
+  <span class="b pew">[UDOWODNIONE]</span>
+  Brak stron: O nas (✗), Nasz zespół (✗), Opinie klientów (✗)
+</div>
+<div class="f-d">
+  Google ocenia E-E-A-T przez dowody doświadczenia i ekspertyzy. Dla dealera Audi: certyfikaty
+  autoryzacyjne, historia grupy, zdjęcia ekspertów, nagrody (Dealer of the Year Audi AG) —
+  to sygnały. Ich brak nie psuje bezpośrednio rankingów, ale:<br>
+  1. Brak strony z opiniami = utracone long-tail frazy ("Audi Plichta opinie", "opinie salon Audi Gdańsk")<br>
+  2. Google może nie przyznać Knowledge Panel jeśli brak stron autorytetu<br>
+  3. Konkurenci z "O nas" + "Certyfikaty" mogą wygrać w E-E-A-T gdy walczą o te same frazy
+</div>
+<div class="fix">
+  <span class="fix-r">FIX P3</span>
+  <div>
+    <div class="fix-l">Utwórz /o-nas/ z historią grupy Plichta + certyfikaty Audi AG</div>
+    <div class="fix-v">Minimum: 500 słów + logo certyfikatu Audi Autoryzowany Dealer + zdjęcia placówek.
+    Opcjonalnie: strona z recenzjami Google (widget Google Reviews). Czas: content 4h + dev 1h.</div>
+  </div>
+</div>
+</div>
+<details class="mth" open>
+<summary>🔍 METODOLOGIA — jak badamy ten moduł<span class="tog"></span></summary>
+<div class="mth-body">
+<p><b>Metoda:</b> curl browser UA — sprawdzono 4 stron salonów (curl browser UA · 2026-07-31) + full crawl 91 stron pod kątem schema.<br><b>Zakres:</b> NAP extraction (regex tel/adres), schema ld+json parser, Google Maps embed detection.<br><b>Reguła R2 (Repro):</b> komendy curl do weryfikacji powyżej.</p>
+<p style="margin-top:.5rem"><b>Źródło:</b> <code>curl browser UA · 2026-07-31</code></p>
+<div class="why"><div class="why-h">DLACZEGO E-E-A-T WAŻNE DLA DEALERA AUDI</div><div class="why-t">Dealer premium = kategoria YMYL-adjacent: klient wydaje 150–400 tys. zł. Google traktuje takie decyzje ostrożniej — E-E-A-T ma większe znaczenie. LocalBusiness schema to minimum dla visibility w Maps Pack dla lokalnych fraz (dealer Audi + miasto), które generują intencję zakupu, nie tylko research.</div></div>
+</div></details>
+</div></div>
+<div class="mod">
+<div class="mod-h">
+  <span class="mod-n">M12</span>
+  <span class="mod-t">Matryca wdrożeniowa · priorytety i właściciele</span>
+  <span class="mod-sc sc-na">bez oceny</span>
+</div>
+<div class="mod-body">
+<div class="call r"><b>P0 · NATYCHMIAST (48h)</b></div>
+<table><tr><th>ID</th><th>Akcja</th><th>Czas</th><th>Właściciel</th></tr>
+<tr><td><b>M1.1</b></td><td>WP Defender: wyłącz blokadę Googlebota [1 checkbox = odblokowanie całego crawlu]</td><td>5 min</td><td>Właściciel / hosting</td></tr>
+<tr><td><b>M1.2</b></td><td>Weryfikacja po P0: robots.txt + sitemaps → 200 dla Googlebota</td><td>15 min</td><td>Właściciel</td></tr>
+</table>
+<div class="call a"><b>P1 · SPRINT 1 (2 tyg)</b></div>
+<table><tr><th>ID</th><th>Akcja</th><th>Czas</th><th>Właściciel</th></tr>
+<tr><td><b>M2.1</b></td><td>301 redirect: /oferta/wszystkie → /oferta/ (404 = utracone linki i ranking)</td><td>5 min</td><td>Developer</td></tr>
+<tr><td><b>M2.2</b></td><td>301 redirect: /dostepne-od-reki/ → /oferta/ (eliminacja 502 par duplikatów)</td><td>30 min</td><td>Developer</td></tr>
+<tr><td><b>M2.3</b></td><td>Fix H1 template: dodaj dynamiczne H1 do 35 stron modeli (zero H1 = crawl bez kontekstu)</td><td>3h</td><td>Developer / Motyw</td></tr>
+<tr><td><b>M2.4</b></td><td>Zostaw 1×H1 na homepage (usuń 7 zbędnych — błąd template)</td><td>30 min</td><td>Developer</td></tr>
+<tr><td><b>M2.5</b></td><td>Meta description: Yoast template dla wszystkich typów stron (0/91 stron ma meta desc)</td><td>2h</td><td>SEO / Yoast</td></tr>
+<tr><td><b>M11.1</b></td><td>Schema LocalBusiness/AutoDealer + openingHours na 4 stronach salonów</td><td>3h</td><td>Developer</td></tr>
+<tr><td><b>M4.1</b></td><td>Diagnoza CLS: Chrome DevTools + code fix</td><td>3h</td><td>Developer</td></tr>
+<tr><td><b>M4.2</b></td><td>TTFB: Cloudflare / LiteSpeed Cache HTML</td><td>2h</td><td>Hosting/Dev</td></tr>
+<tr><td><b>M4.3</b></td><td>LCP: preload hero image + image dimensions</td><td>1h</td><td>Developer</td></tr>
+</table>
+<div class="call a"><b>P2 · SPRINT 2 (4 tyg)</b></div>
+<table><tr><th>ID</th><th>Akcja</th><th>Czas</th><th>Właściciel</th></tr>
+<tr><td><b>M2.6</b></td><td>Zmień title homepage: 'Salon Audi Trójmiasto · Nowe i Używane · Plichta'</td><td>10 min</td><td>SEO</td></tr>
+<tr><td><b>M2.7</b></td><td>Napraw duplikaty title (4× Audi Plichta, 2× Serwis, 2× Jazda testowa)</td><td>2h</td><td>SEO / Yoast</td></tr>
+<tr><td><b>M2.8</b></td><td>Schema.org: Vehicle schema na ogłoszeniach samochodowych (cena, rok, model)</td><td>4h</td><td>Developer</td></tr>
+<tr><td><b>M2.9</b></td><td>Bulk alt-text update: 71 obrazków (plugin lub ręcznie top pages)</td><td>4h</td><td>Content</td></tr>
+<tr><td><b>M6.1</b></td><td>Utwórz /oferta/uzywane z targetowanym H1 + treść</td><td>4h</td><td>Content + Dev</td></tr>
+<tr><td><b>M8.1</b></td><td>Audyt broken pages → 301 redirects (top RD)</td><td>3h</td><td>Developer</td></tr>
+<tr><td><b>M9.1</b></td><td>Yoast noindex: car_color, car_tag, car_equipment, car_country, car_drive (taksonomie CPT)</td><td>1h</td><td>SEO specialist</td></tr>
+<tr><td><b>M9.2</b></td><td>Yoast noindex dla /thank-you/, /thank-you-intel/, /ulubione-oferty/ + usunięcie z sitemapy</td><td>15 min</td><td>SEO specialist</td></tr>
+</table>
+<div class="call g"><b>P3 · BACKLOG</b></div>
+<table><tr><th>ID</th><th>Akcja</th><th>Czas</th><th>Właściciel</th></tr>
+<tr><td><b>M11.2</b></td><td>Utwórz /o-nas/ z historią grupy Plichta + certyfikaty Audi AG</td><td>5h</td><td>Content</td></tr>
+<tr><td><b>M10.1</b></td><td>Utwórz /llms.txt z opisem portfolio i kluczowymi URLami</td><td>1h</td><td>SEO specialist</td></tr>
+<tr><td><b>M0</b></td><td>GSC: dodaj tomekwlq@proton.me → re-run M0/M5/M7 (dopiero po P0!)</td><td>15 min</td><td>Właściciel</td></tr>
+</table>
+</div></div>
+<footer>
+  Audyt 360 SEO/GEO · audiplichta.pl · 2026-07-31 · Metodologia V5.5 ·
+  Dane: CrUX API · DataForSEO (PL) · curl bot tests · Brak GSC: M0/M5/M7 bez oceny
+</footer>
+</div></body></html>

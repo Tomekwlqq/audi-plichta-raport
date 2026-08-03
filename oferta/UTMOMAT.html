@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTMomat — Audi Grupa Plichta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;--ink:#0a0a0a;--muted:#5b6472;--faint:#8b93a2;--line:#e6e6e9;
+    --green:#16a34a;--green-d:#15803d;--green-soft:#e7f6ec;--green-line:#b7e3c4;
+    --orange:#f5751a;--orange-d:#dd5e0a;--orange-soft:#fff2e8;--orange-line:#f8c39a;
+    --blue:#0f7ae5;--blue-d:#0a63bd;--blue-soft:#e9f3fd;--blue-line:#a9d2f6;
+    --violet:#1800ad;--violet-d:#12007e;--violet-soft:#ece9fb;--violet-line:#c5bcf0;
+    --bord:#8d0a31;--bord-d:#6d0725;--bord-soft:#fcebf2;--bord-line:#e8b4c6;
+    --dark:#1a1f2b;
+    --grotesk:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--grotesk);background:var(--bg);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;font-size:16px;padding:74px 34px 100px;
+    background-image:radial-gradient(circle at 8% 0,#eeebfd 0,transparent 42%),radial-gradient(circle at 96% 3%,#fdeef4 0,transparent 36%);
+    background-repeat:no-repeat}
+  .wrap{max-width:1420px;margin:0 auto}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:15px}
+  h1{font-size:clamp(34px,5vw,54px);font-weight:700;letter-spacing:-.035em;line-height:1.03;margin-bottom:14px}
+  h1 .g{color:var(--green-d)}
+  .lede{color:var(--muted);font-size:19px;max-width:920px;line-height:1.5}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;margin-bottom:36px}
+  .badge{font-family:var(--mono);font-size:11px;font-weight:600;padding:6px 11px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--faint)}
+  .badge.draft{color:var(--bord);border-color:var(--bord-line);background:var(--bord-soft)}
+  .card{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:26px 28px;margin-bottom:20px;box-shadow:0 8px 26px rgba(20,26,45,.05)}
+  h2{font-size:24px;font-weight:700;letter-spacing:-.025em;line-height:1.15;margin-bottom:6px}
+  .h2sub{color:var(--muted);font-size:15px;margin-bottom:22px;line-height:1.55;max-width:980px}
+
+  .beforeafter{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:900px){.beforeafter{grid-template-columns:1fr}}
+  .ba{border-radius:16px;padding:19px 21px;border:1.5px solid}
+  .ba.bad{background:var(--bord-soft);border-color:var(--bord-line)}
+  .ba.good{background:var(--green-soft);border-color:var(--green-line)}
+  .ba-h{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:11px}
+  .ba.bad .ba-h{color:var(--bord)}.ba.good .ba-h{color:var(--green-d)}
+  .url{font-family:var(--mono);font-size:12.5px;background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;word-break:break-all;line-height:1.65;color:var(--muted);margin-bottom:11px}
+  .url b{color:var(--ink)}
+  .url .k{color:var(--violet-d);font-weight:600}
+  .url .v{color:var(--green-d);font-weight:600}
+  .url .x{color:var(--bord);font-weight:600}
+  .ba p{font-size:14px;line-height:1.55}
+  .ba.bad p{color:var(--bord-d)}.ba.good p{color:#2f4a3c}
+
+  .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:6px}
+  @media(max-width:1050px){.slots{grid-template-columns:1fr 1fr}}
+  @media(max-width:620px){.slots{grid-template-columns:1fr}}
+  .slot{border:1.5px solid var(--violet-line);border-radius:15px;padding:17px 19px;background:#fbfaff}
+  .slot .sn{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--violet-d);letter-spacing:.08em;margin-bottom:7px}
+  .slot .st{font-size:16px;font-weight:700;margin-bottom:5px;letter-spacing:-.015em}
+  .slot .sd{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:11px}
+  .slot .vals{display:flex;flex-wrap:wrap;gap:5px}
+  .slot .v{font-family:var(--mono);font-size:11px;font-weight:600;padding:4px 8px;border-radius:7px;background:#fff;border:1px solid var(--violet-line);color:var(--violet-d)}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:6px}
+  th{background:var(--dark);color:#fff;padding:12px 14px;text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  td{padding:12px 14px;border-bottom:1px solid #f1eff7;vertical-align:top;color:var(--muted);line-height:1.55}
+  tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:#fbfaff}
+  td strong{color:var(--ink)}
+  .mono{font-family:var(--mono);font-size:12px;color:var(--violet-d)}
+
+
+  .proof{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;align-items:start;margin-top:8px}
+  @media(max-width:950px){.proof{grid-template-columns:1fr}}
+  .shot{border:1.5px solid var(--line);border-radius:15px;overflow:hidden;background:#fff}
+  .shot .cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);
+    padding:11px 15px;border-bottom:1px solid var(--line);font-weight:600;background:#fbfaff}
+  .shot img{display:block;width:100%;height:auto}
+  .shot.tall{max-height:520px;overflow-y:auto}
+  .proof-txt p{font-size:14.5px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+  .proof-txt b{color:var(--ink)}
+  .note{border-left:3px solid var(--green);background:var(--green-soft);padding:15px 19px;border-radius:0 13px 13px 0;font-size:14.5px;margin-top:18px;color:#2f4a3c;line-height:1.6}
+  .note b{color:var(--green-d)}
+  .note.warn{border-left-color:var(--bord);background:var(--bord-soft);color:var(--bord-d)}
+  .note.warn b{color:var(--bord)}
+  .chain{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .chain .step{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px 16px;font-size:14px;font-weight:700}
+  .chain .step.now{border-color:var(--green);background:var(--green-soft);color:var(--green-d)}
+  .chain .ar{font-family:var(--mono);color:var(--faint);font-weight:700}
+  footer{color:var(--faint);font-family:var(--mono);font-size:11.5px;padding:16px 4px 30px;text-align:center}
+#doc-tag-fix{position:fixed;top:18px;left:186px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#12007e;background:rgba(236,233,251,.96);backdrop-filter:blur(8px);padding:8px 13px;border-radius:9px;white-space:nowrap;box-shadow:0 2px 10px rgba(20,26,45,.06)}
+@media(max-width:900px){#doc-tag-fix{display:none}}
+</style>
+<script src="brama.js"></script>
+</head>
+<body>
+<a href="PLICHTA_START.html" style="position:fixed;top:18px;left:18px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#5b6472;text-decoration:none;padding:8px 14px;border:1px solid #e6e6e9;border-radius:9px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(20,26,45,.06)">← Menu Startowe</a>
+<span id="doc-tag-fix">narzędzie · UTMomat</span>
+
+<div class="wrap">
+  <div class="kicker">Audi Grupa Plichta · narzędzie · UTMomat</div>
+  <h1>UTMomat — <span class="g">porządek u źródła, nie sprzątanie po fakcie</span></h1>
+  <p class="lede">Nieokreślone źródła w raportach nie biorą się z awarii analityki. Biorą się z tego, że każdy oznacza kampanie po swojemu — albo wcale. UTMomat nie naprawia raportów. <b>Nie dopuszcza do powstania bałaganu</b>: wydaje gotowy adres według jednego słownika, ten sam dla obu kanałów płatnych.</p>
+  <div class="badges">
+    <span class="badge">Status: adaptacja — mamy wzorzec</span>
+    <span class="badge">Zakres: Z1 Analityka</span>
+  </div>
+
+  <!-- ══ PROBLEM ══ -->
+  <div class="card">
+    <h2>Na czym polega różnica</h2>
+    <p class="h2sub">Ten sam ruch, ta sama kampania — dwa sposoby oznaczenia. Po lewej to, co dziś trafia do raportu i czego nie da się rozliczyć. Po prawej to, co wydaje UTMomat.</p>
+    <div class="beforeafter">
+      <div class="ba bad">
+        <div class="ba-h">↯ Bez reguły — tak powstaje „not set”</div>
+        <div class="url">audiplichta.pl/q5<br><span class="x">?utm_source=fb&amp;utm_medium=cpc&amp;utm_campaign=q5_lipiec</span></div>
+        <div class="url">audiplichta.pl/q5<br><span class="x">?utm_source=Facebook&amp;utm_medium=paid&amp;utm_campaign=Q5-Lipiec-2</span></div>
+        <p><b>To są dwa różne źródła w raporcie.</b> Ta sama kampania, ta sama strona, dwie osobne linie w zestawieniu. Do tego brak informacji o formacie kreacji i o typie strony — więc nie da się powiedzieć, która para reklama–strona sprzedała auto. Po kwartale ktoś siada i „sprząta dane”, czyli zgaduje.</p>
+      </div>
+      <div class="ba good">
+        <div class="ba-h">✓ Z regułą — adres wydany przez UTMomat</div>
+        <div class="url">audiplichta.pl/q5<br>?<span class="k">utm_source</span>=<span class="v">meta</span>&amp;<span class="k">utm_medium</span>=<span class="v">paid_social</span><br>&amp;<span class="k">utm_campaign</span>=<span class="v">2026-08_q5_dostepnosc</span><br>&amp;<span class="k">utm_content</span>=<span class="v">karuzela_lp-modelowa</span><br>&amp;<span class="k">utm_term</span>=<span class="v">gdynia</span></div>
+        <p><b>Jeden zapis, zawsze ten sam.</b> Z adresu da się odczytać: kanał, miesiąc i inicjatywę, obietnicę reklamy, format kreacji, typ strony docelowej i salon. To jest dokładnie ta ścieżka, którą zaplanował Ścieżkomat — tylko zapisana tak, żeby raport ją zobaczył.</p>
+      </div>
+    </div>
+    <div class="note warn">
+      <b>Dlaczego to jest pilne akurat u Was.</b> Jedno zdarzenie formularza odpala się dziś na karcie modelu, na listingu, na stronie głównej i na stronach ofertowych — 447 wywołań przy 15 użytkownikach. Rozszycie udało się dopiero na kombinacji nazwy i adresu. Bez reguły oznaczania ten sam problem wróci przy pierwszej nowej kampanii.
+    </div>
+  </div>
+
+  <!-- ══ SŁOWNIK ══ -->
+  <div class="card">
+    <h2>Pięć pól, jeden słownik</h2>
+    <p class="h2sub">Wartości nie są dowolne — pochodzą z zamkniętej listy. Czego nie ma w słowniku, tego nie da się wygenerować, więc nie powstanie literówka ani wariant „Facebook / facebook / FB”.</p>
+    <div class="slots">
+      <div class="slot">
+        <div class="sn">POLE 1</div>
+        <div class="st">Źródło</div>
+        <div class="sd">Skąd przyszło kliknięcie — element ekosystemu</div>
+        <div class="vals"><span class="v">google</span><span class="v">meta</span><span class="v">youtube</span><span class="v">gbp</span><span class="v">newsletter</span><span class="v">ai</span></div>
+      </div>
+      <div class="slot">
+        <div class="sn">POLE 2</div>
+        <div class="st">Rodzaj</div>
+        <div class="sd">Płatne czy zdobyte, i jakiego typu</div>
+        <div class="vals"><span class="v">cpc</span><span class="v">paid_social</span><span class="v">video</span><span class="v">organic</span><span class="v">local</span><span class="v">referral</span></div>
+      </div>
+      <div class="slot">
+        <div class="sn">POLE 3</div>
+        <div class="st">Inicjatywa</div>
+        <div class="sd">Miesiąc, model i obietnica — spina się z kalendarzem</div>
+        <div class="vals"><span class="v">2026-08_q5_dostepnosc</span><span class="v">2026-09_q6etron_premiera</span><span class="v">serwis_przeglad</span></div>
+      </div>
+      <div class="slot">
+        <div class="sn">POLE 4 i 5</div>
+        <div class="st">Para i salon</div>
+        <div class="sd">Format kreacji, typ strony docelowej, lokalizacja</div>
+        <div class="vals"><span class="v">video_lp-modelowa</span><span class="v">karuzela_listing</span><span class="v">statyk_apl</span><span class="v">gdynia</span><span class="v">bydgoszcz</span></div>
+      </div>
+    </div>
+    <div class="note">
+      <b>Pole czwarte jest tu najważniejsze i najczęściej pomijane.</b> Zapisuje parę: format reklamy i typ strony. Dzięki temu po miesiącu da się odpowiedzieć nie tylko „ile kosztował lead z Meta”, ale „czy karuzela na listing sprzedaje lepiej niż video na stronę modelową”. To jest pytanie, na które dziś nikt nie umie odpowiedzieć.
+    </div>
+  </div>
+
+  <!-- ══ JAK PRACUJE ══ -->
+  <div class="card">
+    <h2>Jak wchodzi w codzienną pracę</h2>
+    <p class="h2sub">UTMomat nie jest raportem ani dokumentem do wypełnienia po fakcie. Jest krokiem w uruchamianiu kampanii — bez wygenerowanego adresu kampania nie startuje.</p>
+    <div class="chain">
+      <span class="step">Ścieżkomat<br><small style="font-family:var(--mono);font-size:10.5px;color:var(--faint);font-weight:500">planuje parę</small></span>
+      <span class="ar">→</span>
+      <span class="step now">UTMomat<br><small style="font-family:var(--mono);font-size:10.5px;color:var(--green-d);font-weight:500">wydaje adres</small></span>
+      <span class="ar">→</span>
+      <span class="step">Kampania<br><small style="font-family:var(--mono);font-size:10.5px;color:var(--faint);font-weight:500">rusza z oznaczeniem</small></span>
+      <span class="ar">→</span>
+      <span class="step">Conversion Keeper<br><small style="font-family:var(--mono);font-size:10.5px;color:var(--faint);font-weight:500">pilnuje, że nadal działa</small></span>
+      <span class="ar">→</span>
+      <span class="step">Mission Control<br><small style="font-family:var(--mono);font-size:10.5px;color:var(--faint);font-weight:500">pokazuje, co sprzedaje</small></span>
+    </div>
+
+    <table>
+      <thead><tr><th style="width:180px">Kiedy</th><th>Co się dzieje</th><th style="width:150px">Kto</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Przy każdej kampanii</strong></td><td>Osoba uruchamiająca kampanię generuje adres — wybiera wartości z list, nie wpisuje ich ręcznie. Adres wraca gotowy do wklejenia.</td><td>Media</td></tr>
+        <tr><td><strong>Przy każdej inicjatywie</strong></td><td>Nazwa inicjatywy trafia do słownika raz i obowiązuje wszystkich — ten sam zapis w Google i w Meta.</td><td>Media + kalendarz</td></tr>
+        <tr><td><strong>Codziennie</strong></td><td>Kontrola: czy w danych pojawiło się źródło spoza słownika. Jeśli tak — alert, zanim urośnie do kwartału.</td><td>Conversion Keeper</td></tr>
+        <tr><td><strong>Miesięcznie</strong></td><td>Zestawienie skuteczności par: format kreacji × typ strony. Wynik wraca do Ścieżkomatu jako wiedza, co dobierać następnym razem.</td><td>Mission Control</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <b>Co to zmienia w rozliczeniu.</b> Brief oczekuje zwalidowanego kosztu kontaktu i kosztu sprzedaży liczonego z CRM. Żeby to policzyć, zgłoszenie musi nieść ze sobą informację, skąd przyszło — przez formularz, przez CRM, aż do zamówienia. UTMomat jest pierwszym ogniwem tego łańcucha. Bez niego reszta pomiaru pracuje na zgadywaniu.
+    </div>
+  </div>
+
+
+  <!-- ══ DOWÓD: REGUŁA JUŻ ISTNIEJE ══ -->
+  <div class="card">
+    <h2>To nie jest pomysł na kartce — reguła już działa</h2>
+    <p class="h2sub">UTMomat ma status <b>adaptacji</b>, nie budowy od zera, bo konwencja została napisana i uzgodniona wcześniej, na innym kliencie. Poniżej ten sam dokument, który stoi dziś za pilotem: cztery parametry, zamknięte słowniki kodów, nazwa pliku kreacji identyczna z wartością <code style="font-family:var(--mono);font-size:12.5px;background:var(--violet-soft);padding:2px 6px;border-radius:5px;color:var(--violet-d)">utm_content</code>.</p>
+
+    <div class="proof">
+      <div class="shot">
+        <div class="cap">Sekcja 3 — struktura czterech parametrów</div>
+        <img src="_img/utm_creator_struktura.jpg" alt="UTM Creator — struktura czterech parametrów UTM">
+      </div>
+      <div class="proof-txt">
+        <div class="shot tall">
+          <div class="cap">Cały dokument — 9 sekcji</div>
+          <img src="_img/utm_creator_glov.jpg" alt="UTM Creator — pełny dokument reguły nazewnictwa">
+        </div>
+        <p style="margin-top:14px"><b>Co przenosimy 1:1:</b> zasady zapisu (małe litery, jeden separator, zero wolnego tekstu), strukturę <code style="font-family:var(--mono);font-size:12px">utm_campaign</code> i <code style="font-family:var(--mono);font-size:12px">utm_content</code>, oraz zasadę, że nazwa pliku graficznego jest tą samą wartością co parametr.</p>
+        <p><b>Co wymieniamy:</b> słownik kategorii. Tam były linie produktowe kosmetyczne — u Was wchodzą modele, salony i dziewięć typów stron.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Dlaczego to jest ważne w rozmowie o cenie.</b> Różnica między „zbudujemy Wam regułę nazewnictwa” a „mamy działającą konwencję, wymieniamy w niej słownik pod motoryzację” to kilkanaście godzin nakładu i kilka tygodni ryzyka. Ta pozycja jest w kosztorysie jako adaptacja, nie jako budowa — i to jest uczciwe.
+    </div>
+  </div>
+
+  <!-- ══ POŁĄCZONA ANALITYKA ══ -->
+  <div class="card" style="border-color:var(--blue-line);background:linear-gradient(180deg,#f7fbff 0,#fff 130px)">
+    <h2>Połączona analityka — dwa źródła, jedna prawda</h2>
+    <p class="h2sub">Panel reklamowy i analityka strony liczą inaczej i zawsze będą się różnić. Dziś nie ma sposobu, żeby powiedzieć, które z nich się myli. UTMomat jest spoiwem: <b>ruch deklarowany przez konta reklamowe weryfikujemy na poziomie analityki strony</b>, a łączymy je po tych samych oznaczeniach.</p>
+
+    <table>
+      <thead><tr><th style="width:210px">Warstwa</th><th>Co mówi</th><th style="width:230px">Czego nie wie sama z siebie</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Konta reklamowe</strong><br><span class="mono">Google Ads · Meta Ads</span></td><td>Ile wydaliśmy, ile kliknięć kupiliśmy, jak zachowywała się kampania i kreacja.</td><td>Czy kliknięcie w ogóle doszło na stronę i co tam zrobiło.</td></tr>
+        <tr><td><strong>Analityka strony</strong><br><span class="mono">GA4</span></td><td>Co odwiedzający zrobił po wejściu: jaka strona, jaka ścieżka, jakie zgłoszenie.</td><td>Ile to kosztowało i z jakiej dokładnie kreacji przyszło.</td></tr>
+        <tr><td><strong>Spoiwo</strong><br><span class="mono">UTMomat</span></td><td>Ten sam zapis po obu stronach — kanał, inicjatywa, para format × typ strony, salon.</td><td>—</td></tr>
+        <tr><td><strong>Domknięcie</strong><br><span class="mono">CRM + BOK</span></td><td>Czy zgłoszenie było prawdziwe i czy skończyło się zamówieniem.</td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    
+    <div class="shot" style="margin-top:18px">
+      <div class="cap">Referencja — ten sam mechanizm działa u innego klienta</div>
+      <img src="_img/glov_cross.jpg" alt="Kampanie w trzech systemach zlaczone po UTM">
+    </div>
+    <p style="font-size:13.5px;color:var(--faint);font-family:var(--mono);margin-top:9px">Ta sama kampania, trzy systemy, jedno złączenie po <span style="color:var(--violet-d)">sessionCampaignName</span> — czyli po wartości wydanej przez UTMomat.</p>
+
+    <div class="note" style="border-left-color:var(--blue);background:var(--blue-soft);color:#1f4a70">
+      <b style="color:var(--blue-d)">Co z tego wynika praktycznie.</b> Po pierwsze: rozbieżność między panelem a analityką przestaje być tematem do dyskusji — staje się mierzalną liczbą, którą widać w Mission Control i którą można ścigać. Po drugie: dopiero połączenie obu stron pozwala policzyć zwalidowany koszt kontaktu i koszt sprzedanego auta tak, jak wymaga tego brief — bo koszt jest po stronie kont, a walidacja po stronie CRM. Bez wspólnego oznaczenia te dwie liczby nigdy się nie spotkają.
+    </div>
+  </div>
+
+  <footer>UTMomat · Audi Grupa Plichta · lipiec 2026</footer>
+</div>
+</body>
+</html>

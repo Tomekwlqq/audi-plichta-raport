@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ścieżkomat — Audi Grupa Plichta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;--ink:#0a0a0a;--muted:#5b6472;--faint:#8b93a2;--line:#e6e6e9;
+    --green:#16a34a;--green-d:#15803d;--green-soft:#e7f6ec;--green-line:#b7e3c4;
+    --orange:#f5751a;--orange-d:#dd5e0a;--orange-soft:#fff2e8;--orange-line:#f8c39a;
+    --blue:#0f7ae5;--blue-d:#0a63bd;--blue-soft:#e9f3fd;--blue-line:#a9d2f6;
+    --violet:#1800ad;--violet-d:#12007e;--violet-soft:#ece9fb;--violet-line:#c5bcf0;
+    --bord:#8d0a31;--bord-d:#6d0725;--bord-soft:#fcebf2;--bord-line:#e8b4c6;
+    --dark:#1a1f2b;
+    --grotesk:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--grotesk);background:var(--bg);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;font-size:16px;padding:74px 34px 100px;
+    background-image:radial-gradient(circle at 8% 0,#eeebfd 0,transparent 42%),radial-gradient(circle at 96% 3%,#fdeef4 0,transparent 36%);
+    background-repeat:no-repeat}
+  .wrap{max-width:1420px;margin:0 auto}
+
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:15px}
+  h1{font-size:clamp(34px,5vw,54px);font-weight:700;letter-spacing:-.035em;line-height:1.03;margin-bottom:14px}
+  h1 .g{color:var(--orange-d)}
+  .lede{color:var(--muted);font-size:19px;max-width:900px;line-height:1.5}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;margin-bottom:36px}
+  .badge{font-family:var(--mono);font-size:11px;font-weight:600;padding:6px 11px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--faint)}
+  .badge.draft{color:var(--bord);border-color:var(--bord-line);background:var(--bord-soft)}
+
+  .card{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:26px 28px;margin-bottom:20px;box-shadow:0 8px 26px rgba(20,26,45,.05)}
+  h2{font-size:24px;font-weight:700;letter-spacing:-.025em;line-height:1.15;margin-bottom:6px}
+  .h2sub{color:var(--muted);font-size:15px;margin-bottom:22px;line-height:1.55;max-width:960px}
+
+  /* ── cztery kolumny wejście/wyjście ── */
+  .io{display:grid;grid-template-columns:repeat(3,1fr) 44px repeat(3,1fr);gap:12px;align-items:start}
+  @media(max-width:1350px){.io{grid-template-columns:repeat(3,1fr);gap:12px}.io .arrowcol{display:none}}
+  @media(max-width:900px){.io{grid-template-columns:1fr 1fr}}
+  @media(max-width:620px){.io{grid-template-columns:1fr}}
+  .col{border-radius:16px;padding:15px 16px;border:1.5px solid}
+  .col-h{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px}
+  .col-t{font-size:17px;font-weight:700;letter-spacing:-.015em;margin-bottom:3px}
+  .col-d{font-size:12.5px;color:var(--muted);line-height:1.45;margin-bottom:13px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-size:12.5px;font-weight:600;padding:7px 11px;border-radius:9px;background:#fff;line-height:1.2}
+  .chip small{display:block;font-family:var(--mono);font-size:10px;font-weight:500;opacity:.7;margin-top:2px}
+
+  .col.inA{background:var(--violet-soft);border-color:var(--violet-line)}
+  .col.inA .col-h,.col.inA .col-t{color:var(--violet-d)}
+  .col.inA .chip{border:1px solid var(--violet-line);color:var(--violet-d)}
+  .col.inC{background:#faf8ff;border-color:var(--violet-line)}
+  .col.inC .col-h,.col.inC .col-t{color:var(--violet-d)}
+  .col.inC .chip{border:1px solid var(--violet-line);color:var(--violet-d)}
+  .col.outC{background:#f7fdf9;border-color:var(--green-line)}
+  .col.outC .col-h,.col.outC .col-t{color:var(--green-d)}
+  .col.outC .chip{border:1px solid var(--green-line);color:var(--green-d)}
+  .col.inB{background:#f5f2fd;border-color:var(--violet-line)}
+  .col.inB .col-h,.col.inB .col-t{color:var(--violet-d)}
+  .col.inB .chip{border:1px solid var(--violet-line);color:var(--violet-d)}
+  .col.outA{background:var(--green-soft);border-color:var(--green-line)}
+  .col.outA .col-h,.col.outA .col-t{color:var(--green-d)}
+  .col.outA .chip{border:1px solid var(--green-line);color:var(--green-d)}
+  .col.outB{background:#f1faf4;border-color:var(--green-line)}
+  .col.outB .col-h,.col.outB .col-t{color:var(--green-d)}
+  .col.outB .chip{border:1px solid var(--green-line);color:var(--green-d)}
+  .arrowcol{display:flex;align-items:center;justify-content:center;padding-top:64px}
+  .arrowcol .box{width:44px;height:44px;border-radius:12px;background:var(--orange);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;box-shadow:0 8px 20px rgba(245,117,26,.32)}
+
+  .pairs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+  @media(max-width:1000px){.pairs{grid-template-columns:1fr}}
+  .pair{border:1.5px solid var(--line);border-radius:15px;padding:16px 18px;background:#fbfaff}
+  .pair.bad{border-color:var(--bord-line);background:var(--bord-soft)}
+  .pair-h{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:9px}
+  .pair.bad .pair-h{color:var(--bord)}
+  .pair-row{font-size:13.5px;line-height:1.5;color:var(--muted)}
+  .pair-row b{color:var(--ink)}
+  .pair-v{font-family:var(--mono);font-size:11px;color:var(--faint);margin:6px 0}
+  .pair-out{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);font-size:13px;color:var(--muted)}
+  .pair.bad .pair-out{border-color:var(--bord-line);color:var(--bord)}
+
+  .map-frame{border:1.5px solid var(--line);border-radius:18px;background:#fff;padding:14px;overflow-x:auto}
+  .map-frame svg{display:block;width:100%;min-width:1000px;height:auto}
+  .hint{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-top:10px}
+  @media(min-width:1100px){.hint{display:none}}
+
+  .note{border-left:3px solid var(--orange);background:var(--orange-soft);padding:15px 19px;border-radius:0 13px 13px 0;font-size:14.5px;margin-top:18px;color:var(--muted);line-height:1.6}
+  .note b{color:var(--orange-d)}
+  footer{color:var(--faint);font-family:var(--mono);font-size:11.5px;padding:16px 4px 30px;text-align:center}
+#doc-tag-fix{position:fixed;top:18px;left:186px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#12007e;background:rgba(236,233,251,.96);backdrop-filter:blur(8px);padding:8px 13px;border-radius:9px;white-space:nowrap;box-shadow:0 2px 10px rgba(20,26,45,.06)}
+@media(max-width:900px){#doc-tag-fix{display:none}}
+</style>
+<script src="brama.js"></script>
+</head>
+<body>
+<a href="PLICHTA_START.html" style="position:fixed;top:18px;left:18px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#5b6472;text-decoration:none;padding:8px 14px;border:1px solid #e6e6e9;border-radius:9px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(20,26,45,.06)">← Menu Startowe</a>
+<span id="doc-tag-fix">narzędzie · Ścieżkomat</span>
+
+<div class="wrap">
+  <div class="kicker">Audi Grupa Plichta · narzędzie · Ścieżkomat</div>
+  <h1>Ścieżkomat — <span class="g">co czeka po drugiej stronie kliknięcia</span></h1>
+  <p class="lede">Reklama i strona docelowa to jedna para, nie dwie osobne decyzje. Ścieżkomat bierze na wejściu <b>miejsce, format i treść reklamy</b>, a na wyjściu wskazuje <b>typ strony, jej elementy i treść</b>, które muszą tam być, żeby kliknięcie nie poszło w próżnię.</p>
+  <div class="badges">
+    <span class="badge">Status: budowa</span>
+    <span class="badge">Zakres: Z2 Media</span>
+  </div>
+
+  <!-- ══ SZEŚĆ KOLUMN ══ -->
+  <div class="card">
+    <h2>Sześć pól, które trzeba wypełnić razem</h2>
+    <p class="h2sub">Dziś te decyzje zapadają osobno: ktoś ustawia kampanię, ktoś inny robi stronę. Ścieżkomat wymusza wypełnienie wszystkich sześciu naraz — i nie pozwala zapisać ścieżki, w której wyjście nie odpowiada wejściu. Najważniejsza jest trzecia oś: <b>treść</b>. Punkt i format można dobrać poprawnie technicznie, a i tak stracić odwiedzającego, jeśli strona nie powtarza obietnicy, która go tam przyprowadziła.</p>
+
+    <div class="io">
+      <div class="col inA">
+        <div class="col-h">Wejście · 1</div>
+        <div class="col-t">Punkt wejścia</div>
+        <div class="col-d">Gdzie w ekosystemie zaczyna się kliknięcie</div>
+        <div class="chips">
+          <span class="chip">Search Ads<small>google · intencja za frazą</small></span>
+          <span class="chip">Performance Max<small>google · worek kanałów</small></span>
+          <span class="chip">YouTube Ads<small>google · dziś w PMax</small></span>
+          <span class="chip">Feed / Stories<small>meta</small></span>
+          <span class="chip">Lead Ads<small>meta · limit 5–6 tys.</small></span>
+          <span class="chip">Organic Search<small>zdobywamy</small></span>
+          <span class="chip">Wizytówki i Mapy<small>zdobywamy · 5 salonów</small></span>
+          <span class="chip">Facebook / Instagram<small>profile własne</small></span>
+          <span class="chip">Odpowiedzi AI<small>ChatGPT · Perplexity · AI Overviews</small></span>
+        </div>
+      </div>
+
+      <div class="col inB">
+        <div class="col-h">Wejście · 2</div>
+        <div class="col-t">Format wejścia</div>
+        <div class="col-d">Czym jest kreacja, w którą klika odwiedzający</div>
+        <div class="chips">
+          <span class="chip">Statyk<small>jedna grafika</small></span>
+          <span class="chip">Karuzela<small>kilka modeli / kilka aut</small></span>
+          <span class="chip">Video<small>obejrzał = wie więcej</small></span>
+          <span class="chip">Kolekcja<small>katalog w reklamie</small></span>
+          <span class="chip">Tekst<small>reklama elastyczna w wyszukiwarce</small></span>
+          <span class="chip">Wynik organiczny<small>tytuł + opis</small></span>
+          <span class="chip">Wizytówka<small>opinie · godziny · zdjęcia</small></span>
+          <span class="chip">Cytat w odpowiedzi AI<small>fragment treści</small></span>
+        </div>
+      </div>
+
+
+      <div class="col inC">
+        <div class="col-h">Wejście · 3</div>
+        <div class="col-t">Treść wejściowa</div>
+        <div class="col-d">Obietnica, którą składa reklama</div>
+        <div class="chips">
+          <span class="chip">Dostępność<small>„Q5 od ręki, 3 sztuki”</small></span>
+          <span class="chip">Rata<small>„od 1 890 zł/mc”</small></span>
+          <span class="chip">Okazja<small>„wyprzedaż rocznika”</small></span>
+          <span class="chip">Premiera<small>„nowe Q6 e-tron”</small></span>
+          <span class="chip">Zaproszenie<small>„jazda próbna w weekend”</small></span>
+          <span class="chip">Marka i zaufanie<small>opinie, salon, obsługa</small></span>
+        </div>
+      </div>
+
+      <div class="arrowcol"><div class="box">→</div></div>
+
+      <div class="col outA">
+        <div class="col-h">Wyjście · 1</div>
+        <div class="col-t">Punkt wyjścia</div>
+        <div class="col-d">Typ strony, na którą kliknięcie ląduje</div>
+        <div class="chips">
+          <span class="chip">Strona główna<small>osobna per salon</small></span>
+          <span class="chip">Listing „Dostępne Audi”<small>~444 auta · filtry</small></span>
+          <span class="chip">Karta produktu<small>konkretne auto z magazynu</small></span>
+          <span class="chip">LP modelowa<small>A3 · Q5 · Q7</small></span>
+          <span class="chip">LP zbiorcza<small>„oferta nowe Audi”</small></span>
+          <span class="chip">LP taktyczna<small>wyprzedaże · akcje</small></span>
+          <span class="chip">LP finansowania (APL)<small>Audi Perfect Lease · VW Bank</small></span>
+          <span class="chip">Serwis i części<small>obecny klient</small></span>
+          <span class="chip">Auta używane<small>osobna domena</small></span>
+        </div>
+      </div>
+
+      <div class="col outB">
+        <div class="col-h">Wyjście · 2</div>
+        <div class="col-t">Format wyjścia</div>
+        <div class="col-d">Elementy, które muszą być na tej stronie</div>
+        <div class="chips">
+          <span class="chip">Treść video<small>domknięcie obejrzanej reklamy</small></span>
+          <span class="chip">Formularz<small>pod treścią, nie nad</small></span>
+          <span class="chip">Kalkulator finansowania<small>API VW Bank</small></span>
+          <span class="chip">Dostępność „od ręki”<small>steruje kolejnością listingu</small></span>
+          <span class="chip">Galeria i specyfikacja<small>karta produktu</small></span>
+          <span class="chip">CTA jazda próbna<small>osobne od formularza</small></span>
+          <span class="chip">Czat z regułą<small>zależny od typu strony</small></span>
+          <span class="chip">Strona podziękowania<small>z następnym krokiem</small></span>
+        </div>
+      </div>
+
+      <div class="col outC">
+        <div class="col-h">Wyjście · 3</div>
+        <div class="col-t">Treść wyjściowa</div>
+        <div class="col-d">Domknięcie tej samej obietnicy</div>
+        <div class="chips">
+          <span class="chip">Powtórzona obietnica<small>ten sam komunikat w nagłówku</small></span>
+          <span class="chip">Dowód<small>lista aut, stan magazynu</small></span>
+          <span class="chip">Liczba<small>rata policzona, nie „od”</small></span>
+          <span class="chip">Warunek<small>do kiedy, ile sztuk</small></span>
+          <span class="chip">Następny krok<small>jedna akcja, nie pięć</small></span>
+          <span class="chip">Odpowiedź na obiekcję<small>to, co blokuje decyzję</small></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PRZYKŁADY PAR ══ -->
+    <div class="pairs">
+      <div class="pair bad">
+        <div class="pair-h">↯ Tak jest dziś</div>
+        <div class="pair-row"><b>Search Ads</b> · tekst</div>
+        <div class="pair-v">↓</div>
+        <div class="pair-row"><b>Strona główna</b> · nawigacja po serwisie</div>
+        <div class="pair-row" style="margin-top:5px">treść: <b>brak związku</b> — komunikat marki</div>
+        <div class="pair-out">Reklama obiecała konkretny model. Strona wita ogólnym powitaniem. Odwiedzający nie wie, czy trafił dobrze. CR 0,93%.</div>
+      </div>
+      <div class="pair">
+        <div class="pair-h">✓ Para dobrana</div>
+        <div class="pair-row"><b>YouTube Ads</b> · video</div>
+        <div class="pair-v">↓</div>
+        <div class="pair-row"><b>LP modelowa</b> · treść video + formularz pod spodem</div>
+        <div class="pair-row" style="margin-top:5px">treść: <b>ta sama obietnica</b> + dowód dostępności</div>
+        <div class="pair-out">Obejrzał film — dostaje ciąg dalszy, nie formularz na wejściu.</div>
+      </div>
+      <div class="pair">
+        <div class="pair-h">✓ Para dobrana</div>
+        <div class="pair-row"><b>Feed / Stories</b> · karuzela aut</div>
+        <div class="pair-v">↓</div>
+        <div class="pair-row"><b>Listing</b> · dostępność „od ręki” + filtr modelu</div>
+        <div class="pair-row" style="margin-top:5px">treść: <b>te same auta</b>, które widział w karuzeli</div>
+        <div class="pair-out">Klikał w konkretne auto — trafia na listę, która zaczyna się od tego, co stoi.</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Po co to narzędzie, skoro to „oczywiste".</b> Bo dziś nikt nie jest właścicielem tej pary. Media planuje kampanię, ktoś inny odpowiada za stronę, a między nimi nie ma dokumentu, który mówi, co ma czekać po drugiej stronie kliknięcia. Ścieżkomat jest tym dokumentem — i jednocześnie wsadem do UTMomatu, żeby dało się to później zmierzyć.
+    </div>
+  </div>
+
+
+  <!-- ══ JAK TO DZIAŁA ══ -->
+  <div class="card">
+    <h2>Jak to działa — planujemy ścieżki, nie reklamy</h2>
+    <p class="h2sub">To jest cała różnica w sposobie pracy. Kampania nie jest jednostką planowania. Jednostką jest <b>ścieżka</b>: od miejsca, w którym ktoś zobaczył komunikat, aż do zgłoszenia, które da się przypisać do tego komunikatu.</p>
+
+    <div class="pairs" style="grid-template-columns:repeat(2,1fr)">
+      <div class="pair bad">
+        <div class="pair-h">↯ Planowanie reklamami — tak jest dziś</div>
+        <div class="pair-row" style="line-height:1.65">
+          Ustalamy budżet i kanały. Robimy kreacje. Kierujemy ruch tam, gdzie akurat jest strona.
+          Strona powstaje osobno, w innym terminie, u kogoś innego. Pomiar dokłada się na końcu, jeśli starczy czasu.
+        </div>
+        <div class="pair-out">Efekt: kreacja obiecuje jedno, strona mówi drugie, a zdarzenie nazywa się tak samo na czterech typach stron. Nie da się powiedzieć, która reklama sprzedała auto.</div>
+      </div>
+      <div class="pair">
+        <div class="pair-h">✓ Planowanie ścieżkami — tak pracujemy</div>
+        <div class="pair-row" style="line-height:1.65">
+          Zaczynamy od pytania „kto i po co klika”. Ścieżkomat zapisuje komplet: punkt, format i treść wejścia,
+          a po drugiej stronie typ strony, jej elementy i treść. Dopiero z tego wynika, co trzeba wyprodukować.
+        </div>
+        <div class="pair-out">Efekt: kreacja, strona i pomiar powstają z jednego dokumentu. Ścieżka ma właściciela, oznaczenie i wynik.</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Ścieżkomat nie jest raportem — jest bramką.</b> Ścieżka bez wypełnionego wyjścia nie przechodzi do realizacji.
+      To on odpowiada na pytanie z briefu o optymalny podział budżetu: nie dzielimy pieniędzy między kanały, tylko między ścieżki, które dowożą sprzedaż.
+      Jego wynik idzie dalej w dwie strony — do <b>UTMomatu</b>, żeby ścieżkę dało się zmierzyć u źródła, i do <b>Generatora LP</b> — narzędzia obok, które ze ścieżki składa stronę.
+    </div>
+  </div>
+
+  <!-- ══ GENERATOR LP — NARZĘDZIE POWIĄZANE ══ -->
+  <div class="card" id="generator" style="border-color:var(--orange-line);background:linear-gradient(180deg,#fffaf6 0,#fff 120px)">
+    <h2>Generator LP — narzędzie powiązane</h2>
+    <p class="h2sub">Osobne narzędzie, które stoi tuż obok Ścieżkomatu i bierze od niego wsad. Ścieżkomat planuje i zapisuje ścieżkę — generator na jej podstawie składa stronę. <b>Efektem tej pary jest gotowa LP</b>, zgodna z formatem i treścią zaplanowanej reklamy. Bez generatora ścieżka zostaje dokumentem, na który trzeba czekać trzy tygodnie.</p>
+
+    <div class="io" style="grid-template-columns:1fr 44px 1fr 44px 1fr">
+      <div class="col inA">
+        <div class="col-h">Wsad</div>
+        <div class="col-t">Ścieżka ze Ścieżkomatu</div>
+        <div class="col-d">Komplet sześciu pól — bez tego generator nie rusza</div>
+        <div class="chips">
+          <span class="chip">punkt + format + treść wejścia</span>
+          <span class="chip">typ strony + elementy + treść wyjścia</span>
+          <span class="chip">model i salon</span>
+          <span class="chip">okno czasowe inicjatywy</span>
+        </div>
+      </div>
+      <div class="arrowcol" style="padding-top:78px"><div class="box">→</div></div>
+      <div class="col outB">
+        <div class="col-h">Co robi automat</div>
+        <div class="col-t">Składa stronę z bloków</div>
+        <div class="col-d">Struktura wynika z typu strony, nie z gotowego szablonu</div>
+        <div class="chips">
+          <span class="chip">nagłówek = obietnica z reklamy</span>
+          <span class="chip">dowód: dostępność z New Car Sales</span>
+          <span class="chip">blok video, gdy wejście było video</span>
+          <span class="chip">kalkulator, gdy wejście mówiło o racie</span>
+          <span class="chip">formularz pod treścią</span>
+          <span class="chip">oznaczenia pomiarowe z UTMomatu</span>
+        </div>
+      </div>
+      <div class="arrowcol" style="padding-top:78px"><div class="box">→</div></div>
+      <div class="col outA">
+        <div class="col-h">Efekt</div>
+        <div class="col-t">LP gotowa do wdrożenia</div>
+        <div class="col-d">Zawsze spójna ze ścieżką, która ją zamówiła</div>
+        <div class="chips">
+          <span class="chip">wariant do testu A/B</span>
+          <span class="chip">wersja per salon</span>
+          <span class="chip">wersja per model</span>
+          <span class="chip">z gotowym pomiarem od pierwszego dnia</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Dlaczego to jest osobna pozycja, a nie „dodatek do CRO”.</b> Dziś LP modelowe mają formularz nad linią przewijania i nie mają treści — a około 70% odwiedzających nie schodzi niżej.
+      Generator nie poprawia istniejących stron, tylko zmienia sposób ich powstawania: strona jest produktem ścieżki, nie osobnym zleceniem.
+      Wdrożenia po stronie serwisu pozostają u właściciela WordPressa — generator dostarcza gotową strukturę i treść, nie zastępuje dewelopera.
+    </div>
+  </div>
+
+  <!-- ══ MAPA WEJŚCIA → WYJŚCIA ══ -->
+  <div class="card">
+    <h2>Ten sam ekosystem, ułożony jako pary</h2>
+    <p class="h2sub">Mapa ekosystemu pokazuje, gdzie Was szukają. Tutaj to samo, ale ustawione pod decyzję planistyczną: <b>wejścia po lewej, wyjścia po prawej</b>, a pośrodku reguła, która je łączy. Czerwone połączenie to stan dzisiejszy.</p>
+
+    <div class="map-frame">
+<svg viewBox="0 0 1240 812" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ścieżkomat — wejścia ekosystemu po lewej, typy stron po prawej">
+<defs>
+  <marker id="sA" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L0,6 L7.5,3 z" fill="#dd5e0a"/></marker>
+  <marker id="sB" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L0,6 L7.5,3 z" fill="#8d0a31"/></marker>
+  <marker id="sG" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto"><path d="M0,0 L0,6 L7.5,3 z" fill="#16a34a"/></marker>
+</defs>
+
+<text x="30" y="26" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#12007e" letter-spacing="2">WEJŚCIA — GDZIE ZACZYNA SIĘ KLIKNIĘCIE</text>
+<text x="880" y="26" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#15803d" letter-spacing="2">WYJŚCIA — GDZIE LĄDUJE</text>
+
+<!-- KUPUJEMY -->
+<rect x="30" y="42" width="316" height="196" rx="14" fill="#ece9fb" stroke="#c5bcf0" stroke-width="1.6"/>
+<text x="48" y="66" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700" fill="#12007e" letter-spacing="1.5">KUPUJEMY — MEDIA PŁATNE</text>
+<rect x="48" y="76" width="280" height="34" rx="9" fill="#fff" stroke="#c5bcf0"/><text x="62" y="98" font-family="Space Grotesk" font-size="14" font-weight="700" fill="#12007e">Search Ads</text><text x="316" y="98" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10" fill="#7b74a8">tekst</text>
+<rect x="48" y="116" width="280" height="34" rx="9" fill="#fff" stroke="#c5bcf0"/><text x="62" y="138" font-family="Space Grotesk" font-size="14" font-weight="700" fill="#12007e">Performance Max</text><text x="316" y="138" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10" fill="#7b74a8">wszystko</text>
+<rect x="48" y="156" width="280" height="34" rx="9" fill="#fff" stroke="#c5bcf0"/><text x="62" y="178" font-family="Space Grotesk" font-size="14" font-weight="700" fill="#12007e">YouTube Ads</text><text x="316" y="178" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10" fill="#7b74a8">video</text>
+<rect x="48" y="196" width="280" height="34" rx="9" fill="#fff" stroke="#c5bcf0"/><text x="62" y="218" font-family="Space Grotesk" font-size="14" font-weight="700" fill="#12007e">Feed / Stories · Lead Ads</text><text x="316" y="218" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10" fill="#7b74a8">statyk · karuzela</text>
+
+<!-- ZDOBYWAMY -->
+<rect x="30" y="256" width="316" height="156" rx="14" fill="#e7f6ec" stroke="#b7e3c4" stroke-width="1.6"/>
+<text x="48" y="280" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700" fill="#15803d" letter-spacing="1.5">ZDOBYWAMY — NIE DO KUPIENIA</text>
+<rect x="48" y="290" width="280" height="34" rx="9" fill="#fff" stroke="#b7e3c4"/><text x="62" y="312" font-family="Space Grotesk" font-size="14" font-weight="700" fill="#15803d">Organic Search</text><text x="316" y="312" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5d8a72">tytuł + opis</text>
+<rect x="48" y="330" width="280" height="34" rx="9" fill="#fff" stroke="#b7e3c4"/><text x="62" y="352" font-family="Space Grotesk" font-size="14" font-weight="700" fill="#15803d">Wizytówki i Mapy</text><text x="316" y="352" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5d8a72">opinie</text>
+<rect x="48" y="370" width="280" height="34" rx="9" fill="#fff" stroke="#b7e3c4"/><text x="62" y="392" font-family="Space Grotesk" font-size="14" font-weight="700" fill="#15803d">Odpowiedzi AI</text><text x="316" y="392" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5d8a72">cytat</text>
+
+<!-- ŚCIEŻKOMAT -->
+<rect x="418" y="150" width="230" height="196" rx="16" fill="#fff2e8" stroke="#f8c39a" stroke-width="2"/>
+<text x="533" y="180" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700" fill="#dd5e0a" letter-spacing="1.8">ŚCIEŻKOMAT</text>
+<text x="533" y="206" text-anchor="middle" font-family="Space Grotesk" font-size="15" font-weight="700" fill="#dd5e0a">Reguła pary</text>
+<text x="533" y="232" text-anchor="middle" font-family="Space Grotesk" font-size="12.5" fill="#a8794f">format wejścia</text>
+<text x="533" y="250" text-anchor="middle" font-family="Space Grotesk" font-size="12.5" fill="#a8794f">×</text>
+<text x="533" y="268" text-anchor="middle" font-family="Space Grotesk" font-size="12.5" fill="#a8794f">typ strony</text>
+<line x1="446" y1="284" x2="620" y2="284" stroke="#f8c39a" stroke-width="1.2"/>
+<text x="533" y="306" text-anchor="middle" font-family="Space Grotesk" font-size="12.5" font-weight="700" fill="#dd5e0a">= co ma tam być</text>
+<text x="533" y="328" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#a8794f">wsad do UTMomatu</text>
+
+<!-- strzałki lewo → środek -->
+<path d="M346 140 L414 200" stroke="#dd5e0a" stroke-width="1.8" fill="none" marker-end="url(#sA)" opacity="0.75"/>
+<path d="M346 330 L414 290" stroke="#16a34a" stroke-width="1.8" fill="none" marker-end="url(#sG)" opacity="0.75"/>
+
+<!-- WYJŚCIA -->
+<rect x="880" y="42" width="330" height="370" rx="14" fill="#f1faf4" stroke="#b7e3c4" stroke-width="1.6"/>
+<text x="898" y="66" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700" fill="#15803d" letter-spacing="1.5">DZIEWIĘĆ TYPÓW STRON</text>
+<rect x="898" y="76" width="294" height="30" rx="8" fill="#fff" stroke="#b7e3c4"/><text x="912" y="96" font-family="Space Grotesk" font-size="13" font-weight="700" fill="#15803d">Strona główna</text>
+<rect x="898" y="112" width="294" height="30" rx="8" fill="#fff" stroke="#b7e3c4"/><text x="912" y="132" font-family="Space Grotesk" font-size="13" font-weight="700" fill="#15803d">Listing „Dostępne Audi”</text>
+<rect x="898" y="148" width="294" height="30" rx="8" fill="#fff" stroke="#b7e3c4"/><text x="912" y="168" font-family="Space Grotesk" font-size="13" font-weight="700" fill="#15803d">Karta produktu</text>
+<rect x="898" y="184" width="294" height="30" rx="8" fill="#fff" stroke="#b7e3c4"/><text x="912" y="204" font-family="Space Grotesk" font-size="13" font-weight="700" fill="#15803d">LP modelowa</text>
+<rect x="898" y="220" width="294" height="30" rx="8" fill="#fff" stroke="#b7e3c4"/><text x="912" y="240" font-family="Space Grotesk" font-size="13" font-weight="700" fill="#15803d">LP zbiorcza</text>
+<rect x="898" y="256" width="294" height="30" rx="8" fill="#fff" stroke="#b7e3c4"/><text x="912" y="276" font-family="Space Grotesk" font-size="13" font-weight="700" fill="#15803d">LP taktyczna</text>
+<rect x="898" y="292" width="294" height="30" rx="8" fill="#fff" stroke="#b7e3c4"/><text x="912" y="312" font-family="Space Grotesk" font-size="13" font-weight="700" fill="#15803d">LP finansowania (APL)</text>
+<rect x="898" y="328" width="294" height="30" rx="8" fill="#fff" stroke="#b7e3c4"/><text x="912" y="348" font-family="Space Grotesk" font-size="13" font-weight="700" fill="#15803d">Serwis i części</text>
+<rect x="898" y="364" width="294" height="30" rx="8" fill="#fff" stroke="#b7e3c4"/><text x="912" y="384" font-family="Space Grotesk" font-size="13" font-weight="700" fill="#15803d">Auta używane</text>
+
+<path d="M652 220 L874 180" stroke="#dd5e0a" stroke-width="1.8" fill="none" marker-end="url(#sA)" opacity="0.75"/>
+<path d="M652 276 L874 320" stroke="#16a34a" stroke-width="1.8" fill="none" marker-end="url(#sG)" opacity="0.75"/>
+
+<!-- ŚCIEŻKA DZISIEJSZA -->
+<path d="M328 93 C560 93, 620 60, 894 91" stroke="#8d0a31" stroke-width="2.2" fill="none" stroke-dasharray="7 5" marker-end="url(#sB)"/>
+<rect x="470" y="46" width="332" height="26" rx="8" fill="#fcebf2" stroke="#e8b4c6" stroke-width="1.2"/>
+<text x="636" y="64" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#8d0a31">dziś: Search Ads → strona główna · CR 0,93%</text>
+
+<!-- FORMAT WYJŚCIA -->
+<rect x="880" y="430" width="330" height="150" rx="14" fill="#fff" stroke="#b7e3c4" stroke-width="1.6"/>
+<text x="898" y="454" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700" fill="#15803d" letter-spacing="1.5">FORMAT WYJŚCIA — CO NA STRONIE</text>
+<rect x="898" y="464" width="140" height="26" rx="7" fill="#e7f6ec"/><text x="968" y="482" text-anchor="middle" font-family="Space Grotesk" font-size="12" font-weight="700" fill="#15803d">treść video</text>
+<rect x="1046" y="464" width="146" height="26" rx="7" fill="#e7f6ec"/><text x="1119" y="482" text-anchor="middle" font-family="Space Grotesk" font-size="12" font-weight="700" fill="#15803d">formularz pod treścią</text>
+<rect x="898" y="498" width="140" height="26" rx="7" fill="#e7f6ec"/><text x="968" y="516" text-anchor="middle" font-family="Space Grotesk" font-size="12" font-weight="700" fill="#15803d">kalkulator</text>
+<rect x="1046" y="498" width="146" height="26" rx="7" fill="#e7f6ec"/><text x="1119" y="516" text-anchor="middle" font-family="Space Grotesk" font-size="12" font-weight="700" fill="#15803d">dostępność „od ręki”</text>
+<rect x="898" y="532" width="140" height="26" rx="7" fill="#e7f6ec"/><text x="968" y="550" text-anchor="middle" font-family="Space Grotesk" font-size="12" font-weight="700" fill="#15803d">CTA jazda próbna</text>
+<rect x="1046" y="532" width="146" height="26" rx="7" fill="#e7f6ec"/><text x="1119" y="550" text-anchor="middle" font-family="Space Grotesk" font-size="12" font-weight="700" fill="#15803d">czat z regułą</text>
+<path d="M1045 412 L1045 426" stroke="#16a34a" stroke-width="1.8" fill="none" marker-end="url(#sG)"/>
+
+<!-- PUNKTY ZGŁOSZENIA -->
+<rect x="30" y="620" width="1180" height="96" rx="16" fill="#fcebf2" stroke="#e8b4c6" stroke-width="1.8"/>
+<text x="54" y="648" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700" fill="#8d0a31" letter-spacing="1.5">PUNKTY ZGŁOSZENIA — TU KOŃCZY SIĘ ŚCIEŻKA</text>
+<rect x="54" y="660" width="268" height="38" rx="9" fill="#fff" stroke="#e8b4c6"/><text x="188" y="678" text-anchor="middle" font-family="Space Grotesk" font-size="13.5" font-weight="700" fill="#8d0a31">Formularz „nowe auta”</text><text x="188" y="692" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#a8567a">dziś jedno zdarzenie na czterech stronach</text>
+<rect x="334" y="660" width="268" height="38" rx="9" fill="#fff" stroke="#e8b4c6"/><text x="468" y="678" text-anchor="middle" font-family="Space Grotesk" font-size="13.5" font-weight="700" fill="#8d0a31">Jazda próbna</text><text x="468" y="692" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#a8567a">osobny formularz</text>
+<rect x="614" y="660" width="268" height="38" rx="9" fill="#fff" stroke="#e8b4c6"/><text x="748" y="678" text-anchor="middle" font-family="Space Grotesk" font-size="13.5" font-weight="700" fill="#8d0a31">Telefon</text><text x="748" y="692" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#a8567a">brak śledzenia źródła połączenia</text>
+<rect x="894" y="660" width="268" height="38" rx="9" fill="#fff" stroke="#e8b4c6"/><text x="1028" y="678" text-anchor="middle" font-family="Space Grotesk" font-size="13.5" font-weight="700" fill="#8d0a31">Czat</text><text x="1028" y="692" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#a8567a">do potwierdzenia czy wdrożony</text>
+<path d="M1045 580 L1045 614" stroke="#8d0a31" stroke-width="1.8" fill="none" marker-end="url(#sB)"/>
+
+<line x1="30" y1="748" x2="1210" y2="748" stroke="#e6e6e9" stroke-width="1.5"/>
+<text x="620" y="780" text-anchor="middle" font-family="Space Grotesk" font-size="16" font-weight="700" fill="#0a0a0a">Każdy typ strony ma inną intencję odwiedzającego — więc inny formularz i inny sposób pomiaru.</text>
+<text x="620" y="802" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11.5" fill="#8b93a2">Ścieżkomat zapisuje parę. UTMomat oznacza ją u źródła. Dopiero wtedy da się policzyć, która para sprzedaje.</text>
+</svg>
+    </div>
+    <p class="hint">↔ na wąskim ekranie przewiń mapę w poziomie</p>
+  </div>
+
+  <footer>Ścieżkomat · Audi Grupa Plichta · lipiec 2026</footer>
+</div>
+</body>
+</html>

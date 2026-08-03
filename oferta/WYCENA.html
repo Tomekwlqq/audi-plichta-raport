@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Wycena — Audi Grupa Plichta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;--ink:#0a0a0a;--muted:#5b6472;--faint:#8b93a2;--line:#e6e6e9;
+  --green:#16a34a;--green-d:#15803d;--green-soft:#e7f6ec;--green-line:#b7e3c4;
+  --orange:#f5751a;--orange-d:#dd5e0a;--orange-soft:#fff2e8;--orange-line:#f8c39a;
+  --blue:#0f7ae5;--blue-d:#0a63bd;--blue-soft:#e9f3fd;--blue-line:#a9d2f6;
+  --violet:#1800ad;--violet-d:#12007e;--violet-soft:#ece9fb;--violet-line:#c5bcf0;
+  --bord:#8d0a31;--bord-d:#6d0725;--bord-soft:#fcebf2;--bord-line:#e8b4c6;
+  --dark:#1a1f2b;
+  --grotesk:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--grotesk);background:var(--bg);color:var(--ink);line-height:1.6;
+  -webkit-font-smoothing:antialiased;font-size:16px;padding:0 0 90px}
+
+/* ── topbar ── */
+.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:11px 30px;background:rgba(255,255,255,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.back{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;
+  padding:7px 13px;border:1px solid var(--line);border-radius:9px;background:#fff;white-space:nowrap;transition:.15s}
+.back:hover{border-color:var(--violet);color:var(--violet-d)}
+.topbar nav{display:flex;gap:4px;flex-wrap:wrap}
+.topbar nav a{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--muted);text-decoration:none;
+  padding:6px 11px;border-radius:8px;letter-spacing:.03em;transition:.15s}
+.topbar nav a:hover{background:var(--violet-soft);color:var(--violet-d)}
+.topbar nav a.active{background:var(--violet);color:#fff}
+.tools{margin-left:auto;display:flex;align-items:center;gap:8px}
+.save{font-family:var(--mono);font-size:11px;color:var(--green-d);white-space:nowrap}
+.btn{font-family:var(--mono);font-size:11.5px;font-weight:600;padding:7px 12px;border-radius:9px;
+  border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;transition:.15s;white-space:nowrap}
+.btn:hover{border-color:var(--violet);color:var(--violet-d)}
+.btn.pri{background:var(--bord);border-color:var(--bord);color:#fff}
+.btn.pri:hover{background:var(--bord-d);border-color:var(--bord-d);color:#fff}
+
+/* ── hero ── */
+.hero{padding:60px 34px 26px;background-image:radial-gradient(circle at 8% 0,#eeebfd 0,transparent 46%),radial-gradient(circle at 96% 4%,#fdeef4 0,transparent 40%)}
+.hero .shell{max-width:1180px;margin:0 auto}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:15px}
+.hero h1{font-size:clamp(32px,4.8vw,52px);font-weight:700;letter-spacing:-.035em;line-height:1.04;margin-bottom:15px}
+.hero h1 .g{color:var(--violet)}
+.hero .lede{color:var(--muted);font-size:19px;max-width:760px;line-height:1.55}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.badge{font-family:var(--mono);font-size:11px;font-weight:600;padding:6px 11px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--faint)}
+.badge.draft{color:var(--bord);border-color:var(--bord-line);background:var(--bord-soft)}
+
+/* ── sekcje ── */
+.section{padding:44px 34px}
+.section.soft{background:#fbfaff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.shell{max-width:1180px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:11px}
+.section-head{margin-bottom:26px}
+.section-head h2{font-size:clamp(25px,3.2vw,35px);font-weight:700;letter-spacing:-.028em;line-height:1.12;margin-bottom:11px}
+.punchline{font-size:18px;color:var(--ink);max-width:820px;line-height:1.5;font-weight:500}
+.punchline em{font-style:normal;color:var(--violet);font-weight:700}
+.muted{color:var(--muted);font-size:15.5px;line-height:1.6;max-width:880px}
+
+/* ── expand na tytule sekcji ── */
+details.db-toggle>summary{list-style:none;cursor:pointer}
+details.db-toggle>summary::-webkit-details-marker{display:none}
+details.db-toggle>summary:focus{outline:none}
+.db-chev{display:inline-block;font-size:.62em;font-weight:400;color:var(--faint);margin-left:11px;transition:transform .2s;vertical-align:middle}
+details.db-toggle[open] .db-chev{transform:rotate(90deg);color:var(--violet)}
+
+/* ── karty ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:19px;padding:22px 24px;position:relative;
+  transition:transform .17s cubic-bezier(.2,.7,.3,1),box-shadow .17s,border-color .17s}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(20,26,45,.10);border-color:var(--violet-line)}
+.card h3{font-size:19px;font-weight:700;letter-spacing:-.015em;margin-bottom:8px;line-height:1.2}
+.card p{font-size:14.5px;color:var(--muted);line-height:1.55}
+.card.wide{grid-column:span 2}
+.card.full{grid-column:1/-1}
+@media(max-width:900px){.card.wide{grid-column:1/-1}}
+.card .big{display:block;font-family:var(--mono);font-size:34px;font-weight:700;color:var(--violet);line-height:1;margin-bottom:9px}
+.deeplink{display:inline-block;margin-top:13px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--violet-d);text-decoration:none;border-bottom:1.5px solid var(--violet-line);padding-bottom:2px;transition:.15s}
+.deeplink:hover{border-color:var(--violet)}
+.step{padding-top:22px}
+.step-no{position:absolute;top:16px;right:20px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--faint)}
+
+/* ── debrief: karty punktów briefu ── */
+.db-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+@media(max-width:900px){.db-grid{grid-template-columns:1fr}}
+.pkt-card{background:#fff;border:1.5px solid var(--line);border-radius:19px;overflow:hidden;transition:.17s}
+.pkt-card:hover{border-color:var(--violet-line);box-shadow:0 14px 34px rgba(20,26,45,.08)}
+.pkt-head{padding:21px 23px 13px}
+.pkt-num{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;
+  padding:4px 9px;border-radius:6px;background:var(--violet-soft);color:var(--violet-d);margin-bottom:10px}
+.pkt-head h2{font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.018em;margin-bottom:5px}
+.pkt-head .cyt{color:var(--muted);font-size:13.5px;font-style:italic;line-height:1.5;border-left:2.5px solid var(--violet-line);padding-left:12px;margin-top:10px}
+.ocz-label{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--faint);padding:12px 22px 0;border-top:1px solid #f1eff7}
+.micro{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:8px;padding:10px 22px 20px}
+.m{border:1px solid var(--line);border-radius:11px;padding:11px 13px;background:#fbfaff;font-size:13px;line-height:1.4}
+.m b{display:block;font-size:13px;margin-bottom:3px;color:var(--ink)}
+.m span{color:var(--muted);font-size:11.5px}
+.m.hard{border-color:var(--orange-line);background:var(--orange-soft)}
+.m.hard b{color:var(--orange-d)}
+.m.pain{border-color:var(--bord-line);background:var(--bord-soft)}
+.m.pain b{color:var(--bord)}
+
+/* ── równanie sprzedaży ── */
+.formula-strip{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:22px 26px;border-radius:19px;
+  background:#fff;border:1.5px solid var(--violet-line);margin:24px 0}
+.fs-lhs{font-size:17px;font-weight:700}
+.fs-eq{font-family:var(--mono);font-size:22px;font-weight:400;color:var(--faint);padding:0 4px}
+.fs-block{padding:11px 17px;border-radius:12px;font-size:14px;font-weight:700;text-align:center;line-height:1.25}
+.fs-block small{display:block;font-family:var(--mono);font-size:10.5px;font-weight:600;opacity:.75;margin-top:3px;letter-spacing:.03em}
+.fs-block.org{background:var(--violet-soft);color:var(--violet-d)}
+.fs-block.conv{background:var(--green-soft);color:var(--green-d)}
+.fs-block.qual{background:var(--bord-soft);color:var(--bord)}
+
+/* ── problemy P1–P6 ── */
+.problem-head{display:flex;align-items:center;gap:10px;margin-bottom:11px;flex-wrap:wrap}
+.problem-no{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;padding:5px 10px;border-radius:7px;background:var(--bord);color:#fff}
+.problem-tag{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.proof-pill{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:600;padding:7px 13px;border-radius:20px;
+  background:var(--bord-soft);color:var(--bord);border:1px solid var(--bord-line);margin:9px 0 12px}
+.solution-block{margin-top:16px;background:var(--green-soft);border:1px solid var(--green-line);border-radius:14px;padding:16px 19px}
+.solution-block strong{display:block;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--green-d);margin-bottom:9px}
+.solution-block ul{list-style:none}
+.solution-block li{position:relative;padding-left:19px;margin-bottom:8px;font-size:14.5px;color:#2f4a3c;line-height:1.5}
+.solution-block li:last-child{margin-bottom:0}
+.solution-block li::before{content:'';position:absolute;left:2px;top:9px;width:6px;height:6px;background:var(--green);border-radius:50%}
+.solution-block code{font-family:var(--mono);font-size:12.5px;background:#fff;padding:2px 6px;border-radius:5px;color:var(--green-d)}
+
+
+.audyt-przyklad{margin-top:26px;border:1.5px solid var(--violet-line);border-radius:20px;background:#fbfaff;padding:24px 26px}
+.audyt-przyklad h3{font-size:21px;font-weight:700;letter-spacing:-.02em;margin-bottom:7px}
+.audyt-przyklad .sub{font-size:15px;color:var(--muted);line-height:1.55;margin-bottom:18px;max-width:940px}
+.ap-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;align-items:start}
+@media(max-width:1000px){.ap-grid{grid-template-columns:1fr}}
+.ap-shot{border:1.5px solid var(--line);border-radius:15px;overflow:hidden;background:#fff}
+.ap-shot .cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding:11px 15px;border-bottom:1px solid var(--line);font-weight:600;background:#fbfaff}
+.ap-shot img{display:block;width:100%;height:auto}
+.ap-shot.tall{max-height:520px;overflow-y:auto}
+.ap-txt p{font-size:14.5px;color:var(--muted);line-height:1.6;margin-bottom:11px}
+.ap-txt b{color:var(--ink)}
+
+
+
+/* ── plan: tory zakresów ── */
+.gantt{border:1.5px solid var(--line);border-radius:19px;overflow:hidden;background:#fff;margin-top:24px}
+.g-head,.g-row{display:grid;grid-template-columns:230px repeat(4,1fr)}
+.g-head{background:var(--dark);color:#fff;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:600}
+.g-head span{padding:12px 13px}
+.g-head span:first-child{padding-left:18px}
+.g-row{border-top:1px solid #f1eff7}
+.g-row:hover{background:#fbfaff}
+.g-lab{padding:15px 13px 15px 18px;display:flex;flex-direction:column;gap:7px;border-right:1px solid #f1eff7}
+.g-lab b{font-size:14.5px;line-height:1.25}
+.g-kod{align-self:flex-start;font-family:var(--mono);font-size:10px;font-weight:700;color:#fff;padding:3px 8px;border-radius:6px;letter-spacing:.08em}
+.g-c{padding:15px 13px;font-size:12.5px;line-height:1.45;color:var(--muted);border-right:1px solid #f7f6fb}
+.g-c:last-child{border-right:none}
+.g-c.pusta{background:repeating-linear-gradient(135deg,#fafafc 0 6px,#fff 6px 12px)}
+@media(max-width:1000px){.g-head{display:none}.g-row{grid-template-columns:1fr}.g-lab{border-right:none;border-bottom:1px solid #f1eff7}
+  .g-c{border-right:none}.g-c::before{content:attr(data-m);display:block;font-family:var(--mono);font-size:9.5px;color:var(--faint)}
+  .g-c.pusta{display:none}}
+.mile{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px}
+.mile-c{background:#fff;border:1.5px solid var(--line);border-radius:17px;padding:18px 20px}
+.mile-t{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-d)}
+.mile-c h3{font-size:16px;font-weight:700;line-height:1.25;margin:8px 0 7px;letter-spacing:-.015em}
+.mile-c p{font-size:13.5px;color:var(--muted);line-height:1.5}
+.kam-note{margin-top:18px;background:var(--dark);color:#c3cad6;border-radius:15px;padding:17px 21px;font-size:14px;line-height:1.55}
+.kam-note b{color:#fff}
+
+/* ── kalendarz rytmu ── */
+.rytm{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+@media(max-width:900px){.rytm{grid-template-columns:1fr}}
+.ry{border:1.5px solid var(--line);border-radius:17px;overflow:hidden;background:#fff}
+.ry-h{padding:14px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:10.5px;
+  font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.ry.t .ry-h{background:var(--violet-soft);color:var(--violet-d)}
+.ry.m .ry-h{background:var(--green-soft);color:var(--green-d)}
+.ry-r{display:grid;grid-template-columns:120px 1fr;padding:12px 18px;border-bottom:1px dashed #f1eff7;align-items:start}
+.ry-r:last-child{border-bottom:0}
+.ry-r .kiedy{font-family:var(--mono);font-size:11.5px;font-weight:700}
+.ry.t .kiedy{color:var(--violet-d)}.ry.m .kiedy{color:var(--green-d)}
+.ry-r .co{font-size:13.5px;color:var(--muted);line-height:1.5}
+@media(max-width:520px){.ry-r{grid-template-columns:1fr;gap:4px}}
+
+/* ── tabele ── */
+.table-wrap{border:1.5px solid var(--line);border-radius:19px;overflow:hidden;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--dark);color:#fff;padding:12px 15px;text-align:left;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+td{padding:12px 15px;border-bottom:1px solid #f1eff7;vertical-align:top;color:var(--muted)}
+td strong{color:var(--ink);font-weight:700}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fbfaff}
+.owner{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;margin-right:4px;white-space:nowrap}
+.owner.tomek{background:var(--violet-soft);color:var(--violet-d)}
+.owner.ewa{background:var(--bord-soft);color:var(--bord)}
+.owner.joint{background:var(--blue-soft);color:var(--blue-d)}
+.owner.external{background:#f2f3f6;color:var(--faint)}
+.status{font-family:var(--mono);font-size:11px;font-weight:700;white-space:nowrap}
+.status.included{color:var(--green-d)}
+.status.option{color:var(--orange-d)}
+
+
+/* ── klocki wyceny ── */
+.klocki{margin-top:26px}
+.kl-head{display:grid;grid-template-columns:1.35fr 2fr 118px;gap:0;background:var(--dark);color:#fff;
+  font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;font-weight:600;
+  padding:12px 18px;border-radius:14px 14px 0 0}
+.kl-head span:last-child{text-align:right}
+.kl{display:grid;grid-template-columns:1.35fr 2fr 118px;gap:0;padding:15px 18px;border:1px solid var(--line);border-top:0;background:#fff;align-items:start}
+.kl:hover{background:#fbfaff}
+.kl .n{font-weight:700;font-size:14.5px;line-height:1.35}
+.kl .n small{display:block;font-family:var(--mono);font-size:10px;font-weight:600;color:var(--faint);letter-spacing:.05em;margin-top:3px;text-transform:uppercase}
+.kl .d{font-size:13.5px;color:var(--muted);line-height:1.5;padding:0 14px}
+.kl .c{text-align:right;font-weight:700;font-size:15px;white-space:nowrap}
+.kl-sum{display:grid;grid-template-columns:1.35fr 2fr 118px;padding:16px 18px;border:1.5px solid var(--violet-line);
+  border-radius:0 0 14px 14px;background:var(--violet-soft);align-items:center}
+.kl-sum .n{font-weight:700;font-size:16px;color:var(--violet-d)}
+.kl-sum .c{text-align:right;font-weight:700;font-size:20px;color:var(--violet-d);letter-spacing:-.02em}
+.kl-tag{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:5px;margin-right:4px;letter-spacing:.04em}
+.t-skill{background:var(--blue-soft);color:var(--blue-d)}
+.t-flow{background:var(--violet-soft);color:var(--violet-d)}
+.t-mc{background:var(--bord-soft);color:var(--bord)}
+.t-wdr{background:var(--green-soft);color:var(--green-d)}
+@media(max-width:820px){.kl,.kl-head,.kl-sum{grid-template-columns:1fr;gap:6px}.kl .d{padding:0}.kl .c,.kl-sum .c{text-align:left}}
+.etap2{margin-top:22px;border:1.5px dashed var(--orange-line);border-radius:16px;background:var(--orange-soft);padding:20px 22px}
+.etap2 h4{font-size:16px;font-weight:700;color:var(--orange-d);margin-bottom:7px}
+.etap2 p{font-size:14px;color:#8a5a33;line-height:1.6}
+.etap2 .lista{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.etap2 .lista a{font-family:var(--mono);font-size:12px;font-weight:600;padding:6px 11px;border-radius:9px;
+  background:#fff;border:1px solid var(--orange-line);color:var(--orange-d);text-decoration:none}
+.etap2 .lista a:hover{border-color:var(--orange)}
+
+/* ── wycena ── */
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:17px}
+.price{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:26px;position:relative;overflow:hidden;transition:.17s}
+.price::before{content:'';position:absolute;inset:0 0 auto 0;height:4px;background:var(--line)}
+.price:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(20,26,45,.12)}
+.price h3{font-size:21px;font-weight:700;letter-spacing:-.02em;margin-bottom:13px;line-height:1.2}
+.price .amount{display:block;font-size:31px;font-weight:700;letter-spacing:-.035em;margin-bottom:15px;color:var(--violet-d)}
+.price .amount small{display:block;font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--faint);letter-spacing:.05em;margin-top:4px}
+.price ul{list-style:none;margin-bottom:12px}
+.price li{position:relative;padding-left:19px;margin-bottom:8px;font-size:14px;color:var(--muted);line-height:1.5}
+.price li::before{content:'';position:absolute;left:2px;top:9px;width:6px;height:6px;background:var(--violet-line);border-radius:50%}
+.price.featured{background:var(--dark);border-color:var(--dark)}
+.price.featured::before{background:var(--bord)}
+.price.featured h3{color:#fff}
+.price.featured .amount{color:#fff}
+.price.featured .amount small{color:#8d97a8}
+.price.featured li{color:#c3cad6}
+.price.featured li::before{background:var(--bord)}
+.price.featured .muted{color:#8d97a8;font-size:13px}
+.price.featured .eyebrow{color:#f0b7ca}
+
+/* ── blok wewnętrzny ── */
+details.internal{margin-top:22px;border:1.5px dashed var(--bord-line);border-radius:16px;background:var(--bord-soft);overflow:hidden}
+details.internal>summary{cursor:pointer;padding:15px 20px;font-family:var(--mono);font-size:11.5px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--bord);list-style:none}
+details.internal>summary::-webkit-details-marker{display:none}
+details.internal>summary::before{content:'⚠ ';}
+details.internal .table-wrap{border:0;border-radius:0;border-top:1px solid var(--bord-line)}
+
+/* ── chat / Mission Control ── */
+.chat{background:var(--dark);border-radius:20px;overflow:hidden;margin:24px 0;border:1.5px solid #2f3846}
+.chat-head{display:flex;align-items:center;gap:10px;padding:13px 20px;background:#141822;border-bottom:1px solid #2f3846;
+  font-family:var(--mono);font-size:11.5px;color:#8d97a8;letter-spacing:.05em}
+.chat-body{padding:20px 22px;font-size:14.5px;color:#c3cad6;line-height:1.75}
+.chat-body b{color:#fff}
+.chat-time{margin-left:auto;font-family:var(--mono);font-size:11px;color:#5f6b7e}
+.up{color:#5fbf85;font-weight:600}
+.down{color:#f08d8d;font-weight:600}
+.warn{color:#e9b665;font-weight:600}
+.bot{color:#8fb3ff}
+
+/* ── outcome ── */
+.outcome{background:var(--green-soft);border:1.5px solid var(--green-line);border-radius:20px;padding:26px 28px;margin-top:24px}
+.outcome h2{font-size:23px;font-weight:700;letter-spacing:-.02em;color:var(--green-d);margin-bottom:10px;line-height:1.2}
+.outcome p{font-size:15.5px;color:#2f4a3c;line-height:1.6}
+
+/* ── checklista ── */
+.checklist{display:grid;gap:9px;max-width:820px}
+.check{display:flex;align-items:flex-start;gap:11px;background:#fff;border:1.5px solid var(--line);border-radius:13px;
+  padding:13px 17px;font-size:14.5px;color:var(--muted);cursor:pointer;transition:.15s}
+.check:hover{border-color:var(--violet-line)}
+.check input{margin-top:4px;accent-color:var(--violet);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+
+.foot{margin-top:44px;padding:0 34px;font-family:var(--mono);font-size:11.5px;color:var(--faint);text-align:center}
+
+@media(max-width:640px){
+  .hero{padding:36px 18px 20px}.section{padding:30px 18px}
+  .topbar{padding:9px 14px;gap:9px}.topbar nav{display:none}
+  .micro{grid-template-columns:1fr}
+  .formula-strip{padding:16px}
+}
+@media print{
+  .topbar,.tools{display:none!important}
+  details.db-toggle:not([open])>*{display:revert!important}
+  details.db-toggle>summary~*{display:revert!important}
+  .card:hover,.price:hover{transform:none;box-shadow:none}
+}
+
+/* ── widoki generowane z klocki.py ── */
+.g-i{display:block;margin-bottom:9px}
+.g-i:last-child{margin-bottom:0}
+.g-i em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:2px}
+.c-tbd{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--orange-d);background:var(--orange-soft);padding:1px 6px;border-radius:5px}
+.c-in{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--faint)}
+.done{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--green-d);background:var(--green-soft);border:1px solid var(--green-line);padding:1px 6px;border-radius:5px;white-space:nowrap}
+.wyc-blok{border:1.5px solid var(--line);border-radius:19px;overflow:hidden;background:#fff;margin-top:22px}
+.wyc-blok h3{font-size:19px;font-weight:700;letter-spacing:-.02em;padding:20px 22px 4px}
+.wyc-blok .muted{padding:0 22px 16px;font-size:14px;margin:0}
+.wyc-head,.wyc-r{display:grid;grid-template-columns:54px 1fr 120px 150px;gap:10px;padding:11px 22px;align-items:baseline}
+.wyc-head{background:var(--dark);color:#fff;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:600}
+.wyc-r{border-top:1px solid #f1eff7;font-size:14px}
+.wyc-r:hover{background:#fbfaff}
+.wyc-z{font-family:var(--mono);font-size:11px;font-weight:700}
+.wyc-n{line-height:1.4}
+.wyc-t{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+.wyc-c{font-family:var(--mono);font-size:13.5px;font-weight:700;text-align:right;color:var(--ink)}
+.wyc-r.suma{background:#fbfaff;border-top:2px solid var(--dark)}
+.wyc-r.suma .wyc-n{font-weight:700}
+.wyc-r.suma .wyc-c{font-size:17px;color:var(--violet-d)}
+@media(max-width:820px){.wyc-head{display:none}.wyc-r{grid-template-columns:1fr;gap:3px}.wyc-c{text-align:left}}
+
+/* statusy + legenda */
+.st{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:1px 6px;border-radius:5px;white-space:nowrap;border:1px solid transparent}
+.st-zrobione{color:var(--green-d);background:var(--green-soft);border-color:var(--green-line)}
+.st-wstepnie{color:var(--orange-d);background:var(--orange-soft);border-color:#f8c39a}
+i.st{display:inline-block;width:11px;height:11px;padding:0;border-radius:4px;vertical-align:-1px;margin-right:7px}
+i.st-zrobione{background:var(--green-soft);border-color:var(--green-line)}
+i.st-wstepnie{background:var(--orange-soft);border-color:#f8c39a}
+i.st-brak{background:#fff;border-color:var(--line)}
+.legenda{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:15px;padding:13px 17px;background:#fbfaff;
+  border:1px solid var(--line);border-radius:13px;font-size:12.5px;color:var(--muted);line-height:1.45}
+.legenda b{color:var(--ink);font-weight:600}
+.legenda span{display:flex;align-items:flex-start}
+.g-head em{display:block;font-style:normal;font-size:9px;letter-spacing:.06em;opacity:.62;margin-top:2px;text-transform:none}
+.g-c.dalej{font-family:var(--mono);font-size:11px;color:var(--faint);display:flex;align-items:center;background:#fbfaff}
+.g-i.cd{opacity:.5}
+.g-i.cd em{font-style:italic}
+
+.wyc-mies{background:var(--violet-soft);color:var(--violet-d);font-family:var(--mono);font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;padding:10px 22px;border-top:1px solid var(--violet-line)}
+.wyc-mies em{font-style:normal;opacity:.65;text-transform:none;letter-spacing:.04em;margin-left:8px}
+.wyc-r.podsuma{background:#fbfaff}
+.wyc-r.podsuma .wyc-n,.wyc-r.podsuma .wyc-c{font-weight:700;color:var(--muted)}
+.wyc-r.podsuma .wyc-c{font-size:14px;color:var(--ink)}
+
+/* wycena — grube pozycje */
+.pak-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:18px 22px}
+@media(max-width:900px){.pak-grid{grid-template-columns:1fr}}
+.pak{border:1.5px solid var(--line);border-radius:16px;padding:17px 19px;background:#fff}
+.pak-h{display:flex;align-items:center;gap:10px;margin-bottom:9px;flex-wrap:wrap}
+.pak-kod{font-family:var(--mono);font-size:9.5px;font-weight:700;color:#fff;padding:2px 7px;border-radius:5px;letter-spacing:.06em}
+.pak-h h4{font-size:16.5px;font-weight:700;letter-spacing:-.015em;line-height:1.2}
+.pak-c{margin-left:auto;font-family:var(--mono);font-size:15px;font-weight:700;color:var(--violet-d);white-space:nowrap}
+.pak-m{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:7px}
+.pak-l{list-style:none;display:flex;flex-direction:column;gap:5px}
+.pak-l li{font-size:13px;color:var(--muted);line-height:1.4;padding-left:14px;position:relative}
+.pak-l li::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--violet-line)}
+.wyc-suma{display:flex;align-items:baseline;gap:14px;padding:15px 22px;background:#fbfaff;border-top:2px solid var(--dark)}
+.wyc-suma span{font-weight:700;font-size:15px}
+.wyc-suma b{margin-left:auto;font-family:var(--mono);font-size:21px;color:var(--violet-d)}
+.pak-u{display:block;font-style:normal;font-size:11.5px;color:var(--orange-d);margin-top:3px}
+
+.pak{display:flex;flex-direction:column}
+.pak-s{display:flex;align-items:baseline;gap:10px;margin:12px 0 7px;padding-top:11px;border-top:1px solid #f1eff7}
+.pak-s:first-of-type{border-top:0;padding-top:0;margin-top:9px}
+.pak-t{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.pak-s b{margin-left:auto;font-family:var(--mono);font-size:15px;font-weight:700;color:var(--violet-d);white-space:nowrap}
+.pak-s.ciag b{color:var(--green-d)}
+.wyc-suma.ciag b{color:var(--green-d)}
+.mies-blok{margin-top:34px;border-top:2px solid var(--dark);padding-top:26px}
+.mies-blok h3{font-size:23px;font-weight:700;letter-spacing:-.022em;margin-bottom:5px}
+.mies{border:1.5px solid var(--line);border-radius:17px;overflow:hidden;margin-top:16px}
+.mies-h{display:flex;align-items:baseline;gap:12px;background:var(--dark);color:#fff;padding:12px 20px}
+.mies-h b{font-size:17px}
+.mies-h em{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#9aa6b8}
+.mies-h span{margin-left:auto;font-family:var(--mono);font-size:16px;font-weight:700}
+.mies-g{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;
+  color:var(--violet-d);background:#fbfaff;padding:8px 20px;border-bottom:1px solid var(--line)}
+.mies-r{display:flex;align-items:baseline;gap:11px;padding:10px 20px;border-bottom:1px solid #f4f3f8;font-size:14.5px}
+.mies-r:last-child{border-bottom:0}
+.mies-z{font-family:var(--mono);font-size:10px;font-weight:700;width:22px;flex:0 0 22px}
+.mies-r b{margin-left:auto;font-family:var(--mono);font-size:15px;font-weight:700;white-space:nowrap}
+.mies-r b i{font-style:normal;color:var(--green-d)}
+</style>
+<script src="brama.js"></script>
+</head><body>
+<div class="topbar">
+  <a class="back" href="PLICHTA_START.html">← Menu Startowe</a>
+  <span class="doc-tag">04 · Wycena</span>
+  <nav><a href="WYCENA_I_ZAKRES.html">Plan wdrożenia</a><a href="ODPOWIEDZ_NA_BRIEF.html#zakres">Zakres działań</a></nav>
+</div>
+
+<div class="hero"><div class="shell">
+  <div class="kicker">Audi Grupa Plichta · 04 · wycena</div>
+  <h1>Wycena<br><span class="g">element po elemencie</span></h1>
+  <p class="lede">Jedna pozycja na zakres, a pod nią widać wszystko, co wchodzi w cenę. Osobno wdrożenie, osobno obsługa miesięczna. Pełny harmonogram prac — w planie dostawy.</p>
+  <div class="badges"><span class="badge">Kwoty netto</span><span class="badge">Budżet mediowy rozliczany osobno</span></div>
+</div></div>
+
+<section id="wycena" class="section">
+  <div class="shell">
+    <div class="section-head">
+      <p class="eyebrow">Wycena</p>
+      <h2>Co się składa na cenę</h2>
+      <p class="punchline">Siedem pozycji zamiast listy siedemdziesięciu. <em>Pod każdą wypisane, co dokładnie robimy.</em></p>
+      <p class="muted">Wszystkie kwoty netto. Budżet mediowy, narzędzia zewnętrzne i prace deweloperskie po stronie serwisu rozliczane osobno.</p>
+    </div>
+    <!-- GEN:WYCENA -->
+        <div class="pak-grid">
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#8d0a31">MC</span><h4>Mission Control</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start sierpień 2026</span><b>11 000 PLN</b></div><ul class="pak-l"><li>Projekt i budowa kokpitu (Mission Control) — agenci, skille, workflowy</li><li>Budowa raportów w ramach Mission Control (GA4, łączone, mediowe, SEO + GEO, CRM) <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Budowa modułów decyzyjnych — priorytety magazynowe, kalendarz inicjatyw, lista napraw, status automatyzacji, rejestr zdarzeń</li><li>Kanał alertów krytycznych — agent pilnuje konfiguracji na żywo <span class="st st-wstepnie">wstępnie zrobione</span><em class="pak-u">Powiadomienie na kanał zespołu tego samego dnia, gdy pomiar albo integracja przestaje działać — nie po miesiącu.</em></li><li>Asystent AI z Mission Control <span class="st st-wstepnie">wstępnie zrobione</span></li></ul>
+</article>
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#12007e">Z1</span><h4>Analityka i pomiar</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start sierpień 2026</span><b>3 200 PLN</b></div><ul class="pak-l"><li>Audyt wdrożenia analityki strony (GA4) <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Strategia budowy spójnego systemu analityki</li><li>Wdrożenie poprawek w analityce GA4</li><li>Projekt pomiaru kosztu kontaktu i kosztu sprzedaży</li><li>Integracja z CRM — pętla zwrotna do kampanii, śledzenie połączeń telefonicznych</li><li>Budowa systemu benchmarków do pomiarów UX / CRO i kosztów sprzedaży</li></ul>
+<div class="pak-s ciag"><span class="pak-t">Obsługa miesięczna · od listopad 2026</span><b>1 000 PLN / mc</b></div><ul class="pak-l"><li>Utrzymanie i nadzór nad analityką / Mission Control<em class="pak-u">Tylko do momentu wyszkolenia operatora po Waszej stronie.</em></li></ul>
+</article>
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#dd5e0a">Z2</span><h4>Media — Google i Meta</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start wrzesień 2026</span><b>3 500 PLN</b></div><ul class="pak-l"><li>Audyt kont, plan przejęcia i rekomendacja alokacji budżetu</li><li>Restrukturyzacja kampanii — rozdzielenie sprzedaży od serwisu</li></ul>
+<div class="pak-s ciag"><span class="pak-t">Obsługa miesięczna · od wrzesień 2026</span><b>6 000 PLN / mc</b></div><ul class="pak-l"><li>Prowadzenie kampanii Google Ads</li><li>Prowadzenie kampanii Meta Ads</li></ul>
+</article>
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#0a63bd">Z3</span><h4>Konwersja i UX</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start sierpień 2026</span><b>0 PLN</b></div><ul class="pak-l"><li>Audyt ścieżek zakupowych <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Audyt wizualny UI / UX / CRO — Audi Plichta i 50 wybranych dealerów</li><li>Rekomendacja uporządkowania formularzy i podstron ofertowych na audiplichta.pl</li><li>Budowa bazy 40 hipotez do testów</li><li>Taktyki wykorzystania chatbota LiveChat</li></ul>
+<div class="pak-s ciag"><span class="pak-t">Obsługa miesięczna · od listopad 2026</span><b>2 000 PLN / mc</b></div><ul class="pak-l"><li>CRO / UX optymalizacja bieżąca — testy hipotez, wdrażanie zmian</li></ul>
+</article>
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#15803d">Z4</span><h4>Widoczność lokalna i AI (SEO + GEO)</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start sierpień 2026</span><b>9 500 PLN</b></div><ul class="pak-l"><li>Audyt widoczności SEO i GEO <span class="st st-zrobione">zrobione</span></li><li>Plan optymalizacji SEO / GEO — część techniczna <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Strategia treści w oparciu o mapy percepcji zakupu samochodu <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Optymalizacja wizytówek Google Maps dla wszystkich lokalizacji</li><li>Odblokowanie serwisu dla robotów Google i asystentów AI</li><li>Przebudowa techniczna serwisu pod SEO i GEO — indeksacja, struktura adresów, dane strukturalne</li><li>Start działań GEO / SEO — pierwszy miesiąc realizacji planu</li></ul>
+<div class="pak-s ciag"><span class="pak-t">Obsługa miesięczna · od listopad 2026</span><b>4 000 PLN / mc</b></div><ul class="pak-l"><li>Działania GEO / SEO zgodnie z planem tworzenia i publikacji</li></ul>
+</article>
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#12007e">Z6</span><h4>Narzędzia</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start sierpień 2026</span><b>3 500 PLN</b></div><ul class="pak-l"><li>Budowa UTMomatu — słownik i generator oznaczeń ruchu</li><li>Budowa interaktywnej mapy ekosystemu <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Budowa Ścieżkomatu — planera ścieżek zakupowych</li><li>Budowa kreatora stron ofertowych (opcjonalnie)</li></ul>
+</article>
+        </div>
+        <div class="wyc-suma"><span>Wdrożenie razem</span><b>30 700 PLN</b></div>
+        <div class="wyc-suma ciag"><span>Obsługa miesięczna razem</span><b>13 000 PLN / mc</b></div>
+        <div class="legenda"><span><i class="st st-zrobione"></i><b>zrobione</b> — gotowe, powstało przed tą ofertą i możecie to zobaczyć</span><span><i class="st st-wstepnie"></i><b>wstępnie zrobione</b> — jest szkic albo część, do domknięcia we współpracy</span><span><i class="st st-brak"></i><b>bez oznaczenia</b> — do zrobienia od zera</span></div>
+
+        <div class="mies-blok" id="miesiace"><h3>Miesiąc po miesiącu</h3><p class="muted">Ten sam zakres rozpisany na kalendarz — ile kosztuje każdy miesiąc współpracy.</p>
+          <div class="mies"><div class="mies-h"><b>Sierpień 2026</b><em>przed startem</em><span>9 000 PLN</span></div>
+<div class="mies-g">jednorazowo</div>
+<div class="mies-r"><span class="mies-z" style="color:#8d0a31">MC</span><span>Projekt i budowa kokpitu (Mission Control) — agenci, skille, workflowy</span><b>5 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#8d0a31">MC</span><span>Asystent AI z Mission Control</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Audyt wdrożenia analityki strony (GA4)</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Strategia budowy spójnego systemu analityki</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>Audyt ścieżek zakupowych</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>Audyt wizualny UI / UX / CRO — Audi Plichta i 50 wybranych dealerów</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Audyt widoczności SEO i GEO</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Plan optymalizacji SEO / GEO — część techniczna</span><b>1 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Odblokowanie serwisu dla robotów Google i asystentów AI</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z6</span><span>Budowa interaktywnej mapy ekosystemu</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z6</span><span>Budowa Ścieżkomatu — planera ścieżek zakupowych</span><b>1 000 PLN</b></div>
+</div>
+          <div class="mies"><div class="mies-h"><b>Wrzesień 2026</b><em>miesiąc 1</em><span>16 500 PLN</span></div>
+<div class="mies-g">jednorazowo</div>
+<div class="mies-r"><span class="mies-z" style="color:#8d0a31">MC</span><span>Budowa raportów w ramach Mission Control (GA4, łączone, mediowe, SEO + GEO, CRM)</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#8d0a31">MC</span><span>Kanał alertów krytycznych — agent pilnuje konfiguracji na żywo</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Wdrożenie poprawek w analityce GA4</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Projekt pomiaru kosztu kontaktu i kosztu sprzedaży</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Audyt kont, plan przejęcia i rekomendacja alokacji budżetu</span><b>3 500 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>Rekomendacja uporządkowania formularzy i podstron ofertowych na audiplichta.pl</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>Budowa bazy 40 hipotez do testów</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Strategia treści w oparciu o mapy percepcji zakupu samochodu</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Optymalizacja wizytówek Google Maps dla wszystkich lokalizacji</span><b>500 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Przebudowa techniczna serwisu pod SEO i GEO — indeksacja, struktura adresów, dane strukturalne</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z6</span><span>Budowa UTMomatu — słownik i generator oznaczeń ruchu</span><b>500 PLN</b></div>
+<div class="mies-g">miesięcznie</div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Google Ads</span><b>3 600 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Meta Ads</span><b>2 400 PLN</b></div>
+</div>
+          <div class="mies"><div class="mies-h"><b>Październik 2026</b><em>miesiąc 2</em><span>15 200 PLN</span></div>
+<div class="mies-g">jednorazowo</div>
+<div class="mies-r"><span class="mies-z" style="color:#8d0a31">MC</span><span>Budowa modułów decyzyjnych — priorytety magazynowe, kalendarz inicjatyw, lista napraw, status automatyzacji, rejestr zdarzeń</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Integracja z CRM — pętla zwrotna do kampanii, śledzenie połączeń telefonicznych</span><b>1 200 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Budowa systemu benchmarków do pomiarów UX / CRO i kosztów sprzedaży</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>Taktyki wykorzystania chatbota LiveChat</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Start działań GEO / SEO — pierwszy miesiąc realizacji planu</span><b>6 000 PLN</b></div>
+<div class="mies-g">miesięcznie</div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Google Ads</span><b>3 600 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Meta Ads</span><b>2 400 PLN</b></div>
+</div>
+          <div class="mies"><div class="mies-h"><b>Listopad 2026</b><em>miesiąc 3</em><span>15 000 PLN</span></div>
+<div class="mies-g">jednorazowo</div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Restrukturyzacja kampanii — rozdzielenie sprzedaży od serwisu</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z6</span><span>Budowa kreatora stron ofertowych (opcjonalnie)</span><b>2 000 PLN</b></div>
+<div class="mies-g">miesięcznie</div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Utrzymanie i nadzór nad analityką / Mission Control</span><b>1 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Google Ads</span><b>3 600 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Meta Ads</span><b>2 400 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>CRO / UX optymalizacja bieżąca — testy hipotez, wdrażanie zmian</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Działania GEO / SEO zgodnie z planem tworzenia i publikacji</span><b>4 000 PLN</b></div>
+</div>
+          <div class="mies"><div class="mies-h"><b>Grudzień 2026</b><em>system pracuje</em><span>13 000 PLN</span></div>
+<div class="mies-g">miesięcznie</div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Utrzymanie i nadzór nad analityką / Mission Control</span><b>1 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Google Ads</span><b>3 600 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Meta Ads</span><b>2 400 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>CRO / UX optymalizacja bieżąca — testy hipotez, wdrażanie zmian</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Działania GEO / SEO zgodnie z planem tworzenia i publikacji</span><b>4 000 PLN</b></div>
+</div>
+          <div class="mies"><div class="mies-h"><b>Styczeń 2027</b><em>i dalej</em><span>13 000 PLN</span></div>
+<div class="mies-g">miesięcznie</div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Utrzymanie i nadzór nad analityką / Mission Control</span><b>1 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Google Ads</span><b>3 600 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Meta Ads</span><b>2 400 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>CRO / UX optymalizacja bieżąca — testy hipotez, wdrażanie zmian</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Działania GEO / SEO zgodnie z planem tworzenia i publikacji</span><b>4 000 PLN</b></div>
+</div>
+        </div>
+        <!-- /GEN:WYCENA -->
+  </div>
+</section>
+
+<div class="foot">Audi Grupa Plichta · wycena · lipiec 2026</div>
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Narzędzia i workflowy — Audi Grupa Plichta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;--ink:#0a0a0a;--muted:#5b6472;--faint:#8b93a2;--line:#e6e6e9;
+  --green:#16a34a;--green-d:#15803d;--green-soft:#e7f6ec;--green-line:#b7e3c4;
+  --orange:#f5751a;--orange-d:#dd5e0a;--orange-soft:#fff2e8;--orange-line:#f8c39a;
+  --blue:#0f7ae5;--blue-d:#0a63bd;--blue-soft:#e9f3fd;--blue-line:#a9d2f6;
+  --violet:#1800ad;--violet-d:#12007e;--violet-soft:#ece9fb;--violet-line:#c5bcf0;
+  --bord:#8d0a31;--bord-d:#6d0725;--bord-soft:#fcebf2;--bord-line:#e8b4c6;
+  --dark:#1a1f2b;
+  --grotesk:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--grotesk);background:var(--bg);color:var(--ink);line-height:1.6;
+  -webkit-font-smoothing:antialiased;font-size:16px;padding:74px 34px 90px;
+  background-image:radial-gradient(circle at 8% 0,#eeebfd 0,transparent 42%),radial-gradient(circle at 96% 3%,#fdeef4 0,transparent 36%);
+  background-repeat:no-repeat}
+.wrap{max-width:1420px;margin:0 auto}
+
+header{margin-bottom:30px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:15px}
+h1{font-size:clamp(34px,5vw,54px);font-weight:700;letter-spacing:-.035em;line-height:1.03;margin-bottom:14px}
+.sub{color:var(--muted);font-size:19px;max-width:900px;line-height:1.5}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.badge{font-family:var(--mono);font-size:11px;font-weight:600;padding:6px 11px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--faint)}
+.badge.draft{color:var(--bord);border-color:var(--bord-line);background:var(--bord-soft)}
+
+.card{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:26px 28px;margin-bottom:18px;
+  box-shadow:0 8px 26px rgba(20,26,45,.05)}
+h2{font-size:24px;font-weight:700;margin-bottom:5px;letter-spacing:-.025em;line-height:1.15}
+.h2sub{color:var(--muted);font-size:15px;margin-bottom:18px;line-height:1.55;max-width:940px}
+.section-meta{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:5px}
+.count-badge{font-family:var(--mono);font-size:11px;font-weight:700;padding:5px 11px;border-radius:20px;letter-spacing:.06em;white-space:nowrap}
+.c-agent{background:var(--bord-soft);color:var(--bord);border:1px solid var(--bord-line)}
+.c-skill{background:var(--blue-soft);color:var(--blue-d);border:1px solid var(--blue-line)}
+.c-skrypt{background:var(--green-soft);color:var(--green-d);border:1px solid var(--green-line)}
+.c-auto{background:var(--orange-soft);color:var(--orange-d);border:1px solid var(--orange-line)}
+.c-flow{background:var(--violet-soft);color:var(--violet-d);border:1px solid var(--violet-line)}
+
+.table-wrap,table{width:100%}
+table{border-collapse:collapse;font-size:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid #f1eff7;vertical-align:top}
+th{background:var(--dark);color:#fff;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+td{color:var(--muted);line-height:1.55}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fbfaff}
+.nazwa{font-weight:700;color:var(--ink)}
+
+.typ{font-family:var(--mono);font-size:10px;font-weight:700;padding:4px 8px;border-radius:6px;letter-spacing:.06em;white-space:nowrap;display:inline-block}
+.t-skill{background:var(--blue-soft);color:var(--blue-d)}
+.t-flow{background:var(--violet-soft);color:var(--violet-d)}
+.t-skrypt{background:var(--green-soft);color:var(--green-d)}
+.t-auto{background:var(--orange-soft);color:var(--orange-d)}
+.t-agent{background:var(--bord-soft);color:var(--bord)}
+
+.z{font-family:var(--mono);font-size:10px;font-weight:700;padding:4px 8px;border-radius:6px;letter-spacing:.05em;white-space:nowrap;display:inline-block;margin:1px 2px 1px 0}
+.z1{background:var(--blue-soft);color:var(--blue-d)}
+.z2{background:var(--green-soft);color:var(--green-d)}
+.z3{background:var(--orange-soft);color:var(--orange-d)}
+.z4{background:var(--violet-soft);color:var(--violet-d)}
+.z0{background:#eef0f3;color:#5b6472}
+.z5{background:var(--blue-soft);color:var(--blue-d)}
+.z6{background:var(--violet-soft);color:var(--violet-d)}
+.zmc{background:var(--bord-soft);color:var(--bord)}
+.rytm{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.rytm article{border:1.5px solid var(--line);border-radius:15px;padding:16px 18px;background:#fff}
+.rytm .r-t{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bord)}
+.rytm h3{font-size:15.5px;font-weight:700;margin:7px 0 6px;letter-spacing:-.015em}
+.rytm p{font-size:13px;color:var(--muted);line-height:1.5}
+
+
+.st{font-family:var(--mono);font-size:11px;font-weight:700;white-space:nowrap;letter-spacing:.04em}
+.s-ok{color:var(--green-d)}.s-adapt{color:var(--orange-d)}.s-new{color:var(--bord)}
+
+.legend{display:flex;gap:22px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);margin-top:8px}
+.legend span{display:flex;align-items:center;gap:8px}
+
+.note{border-left:3px solid var(--bord);background:var(--bord-soft);padding:15px 19px;border-radius:0 13px 13px 0;font-size:14.5px;margin-top:18px;color:var(--muted);line-height:1.6}
+.note b{color:var(--bord)}
+.green{border-left-color:var(--green);background:var(--green-soft)}
+.green b{color:var(--green-d)}
+
+.sumgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:13px;margin-top:8px}
+.sumbox{padding:19px;border:1.5px solid var(--line);border-radius:15px;background:#fbfaff}
+.sumbox strong{display:block;font-size:31px;letter-spacing:-.035em;line-height:1.05;font-weight:700}
+.sumbox span{font-family:var(--mono);font-size:11.5px;color:var(--faint);letter-spacing:.03em}
+
+footer{color:var(--faint);font-family:var(--mono);font-size:11.5px;padding:14px 4px 30px;text-align:center}
+
+@media(max-width:900px){body{padding:60px 18px 70px}.card{padding:20px}
+  .card>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}}
+@media print{#hub-back-btn{display:none!important}body{padding:0;background:none}}
+table td:last-child{white-space:nowrap;font-size:13px;color:var(--faint)}
+#doc-tag-fix{position:fixed;top:18px;left:186px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#12007e;background:rgba(236,233,251,.96);backdrop-filter:blur(8px);padding:8px 13px;border-radius:9px;white-space:nowrap;box-shadow:0 2px 10px rgba(20,26,45,.06)}
+@media(max-width:900px){#doc-tag-fix{display:none}}
+</style>
+<script src="brama.js"></script>
+</head>
+<body>
+
+<a id="hub-back-btn" href="PLICHTA_START.html" style="position:fixed;top:18px;left:18px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#5b6472;text-decoration:none;padding:8px 14px;border:1px solid #e6e6e9;border-radius:9px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(20,26,45,.06);transition:.15s" onmouseover="this.style.borderColor='#1800ad';this.style.color='#12007e'" onmouseout="this.style.borderColor='#e6e6e9';this.style.color='#5b6472'">← Menu Startowe</a>
+<span id="doc-tag-fix">07 · Narzędzia i workflowy</span>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Audi Grupa Plichta · 07 · narzędzia i workflowy</div>
+  <h1>Narzędzia i workflowy</h1>
+  <p class="sub">37 elementów pogrupowanych według tego, <b>czym są</b> — agenci, skille, skrypty, automaty i workflowy. Zakresy, które obsługują, opisane są osobno: ten sam element pracuje w kilku z nich, więc przypisanie go na sztywno do jednego byłoby nieprawdą.</p>
+  <div class="badges">
+    <span class="badge">31.07.2026</span>
+    <span class="badge">37 elementów · 5 typów</span>
+  </div>
+</header>
+
+<!-- ===== LEGENDA ===== -->
+<div class="card">
+  <h2>5 typów · 8 zakresów</h2>
+  <p class="h2sub">Dwie niezależne osie. <b>Typ</b> mówi, czym dany element jest i jak działa. <b>Zakres</b> mówi, w którym obszarze pracuje. Nie są ze sobą sklejone — jeden skrypt może zasilać analitykę i widoczność naraz, a ci sami agenci pracują we wszystkich zakresach.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
+    <table>
+      <thead><tr><th colspan="2">Typy elementów</th></tr></thead>
+      <tbody>
+        <tr><td style="width:110px"><span class="typ t-agent">AGENT</span></td><td>Wyspecjalizowana rola korzystająca ze skilli i baz — nie wiedza, tylko rola.</td></tr>
+        <tr><td><span class="typ t-skill">SKILL</span></td><td>Jedna umiejętność — przepis na konkretne zadanie, odpala się na żądanie.</td></tr>
+        <tr><td><span class="typ t-skrypt">SKRYPT</span></td><td>Deterministyczny kod — te same dane = ten sam wynik. Tańszy i pewniejszy niż LLM.</td></tr>
+        <tr><td><span class="typ t-auto">AUTOMAT</span></td><td>Odpalany bez człowieka: zegarem (raport co poniedziałek) lub zdarzeniem (alert).</td></tr>
+        <tr><td><span class="typ t-flow">WORKFLOW</span></td><td>Ustalona kolejność kroków — jak procedura firmowa, tylko wykonuje się sama.</td></tr>
+      </tbody>
+    </table>
+    <table>
+      <thead><tr><th colspan="2">Zakresy</th></tr></thead>
+      <tbody>
+        <tr><td style="width:130px"><span class="z z0">Z0 · Setup techniczny</span></td><td>Dostępy, środowisko, połączenia z systemami, bazy wiedzy</td></tr>
+        <tr><td style="width:130px"><span class="z zmc">MC · Mission Control</span></td><td>Kokpit, raporty, alerty, asystent do danych</td></tr>
+        <tr><td style="width:130px"><span class="z z1">Z1 · Analityka i pomiar</span></td><td>Pomiar, GA4, UTM, pętla zwrotna, połączenia</td></tr>
+        <tr><td style="width:130px"><span class="z z2">Z2 · Media</span></td><td>Google Ads, Meta Ads, ścieżki, alokacja</td></tr>
+        <tr><td style="width:130px"><span class="z z3">Z3 · Konwersja i UX</span></td><td>Konwersja, UX, strony ofertowe, testy</td></tr>
+        <tr><td style="width:130px"><span class="z z4">Z4 · Widoczność lokalna i AI</span></td><td>Widoczność lokalna, asystenci AI, opinie</td></tr>
+        <tr><td style="width:130px"><span class="z z5">Z5 · Raportowanie i komunikacja</span></td><td>Spotkania, planowanie, podsumowania, inicjatywy</td></tr>
+        <tr><td style="width:130px"><span class="z z6">Z6 · Narzędzia</span></td><td>UTMomat, Ścieżkomat, mapa ekosystemu, agenci konwersji</td></tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+<!-- ===== RYTM OPERACYJNY ===== -->
+<div class="card" id="rytm">
+  <h2>Rytm operacyjny</h2>
+  <p class="h2sub">Elementy z tabel niżej nie odpalają się przypadkiem. <b>Każdy ma swój rytm</b> — dzienny, tygodniowy, miesięczny albo wyzwalany zdarzeniem. Tak wygląda tydzień i miesiąc pracy systemu.</p>
+  <div class="rytm">
+    <article><span class="r-t">codziennie</span><h3>Pętla jakości leadów</h3><p>Zgłoszenie → walidacja BDC → informacja o sprzedaży wraca do systemu reklamowego. Algorytm uczy się na sprzedaży, nie na wypełnieniach formularza.</p></article>
+    <article><span class="r-t">poniedziałek rano</span><h3>Raport tygodniowy</h3><p>Na kanale zespołu, bez zamawiania. Co poszło w górę, co wymaga uwagi, co czeka w kalendarzu inicjatyw.</p></article>
+    <article><span class="r-t">co miesiąc</span><h3>Przegląd i alokacja</h3><p>Budżet według priorytetów magazynowych i sprzedażowych, wnioski z danych, decyzja co skalować, a co wygasić.</p></article>
+    <article><span class="r-t">w cyklu</span><h3>Testowanie</h3><p>Hipoteza → wdrożenie → pomiar przed i po → wniosek do bazy. Bez tego cyklu testy są pojedynczymi strzałami, a nie wiedzą o kliencie.</p></article>
+    <article><span class="r-t">przed każdą akcją</span><h3>Gotowość na inicjatywę</h3><p>Przed premierą i akcją: lista kontrolna materiałów, ścieżek i pomiaru. Kalendarz zamienia się w narzędzie operacyjne.</p></article>
+  </div>
+</div>
+
+<!-- ===== AGENCI ===== -->
+<div class="card">
+  <div class="section-meta">
+    <h2>Agenci</h2>
+    <span class="count-badge c-agent">3 elementy</span>
+  </div>
+  <p class="h2sub">Trzy role, trzy różne zadania: jeden <b>podnosi</b> wynik, drugi <b>pilnuje</b>, żeby to, co działa, nie przestało działać, trzeci <b>pilnuje danych</b>, na których obaj pracują. Każdy z własnym zestawem skilli i baz. Ci sami we wszystkich zakresach.</p>
+  <table>
+    <thead><tr><th style="width:200px">Nazwa</th><th>Co robi</th><th style="width:152px">Rytm</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="nazwa">Conversion Upgrader</td>
+        <td>Czyta dane i obserwacje z audytu, generuje hipotezy do testów — z uzasadnieniem mechanizmu i przewidywanym efektem. Buduje backlog, nie pojedyncze pomysły. Cel wyjściowy: minimum 40 hipotez. <b>Pamięta poprzednie przebiegi</b> — nie podsuwa drugi raz tego, co już przetestowaliście, i zna wynik każdego testu, więc kolejne hipotezy stawia na tym, co zadziałało. Decyzję, co wchodzi do wdrożenia, podejmujecie Wy.</td>
+        <td>na żądanie + cykl miesięczny</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Conversion Keeper</td>
+        <td>Strażnik integralności pomiaru. Codziennie sprawdza, czy kluczowe zdarzenia nadal się odpalają i w oczekiwanym wolumenie. Alarmuje, gdy zmiana na stronie łamie śledzenie albo nowa kampania złamała taksonomię.</td>
+        <td>codziennie</td>
+      </tr>
+      
+      
+      <tr>
+        <td class="nazwa">Data Keeper</td>
+        <td>Strażnik danych. Jeden agent patrzący na całą analitykę, nie zespół specjalistów. Pilnuje, żeby liczby się zgadzały między systemami, mówi normalnym językiem, co widzi i czego nie rozumie. Do niego trafiają sygnały ze wszystkich zakresów.</td>
+        <td>codziennie</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note green">
+    <b>Standardy kategorii są gotowe przed wdrożeniem.</b> Sześć obszarów zakupowych, ponad 800 pytań, z osobną ścieżką dla marek chińskich (BYD, MG, Omoda, Jaecoo). Tu mamy najmocniejszą przewagę — to nie obietnica, to istniejący zasób.
+  </div>
+</div>
+
+<!-- ===== SKILLE ===== -->
+<div class="card">
+  <div class="section-meta">
+    <h2>Skille</h2>
+    <span class="count-badge c-skill">11 elementów</span>
+  </div>
+  <p class="h2sub">Jednorazowe umiejętności do wywołania na żądanie. Część to stałe rutynyI (start + kwartalnie), część jednorazowe diagnnozy, część wchodzi jako komponent do innych elementów.</p>
+  <table>
+    <thead><tr><th style="width:200px">Nazwa</th><th>Co robi</th><th style="width:152px">Rytm</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="nazwa">Audyt konfiguracji pomiaru</td>
+        <td>Sprawdza, co jest mierzone, co jest mierzone źle i czego brakuje. Wykrywa zdarzenia widmo, luki w ścieżce, rozjazdy w źródłach ruchu.</td>
+        <td>start + kwartalnie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Mapa zdarzeń</td>
+        <td>Przekłada listę mikro- i makrokonwersji z briefu na konkretne zdarzenia: co już działa, co trzeba dopiąć, jak nazwać, żeby dało się rozróżnić źródło.</td>
+        <td>jednorazowo</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Audyt kont reklamowych</td>
+        <td>Przegląd struktury, budżetów, kanibalizacji między kampaniami, jakości sygnałów konwersji. Podstawa planu przejęcia.</td>
+        <td>start</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Przegląd konkurencji w Meta</td>
+        <td>Co robią inni dealerzy premium w regionie — formaty, przekazy, intensywność. Wejście do planowania kreacji.</td>
+        <td>kwartalnie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Audyt wizualny ścieżki</td>
+        <td>Ogląda stronę oczami kupującego: co przyciąga wzrok, co jest niewidoczne mimo że istnieje, gdzie ścieżka się rwie. Obserwacja, nie lista reguł.</td>
+        <td>start + kwartalnie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Reguły zachowania czatu</td>
+        <td>Kiedy okno czatu ma się pojawić, komu i z jakim komunikatem — zależnie od zachowania na stronie. Brief wymienia to wprost.</td>
+        <td>jednorazowo</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Audyt wizytówek</td>
+        <td>Kompletność profilu każdej lokalizacji, kategorie, zdjęcia, godziny, stan opinii. Punkt wyjścia znamy: od 720 opinii w jednym salonie do 29 w innym.</td>
+        <td>na żądanie + cykl miesięczny</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Strony lokalizacyjne</td>
+        <td>Osobna strona pod każdą lokalizację obsługi, z lokalnym kontekstem i sekcją pytań i odpowiedzi. Buduje sieć obecności zamiast jednej strony kontaktowej.</td>
+        <td>fala 2</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Status automatyzacji</td>
+        <td>Pokazuje, czy mechanizmy działające w tle nadal działają — pętla zwrotna, śledzenie połączeń, odświeżanie danych. Awaria po cichu jest gorsza niż brak mechanizmu.</td>
+        <td>codziennie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Przegląd trafności alertów</td>
+        <td>Sprawdza, ile alertów z ostatniego okresu było trafnych, a ile fałszywych. Alert, któremu nikt nie ufa, przestaje być alertem — a system, którego nie czyta się po dwóch miesiącach, nie działa, nawet jeśli technicznie chodzi.</td>
+        <td>tygodniowo</td>
+      </tr>
+      
+      <tr>
+        <td class="nazwa">Gotowość na inicjatywę</td>
+        <td>Lista kontrolna przed premierą lub akcją: co ma być przygotowane, co już jest, ile procent gotowości. Zamienia kalendarz w narzędzie operacyjne.</td>
+        <td>przy inicjatywach</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== SKRYPTY ===== -->
+<div class="card">
+  <div class="section-meta">
+    <h2>Skrypty</h2>
+    <span class="count-badge c-skrypt">10 elementów</span>
+  </div>
+  <p class="h2sub">Kod deterministyczny — te same dane zawsze dają ten sam wynik. Tańszy i pewniejszy niż model językowy tam, gdzie trzeba <b>policzyć</b> zamiast <b>zinterpretować</b>.</p>
+  <table>
+    <thead><tr><th style="width:200px">Nazwa</th><th>Co robi</th><th style="width:152px">Rytm</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="nazwa">Rejestr zdarzeń</td>
+        <td>Utrzymuje aktualną listę wszystkiego, co jest mierzone na stronie: które zdarzenie, na jakiej stronie, w jakim wolumenie, czy nadal się odpala. Wykrywa zdarzenia widmo i te, których brakuje. To z niego kokpit bierze obraz stanu pomiaru.</td>
+        <td>codziennie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Ekstraktor danych GA4</td>
+        <td>Pobiera dane z konta analitycznego według ustalonej metody — te same reguły za każdym razem. Zbudowany i sprawdzony na danych Plichty, obsługuje rozszywanie formularzy o identycznych nazwach.</td>
+        <td>codziennie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Rozdzielacz połączeń</td>
+        <td>Łączy dane o połączeniach ze źródłem i frazą, klasyfikuje na serwisowe i sprzedażowe. Odpowiedź na główny ból z briefu.</td>
+        <td>codziennie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Zrzuty i kompresja widoków</td>
+        <td>Automatyczne zbieranie widoków stron do audytu — przez zalogowaną przeglądarkę, z kompresją. Podstawa pod analizę wizualną i dokumentację przed/po.</td>
+        <td>na żądanie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Kontrola spójności danych firmowych</td>
+        <td>Sprawdza, czy nazwa, adres i telefon są identyczne w katalogach zewnętrznych. Rozbieżności obniżają zaufanie algorytmów do wiarygodności firmy.</td>
+        <td>miesięcznie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Ocena cytowalności strony</td>
+        <td>Sprawdza, czy treść nadaje się do zacytowania przez asystenta AI: struktura odpowiedzi, dane liczbowe, oznaczenia semantyczne. Wynik punktowy, powtarzalny.</td>
+        <td>kwartalnie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Odświeżanie pulpitu</td>
+        <td>Pobiera dane i przebudowuje widok Mission Control bez udziału człowieka. <b>Działa już na koncie Plichty</b> — uruchamia się codziennie rano.</td>
+        <td>codziennie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Wyliczanie punktów odniesienia</td>
+        <td>Liczy własne normy z historii: jaka jest typowa wartość każdego wskaźnika w dłuższym okresie. Norm się nie wymyśla — wyciąga się je z danych.</td>
+        <td>tygodniowo</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Standardy kategorii</td>
+        <td>Generator mapy tego, o co realnie pyta kupujący auto — z rozbiciem na etapy decyzji i bariery. <b>Dla motoryzacji już zbudowany: sześć kategorii, ponad 800 pytań.</b></td>
+        <td>jednorazowo + rozbudowa</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Publikacja raportów</td>
+        <td>Wystawianie dokumentów pod stały adres, z kontrolą wersji. Klient dostaje link, nie załącznik.</td>
+        <td>przy każdym raporcie</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== AUTOMATY ===== -->
+<div class="card">
+  <div class="section-meta">
+    <h2>Automaty</h2>
+    <span class="count-badge c-auto">4 elementy</span>
+  </div>
+  <p class="h2sub">Odpalają się bez człowieka — zegarem lub zdarzeniem. To one zamieniają system w coś, co <em>samo mówi, kiedy coś wymaga uwagi</em>.</p>
+  <table>
+    <thead><tr><th style="width:200px">Nazwa</th><th>Co robi</th><th style="width:152px">Rytm</th></tr></thead>
+    <tbody>
+      
+      <tr>
+        <td class="nazwa">Wyprzedzenie kalendarza</td>
+        <td>Przypomina o nadchodzącej premierze lub akcji i pokazuje stan gotowości materiałów. Audi pracuje inicjatywami — premiera zaskakująca zespół to stracony budżet.</td>
+        <td>tygodniowo</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Monitoring obecności w AI</td>
+        <td>Regularne sprawdzanie, czy firma pojawia się w odpowiedziach asystentów na pytania o dealerów w regionie — i z jakim kontekstem.</td>
+        <td>miesięcznie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Wykrywanie odchyleń</td>
+        <td>Porównuje bieżący wynik z normą. Odchylenie 15% to sygnał ostrzegawczy, 25% — alarm. Działa w obie strony, bo nagły wzrost też wymaga zrozumienia.</td>
+        <td>codziennie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Raport tygodniowy</td>
+        <td>Podsumowanie na kanale zespołu w poniedziałek rano: co poszło w górę, co wymaga uwagi, co czeka w kalendarzu. Bez zamawiania analizy.</td>
+        <td>tygodniowo</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== WORKFLOWY ===== -->
+<div class="card">
+  <div class="section-meta">
+    <h2>Workflowy</h2>
+    <span class="count-badge c-flow">9 elementów</span>
+  </div>
+  <p class="h2sub">Ustalona kolejność kroków, która wykonuje się sama. Część spina zakres analityczny z mediowym, część to powtarzalne procedury operacyjne.</p>
+  <table>
+    <thead><tr><th style="width:200px">Nazwa</th><th>Co robi</th><th style="width:152px">Rytm</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="nazwa"><a href="UTMOMAT.html" style="color:#12007e;text-decoration:none;border-bottom:1.5px solid #c5bcf0">UTMomat →</a></td>
+        <td>Reguła oznaczania źródeł u samego źródła — zamiast sprzątać „not set" co kwartał, nie dopuszcza do jego powstania. Generator adresów według słownika kategorii, spójny dla obu kanałów płatnych.</td>
+        <td>przy każdej kampanii</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Pętla zwrotna do kampanii</td>
+        <td>Cykl: zgłoszenie → walidacja → sprzedaż → z powrotem do systemu reklamowego jako sygnał jakości. Dzięki temu algorytm uczy się na sprzedaży, a nie na wypełnieniach formularza.</td>
+        <td>codziennie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Bramka nadzoru</td>
+        <td>Zapisana granica autonomii: co system robi sam, co wymaga akceptu i kto akceptuje. Zmiany o skutku budżetowym lub wizerunkowym przechodzą przez bramkę; rutyna idzie sama. Bez tego „agent pracuje, kiedy nikt nie patrzy" jest obietnicą bez ram.</td>
+        <td>przy każdej akcji systemu</td>
+      </tr>
+      
+      <tr>
+        <td class="nazwa">Rozdział serwis / sprzedaż</td>
+        <td>Wgranie bazy obecnych klientów jako wykluczenie, osobne tory kampanii, kontrola nakładania się fraz. Rozwiązuje problem intencji za słowem kluczowym.</td>
+        <td>na żądanie + cykl miesięczny</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Alokacja za magazynem</td>
+        <td>Miesięczna realokacja budżetu według priorytetów modeli i dostępności aut, nie według historycznych proporcji. Wymaga terminu przekazywania danych od klienta.</td>
+        <td>miesięcznie</td>
+      </tr>
+      <tr>
+        <td class="nazwa"><a href="SCIEZKOMAT.html" style="color:#12007e;text-decoration:none;border-bottom:1.5px solid #c5bcf0">Ścieżkomat →</a></td>
+        <td>Narzędzie planistyczne: na wejściu kombinacja formatu i kanału, na wyjściu zaprojektowana ścieżka i wskazanie, jaki materiał ma czekać po drugiej stronie kliknięcia. Spina planowanie mediów z tym, co dzieje się na stronie.</td>
+        <td>przy każdej inicjatywie</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Generator stron ofertowych</td>
+        <td>Budowanie stron kampanijnych z treścią zamiast obecnego wzorca z formularzem nad linią przewijania. Struktura zależna od modelu, etapu decyzji i źródła ruchu.</td>
+        <td>przy inicjatywach</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Cykl testowania</td>
+        <td>Hipoteza → wdrożenie → pomiar przed i po → wniosek do bazy. Bez tego cyklu testy są jednorazowymi strzałami, a nie budowaniem wiedzy o kliencie.</td>
+        <td>ciągle</td>
+      </tr>
+      <tr>
+        <td class="nazwa">Program opinii</td>
+        <td>Systematyczne pozyskiwanie i odpowiadanie na opinie. Opinie są dosłownie cytowane przez asystentów AI — to nie jest kosmetyka wizerunkowa, tylko materiał źródłowy.</td>
+        <td>ciągle</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== PODSUMOWANIE ===== -->
+<div class="card">
+  <h2>Co się na to składa</h2>
+  <p class="h2sub">Trzydzieści siedem elementów w pięciu typach. Część z nich pracuje już dziś w naszym warsztacie, część powstaje pod ten przypadek — a wszystkie stoją na jednym fundamencie technicznym i obsługują wszystkie zakresy naraz.</p>
+  <div class="sumgrid">
+    <div class="sumbox"><strong style="color:#a8143a">3</strong><span>Agenci</span></div>
+    <div class="sumbox"><strong style="color:#1a56b8">11</strong><span>Skille</span></div>
+    <div class="sumbox"><strong style="color:#136c35">10</strong><span>Skrypty</span></div>
+    <div class="sumbox"><strong style="color:#8a5108">4</strong><span>Automaty</span></div>
+    <div class="sumbox"><strong style="color:#6b32a8">9</strong><span>Workflowy</span></div>
+  </div>
+  <div class="note green" style="margin-top:16px">
+    <b>To nie jest lista życzeń.</b> Część tych elementów pracuje dziś na Waszych danych — ekstraktor GA4 i odświeżanie pulpitu chodzą codziennie rano od czerwca, standardy kategorii dla motoryzacji powstały przed złożeniem tej oferty, a reguła oznaczania źródeł działa na innym wdrożeniu. Reszta powstaje pod ten przypadek.
+  </div>
+</div>
+
+<footer>Silnik wykonawczy · Audi Grupa Plichta · lipiec 2026</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission Control — Audi Grupa Plichta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;--ink:#0a0a0a;--muted:#5b6472;--faint:#8b93a2;--line:#e6e6e9;
+    --green:#16a34a;--green-d:#15803d;--green-soft:#e7f6ec;--green-line:#b7e3c4;
+    --orange:#f5751a;--orange-d:#dd5e0a;--orange-soft:#fff2e8;--orange-line:#f8c39a;
+    --blue:#0f7ae5;--blue-d:#0a63bd;--blue-soft:#e9f3fd;--blue-line:#a9d2f6;
+    --violet:#1800ad;--violet-d:#12007e;--violet-soft:#ece9fb;--violet-line:#c5bcf0;
+    --bord:#8d0a31;--bord-d:#6d0725;--bord-soft:#fcebf2;--bord-line:#e8b4c6;
+    --dark:#1a1f2b;
+    --grotesk:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--grotesk);background:var(--bg);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;font-size:16px;padding:74px 34px 100px;
+    background-image:radial-gradient(circle at 8% 0,#eeebfd 0,transparent 42%),radial-gradient(circle at 96% 3%,#fdeef4 0,transparent 36%);background-repeat:no-repeat}
+  .wrap{max-width:1420px;margin:0 auto}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:15px}
+  h1{font-size:clamp(34px,5vw,54px);font-weight:700;letter-spacing:-.035em;line-height:1.03;margin-bottom:14px}
+  h1 .g{color:var(--violet)}
+  .lede{color:var(--muted);font-size:19px;max-width:940px;line-height:1.5}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;margin-bottom:36px}
+  .badge{font-family:var(--mono);font-size:11px;font-weight:600;padding:6px 11px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--faint)}
+  .badge.draft{color:var(--bord);border-color:var(--bord-line);background:var(--bord-soft)}
+  .badge.live{color:var(--green-d);border-color:var(--green-line);background:var(--green-soft)}
+  .card{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:26px 28px;margin-bottom:20px;box-shadow:0 8px 26px rgba(20,26,45,.05)}
+  h2{font-size:24px;font-weight:700;letter-spacing:-.025em;line-height:1.15;margin-bottom:6px}
+  .h2sub{color:var(--muted);font-size:15px;margin-bottom:22px;line-height:1.55;max-width:980px}
+
+  .mods{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+  @media(max-width:1050px){.mods{grid-template-columns:1fr 1fr}}
+  @media(max-width:680px){.mods{grid-template-columns:1fr}}
+  .mod{border:1.5px solid var(--line);border-radius:15px;padding:16px 18px;background:#fbfaff}
+  .mod .mn{font-size:16px;font-weight:700;letter-spacing:-.015em;margin-bottom:5px;color:var(--violet-d)}
+  .mod .md{font-size:13.5px;color:var(--muted);line-height:1.5}
+
+  .chat{background:var(--dark);border-radius:19px;overflow:hidden;border:1.5px solid #2f3846}
+  .chat-head{display:flex;align-items:center;gap:10px;padding:13px 20px;background:#141822;border-bottom:1px solid #2f3846;font-family:var(--mono);font-size:11.5px;color:#8d97a8;letter-spacing:.05em}
+  .chat-time{margin-left:auto;font-size:11px;color:#5f6b7e}
+  .chat-body{padding:20px 22px;font-size:14.5px;color:#c3cad6;line-height:1.85}
+  .chat-body b{color:#fff}
+  .up{color:#5fbf85;font-weight:600}.down{color:#f08d8d;font-weight:600}.warn{color:#e9b665;font-weight:600}
+
+  .ref{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;align-items:start}
+  @media(max-width:1000px){.ref{grid-template-columns:1fr}}
+  .shot{border:1.5px solid var(--line);border-radius:15px;overflow:hidden;background:#fff}
+  .shot .cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding:11px 15px;border-bottom:1px solid var(--line);font-weight:600;background:#fbfaff}
+  .shot img{display:block;width:100%;height:auto}
+  .shot.tall{max-height:540px;overflow-y:auto}
+  .reftxt p{font-size:14.5px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+  .reftxt b{color:var(--ink)}
+
+  .note{border-left:3px solid var(--violet);background:var(--violet-soft);padding:15px 19px;border-radius:0 13px 13px 0;font-size:14.5px;margin-top:18px;color:var(--muted);line-height:1.6}
+  .note b{color:var(--violet-d)}
+  .note.green{border-left-color:var(--green);background:var(--green-soft);color:#2f4a3c}
+  .note.green b{color:var(--green-d)}
+  .note.warn{border-left-color:var(--bord);background:var(--bord-soft);color:var(--bord-d)}
+  .note.warn b{color:var(--bord)}
+  footer{color:var(--faint);font-family:var(--mono);font-size:11.5px;padding:16px 4px 30px;text-align:center}
+#doc-tag-fix{position:fixed;top:18px;left:186px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#12007e;background:rgba(236,233,251,.96);backdrop-filter:blur(8px);padding:8px 13px;border-radius:9px;white-space:nowrap;box-shadow:0 2px 10px rgba(20,26,45,.06)}
+@media(max-width:900px){#doc-tag-fix{display:none}}
+</style>
+<script src="brama.js"></script>
+</head>
+<body>
+<a href="PLICHTA_START.html" style="position:fixed;top:18px;left:18px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#5b6472;text-decoration:none;padding:8px 14px;border:1px solid #e6e6e9;border-radius:9px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(20,26,45,.06)">← Menu Startowe</a>
+<span id="doc-tag-fix">narzędzie · Mission Control</span>
+
+<div class="wrap">
+  <div class="kicker">Audi Grupa Plichta · narzędzie · Mission Control</div>
+  <h1>Mission Control — <span class="g">jedno miejsce, w którym widać całość</span></h1>
+  <p class="lede">Analityka nie jest raportem, który się zamawia. Jest stanem, który widać. Mission Control zbiera sygnały ze wszystkich zakresów, liczy Wasze normy z Waszej historii i odzywa się sam, kiedy coś odbiega. Poniżej: jak to wygląda w praktyce i dwa dowody, że nie jest to makieta.</p>
+  <div class="badges">
+    <span class="badge live">Pulpit działa dziś na Waszych danych</span>
+    <span class="badge">Zakres: MC · Nadzór</span>
+  </div>
+
+  <!-- ══ CO KONKRETNIE WIDAĆ ══ -->
+  <div class="card">
+    <h2>Co konkretnie widać w kokpicie</h2>
+    <p class="h2sub">Pięć źródeł w jednym miejscu. Zamiast siedmiu paneli otwieranych osobno — jeden pulpit, w którym dane już są zestawione.</p>
+    <div class="mods">
+      <div class="mod"><div class="mn">Analityka GA4</div><div class="md">Ruch, zachowanie i konwersje ze wszystkich Waszych usług pomiarowych, sprowadzone do jednego widoku.</div></div>
+      <div class="mod"><div class="mn">Analityka łączona: Meta, Google i GA4</div><div class="md">Te same kampanie w trzech soczewkach naraz, żeby było widać, która liczba jest zawyżona, a która wiarygodna.</div></div>
+      <div class="mod"><div class="mn">Dane z CRM</div><div class="md">Walidacja leadów i konwersja na sprzedaż: co z pozyskanych zgłoszeń faktycznie skończyło się zamówieniem.</div></div>
+      <div class="mod"><div class="mn">Analityka SEO i GEO</div><div class="md">Pozycje i widoczność z Search Console oraz z narzędzi dedykowanych do odpowiedzi asystentów AI.</div></div>
+      <div class="mod"><div class="mn">Asystent AI do rozmowy o danych</div><div class="md">Pytania zadaje się normalnym językiem, bez budowania raportu. Przykład działającego asystenta jest w dokumencie Referencje.<br><a href="REFERENCJE.html" style="display:inline-block;margin-top:8px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--violet-d);text-decoration:none;border-bottom:1.5px solid var(--violet-line);padding-bottom:2px">Referencje: pulpit z asystentem →</a></div></div>
+    </div>
+  </div>
+
+  <!-- ══ SCENKA ══ -->
+  <div class="card">
+    <h2>Poniedziałek, 7:00 — zanim ktokolwiek otworzy panel reklamowy</h2>
+    <p class="h2sub">To nie jest opis funkcji. To jest wiadomość, która czeka na kanale zespołu. Trzy rzeczy dzieją się tu naraz i żadna nie wymagała zamówienia analizy.</p>
+    <div class="chat">
+      <div class="chat-head">Discord · #mission-control-audi-plichta<span class="chat-time">7:00</span></div>
+      <div class="chat-body">
+        <b>🤖 Mission Control</b> — Tydzień 34 · trzy rzeczy w normie, dwie wymagają uwagi<br><br>
+        <span class="up">▲</span> Zwalidowany CPL Q5: <b>340 zł</b> (−12% m/m) · Wasza norma 380 zł<br>
+        <span class="up">▲</span> Hot leady z Search: <b>18</b> · rekord od sześciu miesięcy<br>
+        <span class="up">▲</span> Widoczność lokalna Gdańsk + Bydgoszcz ↑ · Stadion 29 → 63 recenzje<br>
+        <span class="down">▼</span> Landing „A3 2026" — CR spadł do <b>1,1%</b> przy Waszej normie 1,9%<br>
+        &nbsp;&nbsp;&nbsp;↳ Hipoteza: zmiana formularza 12.08? Do sprawdzenia z deweloperem.<br>
+        <span class="warn">⚠</span> Za trzy tygodnie premiera Q6 e-tron · gotowość materiałów <b>40%</b><br>
+        &nbsp;&nbsp;&nbsp;↳ Brakuje: dwóch kreacji Search, LP dla Gdyni, briefu dla BDC.
+      </div>
+    </div>
+    <div class="note">
+      <b>Benchmark, nie liczba.</b> „CR 1,1%" nic nie mówi — „1,1% przy Waszej normie 1,9%" zmusza do pytania, co się zmieniło. <b>Anomalia z tropem</b>, nie sam alert: system nie stawia diagnozy, wskazuje kierunek. <b>Wyprzedzenie o trzy tygodnie</b>, bo kalendarz inicjatyw jest w środku systemu, a nie w czyjejś skrzynce.
+    </div>
+  </div>
+
+  <!-- ══ DOWÓD 1: PODEJŚCIE WIZUALNE ══ -->
+  <div class="card">
+    <h2>Podejście wizualne — mierzona rzecz obok swojego obrazka</h2>
+    <p class="h2sub">To jest metoda, nie ozdobnik. Kiedy raport mówi „<span style="font-family:var(--mono);font-size:13px">form_APL_sent</span> — 15 rozpoczęć, 12 konwersji", nikt w firmie nie wie, o który formularz chodzi. Dlatego <b>każdy mierzony formularz stoi w raporcie obok zrzutu ekranu samego siebie</b>, ze swoją nazwą zdarzenia, adresem i liczbami. Zrobiliśmy to dla Was w czerwcu — dziewięć formularzy, wszystkie zmatchowane z GA4.</p>
+
+    <div class="shot">
+      <div class="cap">Raport GA4 Audi Plichta · zakładka „Formularze — szczegóły" · 9 formularzy</div>
+      <img src="_img/audi_formularze_wizualnie.jpg" alt="Raport GA4 — formularze z ich zrzutami ekranu, eventami i konwersjami">
+    </div>
+
+    <div class="note green">
+      <b>Co ta jedna zakładka rozstrzygnęła.</b> Że <span style="font-family:var(--mono);font-size:13px">form_jazda-testowa</span> i <span style="font-family:var(--mono);font-size:13px">Formularz_jazda_testowa</span> to ten sam formularz z dwóch różnych tagów. Że siedem zdarzeń widzianych przez GA4 nie występuje w ogóle na Waszej liście formularzy. I że jazda testowa konwertuje na <b>54,2%</b> — przy 24 rozpoczęciach. Bez zrzutów obok liczb żadnej z tych rzeczy nie dałoby się zauważyć ani obronić na spotkaniu.
+    </div>
+  </div>
+
+  <!-- ══ DOWÓD 2: GLOV CROSS-SOURCE ══ -->
+  <div class="card">
+    <h2>Referencja — połączona analityka, która już działa</h2>
+    <p class="h2sub">Panel reklamowy i analityka strony zawsze pokażą inne liczby. Pytanie nie brzmi „które się myli", tylko „jak je zestawić, żeby wiedzieć, ile naprawdę kosztowała sprzedaż". Poniżej gotowy widok zbudowany dla klienta e-commerce: <b>ta sama kampania w trzech systemach obok siebie, złączona po oznaczeniu UTM</b>.</p>
+
+    <div class="shot">
+      <div class="cap">Kampanie w trzech systemach naraz · złączenie po <span style="font-family:var(--mono)">sessionCampaignName</span> (UTM)</div>
+      <img src="_img/glov_cross.jpg" alt="Zestawienie kampanii: Meta Ads pixel, GA4 last-click po UTM, oraz sprzedaz ze sklepu">
+    </div>
+
+    <div class="note warn">
+      <b>To jest cała teza w jednym obrazku.</b> Ta sama kampania ma trzy różne wyniki zależnie od tego, kogo zapytasz: panel reklamowy zawyża o około 40%, bo liczy też wyświetlenia; analityka strony zaniża, bo gubi konwersje wspomagane; dopiero zestawienie z realną sprzedażą daje wskaźnik, na którym można oprzeć decyzję budżetową. <b>Bez wspólnego oznaczenia UTM tego zestawienia nie da się zrobić w ogóle</b> — i to jest odpowiedź, po co UTMomat.
+    </div>
+
+    <div class="note green">
+      <b>Jak to wygląda u Was.</b> Zamiast sklepu po prawej stronie stoi CRM i zamówienie w salonie. Zamiast zakupu — zwalidowany kontakt i sprzedane auto. Kolumny się zmieniają, mechanizm zostaje ten sam: koszt bierzemy z kont reklamowych, zachowanie z analityki strony, prawdę o sprzedaży z CRM, a spina to jedno oznaczenie pilnowane przez <a href="UTMOMAT.html" style="color:var(--green-d);font-weight:600">UTMomat</a>.
+    </div>
+  </div>
+
+  <!-- ══ MODUŁY ══ -->
+  <div class="card">
+    <h2>Dziewięć modułów kokpitu</h2>
+    <p class="h2sub">Każdy odpowiada na jedno pytanie, które dziś wymaga maila do agencji albo nie ma odpowiedzi w ogóle.</p>
+    <div class="mods">
+      <div class="mod"><div class="mn">Punkty odniesienia</div><div class="md">Wasze normy liczone z Waszej historii. Norm się nie wymyśla — wyciąga się je z danych.</div></div>
+      <div class="mod"><div class="mn">Alerty odchyleń z tropem</div><div class="md">15% to sygnał, 25% to alarm. W obie strony — nagły wzrost też wymaga zrozumienia. Z hipotezą, nie samym alertem.</div></div>
+      <div class="mod"><div class="mn">Pętla CPL → CPS</div><div class="md">Zwalidowany koszt kontaktu i koszt sprzedanego auta, z CRM, w podziale na model i salon.</div></div>
+      <div class="mod"><div class="mn">Priorytety magazynowe</div><div class="md">Feed z New Car Sales: model × salon × dni na parkingu → miesięczna decyzja budżetowa.</div></div>
+      <div class="mod"><div class="mn">Status pomiaru</div><div class="md">Czy pętla zwrotna, śledzenie połączeń i odświeżanie danych nadal działają. Awaria po cichu jest gorsza niż brak mechanizmu.</div></div>
+      <div class="mod"><div class="mn">Kalendarz inicjatyw i przypominacz</div><div class="md">Premiery i akcje z trzytygodniowym wyprzedzeniem. Przypominacz odzywa się sam: co przygotować, do kiedy, czyja to pozycja.</div></div>
+      <div class="mod"><div class="mn">Lista napraw</div><div class="md">Wszystkie problemy ze wszystkich audytów w jednym miejscu — priorytet, właściciel, status.</div></div>
+      <div class="mod"><div class="mn">Odpalanie workflowów</div><div class="md">Audyty i analizy uruchamiane z kokpitu. Klikacie i system rusza — bez maila z prośbą o raport.</div></div>
+      <div class="mod"><div class="mn">Interaktywny asystent</div><div class="md">Pytacie normalnym językiem, odpowiada z Waszych danych. Zna kanały, modele, salony i lejek. Dyskutuje, nie dyktuje.</div></div>
+    </div>
+  </div>
+
+  <footer>Mission Control · Audi Grupa Plichta · lipiec 2026</footer>
+</div>
+</body>
+</html>

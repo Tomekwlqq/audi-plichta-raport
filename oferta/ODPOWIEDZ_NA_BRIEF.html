@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Odpowiedź na brief — Audi Grupa Plichta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;--ink:#0a0a0a;--muted:#5b6472;--faint:#8b93a2;--line:#e6e6e9;
+  --green:#16a34a;--green-d:#15803d;--green-soft:#e7f6ec;--green-line:#b7e3c4;
+  --orange:#f5751a;--orange-d:#dd5e0a;--orange-soft:#fff2e8;--orange-line:#f8c39a;
+  --blue:#0f7ae5;--blue-d:#0a63bd;--blue-soft:#e9f3fd;--blue-line:#a9d2f6;
+  --violet:#1800ad;--violet-d:#12007e;--violet-soft:#ece9fb;--violet-line:#c5bcf0;
+  --bord:#8d0a31;--bord-d:#6d0725;--bord-soft:#fcebf2;--bord-line:#e8b4c6;
+  --dark:#1a1f2b;
+  --grotesk:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--grotesk);background:var(--bg);color:var(--ink);line-height:1.6;
+  -webkit-font-smoothing:antialiased;font-size:16px;padding:0 0 90px}
+
+/* ── topbar ── */
+.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:11px 30px;background:rgba(255,255,255,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.back{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;
+  padding:7px 13px;border:1px solid var(--line);border-radius:9px;background:#fff;white-space:nowrap;transition:.15s}
+.back:hover{border-color:var(--violet);color:var(--violet-d)}
+.doc-tag{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--violet-d);background:var(--violet-soft);padding:7px 12px;border-radius:9px;white-space:nowrap}
+@media(max-width:1100px){.doc-tag{display:none}}
+.topbar nav{display:flex;gap:4px;flex-wrap:wrap}
+.topbar nav a{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--muted);text-decoration:none;
+  padding:6px 11px;border-radius:8px;letter-spacing:.03em;transition:.15s}
+.topbar nav a:hover{background:var(--violet-soft);color:var(--violet-d)}
+.topbar nav a.active{background:var(--violet);color:#fff}
+.tools{margin-left:auto;display:flex;align-items:center;gap:8px}
+.save{font-family:var(--mono);font-size:11px;color:var(--green-d);white-space:nowrap}
+.btn{font-family:var(--mono);font-size:11.5px;font-weight:600;padding:7px 12px;border-radius:9px;
+  border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;transition:.15s;white-space:nowrap}
+.btn:hover{border-color:var(--violet);color:var(--violet-d)}
+.btn.pri{background:var(--bord);border-color:var(--bord);color:#fff}
+.btn.pri:hover{background:var(--bord-d);border-color:var(--bord-d);color:#fff}
+
+/* ── hero ── */
+.hero{padding:60px 34px 26px;background-image:radial-gradient(circle at 8% 0,#eeebfd 0,transparent 46%),radial-gradient(circle at 96% 4%,#fdeef4 0,transparent 40%)}
+.hero .shell{max-width:1180px;margin:0 auto}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:15px}
+.hero h1{font-size:clamp(32px,4.8vw,52px);font-weight:700;letter-spacing:-.035em;line-height:1.04;margin-bottom:15px}
+.hero h1 .g{color:var(--violet)}
+.hero .lede{color:var(--muted);font-size:19px;max-width:760px;line-height:1.55}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.badge{font-family:var(--mono);font-size:11px;font-weight:600;padding:6px 11px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--faint)}
+.badge.draft{color:var(--bord);border-color:var(--bord-line);background:var(--bord-soft)}
+
+/* ── sekcje ── */
+.section{padding:44px 34px}
+.section.soft{background:#fbfaff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.shell{max-width:1180px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:11px}
+.section-head{margin-bottom:26px}
+.section-head h2{font-size:clamp(25px,3.2vw,35px);font-weight:700;letter-spacing:-.028em;line-height:1.12;margin-bottom:11px}
+.punchline{font-size:18px;color:var(--ink);max-width:820px;line-height:1.5;font-weight:500}
+.punchline em{font-style:normal;color:var(--violet);font-weight:700}
+.muted{color:var(--muted);font-size:15.5px;line-height:1.6;max-width:880px}
+
+
+/* ── zakres działań ── */
+.zak-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+@media(max-width:900px){.zak-grid{grid-template-columns:1fr}}
+.zak{background:#fff;border:1.5px solid var(--line);border-radius:19px;padding:21px 23px;transition:.17s}
+.zak:hover{border-color:var(--violet-line);box-shadow:0 14px 34px rgba(20,26,45,.08)}
+.zak-h{display:flex;align-items:center;gap:11px;margin-bottom:13px}
+.zak-kod{font-family:var(--mono);font-size:10px;font-weight:700;color:#fff;padding:4px 9px;border-radius:6px;letter-spacing:.08em}
+.zak-h h3{font-size:18px;font-weight:700;letter-spacing:-.018em}
+.zak ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.zak li{font-size:13.5px;color:var(--muted);line-height:1.45;padding-left:16px;position:relative}
+.zak li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--violet-line)}
+
+.zak-t{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--violet-d);margin:4px 0 9px}
+.zak-t.ciag{color:var(--faint);margin-top:15px;padding-top:13px;border-top:1px solid #f1eff7}
+.zak ul.cia li::before{background:var(--line)}
+
+/* ── plan: tory zakresów ── */
+.gantt{border:1.5px solid var(--line);border-radius:19px;overflow:hidden;background:#fff;margin-top:24px}
+.g-head,.g-row{display:grid;grid-template-columns:230px repeat(4,1fr)}
+.g-head{background:var(--dark);color:#fff;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:600}
+.g-head span{padding:12px 13px}
+.g-head span:first-child{padding-left:18px}
+.g-row{border-top:1px solid #f1eff7}
+.g-row:hover{background:#fbfaff}
+.g-lab{padding:15px 13px 15px 18px;display:flex;flex-direction:column;gap:7px;border-right:1px solid #f1eff7}
+.g-lab b{font-size:14.5px;line-height:1.25}
+.g-kod{align-self:flex-start;font-family:var(--mono);font-size:10px;font-weight:700;color:#fff;padding:3px 8px;border-radius:6px;letter-spacing:.08em}
+.g-c{padding:15px 13px;font-size:12.5px;line-height:1.45;color:var(--muted);border-right:1px solid #f7f6fb}
+.g-c:last-child{border-right:none}
+.g-c.pusta{background:repeating-linear-gradient(135deg,#fafafc 0 6px,#fff 6px 12px)}
+@media(max-width:1000px){.g-head{display:none}.g-row{grid-template-columns:1fr}.g-lab{border-right:none;border-bottom:1px solid #f1eff7}
+  .g-c{border-right:none}.g-c::before{content:attr(data-m);display:block;font-family:var(--mono);font-size:9.5px;color:var(--faint)}
+  .g-c.pusta{display:none}}
+.mile{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px}
+.mile-c{background:#fff;border:1.5px solid var(--line);border-radius:17px;padding:18px 20px}
+.mile-t{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-d)}
+.mile-c h3{font-size:16px;font-weight:700;line-height:1.25;margin:8px 0 7px;letter-spacing:-.015em}
+.mile-c p{font-size:13.5px;color:var(--muted);line-height:1.5}
+.kam-note{margin-top:18px;background:var(--dark);color:#c3cad6;border-radius:15px;padding:17px 21px;font-size:14px;line-height:1.55}
+.kam-note b{color:#fff}
+
+
+.wiz-doc{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
+.wd-h{font-size:21px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.rozdz.dwa{grid-template-columns:1fr 1fr}
+@media(max-width:820px){.rozdz.dwa{grid-template-columns:1fr}}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+@media(max-width:900px){.prob-grid{grid-template-columns:1fr}}
+.prob{background:#fff;border:1.5px solid var(--line);border-radius:19px;padding:20px 22px;transition:.17s}
+.prob:hover{border-color:var(--bord-line);box-shadow:0 14px 34px rgba(20,26,45,.08)}
+.prob-nr{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.12em;color:var(--bord);background:var(--bord-soft);padding:3px 9px;border-radius:6px}
+.prob h3{font-size:17px;font-weight:700;line-height:1.25;letter-spacing:-.018em;margin:10px 0 7px}
+.prob p{font-size:13.5px;color:var(--muted);line-height:1.5}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:20px}
+.price{background:#fff;border:1.5px solid var(--line);border-radius:19px;padding:22px 24px}
+.price.featured{background:var(--dark);color:#fff;border-color:var(--dark)}
+.price.featured h3,.price.featured .amount{color:#fff}
+.price.featured li,.price.featured .muted{color:#c3cad6}
+.price h3{font-size:19px;font-weight:700;margin-bottom:10px;letter-spacing:-.018em}
+.price .amount{display:block;font-family:var(--mono);font-size:25px;font-weight:700;color:var(--violet-d);margin-bottom:13px}
+.price .amount small{font-size:12px;font-weight:500;color:var(--faint)}
+.price ul{margin-left:19px}
+.price li{font-size:13.5px;color:var(--muted);line-height:1.6}
+
+/* zajawki */
+.rozdz{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:16px;margin-top:26px}
+.rz{text-decoration:none;color:inherit;background:#fff;border:1.5px solid var(--line);border-radius:19px;padding:22px 23px;
+  position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform .17s cubic-bezier(.2,.7,.3,1),box-shadow .17s,border-color .17s}
+.rz::before{content:'';position:absolute;inset:0 0 auto 0;height:4px;background:var(--c)}
+.rz:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(20,26,45,.11);border-color:var(--c)}
+.rz h3{font-size:19px;font-weight:700;letter-spacing:-.018em;margin:6px 0 8px}
+.rz>p{font-size:13.5px;color:var(--muted);line-height:1.5;margin-bottom:13px}
+.rz ul{list-style:none;display:flex;flex-direction:column;gap:6px;flex:1}
+.rz li{font-family:var(--mono);font-size:11.5px;color:var(--faint);line-height:1.4;padding-left:13px;position:relative}
+.rz li::before{content:'·';position:absolute;left:2px;color:var(--c);font-weight:700}
+.rz-go{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--c);margin-top:15px}
+
+/* ── pokrycie 8 warunków ── */
+.pok{border:1.5px solid var(--line);border-radius:19px;overflow:hidden;background:#fff;margin-top:24px}
+.pok-h{display:grid;grid-template-columns:56px 1.15fr 1.9fr 150px;background:var(--dark);color:#fff;
+  font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;font-weight:600;padding:12px 18px}
+.pok-r{display:grid;grid-template-columns:56px 1.15fr 1.9fr 150px;padding:14px 18px;border-top:1px solid #f1eff7;align-items:start}
+.pok-r:hover{background:#fbfaff}
+.pok-r .nr{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--violet-d)}
+.pok-r .zad{font-size:14px;font-weight:700;line-height:1.35;padding-right:12px}
+.pok-r .daj{font-size:13.5px;color:var(--muted);line-height:1.5;padding-right:12px}
+.pok-r .gdz{font-family:var(--mono);font-size:11.5px;font-weight:600}
+.pok-r .gdz a{color:var(--violet-d);text-decoration:none;border-bottom:1.5px solid var(--violet-line);padding-bottom:1px}
+.pok-r .gdz a:hover{border-color:var(--violet)}
+.pok-r.otw{background:var(--orange-soft)}
+.pok-r.otw:hover{background:#ffeada}
+.pok-r.otw .gdz{color:var(--orange-d)}
+@media(max-width:900px){.pok-h{display:none}.pok-r{grid-template-columns:1fr;gap:5px}.pok-r .zad,.pok-r .daj{padding-right:0}}
+
+/* ── expand na tytule sekcji ── */
+details.db-toggle>summary{list-style:none;cursor:pointer}
+details.db-toggle>summary::-webkit-details-marker{display:none}
+details.db-toggle>summary:focus{outline:none}
+.db-chev{display:inline-block;font-size:.62em;font-weight:400;color:var(--faint);margin-left:11px;transition:transform .2s;vertical-align:middle}
+details.db-toggle[open] .db-chev{transform:rotate(90deg);color:var(--violet)}
+
+/* ── karty ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:19px;padding:22px 24px;position:relative;
+  transition:transform .17s cubic-bezier(.2,.7,.3,1),box-shadow .17s,border-color .17s}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(20,26,45,.10);border-color:var(--violet-line)}
+.card h3{font-size:19px;font-weight:700;letter-spacing:-.015em;margin-bottom:8px;line-height:1.2}
+.card p{font-size:14.5px;color:var(--muted);line-height:1.55}
+.card.wide{grid-column:span 2}
+.card.full{grid-column:1/-1}
+@media(max-width:900px){.card.wide{grid-column:1/-1}}
+.card .big{display:block;font-family:var(--mono);font-size:34px;font-weight:700;color:var(--violet);line-height:1;margin-bottom:9px}
+.deeplink{display:inline-block;margin-top:13px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--violet-d);text-decoration:none;border-bottom:1.5px solid var(--violet-line);padding-bottom:2px;transition:.15s}
+.deeplink:hover{border-color:var(--violet)}
+.step{padding-top:22px}
+.step-no{position:absolute;top:16px;right:20px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--faint)}
+
+/* ── debrief: karty punktów briefu ── */
+.db-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+@media(max-width:900px){.db-grid{grid-template-columns:1fr}}
+.pkt-card{background:#fff;border:1.5px solid var(--line);border-radius:19px;overflow:hidden;transition:.17s}
+.pkt-card:hover{border-color:var(--violet-line);box-shadow:0 14px 34px rgba(20,26,45,.08)}
+.pkt-head{padding:21px 23px 13px}
+.pkt-num{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;
+  padding:4px 9px;border-radius:6px;background:var(--violet-soft);color:var(--violet-d);margin-bottom:10px}
+.pkt-head h2{font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.018em;margin-bottom:5px}
+.pkt-head .cyt{color:var(--muted);font-size:13.5px;font-style:italic;line-height:1.5;border-left:2.5px solid var(--violet-line);padding-left:12px;margin-top:10px}
+.ocz-label{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--faint);padding:12px 22px 0;border-top:1px solid #f1eff7}
+.micro{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:8px;padding:10px 22px 20px}
+.m{border:1px solid var(--line);border-radius:11px;padding:11px 13px;background:#fbfaff;font-size:13px;line-height:1.4}
+.m b{display:block;font-size:13px;margin-bottom:3px;color:var(--ink)}
+.m span{color:var(--muted);font-size:11.5px}
+.m.hard{border-color:var(--orange-line);background:var(--orange-soft)}
+.m.hard b{color:var(--orange-d)}
+.m.pain{border-color:var(--bord-line);background:var(--bord-soft)}
+.m.pain b{color:var(--bord)}
+
+
+
+/* ── równanie sprzedaży ── */
+.formula-strip{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:22px 26px;border-radius:19px;
+  background:#fff;border:1.5px solid var(--violet-line);margin:24px 0}
+.fs-lhs{font-size:17px;font-weight:700}
+.fs-eq{font-family:var(--mono);font-size:22px;font-weight:400;color:var(--faint);padding:0 4px}
+.fs-block{padding:11px 17px;border-radius:12px;font-size:14px;font-weight:700;text-align:center;line-height:1.25}
+.fs-block small{display:block;font-family:var(--mono);font-size:10.5px;font-weight:600;opacity:.75;margin-top:3px;letter-spacing:.03em}
+.fs-block.org{background:var(--violet-soft);color:var(--violet-d)}
+.fs-block.conv{background:var(--green-soft);color:var(--green-d)}
+.fs-block.qual{background:var(--bord-soft);color:var(--bord)}
+
+
+/* ── mapa systemu (równanie) ── */
+.sys-map{margin:22px 0 26px}
+.sys-frame{background:#fff;border:1.5px solid var(--violet-line);border-radius:20px;padding:16px;overflow-x:auto}
+.sys-frame svg{display:block;width:100%;min-width:940px;height:auto}
+.sys-hint{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-top:9px}
+@media(min-width:1000px){.sys-hint{display:none}}
+
+/* ── nogi równania ── */
+.eq-legs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0 0}
+@media(max-width:900px){.eq-legs{grid-template-columns:1fr}}
+.leg{background:#fff;border:1.5px solid var(--line);border-radius:17px;padding:19px 21px;position:relative;overflow:hidden}
+.leg::before{content:'';position:absolute;inset:0 0 auto 0;height:4px}
+.leg-h{display:flex;align-items:center;gap:9px;font-size:17px;font-weight:700;letter-spacing:-.015em;margin-bottom:4px}
+.leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.leg-sub{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--faint);margin-bottom:14px}
+.leg-items{display:flex;flex-direction:column;gap:7px}
+.leg-item{border-radius:11px;padding:10px 13px;font-size:13.5px;font-weight:700;line-height:1.25}
+.leg-item small{display:block;font-family:var(--mono);font-size:10.5px;font-weight:600;opacity:.78;margin-top:3px;letter-spacing:.02em}
+.leg.org::before{background:var(--violet)}
+.leg.org .leg-h{color:var(--violet-d)}.leg.org .leg-dot{background:var(--violet)}
+.leg.org .leg-item{background:var(--violet-soft);color:var(--violet-d)}
+.leg.conv::before{background:var(--green)}
+.leg.conv .leg-h{color:var(--green-d)}.leg.conv .leg-dot{background:var(--green)}
+.leg.conv .leg-item{background:var(--green-soft);color:var(--green-d)}
+.leg.qual::before{background:var(--bord)}
+.leg.qual .leg-h{color:var(--bord)}.leg.qual .leg-dot{background:var(--bord)}
+.leg.qual .leg-item{background:var(--bord-soft);color:var(--bord)}
+.eq-note{margin:18px 0 24px;padding:15px 19px;background:#fbfaff;border-left:3px solid var(--violet);border-radius:0 12px 12px 0;
+  font-size:15px;color:var(--muted);line-height:1.6;max-width:900px}
+.eq-note b{color:var(--ink)}
+
+/* ── problemy P1–P6 ── */
+.problem-head{display:flex;align-items:center;gap:10px;margin-bottom:11px;flex-wrap:wrap}
+.problem-no{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;padding:5px 10px;border-radius:7px;background:var(--bord);color:#fff}
+.problem-tag{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.proof-pill{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:600;padding:7px 13px;border-radius:20px;
+  background:var(--bord-soft);color:var(--bord);border:1px solid var(--bord-line);margin:9px 0 12px}
+.solution-block{margin-top:16px;background:var(--green-soft);border:1px solid var(--green-line);border-radius:14px;padding:16px 19px}
+.solution-block strong{display:block;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--green-d);margin-bottom:9px}
+.solution-block ul{list-style:none}
+.solution-block li{position:relative;padding-left:19px;margin-bottom:8px;font-size:14.5px;color:#2f4a3c;line-height:1.5}
+.solution-block li:last-child{margin-bottom:0}
+.solution-block li::before{content:'';position:absolute;left:2px;top:9px;width:6px;height:6px;background:var(--green);border-radius:50%}
+.solution-block code{font-family:var(--mono);font-size:12.5px;background:#fff;padding:2px 6px;border-radius:5px;color:var(--green-d)}
+
+/* ── tabele ── */
+.table-wrap{border:1.5px solid var(--line);border-radius:19px;overflow:hidden;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--dark);color:#fff;padding:12px 15px;text-align:left;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+td{padding:12px 15px;border-bottom:1px solid #f1eff7;vertical-align:top;color:var(--muted)}
+td strong{color:var(--ink);font-weight:700}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fbfaff}
+.owner{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;margin-right:4px;white-space:nowrap}
+.owner.tomek{background:var(--violet-soft);color:var(--violet-d)}
+.owner.ewa{background:var(--bord-soft);color:var(--bord)}
+.owner.joint{background:var(--blue-soft);color:var(--blue-d)}
+.owner.external{background:#f2f3f6;color:var(--faint)}
+.status{font-family:var(--mono);font-size:11px;font-weight:700;white-space:nowrap}
+.status.included{color:var(--green-d)}
+.status.option{color:var(--orange-d)}
+
+/* ── wycena ── */
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:17px}
+.price{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:26px;position:relative;overflow:hidden;transition:.17s}
+.price::before{content:'';position:absolute;inset:0 0 auto 0;height:4px;background:var(--line)}
+.price:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(20,26,45,.12)}
+.price h3{font-size:21px;font-weight:700;letter-spacing:-.02em;margin-bottom:13px;line-height:1.2}
+.price .amount{display:block;font-size:31px;font-weight:700;letter-spacing:-.035em;margin-bottom:15px;color:var(--violet-d)}
+.price .amount small{display:block;font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--faint);letter-spacing:.05em;margin-top:4px}
+.price ul{list-style:none;margin-bottom:12px}
+.price li{position:relative;padding-left:19px;margin-bottom:8px;font-size:14px;color:var(--muted);line-height:1.5}
+.price li::before{content:'';position:absolute;left:2px;top:9px;width:6px;height:6px;background:var(--violet-line);border-radius:50%}
+.price.featured{background:var(--dark);border-color:var(--dark)}
+.price.featured::before{background:var(--bord)}
+.price.featured h3{color:#fff}
+.price.featured .amount{color:#fff}
+.price.featured .amount small{color:#8d97a8}
+.price.featured li{color:#c3cad6}
+.price.featured li::before{background:var(--bord)}
+.price.featured .muted{color:#8d97a8;font-size:13px}
+.price.featured .eyebrow{color:#f0b7ca}
+
+/* ── blok wewnętrzny ── */
+details.internal{margin-top:22px;border:1.5px dashed var(--bord-line);border-radius:16px;background:var(--bord-soft);overflow:hidden}
+details.internal>summary{cursor:pointer;padding:15px 20px;font-family:var(--mono);font-size:11.5px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--bord);list-style:none}
+details.internal>summary::-webkit-details-marker{display:none}
+details.internal>summary::before{content:'⚠ ';}
+details.internal .table-wrap{border:0;border-radius:0;border-top:1px solid var(--bord-line)}
+
+/* ── chat / Mission Control ── */
+.chat{background:var(--dark);border-radius:20px;overflow:hidden;margin:24px 0;border:1.5px solid #2f3846}
+.chat-head{display:flex;align-items:center;gap:10px;padding:13px 20px;background:#141822;border-bottom:1px solid #2f3846;
+  font-family:var(--mono);font-size:11.5px;color:#8d97a8;letter-spacing:.05em}
+.chat-body{padding:20px 22px;font-size:14.5px;color:#c3cad6;line-height:1.75}
+.chat-body b{color:#fff}
+.chat-time{margin-left:auto;font-family:var(--mono);font-size:11px;color:#5f6b7e}
+.up{color:#5fbf85;font-weight:600}
+.down{color:#f08d8d;font-weight:600}
+.warn{color:#e9b665;font-weight:600}
+.bot{color:#8fb3ff}
+
+/* ── checklista ── */
+.checklist{display:grid;gap:9px;max-width:820px}
+.check{display:flex;align-items:flex-start;gap:11px;background:#fff;border:1.5px solid var(--line);border-radius:13px;
+  padding:13px 17px;font-size:14.5px;color:var(--muted);cursor:pointer;transition:.15s}
+.check:hover{border-color:var(--violet-line)}
+.check input{margin-top:4px;accent-color:var(--violet);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+
+.foot{margin-top:44px;padding:0 34px;font-family:var(--mono);font-size:11.5px;color:var(--faint);text-align:center}
+
+@media(max-width:640px){
+  .hero{padding:36px 18px 20px}.section{padding:30px 18px}
+  .topbar{padding:9px 14px;gap:9px}.topbar nav{display:none}
+  .micro{grid-template-columns:1fr}
+  .formula-strip{padding:16px}
+}
+@media print{
+  .topbar,.tools{display:none!important}
+  details.db-toggle:not([open])>*{display:revert!important}
+  details.db-toggle>summary~*{display:revert!important}
+  .card:hover,.price:hover{transform:none;box-shadow:none}
+}
+
+/* ── widoki generowane z klocki.py ── */
+.g-i{display:block;margin-bottom:9px}
+.g-i:last-child{margin-bottom:0}
+.g-i em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:2px}
+.c-tbd{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--orange-d);background:var(--orange-soft);padding:1px 6px;border-radius:5px}
+.c-in{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--faint)}
+.done{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--green-d);background:var(--green-soft);border:1px solid var(--green-line);padding:1px 6px;border-radius:5px;white-space:nowrap}
+.wyc-blok{border:1.5px solid var(--line);border-radius:19px;overflow:hidden;background:#fff;margin-top:22px}
+.wyc-blok h3{font-size:19px;font-weight:700;letter-spacing:-.02em;padding:20px 22px 4px}
+.wyc-blok .muted{padding:0 22px 16px;font-size:14px;margin:0}
+.wyc-head,.wyc-r{display:grid;grid-template-columns:54px 1fr 120px 150px;gap:10px;padding:11px 22px;align-items:baseline}
+.wyc-head{background:var(--dark);color:#fff;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:600}
+.wyc-r{border-top:1px solid #f1eff7;font-size:14px}
+.wyc-r:hover{background:#fbfaff}
+.wyc-z{font-family:var(--mono);font-size:11px;font-weight:700}
+.wyc-n{line-height:1.4}
+.wyc-t{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+.wyc-c{font-family:var(--mono);font-size:13.5px;font-weight:700;text-align:right;color:var(--ink)}
+.wyc-r.suma{background:#fbfaff;border-top:2px solid var(--dark)}
+.wyc-r.suma .wyc-n{font-weight:700}
+.wyc-r.suma .wyc-c{font-size:17px;color:var(--violet-d)}
+@media(max-width:820px){.wyc-head{display:none}.wyc-r{grid-template-columns:1fr;gap:3px}.wyc-c{text-align:left}}
+
+/* statusy + legenda */
+.st{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:1px 6px;border-radius:5px;white-space:nowrap;border:1px solid transparent}
+.st-zrobione{color:var(--green-d);background:var(--green-soft);border-color:var(--green-line)}
+.st-wstepnie{color:var(--orange-d);background:var(--orange-soft);border-color:#f8c39a}
+i.st{display:inline-block;width:11px;height:11px;padding:0;border-radius:4px;vertical-align:-1px;margin-right:7px}
+i.st-zrobione{background:var(--green-soft);border-color:var(--green-line)}
+i.st-wstepnie{background:var(--orange-soft);border-color:#f8c39a}
+i.st-brak{background:#fff;border-color:var(--line)}
+.legenda{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:15px;padding:13px 17px;background:#fbfaff;
+  border:1px solid var(--line);border-radius:13px;font-size:12.5px;color:var(--muted);line-height:1.45}
+.legenda b{color:var(--ink);font-weight:600}
+.legenda span{display:flex;align-items:flex-start}
+.g-head em{display:block;font-style:normal;font-size:9px;letter-spacing:.06em;opacity:.62;margin-top:2px;text-transform:none}
+.g-c.dalej{font-family:var(--mono);font-size:11px;color:var(--faint);display:flex;align-items:center;background:#fbfaff}
+.g-i.cd{opacity:.5}
+.g-i.cd em{font-style:italic}
+
+.g-gr{display:block;font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--violet-d);background:var(--violet-soft);padding:2px 6px;border-radius:4px;margin:0 0 7px;width:fit-content}
+.g-gr.ciag{color:var(--green-d);background:var(--green-soft);margin-top:11px}
+.c-gratis{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--green-d);background:var(--green-soft);padding:1px 6px;border-radius:5px}
+
+.wyc-skrot-blok{margin-top:30px;padding-top:26px;border-top:2px solid var(--dark)}
+.wyc-skrot-blok h3{font-size:22px;font-weight:700;letter-spacing:-.022em;margin-bottom:4px}
+.skrot{border:1.5px solid var(--line);border-radius:17px;overflow:hidden;margin-top:16px;background:#fff}
+.skrot-r{display:grid;grid-template-columns:34px 1fr 130px 140px;gap:10px;align-items:baseline;padding:12px 20px;border-bottom:1px solid #f4f3f8}
+.skrot-r:last-child{border-bottom:0}
+.skrot-k{font-family:var(--mono);font-size:9.5px;font-weight:700;color:#fff;padding:2px 6px;border-radius:5px;text-align:center}
+.skrot-n{font-size:15px;font-weight:600}
+.skrot-j,.skrot-c{font-family:var(--mono);font-size:14.5px;font-weight:700;text-align:right;white-space:nowrap}
+.skrot-c{color:var(--green-d)}
+.skrot-j i{font-style:normal;color:var(--green-d);font-size:12px}
+.skrot-r.suma{background:#fbfaff;border-top:2px solid var(--dark)}
+.skrot-r.suma .skrot-j{font-size:17px;color:var(--violet-d)}
+.skrot-r.suma .skrot-c{font-size:17px}
+.skrot-link{display:block;margin-top:16px;background:var(--dark);color:#fff;border-radius:15px;padding:18px 22px;text-decoration:none;transition:.16s}
+.skrot-link:hover{background:#252c3c}
+.skrot-link b{display:block;font-size:16.5px;margin-bottom:3px}
+.skrot-link span{font-family:var(--mono);font-size:12px;color:#9aa6b8}
+@media(max-width:760px){.skrot-r{grid-template-columns:34px 1fr;row-gap:4px}.skrot-j,.skrot-c{text-align:left}}
+/* wycena — grube pozycje */
+.pak-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:18px 22px}
+@media(max-width:900px){.pak-grid{grid-template-columns:1fr}}
+.pak{border:1.5px solid var(--line);border-radius:16px;padding:17px 19px;background:#fff}
+.pak-h{display:flex;align-items:center;gap:10px;margin-bottom:9px;flex-wrap:wrap}
+.pak-kod{font-family:var(--mono);font-size:9.5px;font-weight:700;color:#fff;padding:2px 7px;border-radius:5px;letter-spacing:.06em}
+.pak-h h4{font-size:16.5px;font-weight:700;letter-spacing:-.015em;line-height:1.2}
+.pak-c{margin-left:auto;font-family:var(--mono);font-size:15px;font-weight:700;color:var(--violet-d);white-space:nowrap}
+.pak-m{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:7px}
+.pak-l{list-style:none;display:flex;flex-direction:column;gap:5px}
+.pak-l li{font-size:13px;color:var(--muted);line-height:1.4;padding-left:14px;position:relative}
+.pak-l li::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--violet-line)}
+.wyc-suma{display:flex;align-items:baseline;gap:14px;padding:15px 22px;background:#fbfaff;border-top:2px solid var(--dark)}
+.wyc-suma span{font-weight:700;font-size:15px}
+.wyc-suma b{margin-left:auto;font-family:var(--mono);font-size:21px;color:var(--violet-d)}
+.pak-u{display:block;font-style:normal;font-size:11.5px;color:var(--orange-d);margin-top:3px}
+
+.pak{display:flex;flex-direction:column}
+.pak-s{display:flex;align-items:baseline;gap:10px;margin:12px 0 7px;padding-top:11px;border-top:1px solid #f1eff7}
+.pak-s:first-of-type{border-top:0;padding-top:0;margin-top:9px}
+.pak-t{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.pak-s b{margin-left:auto;font-family:var(--mono);font-size:15px;font-weight:700;color:var(--violet-d);white-space:nowrap}
+.pak-s.ciag b{color:var(--green-d)}
+.wyc-suma.ciag b{color:var(--green-d)}
+.mies-blok{margin-top:34px;border-top:2px solid var(--dark);padding-top:26px}
+.mies-blok h3{font-size:23px;font-weight:700;letter-spacing:-.022em;margin-bottom:5px}
+.mies{border:1.5px solid var(--line);border-radius:17px;overflow:hidden;margin-top:16px}
+.mies-h{display:flex;align-items:baseline;gap:12px;background:var(--dark);color:#fff;padding:12px 20px}
+.mies-h b{font-size:17px}
+.mies-h em{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#9aa6b8}
+.mies-h span{margin-left:auto;font-family:var(--mono);font-size:16px;font-weight:700}
+.mies-g{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;
+  color:var(--violet-d);background:#fbfaff;padding:8px 20px;border-bottom:1px solid var(--line)}
+.mies-r{display:flex;align-items:baseline;gap:11px;padding:10px 20px;border-bottom:1px solid #f4f3f8;font-size:14.5px}
+.mies-r:last-child{border-bottom:0}
+.mies-z{font-family:var(--mono);font-size:10px;font-weight:700;width:22px;flex:0 0 22px}
+.mies-r b{margin-left:auto;font-family:var(--mono);font-size:15px;font-weight:700;white-space:nowrap}
+.mies-r b i{font-style:normal;color:var(--green-d)}
+
+#problemy .grid{grid-template-columns:1fr}
+#problemy .card.wide,#problemy .card.full{grid-column:1/-1}
+</style>
+<script src="brama.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <a class="back" href="PLICHTA_START.html">← Menu Startowe</a>
+  <span class="doc-tag">01 · Odpowiedź na brief</span>
+  <nav><a href="#debrief">Brief</a><a href="#wizja">Wizja</a><a href="#pokrycie">Mapa odpowiedzi</a><a href="#zakres">Zakres działań</a><a href="#plan">Plan i wycena</a><a href="#problemy">Problemy szczególne</a></nav>
+  </div>
+
+
+    <section id="debrief" class="section soft">
+      <div class="shell">
+        <details class="db-toggle" open>
+          <summary class="section-head db-summary">
+            <h2>Brief punkt po punkcie <span class="db-chev">›</span></h2>
+          </summary>
+
+        <div class="db-grid">
+
+          <div class="pkt-card">
+            <div class="pkt-head">
+              <span class="pkt-num">SEKCJA 1</span>
+              <h2>Struktura budżetowa i założenia</h2>
+              <p class="cyt">„Nie traktujemy obecnego podziału jako docelowego. Oczekujemy rekomendacji optymalnej alokacji budżetu wraz z uzasadnieniem biznesowym."</p>
+            </div>
+            <div class="micro">
+              <div class="m"><b>54 000 zł netto / mc</b><span>budżet mediowy, średnia miesięczna</span></div>
+              <div class="m"><b>Podział 42 / 12 do zakwestionowania</b><span>obecny stan nie jest punktem docelowym</span></div>
+              <div class="m hard"><b>Lead Ads maks. 5–6 tys. zł</b><span>warunek twardy, nie do negocjacji</span></div>
+              <div class="m"><b>Rekomendacja z uzasadnieniem</b><span>nie sama liczba — powód za liczbą</span></div>
+              <div class="m"><b>Główny filar: auta gotowe do odbioru</b><span>zasilane z systemu New Car Sales</span></div>
+              <div class="m"><b>Finansowanie jako element przekazu</b><span>Audi Perfect Lease, VW Bank</span></div>
+              <div class="m"><b>Priorytety modeli co miesiąc</b><span>wynikają z magazynu i celów sprzedaży</span></div>
+              <div class="m"><b>Podział regionalny 65 / 35</b><span>pomorskie / kujawsko-pomorskie</span></div>
+            </div>
+          </div>
+
+          <div class="pkt-card">
+            <div class="pkt-head">
+              <span class="pkt-num">SEKCJA 2</span>
+              <h2>Google Ads</h2>
+              <p class="cyt">„Znaczna część połączeń dotyczy serwisu i części zamiennych, mimo że kampanie mają wspierać sprzedaż samochodów."</p>
+            </div>
+            <div class="micro">
+              <div class="m pain"><b>Rozdzielić ruch serwisowy od sprzedażowego</b><span>nazwane przez Was jako najważniejsze wyzwanie</span></div>
+              <div class="m"><b>Optymalny podział Search / Performance Max</b><span>dziś podział budżetu jest niewidoczny</span></div>
+              <div class="m"><b>Ograniczyć kanibalizację</b><span>płatne × organiczne × brandowe</span></div>
+              <div class="m"><b>Wykorzystać CRM do optymalizacji</b><span>pod rzeczywistą sprzedaż, nie pod formularz</span></div>
+              <div class="m"><b>Formularze i wartościowe połączenia</b><span>dwa równorzędne cele kampanii</span></div>
+            </div>
+          </div>
+
+          <div class="pkt-card">
+            <div class="pkt-head">
+              <span class="pkt-num">SEKCJA 3</span>
+              <h2>Meta Ads</h2>
+              <p class="cyt">„Dotychczasowe doświadczenia pokazują, że duża liczba leadów nie przekładała się na sprzedaż. Priorytetem jest jakość kontaktów, a nie ich wolumen."</p>
+            </div>
+            <div class="micro">
+              <div class="m"><b>Ruch na strony ofertowe</b><span>główna rola kanału</span></div>
+              <div class="m"><b>Promocja aktualnej oferty</b><span>auta gotowe do odbioru</span></div>
+              <div class="m"><b>Remarketing</b><span>domykanie rozpoczętych ścieżek</span></div>
+              <div class="m hard"><b>Lead Ads tylko krótkoterminowo</b><span>wybrane auta, ograniczony czas</span></div>
+              <div class="m pain"><b>Jakość ponad wolumen</b><span>wyciągnięte z wcześniejszego rozczarowania</span></div>
+            </div>
+          </div>
+
+          <div class="pkt-card">
+            <div class="pkt-head">
+              <span class="pkt-num">SEKCJA 4</span>
+              <h2>Metryki sukcesu</h2>
+              <p class="cyt">„Ocena współpracy będzie oparta na danych CRM. Zwalidowany CPL. CPS liczony od pierwszego kontaktu marketingowego do zamówienia."</p>
+            </div>
+            <div class="micro">
+              <div class="m hard"><b>Zwalidowany koszt kontaktu</b><span>po weryfikacji BDC, przekazany handlowcowi</span></div>
+              <div class="m hard"><b>Koszt sprzedaży</b><span>od pierwszego kontaktu do zamówienia</span></div>
+              <div class="m"><b>Rozliczenie na danych CRM</b><span>nie na danych z platform reklamowych</span></div>
+              <div class="m"><b>Regularne udostępnianie danych</b><span>zadeklarowane przez Was</span></div>
+            </div>
+          </div>
+
+          <div class="pkt-card">
+            <div class="pkt-head">
+              <span class="pkt-num">SEKCJA 5</span>
+              <h2>Analityka i pomiar</h2>
+              <p class="cyt">„Oczekujemy pełnego audytu i uporządkowania konfiguracji GA4 oraz GTM. (…) inne rekomendowane TBD"</p>
+            </div>
+            <div class="micro">
+              <div class="m"><b>Pełny audyt pomiaru</b><span>konfiguracja analityki i menedżera tagów</span></div>
+              <div class="m"><b>Mikrokonwersje</b><span>oferta auta, filtry, strony ofertowe, kliknięcie CTA</span></div>
+              <div class="m"><b>Makrokonwersje</b><span>formularz, jazda próbna, telefon, e-mail</span></div>
+              <div class="m pain"><b>Śledzenie połączeń</b><span>ze źródłem i frazą</span></div>
+              <div class="m pain"><b>Eliminacja źródeł nieokreślonych</b><span>„not set" w raportach</span></div>
+              <div class="m"><b>Consent Mode</b><span>poprawna obsługa zgód i sesji</span></div>
+              <div class="m hard"><b>„Inne rekomendowane" — dwa razy</b><span>zostawiacie miejsce na naszą wiedzę</span></div>
+            </div>
+          </div>
+
+          <div class="pkt-card">
+            <div class="pkt-head">
+              <span class="pkt-num">SEKCJA 6</span>
+              <h2>Optymalizacja konwersji i UX</h2>
+              <p class="cyt">„Agencja powinna regularnie analizować zachowania użytkowników i przygotowywać rekomendacje zmian dla zespołu wdrożeniowego."</p>
+            </div>
+            <div class="micro">
+              <div class="m"><b>Optymalizacja obecnego czatu</b><span>narzędzie już wdrożone</span></div>
+              <div class="m"><b>Okna czatu reagujące na zachowanie</b><span>wyświetlane automatycznie</span></div>
+              <div class="m"><b>Treści wspierające sprzedaż</b><span>rozwój, nie tylko poprawki</span></div>
+              <div class="m"><b>Strona podziękowania po formularzu</b><span>dziś prawdopodobnie martwy punkt</span></div>
+              <div class="m"><b>Wzrost konwersji na wartościowe zgłoszenia</b><span>nie na zgłoszenia w ogóle</span></div>
+              <div class="m hard"><b>Rekomendacje dla wdrożeniowców</b><span>my projektujemy, ktoś inny wdraża</span></div>
+            </div>
+          </div>
+
+          <div class="pkt-card">
+            <div class="pkt-head">
+              <span class="pkt-num">SEKCJA 7</span>
+              <h2>Widoczność lokalna i AI</h2>
+              <p class="cyt">„Przygotowanie strony pod GEO i AI Search. (…) Zwiększanie obecności marki w odpowiedziach generowanych przez narzędzia AI."</p>
+            </div>
+            <div class="micro">
+              <div class="m"><b>Strona przygotowana pod AI</b><span>cytowalność w odpowiedziach asystentów</span></div>
+              <div class="m"><b>Widoczność lokalna w Google</b><span>Pomorze i Kujawy-Pomorze</span></div>
+              <div class="m"><b>Pełna optymalizacja wizytówek</b><span>wszystkie lokalizacje</span></div>
+              <div class="m"><b>Ocena dotychczasowego SEO</b><span>pod kątem jakości ruchu i intencji zakupowej</span></div>
+              <div class="m"><b>Obecność w odpowiedziach AI</b><span>ChatGPT, Perplexity, AI Overviews</span></div>
+              <div class="m hard"><b>Do 6 000 zł netto / mc</b><span>budżet osobny od mediowego</span></div>
+            </div>
+          </div>
+
+          <div class="pkt-card">
+            <div class="pkt-head">
+              <span class="pkt-num">SEKCJA 8</span>
+              <h2>Infrastruktura techniczna</h2>
+              <p class="cyt">„Obecna infrastruktura pozwala na sprawne wdrażanie zmian technicznych, analitycznych i UX."</p>
+            </div>
+            <div class="micro">
+              <div class="m"><b>Serwis na WordPressie</b><span>zmiany możliwe bez przebudowy</span></div>
+              <div class="m"><b>Oferta aut z systemu New Car Sales</b><span>zasilanie przez interfejs programistyczny</span></div>
+              <div class="m"><b>Kalkulator finansowania VW Bank</b><span>również przez interfejs</span></div>
+              <div class="m hard"><b>Gotowość na sprawne wdrażanie</b><span>Wasze zapewnienie — przyjmujemy</span></div>
+            </div>
+          </div>
+
+        </div><!-- /db-grid -->
+        </details><!-- /db-toggle -->
+      </div>
+    </section>
+
+<section id="wizja" class="section soft">
+      <div class="shell">
+        <details class="db-toggle" open>
+        <summary class="section-head db-summary">
+          <p class="eyebrow">Wizja</p>
+          <h2>Spójny system zarządzania pozyskiwaniem i nurturingiem leadów <span class="db-chev">›</span></h2>
+          <p class="punchline">Kanały pozyskiwania ruchu skoordynowane z ekosystemem marki. <em>Konwersja i sprzedaż zarządzane w jednym miejscu.</em> Pod kątem technologicznym — infrastruktura wiedzy i automatyzacji <em>pod 100% kontrolą wewnętrzną, bez jakichkolwiek zależności.</em></p>
+        </summary>
+
+        <p class="muted" style="max-width:820px;margin-bottom:28px">Wspólne KPI, automatyzacja tam gdzie to możliwe, uczący się system zarządzalny z jednego miejsca — z pełną widocznością skuteczności (Mission Control).</p>
+
+        <div class="sys-map">
+          <div class="sys-frame">
+<svg viewBox="-34 0 1308 896" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa systemu: ruch, narzędzia, konwersja, Mission Control i sprzedaż">
+<defs>
+  <marker id="aV" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto"><path d="M0,0 L0,6.4 L8,3.2 z" fill="#1800ad"/></marker>
+  <marker id="aVs" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto-start-reverse"><path d="M0,0 L0,6.4 L8,3.2 z" fill="#1800ad"/></marker>
+  <marker id="aG" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto"><path d="M0,0 L0,6.4 L8,3.2 z" fill="#16a34a"/></marker>
+  <marker id="aGs" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto-start-reverse"><path d="M0,0 L0,6.4 L8,3.2 z" fill="#16a34a"/></marker>
+  <marker id="aB" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto"><path d="M0,0 L0,6.4 L8,3.2 z" fill="#8d0a31"/></marker>
+  <marker id="aD" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto"><path d="M0,0 L0,6.4 L8,3.2 z" fill="#5b6472"/></marker>
+</defs>
+
+<!-- ══ RUCH ══ -->
+<rect x="30" y="64" width="352" height="390" rx="18" fill="#ece9fb" stroke="#c5bcf0" stroke-width="2"/>
+<text x="54" y="98" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="700" fill="#12007e" letter-spacing="2.2">RUCH</text>
+<text x="54" y="120" font-family="Space Grotesk,sans-serif" font-size="13" fill="#5b6472">Ile osób trafia na ścieżkę</text>
+
+<rect x="54" y="140" width="304" height="66" rx="12" fill="#ffffff" stroke="#c5bcf0" stroke-width="1.5"/>
+<text x="74" y="169" font-family="Space Grotesk,sans-serif" font-size="16" font-weight="700" fill="#12007e">Paid traffic</text>
+<text x="74" y="190" font-family="IBM Plex Mono,monospace" font-size="11.5" fill="#7b74a8">Google Ads · Meta Ads</text>
+
+<rect x="54" y="218" width="304" height="66" rx="12" fill="#ffffff" stroke="#c5bcf0" stroke-width="1.5"/>
+<text x="74" y="247" font-family="Space Grotesk,sans-serif" font-size="16" font-weight="700" fill="#12007e">Own touchpoints</text>
+<text x="74" y="268" font-family="IBM Plex Mono,monospace" font-size="11.5" fill="#7b74a8">wizytówki · social · baza klientów</text>
+
+<rect x="54" y="296" width="304" height="66" rx="12" fill="#ffffff" stroke="#c5bcf0" stroke-width="1.5"/>
+<text x="74" y="325" font-family="Space Grotesk,sans-serif" font-size="16" font-weight="700" fill="#12007e">SEO / GEO</text>
+<text x="74" y="346" font-family="IBM Plex Mono,monospace" font-size="11.5" fill="#7b74a8">organic · odpowiedzi AI</text>
+
+<!-- ══ NARZĘDZIA ══ -->
+<rect x="446" y="64" width="348" height="180" rx="18" fill="#fff2e8" stroke="#f8c39a" stroke-width="2"/>
+<text x="470" y="98" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="700" fill="#dd5e0a" letter-spacing="2.2">NARZĘDZIA</text>
+<text x="470" y="119" font-family="Space Grotesk,sans-serif" font-size="13" fill="#a8794f">Spinają ruch z konwersją</text>
+<rect x="470" y="136" width="140" height="38" rx="10" fill="#ffffff" stroke="#f8c39a" stroke-width="1.5"/>
+<text x="540" y="160" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="14" font-weight="700" fill="#dd5e0a">UTMomat</text>
+<rect x="622" y="136" width="148" height="38" rx="10" fill="#ffffff" stroke="#f8c39a" stroke-width="1.5"/>
+<text x="696" y="160" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="14" font-weight="700" fill="#dd5e0a">Ścieżkomat</text>
+<rect x="470" y="184" width="300" height="38" rx="10" fill="#ffffff" stroke="#f8c39a" stroke-width="1.5"/>
+<text x="620" y="208" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="14" font-weight="700" fill="#dd5e0a">Conversion Keeper · Conversion Upgrader</text>
+
+<!-- ══ MISSION CONTROL ══ -->
+<rect x="446" y="266" width="348" height="188" rx="18" fill="#1a1f2b" stroke="#2f3846" stroke-width="2"/>
+<text x="470" y="300" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="700" fill="#f0b7ca" letter-spacing="2.2">MISSION CONTROL</text>
+<text x="470" y="324" font-family="Space Grotesk,sans-serif" font-size="15" font-weight="700" fill="#ffffff">Widzi obie strony naraz</text>
+<text x="470" y="352" font-family="Space Grotesk,sans-serif" font-size="13" fill="#c3cad6">Normy i odchylenia · status pomiaru</text>
+<text x="470" y="374" font-family="Space Grotesk,sans-serif" font-size="13" fill="#c3cad6">CPL i CPS · priorytety magazynowe</text>
+<text x="470" y="396" font-family="Space Grotesk,sans-serif" font-size="13" fill="#c3cad6">Kalendarz inicjatyw · asystent</text>
+<rect x="470" y="412" width="300" height="28" rx="8" fill="#252c3a"/>
+<text x="620" y="431" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11.5" fill="#8fb3ff">jedno miejsce zamiast siedmiu paneli</text>
+
+<!-- ══ KONWERSJA ══ -->
+<rect x="858" y="64" width="352" height="390" rx="18" fill="#e7f6ec" stroke="#b7e3c4" stroke-width="2"/>
+<text x="882" y="98" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="700" fill="#15803d" letter-spacing="2.2">KONWERSJA</text>
+<text x="882" y="120" font-family="Space Grotesk,sans-serif" font-size="13" fill="#5b6472">Ilu z nich realnie kupuje</text>
+
+<rect x="882" y="140" width="304" height="66" rx="12" fill="#ffffff" stroke="#b7e3c4" stroke-width="1.5"/>
+<text x="902" y="169" font-family="Space Grotesk,sans-serif" font-size="16" font-weight="700" fill="#15803d">Strona</text>
+<text x="902" y="190" font-family="IBM Plex Mono,monospace" font-size="11.5" fill="#5d8a72">LP · formularz · czat</text>
+
+<rect x="882" y="218" width="304" height="66" rx="12" fill="#ffffff" stroke="#b7e3c4" stroke-width="1.5"/>
+<text x="902" y="247" font-family="Space Grotesk,sans-serif" font-size="16" font-weight="700" fill="#15803d">CRM + BOK</text>
+<text x="902" y="268" font-family="IBM Plex Mono,monospace" font-size="11.5" fill="#5d8a72">walidacja · hot lead · telefon</text>
+
+<rect x="882" y="296" width="304" height="66" rx="12" fill="#ffffff" stroke="#b7e3c4" stroke-width="1.5"/>
+<text x="902" y="325" font-family="Space Grotesk,sans-serif" font-size="16" font-weight="700" fill="#15803d">Salony</text>
+<text x="902" y="346" font-family="IBM Plex Mono,monospace" font-size="11.5" fill="#5d8a72">5 lokalizacji · handlowiec · zamówienie</text>
+
+<line x1="54" y1="384" x2="358" y2="384" stroke="#c5bcf0" stroke-width="1.2"/>
+<text x="54" y="406" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700" fill="#7b74a8" letter-spacing="1.6">KPI TEJ STRONY</text>
+<rect x="54" y="416" width="146" height="26" rx="8" fill="#ffffff" stroke="#c5bcf0" stroke-width="1.2"/>
+<text x="127" y="434" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#12007e">koszt kliknięcia</text>
+<rect x="210" y="416" width="148" height="26" rx="8" fill="#ffffff" stroke="#c5bcf0" stroke-width="1.2"/>
+<text x="284" y="434" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#12007e">udział źródeł</text>
+
+<line x1="882" y1="384" x2="1186" y2="384" stroke="#b7e3c4" stroke-width="1.2"/>
+<text x="882" y="406" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700" fill="#5d8a72" letter-spacing="1.6">KPI TEJ STRONY</text>
+<rect x="882" y="416" width="146" height="26" rx="8" fill="#ffffff" stroke="#b7e3c4" stroke-width="1.2"/>
+<text x="955" y="434" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#15803d">CR 0,93% → 2–4%</text>
+<rect x="1038" y="416" width="148" height="26" rx="8" fill="#ffffff" stroke="#b7e3c4" stroke-width="1.2"/>
+<text x="1112" y="434" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#15803d">zwalidowany CPL</text>
+
+<!-- ══ STRZAŁKI PRZEPŁYWU ══ -->
+<path d="M382 152 L438 152" stroke="#1800ad" stroke-width="2.5" fill="none" marker-start="url(#aVs)" marker-end="url(#aV)"/>
+<path d="M794 152 L850 152" stroke="#16a34a" stroke-width="2.5" fill="none" marker-start="url(#aGs)" marker-end="url(#aG)"/>
+<path d="M382 360 L442 360" stroke="#5b6472" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#aD)"/>
+<path d="M854 360 L798 360" stroke="#5b6472" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#aD)"/>
+
+<!-- ══ SPRZEDAŻ ══ -->
+<path d="M1034 454 L1034 486" stroke="#8d0a31" stroke-width="2.5" fill="none" marker-end="url(#aB)"/>
+<path d="M620 454 L620 486" stroke="#5b6472" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#aD)"/>
+<rect x="30" y="496" width="1180" height="106" rx="18" fill="#fcebf2" stroke="#e8b4c6" stroke-width="2"/>
+<text x="620" y="536" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="28" font-weight="700" fill="#8d0a31" letter-spacing="-0.5">SPRZEDAŻ</text>
+<text x="620" y="560" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12.5" fill="#a8567a">zamówione auto — nie wypełniony formularz</text>
+<rect x="502" y="566" width="236" height="26" rx="8" fill="#ffffff" stroke="#e8b4c6" stroke-width="1.2"/>
+<text x="620" y="584" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#8d0a31">KPI: CPS — koszt sprzedanego auta</text>
+
+<!-- ══ PĘTLA ZWROTNA ══ -->
+<path d="M620 602 L620 640 L-16 640 L-16 174 L24 174" stroke="#8d0a31" stroke-width="2" fill="none" stroke-dasharray="6 5" marker-end="url(#aB)"/>
+<path d="M620 640 L1256 640 L1256 174 L1216 174" stroke="#8d0a31" stroke-width="2" fill="none" stroke-dasharray="6 5" marker-end="url(#aB)"/>
+<rect x="150" y="620" width="392" height="32" rx="9" fill="#fcebf2" stroke="#e8b4c6" stroke-width="1.2"/>
+<text x="346" y="641" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11.5" font-weight="600" fill="#8d0a31">pętla zwrotna — sprzedaż wraca do kampanii jako sygnał</text>
+
+<!-- ══ RÓWNANIE SYMBOLICZNE ══ -->
+<line x1="30" y1="694" x2="1210" y2="694" stroke="#e6e6e9" stroke-width="1.5"/>
+<text x="620" y="742" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="30" font-weight="700" fill="#0a0a0a" letter-spacing="-0.5">
+  <tspan fill="#8d0a31">Sprzedaż</tspan><tspan fill="#8b93a2">  =  </tspan><tspan fill="#12007e">Ruch</tspan><tspan fill="#8b93a2">  ×  </tspan><tspan fill="#15803d">Konwersja</tspan>
+</text>
+<text x="620" y="778" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="15" fill="#5b6472">Mnożenie, nie dodawanie — zero po którejkolwiek stronie zeruje wynik.</text>
+<text x="620" y="816" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="14.5" fill="#5b6472">Nie da się nadrobić budżetem mediowym konwersji na poziomie <tspan font-weight="700" fill="#8d0a31">0,93%</tspan>,</text>
+<text x="620" y="840" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="14.5" fill="#5b6472">ani samą konwersją, jeśli algorytm uczy się na formularzach zamiast na sprzedażach.</text>
+<text x="620" y="874" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11.5" fill="#8b93a2">Mission Control stoi po środku, bo jest miejscem, w którym widać obie strony równania naraz.</text>
+</svg>
+          </div>
+          <p class="sys-hint">↔ na wąskim ekranie przewiń diagram w poziomie</p>
+        </div>
+
+        <div class="chat">
+          <div class="chat-head"><span class="bot">Mission Control</span><span class="chat-time">poniedziałek, 7:00</span></div>
+          <div class="chat-body" data-edit="chatBody" contenteditable="true">
+            <p><b>Tydzień 34 — trzy rzeczy w normie, dwie wymagają uwagi.</b></p>
+            <p class="up">▲ Zwalidowany koszt kontaktu dla Q5: 340 zł — o 12% niżej niż miesiąc temu<br>▲ Wartościowe zgłoszenia z wyszukiwarki: 18 — najwyższy wynik w tym kwartale</p>
+            <p class="down">▼ Strona ofertowa A3 — konwersja spadła do 1,1% przy normie 1,9%. Sprawdź: zmiana formularza z 12 sierpnia?</p>
+            <p class="warn">⚠ Za trzy tygodnie premiera Q6 e-tron. Gotowość materiałów: 40% — brakuje kreacji i strony ofertowej.</p>
+            <p class="muted" style="margin-bottom:0">Pełny raport → mail</p>
+          </div>
+        </div>
+
+
+        <div class="wiz-doc">
+          <p class="eyebrow">Jak ta wizja jest zbudowana</p>
+          <h3 class="wd-h">Dwa dokumenty rozwijają to, co widać na mapie</h3>
+          <div class="rozdz dwa">
+<a class="rz" href="ARCHITEKTURA_SCHEMAT.html" style="--c:#15803d"><h3>Architektura rozwiązania</h3><p>Jak to jest zbudowane: setup techniczny, kokpit Mission Control, silnik wykonawczy, bazy wiedzy i pętla uczenia.</p><ul><li>Mapa ekosystemu — 7 usług pomiarowych, strona, konta reklamowe, CRM</li><li>Kokpit Mission Control — 10 modułów decyzyjnych</li><li>Silnik wykonawczy — pięć typów elementów, pięć zakresów</li><li>Bazy wiedzy: kategoria, marka, oferta, zasady decyzyjne</li><li>Model uczenia — każda decyzja wraca do systemu jako wniosek</li></ul><span class="rz-go">Otwórz rozdział →</span></a>
+<a class="rz" href="SILNIK_WYKONAWCZY.html" style="--c:#dd5e0a"><h3>Narzędzia i workflowy</h3><p>37 elementów w pięciu typach: agenci, skille, skrypty, automaty i workflowy — z rytmem pracy każdego z nich.</p><ul><li>3 agentów: Conversion Upgrader, Conversion Keeper, Data Keeper</li><li>11 skilli — od audytu kont po przegląd trafności alertów</li><li>10 skryptów — deterministycznych, te same dane = ten sam wynik</li><li>4 automaty — raport tygodniowy, alerty, rejestr zdarzeń</li><li>9 workflowów — ustalona kolejność kroków, wykonuje się sama</li></ul><span class="rz-go">Otwórz rozdział →</span></a>
+          </div>
+        </div>
+        </details>
+      </div>
+    </section>
+
+<section id="pokrycie" class="section">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Warunki odpowiedzi ofertowej</p>
+          <h2>8 zadań z briefu z linkami do odpowiedzi</h2>
+          </div>
+
+        <div class="pok">
+          <div class="pok-h"><span>Pkt</span><span>O co prosicie</span><span>Co dajemy</span><span>Gdzie</span></div>
+
+          <div class="pok-r otw">
+            <div class="nr">1</div>
+            <div class="zad">Rekomendacja podziału budżetu wraz z uzasadnieniem</div>
+            <div class="daj">Podział zaproponujemy po audycie kont — z uzasadnieniem opartym na tym, co realnie sprzedaje, nie na historycznych proporcjach. Dziś podziału Search / Performance Max nie widać w danych, a ruch serwisowy i sprzedażowy dzielą jeden koszt. <b>To są dwie rzeczy, które trzeba rozdzielić, zanim liczba ma sens.</b></div>
+            <div class="gdz"><span style="color:#dd5e0a;font-weight:700">do uzupełnienia po audycie kont</span><br><a href="ODPOWIEDZ_NA_BRIEF.html#zakres">Zakres działań: Z2 →</a><br><a href="WYCENA_I_ZAKRES.html#plan">Plan i wycena: Miesiąc 1 →</a></div>
+          </div>
+
+          <div class="pok-r">
+            <div class="nr">2</div>
+            <div class="zad">Strategia rozdzielenia ruchu sprzedażowego i serwisowego</div>
+            <div class="daj">Rozdzielenie na poziomie struktury kampanii i intencji, nie słów kluczowych. Baza obecnych klientów jako wykluczenie, osobne tory, śledzenie połączeń ze źródłem i frazą.</div>
+            <div class="gdz"><a href="PROBLEMY_Z_BRIEFU.html">Problemy szczególne: P2 →</a><br><a href="ODPOWIEDZ_NA_BRIEF.html#zakres">Zakres działań: Z2 →</a></div>
+          </div>
+
+          <div class="pok-r">
+            <div class="nr">3</div>
+            <div class="zad">Koncepcja wykorzystania danych CRM do optymalizacji kampanii</div>
+            <div class="daj">Pętla zwrotna: zgłoszenie → walidacja BDC → sprzedaż → z powrotem do systemu reklamowego jako konwersja offline. Algorytm uczy się na sprzedaży, nie na wypełnieniach.</div>
+            <div class="gdz"><a href="PROBLEMY_Z_BRIEFU.html">Problemy szczególne: P3 →</a><br><a href="ODPOWIEDZ_NA_BRIEF.html#zakres">Zakres działań: Z1 →</a></div>
+          </div>
+
+          <div class="pok-r">
+            <div class="nr">4</div>
+            <div class="zad">Plan działań analitycznych</div>
+            <div class="daj">Audyt konfiguracji pomiaru, mapa zdarzeń, wdrożenia, pętla CPL → CPS. Część tego audytu już dla Was zrobiliśmy — przykład w planie dostawy.</div>
+            <div class="gdz"><a href="ODPOWIEDZ_NA_BRIEF.html#zakres">Zakres działań: Z1 →</a><br><a href="REFERENCJE.html">Referencje: audyt Waszego serwisu →</a></div>
+          </div>
+
+          <div class="pok-r">
+            <div class="nr">5</div>
+            <div class="zad">Strategia pozycjonowania lokalnego i GEO</div>
+            <div class="daj">Dwie warstwy. <b>Warstwa 1 — techniczna:</b> audyt SEO/GEO 360 pokazał poważne błędy. To wymaga poważnej optymalizacji strony, nie kosmetyki. <b>Warstwa 2 — kontentowa:</b> strategia budowy i optymalizacji treści oraz miejsc pod widoczność w lokalnym GEO.</div>
+            <div class="gdz"><a href="KONCEPT_GEO_SEO.html">Strategia i plan GEO/SEO →</a><br><a href="PROBLEMY_Z_BRIEFU.html">Problemy szczególne: P5 →</a></div>
+          </div>
+
+          <div class="pok-r">
+            <div class="nr">6</div>
+            <div class="zad">Harmonogram wdrożenia</div>
+            <div class="daj">Sześć faz od przygotowania do rozwoju, z zasadą bezpiecznego przejęcia: pierwszy miesiąc bez gwałtownych zmian, wyjątek — strony ofertowe.</div>
+            <div class="gdz"><a href="WYCENA_I_ZAKRES.html#plan">Plan i wycena: harmonogram →</a></div>
+          </div>
+
+          <div class="pok-r">
+            <div class="nr">7</div>
+            <div class="zad">Model współpracy, raportowania i komunikacji</div>
+            <div class="daj">Podział odpowiedzialności z granicami, rytm tygodniowy i miesięczny, kanał zespołu jako miejsce raportu. Mission Control jako wspólny widok stanu.</div>
+            <div class="gdz"><a href="SILNIK_WYKONAWCZY.html#rytm">Narzędzia i workflowy: rytm operacyjny →</a><br><a href="ARCHITEKTURA_SCHEMAT.html">Architektura: kokpit →</a></div>
+          </div>
+
+          <div class="pok-r">
+            <div class="nr">8</div>
+            <div class="zad">Przykłady podobnych realizacji</div>
+            <div class="daj">Połączona analityka trzech systemów u innego klienta, słownik oznaczania źródeł ruchu z działającego wdrożenia, mapy percepcji i treść pod widoczność w AI — publicznie do obejrzenia.</div>
+            <div class="gdz"><a href="REFERENCJE.html">Referencje →</a></div>
+          </div>
+        </div>
+
+        <p class="muted" style="margin-top:16px">Punkt pierwszy zostawiamy świadomie otwarty. Rekomendacja podziału budżetu bez dostępu do kont i bez rozdzielenia ruchu serwisowego od sprzedażowego byłaby liczbą wziętą z sufitu — a prosicie o uzasadnienie, nie o liczbę.</p>
+      </div>
+    </section>
+
+
+
+    <!-- ══ ZAKRES DZIAŁAŃ ══ -->
+    <section id="zakres" class="section">
+      <div class="shell">
+        <details class="db-toggle" open>
+        <summary class="section-head db-summary">
+          <p class="eyebrow">Zakres</p>
+          <h2>W ramach wizji zrealizujemy następujący zakres działań <span class="db-chev">›</span></h2>
+          <p class="punchline">Osiem zakresów, jeden system. <em>Co robimy raz, a co pracuje potem bez przerwy.</em></p>
+          <p class="muted">Kolejność i terminy — w planie dostawy.</p>
+        </summary>
+        <!-- GEN:ZAKRES -->
+        <div class="zak-grid">
+          <article class="zak"><div class="zak-h"><span class="zak-kod" style="background:#5b6472">Z0</span><h3>Setup techniczny</h3></div>
+            <p class="zak-t">Jednorazowo — wdrożenie</p><ul class="jed"><li>Konsultacje z działem IT — inwentaryzacja środowiska i dostępów <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Ustanowienie ekosystemu w środowisku technicznym Audi Plichta</li><li>Połączenia z systemami źródłowymi — GA4, Google Ads, Meta, CRM, New Car Sales</li><li>Budowa bazy wiedzy o marce, ofercie i kategorii</li><li>Pełna funkcjonalność systemu agentów — Data Keeper, Conversion Keeper, Conversion Upgrader</li></ul>
+            <p class="zak-t ciag">Później — praca ciągła</p><ul class="cia"><li>Utrzymanie środowiska i dostępów</li><li>Dalszy rozwój zgodnie ze zmieniającymi się oczekiwaniami</li></ul>
+          </article>
+          <article class="zak"><div class="zak-h"><span class="zak-kod" style="background:#8d0a31">MC</span><h3>Mission Control</h3></div>
+            <p class="zak-t">Jednorazowo — wdrożenie</p><ul class="jed"><li>Projekt i budowa kokpitu (Mission Control) — agenci, skille, workflowy</li><li>Budowa raportów w ramach Mission Control (GA4, łączone, mediowe, SEO + GEO, CRM) <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Budowa modułów decyzyjnych — priorytety magazynowe, kalendarz inicjatyw, lista napraw, status automatyzacji, rejestr zdarzeń</li><li>Kanał alertów krytycznych — agent pilnuje konfiguracji na żywo <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Asystent AI z Mission Control <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Benchmarki — punkty odniesienia liczone z Waszej historii</li><li>Budowa alertów odchyleń z tropem</li><li>Odpalanie workflowów z kokpitu</li></ul>
+            <p class="zak-t ciag">Później — praca ciągła</p><ul class="cia"><li>Alerty odchyleń i raport tygodniowy</li><li>Dalszy rozwój zgodnie ze zmieniającymi się oczekiwaniami</li></ul>
+          </article>
+          <article class="zak"><div class="zak-h"><span class="zak-kod" style="background:#12007e">Z1</span><h3>Analityka i pomiar</h3></div>
+            <p class="zak-t">Jednorazowo — wdrożenie</p><ul class="jed"><li>Audyt wdrożenia analityki strony (GA4) <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Strategia budowy spójnego systemu analityki</li><li>Wdrożenie poprawek w analityce GA4</li><li>Projekt pomiaru kosztu kontaktu i kosztu sprzedaży</li><li>Integracja z CRM — pętla zwrotna do kampanii, śledzenie połączeń telefonicznych</li><li>Budowa systemu benchmarków do pomiarów UX / CRO i kosztów sprzedaży</li><li>Pętla zwrotna do kampanii</li><li>Śledzenie połączeń telefonicznych</li></ul>
+            <p class="zak-t ciag">Później — praca ciągła</p><ul class="cia"><li>Utrzymanie i nadzór nad analityką / Mission Control</li><li>Dalszy rozwój zgodnie ze zmieniającymi się oczekiwaniami</li></ul>
+          </article>
+          <article class="zak"><div class="zak-h"><span class="zak-kod" style="background:#dd5e0a">Z2</span><h3>Media — Google i Meta</h3></div>
+            <p class="zak-t">Jednorazowo — wdrożenie</p><ul class="jed"><li>Audyt kont, plan przejęcia i rekomendacja alokacji budżetu</li><li>Restrukturyzacja kampanii — rozdzielenie sprzedaży od serwisu</li><li>Rekomendacja alokacji budżetu z uzasadnieniem</li><li>Przejęcie kont z zachowaniem ciągłości</li></ul>
+            <p class="zak-t ciag">Później — praca ciągła</p><ul class="cia"><li>Prowadzenie kampanii Google Ads</li><li>Prowadzenie kampanii Meta Ads</li><li>Dalszy rozwój zgodnie ze zmieniającymi się oczekiwaniami</li><li>Miesięczna alokacja wg magazynu i priorytetów modeli</li></ul>
+          </article>
+          <article class="zak"><div class="zak-h"><span class="zak-kod" style="background:#0a63bd">Z3</span><h3>Konwersja i UX</h3></div>
+            <p class="zak-t">Jednorazowo — wdrożenie</p><ul class="jed"><li>Audyt ścieżek zakupowych <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Audyt wizualny UI / UX / CRO — Audi Plichta i 50 wybranych dealerów</li><li>Rekomendacja uporządkowania formularzy i podstron ofertowych na audiplichta.pl</li><li>Budowa bazy 40 hipotez do testów</li><li>Taktyki wykorzystania chatbota LiveChat</li></ul>
+            <p class="zak-t ciag">Później — praca ciągła</p><ul class="cia"><li>CRO / UX optymalizacja bieżąca — testy hipotez, wdrażanie zmian</li><li>Dalszy rozwój zgodnie ze zmieniającymi się oczekiwaniami</li></ul>
+          </article>
+          <article class="zak"><div class="zak-h"><span class="zak-kod" style="background:#15803d">Z4</span><h3>Widoczność lokalna i AI (SEO + GEO)</h3></div>
+            <p class="zak-t">Jednorazowo — wdrożenie</p><ul class="jed"><li>Audyt widoczności SEO i GEO <span class="st st-zrobione">zrobione</span></li><li>Plan optymalizacji SEO / GEO — część techniczna <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Strategia treści w oparciu o mapy percepcji zakupu samochodu <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Optymalizacja wizytówek Google Maps dla wszystkich lokalizacji</li><li>Odblokowanie serwisu dla robotów Google i asystentów AI</li><li>Przebudowa techniczna serwisu pod SEO i GEO — indeksacja, struktura adresów, dane strukturalne</li><li>Monitorowanie rezultatów — pozycje, cytowania w AI, ruch</li><li>Start realizacji planu SEO i GEO — pierwsza partia publikacji</li></ul>
+            <p class="zak-t ciag">Później — praca ciągła</p><ul class="cia"><li>Działania GEO / SEO zgodnie z planem tworzenia i publikacji</li><li>Pomiar widoczności i opinie per salon</li><li>Dalszy rozwój zgodnie ze zmieniającymi się oczekiwaniami</li></ul>
+          </article>
+          <article class="zak"><div class="zak-h"><span class="zak-kod" style="background:#0f7ae5">Z5</span><h3>Raportowanie i komunikacja</h3></div>
+            <p class="zak-t">Jednorazowo — wdrożenie</p><ul class="jed"><li>Budowa raportów w ramach Mission Control (GA4, łączone, mediowe, SEO + GEO, CRM)</li><li>Dostosowywanie raportowania i komunikacji — format, zakres i rytm pod Wasze potrzeby</li><li>Ustalenie rytmu spotkań i formatu raportów</li></ul>
+            <p class="zak-t ciag">Później — praca ciągła</p><ul class="cia"><li>Mission Control — stały wgląd w wyniki</li><li>Tygodniowe spotkanie statusowe</li><li>Comiesięczne planowanie działań</li><li>Comiesięczne podsumowanie z propozycjami ulepszeń</li><li>Ewolucja raportowania — zmiana raportów wraz z pytaniami, jakie zadajecie</li><li>Kwartalne uzupełnianie systemu o listy inicjatyw</li><li>Dalszy rozwój zgodnie ze zmieniającymi się oczekiwaniami</li></ul>
+          </article>
+          <article class="zak"><div class="zak-h"><span class="zak-kod" style="background:#12007e">Z6</span><h3>Narzędzia</h3></div>
+            <p class="zak-t">Jednorazowo — wdrożenie</p><ul class="jed"><li>Budowa UTMomatu — słownik i generator oznaczeń ruchu</li><li>Budowa interaktywnej mapy ekosystemu <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Budowa Ścieżkomatu — planera ścieżek zakupowych</li><li>Budowa kreatora stron ofertowych (opcjonalnie)</li></ul>
+            <p class="zak-t ciag">Później — praca ciągła</p><ul class="cia"><li>Utrzymanie i rozwój narzędzi</li><li>Dalszy rozwój zgodnie ze zmieniającymi się oczekiwaniami</li></ul>
+          </article>
+        </div>
+        <div class="legenda"><span><i class="st st-zrobione"></i><b>zrobione</b> — gotowe, powstało przed tą ofertą i możecie to zobaczyć</span><span><i class="st st-wstepnie"></i><b>wstępnie zrobione</b> — jest szkic albo część, do domknięcia we współpracy</span><span><i class="st st-brak"></i><b>bez oznaczenia</b> — do zrobienia od zera</span></div>
+        <!-- /GEN:ZAKRES -->
+        </details>
+      </div>
+    </section>
+
+    <!-- PLAN I WYCENA -->
+    <section id="plan" class="section soft">
+      <div class="shell">
+        <details class="db-toggle" open>
+        <summary class="section-head db-summary">
+          <p class="eyebrow">Plan i wycena</p>
+          <h2>Co, w jakim zakresie i kiedy <span class="db-chev">&rsaquo;</span></h2>
+          <p class="punchline">Bezpieczne przej&#281;cie zamiast rewolucji pierwszego dnia. <em>Ka&#380;dy zakres ma w&#322;asny tor i w&#322;asne tempo.</em></p>
+          <p class="muted">Miesi&#261;ce liczone od startu wsp&#243;&#322;pracy, nie od daty w kalendarzu. &bdquo;Przed startem&rdquo; to dwa tygodnie na dost&#281;py i dane bazowe.</p>
+        </summary>
+<!-- GEN:PLAN -->
+        <div class="gantt">
+          <div class="g-head"><span>Zakres</span><span>Sierpień 2026<em>przed startem</em></span><span>Wrzesień 2026<em>miesiąc 1</em></span><span>Październik 2026<em>miesiąc 2</em></span><span>Listopad 2026<em>miesiąc 3</em></span></div>
+          <div class="g-row"><div class="g-lab"><span class="g-kod" style="background:#5b6472">Z0</span><b>Setup techniczny</b></div>
+<div class="g-c"><span class="g-i">Konsultacje z działem IT — inwentaryzacja środowiska i dostępów <span class="st st-wstepnie">wstępnie zrobione</span><em>2 tygodnie</em></span></div>
+<div class="g-c"><span class="g-i">Ustanowienie ekosystemu w środowisku technicznym Audi Plichta<em>1 miesiąc</em></span><span class="g-i">Budowa bazy wiedzy o marce, ofercie i kategorii<em>2 miesiące</em></span></div>
+<div class="g-c"><span class="g-i">Połączenia z systemami źródłowymi — GA4, Google Ads, Meta, CRM, New Car Sales<em>1 miesiąc</em></span><span class="g-i cd">Budowa bazy wiedzy o marce, ofercie i kategorii<em>ciąg dalszy</em></span></div>
+<div class="g-c"><span class="g-i">Pełna funkcjonalność systemu agentów — Data Keeper, Conversion Keeper, Conversion Upgrader<em>1 miesiąc</em></span></div>
+</div>
+          <div class="g-row"><div class="g-lab"><span class="g-kod" style="background:#8d0a31">MC</span><b>Mission Control</b></div>
+<div class="g-c"><span class="g-i">Projekt i budowa kokpitu (Mission Control) — agenci, skille, workflowy<em>1 miesiąc</em></span><span class="g-i">Asystent AI z Mission Control <span class="st st-wstepnie">wstępnie zrobione</span><em>1 miesiąc</em></span><span class="g-i">Benchmarki — punkty odniesienia liczone z Waszej historii<em>2 tygodnie</em></span><span class="g-i">Budowa alertów odchyleń z tropem<em>1 miesiąc</em></span><span class="g-i">Odpalanie workflowów z kokpitu<em>1 miesiąc</em></span></div>
+<div class="g-c"><span class="g-i">Budowa raportów w ramach Mission Control (GA4, łączone, mediowe, SEO + GEO, CRM) <span class="st st-wstepnie">wstępnie zrobione</span><em>1 miesiąc</em></span><span class="g-i">Kanał alertów krytycznych — agent pilnuje konfiguracji na żywo <span class="st st-wstepnie">wstępnie zrobione</span><em>1 miesiąc</em></span></div>
+<div class="g-c"><span class="g-i">Budowa modułów decyzyjnych — priorytety magazynowe, kalendarz inicjatyw, lista napraw, status automatyzacji, rejestr zdarzeń<em>2 miesiące</em></span></div>
+<div class="g-c"><span class="g-i cd">Budowa modułów decyzyjnych — priorytety magazynowe, kalendarz inicjatyw, lista napraw, status automatyzacji, rejestr zdarzeń<em>ciąg dalszy</em></span></div>
+</div>
+          <div class="g-row"><div class="g-lab"><span class="g-kod" style="background:#12007e">Z1</span><b>Analityka i pomiar</b></div>
+<div class="g-c"><span class="g-i">Audyt wdrożenia analityki strony (GA4) <span class="st st-wstepnie">wstępnie zrobione</span><em></em></span><span class="g-i">Strategia budowy spójnego systemu analityki<em>1 miesiąc</em></span></div>
+<div class="g-c"><span class="g-i">Wdrożenie poprawek w analityce GA4<em>1 miesiąc</em></span><span class="g-i">Projekt pomiaru kosztu kontaktu i kosztu sprzedaży<em>1 miesiąc</em></span></div>
+<div class="g-c"><span class="g-i">Integracja z CRM — pętla zwrotna do kampanii, śledzenie połączeń telefonicznych<em>1 miesiąc</em></span><span class="g-i">Budowa systemu benchmarków do pomiarów UX / CRO i kosztów sprzedaży<em>2 miesiące</em></span><span class="g-i">Pętla zwrotna do kampanii<em>1 miesiąc</em></span><span class="g-i">Śledzenie połączeń telefonicznych<em>1 miesiąc</em></span></div>
+<div class="g-c"><span class="g-i cd">Budowa systemu benchmarków do pomiarów UX / CRO i kosztów sprzedaży<em>ciąg dalszy</em></span></div>
+</div>
+          <div class="g-row"><div class="g-lab"><span class="g-kod" style="background:#dd5e0a">Z2</span><b>Media — Google i Meta</b></div>
+<div class="g-c pusta"></div>
+<div class="g-c"><span class="g-gr">jednorazowo</span><span class="g-i">Audyt kont, plan przejęcia i rekomendacja alokacji budżetu<em>1 miesiąc</em></span><span class="g-i">Rekomendacja alokacji budżetu z uzasadnieniem<em>1 miesiąc</em></span><span class="g-i">Przejęcie kont z zachowaniem ciągłości<em>1 miesiąc</em></span><span class="g-gr ciag">obsługa miesięczna</span><span class="g-i">Prowadzenie kampanii Google Ads<em>bez końca</em></span><span class="g-i">Prowadzenie kampanii Meta Ads<em>bez końca</em></span><span class="g-i">Miesięczna alokacja wg magazynu i priorytetów modeli<em>co miesiąc</em></span></div>
+<div class="g-c"><span class="g-gr ciag">obsługa miesięczna</span><span class="g-i">Prowadzenie kampanii Google Ads<em>bez końca</em></span><span class="g-i">Prowadzenie kampanii Meta Ads<em>bez końca</em></span><span class="g-i">Miesięczna alokacja wg magazynu i priorytetów modeli<em>co miesiąc</em></span></div>
+<div class="g-c"><span class="g-gr">jednorazowo</span><span class="g-i">Restrukturyzacja kampanii — rozdzielenie sprzedaży od serwisu<em>1 miesiąc</em></span><span class="g-gr ciag">obsługa miesięczna</span><span class="g-i">Prowadzenie kampanii Google Ads<em>bez końca</em></span><span class="g-i">Prowadzenie kampanii Meta Ads<em>bez końca</em></span><span class="g-i">Miesięczna alokacja wg magazynu i priorytetów modeli<em>co miesiąc</em></span></div>
+</div>
+          <div class="g-row"><div class="g-lab"><span class="g-kod" style="background:#0a63bd">Z3</span><b>Konwersja i UX</b></div>
+<div class="g-c"><span class="g-i">Audyt ścieżek zakupowych <span class="st st-wstepnie">wstępnie zrobione</span><em></em></span><span class="g-i">Audyt wizualny UI / UX / CRO — Audi Plichta i 50 wybranych dealerów<em>1 miesiąc</em></span></div>
+<div class="g-c"><span class="g-i">Rekomendacja uporządkowania formularzy i podstron ofertowych na audiplichta.pl<em>2 miesiące</em></span><span class="g-i">Budowa bazy 40 hipotez do testów<em>1 miesiąc</em></span></div>
+<div class="g-c"><span class="g-i cd">Rekomendacja uporządkowania formularzy i podstron ofertowych na audiplichta.pl<em>ciąg dalszy</em></span><span class="g-i">Taktyki wykorzystania chatbota LiveChat<em>1 miesiąc</em></span></div>
+<div class="g-c"><span class="g-gr ciag">obsługa miesięczna</span><span class="g-i">CRO / UX optymalizacja bieżąca — testy hipotez, wdrażanie zmian<em>bez końca</em></span></div>
+</div>
+          <div class="g-row"><div class="g-lab"><span class="g-kod" style="background:#15803d">Z4</span><b>Widoczność lokalna i AI (SEO + GEO)</b></div>
+<div class="g-c"><span class="g-i">Audyt widoczności SEO i GEO <span class="st st-zrobione">zrobione</span><em></em></span><span class="g-i">Plan optymalizacji SEO / GEO — część techniczna <span class="st st-wstepnie">wstępnie zrobione</span><em>1 miesiąc</em></span><span class="g-i">Odblokowanie serwisu dla robotów Google i asystentów AI<em>2 tygodnie</em></span></div>
+<div class="g-c"><span class="g-i">Strategia treści w oparciu o mapy percepcji zakupu samochodu <span class="st st-wstepnie">wstępnie zrobione</span><em>1 miesiąc</em></span><span class="g-i">Optymalizacja wizytówek Google Maps dla wszystkich lokalizacji<em>1 miesiąc</em></span><span class="g-i">Przebudowa techniczna serwisu pod SEO i GEO — indeksacja, struktura adresów, dane strukturalne<em>2 miesiące</em></span></div>
+<div class="g-c"><span class="g-i cd">Przebudowa techniczna serwisu pod SEO i GEO — indeksacja, struktura adresów, dane strukturalne<em>ciąg dalszy</em></span></div>
+<div class="g-c"><span class="g-gr">jednorazowo</span><span class="g-i">Monitorowanie rezultatów — pozycje, cytowania w AI, ruch<em>1 miesiąc</em></span><span class="g-i">Start realizacji planu SEO i GEO — pierwsza partia publikacji<em>1 miesiąc</em></span><span class="g-gr ciag">obsługa miesięczna</span><span class="g-i">Działania GEO / SEO zgodnie z planem tworzenia i publikacji<em>bez końca</em></span><span class="g-i">Pomiar widoczności i opinie per salon<em>bez końca</em></span></div>
+</div>
+          <div class="g-row"><div class="g-lab"><span class="g-kod" style="background:#0f7ae5">Z5</span><b>Raportowanie i komunikacja</b></div>
+<div class="g-c"><span class="g-i">Ustalenie rytmu spotkań i formatu raportów<em>2 tygodnie</em></span></div>
+<div class="g-c"><span class="g-i">Budowa raportów w ramach Mission Control (GA4, łączone, mediowe, SEO + GEO, CRM)<em>2 miesiące</em></span></div>
+<div class="g-c"><span class="g-i cd">Budowa raportów w ramach Mission Control (GA4, łączone, mediowe, SEO + GEO, CRM)<em>ciąg dalszy</em></span><span class="g-i">Dostosowywanie raportowania i komunikacji — format, zakres i rytm pod Wasze potrzeby<em>2 miesiące</em></span></div>
+<div class="g-c"><span class="g-i cd">Dostosowywanie raportowania i komunikacji — format, zakres i rytm pod Wasze potrzeby<em>ciąg dalszy</em></span></div>
+</div>
+          <div class="g-row"><div class="g-lab"><span class="g-kod" style="background:#12007e">Z6</span><b>Narzędzia</b></div>
+<div class="g-c"><span class="g-i">Budowa interaktywnej mapy ekosystemu <span class="st st-wstepnie">wstępnie zrobione</span><em>1 miesiąc</em></span><span class="g-i">Budowa Ścieżkomatu — planera ścieżek zakupowych<em>2 miesiące</em></span></div>
+<div class="g-c"><span class="g-i">Budowa UTMomatu — słownik i generator oznaczeń ruchu<em>1 miesiąc</em></span><span class="g-i cd">Budowa Ścieżkomatu — planera ścieżek zakupowych<em>ciąg dalszy</em></span></div>
+<div class="g-c pusta"></div>
+<div class="g-c"><span class="g-i">Budowa kreatora stron ofertowych (opcjonalnie)<em>2 miesiące</em></span></div>
+</div>
+        </div>
+
+        <div class="legenda"><span><i class="st st-zrobione"></i><b>zrobione</b> — gotowe, powstało przed tą ofertą i możecie to zobaczyć</span><span><i class="st st-wstepnie"></i><b>wstępnie zrobione</b> — jest szkic albo część, do domknięcia we współpracy</span><span><i class="st st-brak"></i><b>bez oznaczenia</b> — do zrobienia od zera</span></div>
+        <div class="kam-note"><b>Jak czytać:</b> to jest plan <b>budowy systemu</b> — wyłącznie prace jednorazowe.
+        Każdy element stoi w miesiącu, w którym się zaczyna; jeśli trwa dłużej, ciągnie się dalej wyszarzony.
+        <b>Od grudnia 2026 system pracuje</b> — obsługa ciągła jest opisana w zakresie działań i rozliczana miesięcznie.
+        Daty zakładają start współpracy we wrześniu 2026 i przesuwają się razem z terminem podpisania.</div>
+        <!-- /GEN:PLAN -->
+        <div class="wyc-skrot-blok"><h3>Ile to kosztuje</h3><p class="muted">Osobno wdrożenie, osobno obsługa miesięczna. Pod każdą pozycją widać, co dokładnie wchodzi w cenę. Setup techniczny — w całości gratis.</p>
+        <!-- GEN:WYCENA_SKROT -->
+        <div class="pak-grid">
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#8d0a31">MC</span><h4>Mission Control</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start sierpień 2026</span><b>11 000 PLN</b></div><ul class="pak-l"><li>Projekt i budowa kokpitu (Mission Control) — agenci, skille, workflowy</li><li>Budowa raportów w ramach Mission Control (GA4, łączone, mediowe, SEO + GEO, CRM) <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Budowa modułów decyzyjnych — priorytety magazynowe, kalendarz inicjatyw, lista napraw, status automatyzacji, rejestr zdarzeń</li><li>Kanał alertów krytycznych — agent pilnuje konfiguracji na żywo <span class="st st-wstepnie">wstępnie zrobione</span><em class="pak-u">Powiadomienie na kanał zespołu tego samego dnia, gdy pomiar albo integracja przestaje działać — nie po miesiącu.</em></li><li>Asystent AI z Mission Control <span class="st st-wstepnie">wstępnie zrobione</span></li></ul>
+</article>
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#12007e">Z1</span><h4>Analityka i pomiar</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start sierpień 2026</span><b>3 200 PLN</b></div><ul class="pak-l"><li>Audyt wdrożenia analityki strony (GA4) <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Strategia budowy spójnego systemu analityki</li><li>Wdrożenie poprawek w analityce GA4</li><li>Projekt pomiaru kosztu kontaktu i kosztu sprzedaży</li><li>Integracja z CRM — pętla zwrotna do kampanii, śledzenie połączeń telefonicznych</li><li>Budowa systemu benchmarków do pomiarów UX / CRO i kosztów sprzedaży</li></ul>
+<div class="pak-s ciag"><span class="pak-t">Obsługa miesięczna · od listopad 2026</span><b>1 000 PLN / mc</b></div><ul class="pak-l"><li>Utrzymanie i nadzór nad analityką / Mission Control<em class="pak-u">Tylko do momentu wyszkolenia operatora po Waszej stronie.</em></li></ul>
+</article>
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#dd5e0a">Z2</span><h4>Media — Google i Meta</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start wrzesień 2026</span><b>3 500 PLN</b></div><ul class="pak-l"><li>Audyt kont, plan przejęcia i rekomendacja alokacji budżetu</li><li>Restrukturyzacja kampanii — rozdzielenie sprzedaży od serwisu</li></ul>
+<div class="pak-s ciag"><span class="pak-t">Obsługa miesięczna · od wrzesień 2026</span><b>6 000 PLN / mc</b></div><ul class="pak-l"><li>Prowadzenie kampanii Google Ads</li><li>Prowadzenie kampanii Meta Ads</li></ul>
+</article>
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#0a63bd">Z3</span><h4>Konwersja i UX</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start sierpień 2026</span><b>0 PLN</b></div><ul class="pak-l"><li>Audyt ścieżek zakupowych <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Audyt wizualny UI / UX / CRO — Audi Plichta i 50 wybranych dealerów</li><li>Rekomendacja uporządkowania formularzy i podstron ofertowych na audiplichta.pl</li><li>Budowa bazy 40 hipotez do testów</li><li>Taktyki wykorzystania chatbota LiveChat</li></ul>
+<div class="pak-s ciag"><span class="pak-t">Obsługa miesięczna · od listopad 2026</span><b>2 000 PLN / mc</b></div><ul class="pak-l"><li>CRO / UX optymalizacja bieżąca — testy hipotez, wdrażanie zmian</li></ul>
+</article>
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#15803d">Z4</span><h4>Widoczność lokalna i AI (SEO + GEO)</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start sierpień 2026</span><b>9 500 PLN</b></div><ul class="pak-l"><li>Audyt widoczności SEO i GEO <span class="st st-zrobione">zrobione</span></li><li>Plan optymalizacji SEO / GEO — część techniczna <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Strategia treści w oparciu o mapy percepcji zakupu samochodu <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Optymalizacja wizytówek Google Maps dla wszystkich lokalizacji</li><li>Odblokowanie serwisu dla robotów Google i asystentów AI</li><li>Przebudowa techniczna serwisu pod SEO i GEO — indeksacja, struktura adresów, dane strukturalne</li><li>Start działań GEO / SEO — pierwszy miesiąc realizacji planu</li></ul>
+<div class="pak-s ciag"><span class="pak-t">Obsługa miesięczna · od listopad 2026</span><b>4 000 PLN / mc</b></div><ul class="pak-l"><li>Działania GEO / SEO zgodnie z planem tworzenia i publikacji</li></ul>
+</article>
+          <article class="pak"><div class="pak-h"><span class="pak-kod" style="background:#12007e">Z6</span><h4>Narzędzia</h4></div>
+<div class="pak-s"><span class="pak-t">Wdrożenie · start sierpień 2026</span><b>3 500 PLN</b></div><ul class="pak-l"><li>Budowa UTMomatu — słownik i generator oznaczeń ruchu</li><li>Budowa interaktywnej mapy ekosystemu <span class="st st-wstepnie">wstępnie zrobione</span></li><li>Budowa Ścieżkomatu — planera ścieżek zakupowych</li><li>Budowa kreatora stron ofertowych (opcjonalnie)</li></ul>
+</article>
+        </div>
+        <div class="wyc-suma"><span>Wdrożenie razem</span><b>30 700 PLN</b></div>
+        <div class="wyc-suma ciag"><span>Obsługa miesięczna razem</span><b>13 000 PLN / mc</b></div>
+        <div class="legenda"><span><i class="st st-zrobione"></i><b>zrobione</b> — gotowe, powstało przed tą ofertą i możecie to zobaczyć</span><span><i class="st st-wstepnie"></i><b>wstępnie zrobione</b> — jest szkic albo część, do domknięcia we współpracy</span><span><i class="st st-brak"></i><b>bez oznaczenia</b> — do zrobienia od zera</span></div>
+
+        <div class="mies-blok" id="miesiace"><h3>Miesiąc po miesiącu</h3><p class="muted">Ten sam zakres rozpisany na kalendarz — ile kosztuje każdy miesiąc współpracy.</p>
+          <div class="mies"><div class="mies-h"><b>Sierpień 2026</b><em>przed startem</em><span>9 000 PLN</span></div>
+<div class="mies-g">jednorazowo</div>
+<div class="mies-r"><span class="mies-z" style="color:#8d0a31">MC</span><span>Projekt i budowa kokpitu (Mission Control) — agenci, skille, workflowy</span><b>5 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#8d0a31">MC</span><span>Asystent AI z Mission Control</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Audyt wdrożenia analityki strony (GA4)</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Strategia budowy spójnego systemu analityki</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>Audyt ścieżek zakupowych</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>Audyt wizualny UI / UX / CRO — Audi Plichta i 50 wybranych dealerów</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Audyt widoczności SEO i GEO</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Plan optymalizacji SEO / GEO — część techniczna</span><b>1 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Odblokowanie serwisu dla robotów Google i asystentów AI</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z6</span><span>Budowa interaktywnej mapy ekosystemu</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z6</span><span>Budowa Ścieżkomatu — planera ścieżek zakupowych</span><b>1 000 PLN</b></div>
+</div>
+          <div class="mies"><div class="mies-h"><b>Wrzesień 2026</b><em>miesiąc 1</em><span>16 500 PLN</span></div>
+<div class="mies-g">jednorazowo</div>
+<div class="mies-r"><span class="mies-z" style="color:#8d0a31">MC</span><span>Budowa raportów w ramach Mission Control (GA4, łączone, mediowe, SEO + GEO, CRM)</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#8d0a31">MC</span><span>Kanał alertów krytycznych — agent pilnuje konfiguracji na żywo</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Wdrożenie poprawek w analityce GA4</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Projekt pomiaru kosztu kontaktu i kosztu sprzedaży</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Audyt kont, plan przejęcia i rekomendacja alokacji budżetu</span><b>3 500 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>Rekomendacja uporządkowania formularzy i podstron ofertowych na audiplichta.pl</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>Budowa bazy 40 hipotez do testów</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Strategia treści w oparciu o mapy percepcji zakupu samochodu</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Optymalizacja wizytówek Google Maps dla wszystkich lokalizacji</span><b>500 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Przebudowa techniczna serwisu pod SEO i GEO — indeksacja, struktura adresów, dane strukturalne</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z6</span><span>Budowa UTMomatu — słownik i generator oznaczeń ruchu</span><b>500 PLN</b></div>
+<div class="mies-g">miesięcznie</div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Google Ads</span><b>3 600 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Meta Ads</span><b>2 400 PLN</b></div>
+</div>
+          <div class="mies"><div class="mies-h"><b>Październik 2026</b><em>miesiąc 2</em><span>15 200 PLN</span></div>
+<div class="mies-g">jednorazowo</div>
+<div class="mies-r"><span class="mies-z" style="color:#8d0a31">MC</span><span>Budowa modułów decyzyjnych — priorytety magazynowe, kalendarz inicjatyw, lista napraw, status automatyzacji, rejestr zdarzeń</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Integracja z CRM — pętla zwrotna do kampanii, śledzenie połączeń telefonicznych</span><b>1 200 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Budowa systemu benchmarków do pomiarów UX / CRO i kosztów sprzedaży</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>Taktyki wykorzystania chatbota LiveChat</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Start działań GEO / SEO — pierwszy miesiąc realizacji planu</span><b>6 000 PLN</b></div>
+<div class="mies-g">miesięcznie</div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Google Ads</span><b>3 600 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Meta Ads</span><b>2 400 PLN</b></div>
+</div>
+          <div class="mies"><div class="mies-h"><b>Listopad 2026</b><em>miesiąc 3</em><span>15 000 PLN</span></div>
+<div class="mies-g">jednorazowo</div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Restrukturyzacja kampanii — rozdzielenie sprzedaży od serwisu</span><b><i>GRATIS</i></b></div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z6</span><span>Budowa kreatora stron ofertowych (opcjonalnie)</span><b>2 000 PLN</b></div>
+<div class="mies-g">miesięcznie</div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Utrzymanie i nadzór nad analityką / Mission Control</span><b>1 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Google Ads</span><b>3 600 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Meta Ads</span><b>2 400 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>CRO / UX optymalizacja bieżąca — testy hipotez, wdrażanie zmian</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Działania GEO / SEO zgodnie z planem tworzenia i publikacji</span><b>4 000 PLN</b></div>
+</div>
+          <div class="mies"><div class="mies-h"><b>Grudzień 2026</b><em>system pracuje</em><span>13 000 PLN</span></div>
+<div class="mies-g">miesięcznie</div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Utrzymanie i nadzór nad analityką / Mission Control</span><b>1 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Google Ads</span><b>3 600 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Meta Ads</span><b>2 400 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>CRO / UX optymalizacja bieżąca — testy hipotez, wdrażanie zmian</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Działania GEO / SEO zgodnie z planem tworzenia i publikacji</span><b>4 000 PLN</b></div>
+</div>
+          <div class="mies"><div class="mies-h"><b>Styczeń 2027</b><em>i dalej</em><span>13 000 PLN</span></div>
+<div class="mies-g">miesięcznie</div>
+<div class="mies-r"><span class="mies-z" style="color:#12007e">Z1</span><span>Utrzymanie i nadzór nad analityką / Mission Control</span><b>1 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Google Ads</span><b>3 600 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#dd5e0a">Z2</span><span>Prowadzenie kampanii Meta Ads</span><b>2 400 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#0a63bd">Z3</span><span>CRO / UX optymalizacja bieżąca — testy hipotez, wdrażanie zmian</span><b>2 000 PLN</b></div>
+<div class="mies-r"><span class="mies-z" style="color:#15803d">Z4</span><span>Działania GEO / SEO zgodnie z planem tworzenia i publikacji</span><b>4 000 PLN</b></div>
+</div>
+        </div>
+        <a class="skrot-link" href="WYCENA.html#miesiace"><b>Wycena po miesiącach &mdash; szczegółowo, miesiąc po miesiącu</b><span>ile kosztuje sierpień, wrzesień, październik, listopad i każdy kolejny miesiąc &rarr;</span></a>
+        <!-- /GEN:WYCENA_SKROT --></div>
+        <p class="muted" style="margin-top:16px">Pe&#322;na wycena element po elemencie, warunki i podzia&#322; na etapy &mdash; <a class="deeplink" href="WYCENA_I_ZAKRES.html">Plan i wycena →</a></p>
+        </details>
+      </div>
+    </section>
+
+
+    <!-- PROBLEMY SZCZEGOLNE -->
+    <section id="problemy" class="section">
+      <div class="shell">
+        <details class="db-toggle" open>
+        <summary class="section-head db-summary">
+          <p class="eyebrow">Problemy szczeg&oacute;lne</p>
+          <h2>Sześć problemów do rozwiązania <span class="db-chev">›</span></h2>
+          <p class="punchline">Każdy nazwany przez Was w briefie, każdy z dowodem z Waszych danych i konkretnym rozwiązaniem. <em>Nie interpretujemy — odnosimy się do liczb.</em></p>
+        </summary>
+        <!-- DUP:PROBLEMY (kopia 1:1 z PROBLEMY_Z_BRIEFU.html) -->
+        <div class="grid">
+
+          <!-- P1 -->
+          <article class="card full">
+            <div class="problem-head">
+              <span class="problem-no">P1</span>
+              <span class="problem-tag">Pomiar sprzedaży</span>
+            </div>
+            <h3>Nie wiadomo, które zgłoszenie doprowadziło do sprzedaży</h3>
+            <span class="proof-pill">447 wywołań / 15 użytkowników — to samo zdarzenie na każdym formularzu</span>
+            <p class="muted">Formularz „nowe auta" odpala identyczne zdarzenie na karcie modelu, na listingu, na stronie głównej i na stronach ofertowych. Każda dotychczasowa optymalizacja pracowała na danych, których nie da się przypisać do miejsca ani kontekstu.</p>
+            <div class="solution-block">
+              <strong>Co to rozwiązuje</strong>
+              <ul>
+                <li>Etap 0: inwentaryzacja wszystkich formularzy i adresów, na których odpalają.</li>
+                <li>Jeden trigger GTM per typ formularza — zdarzenie z parametrem <code>form_name</code> + <code>page_type</code>.</li>
+                <li>Dashboard CPL/CPS zaczyna działać dopiero po tej naprawie — to jest blokada dla reszty systemu.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- P2 -->
+          <article class="card wide">
+            <div class="problem-head">
+              <span class="problem-no">P2</span>
+              <span class="problem-tag">Podział budżetu</span>
+            </div>
+            <h3>Serwis konkuruje o budżet z nową sprzedażą</h3>
+            <span class="proof-pill">~82 połączenia serwisowe vs ~66 sprzedażowych</span>
+            <p class="muted">Kampanie nie rozróżniają intencji na poziomie ruchu — serwis i sprzedaż trafiają do jednego kosztu mediowego bez podziału na cel.</p>
+            <div class="solution-block">
+              <strong>Co to rozwiązuje</strong>
+              <ul>
+                <li>Rozdzielenie struktur kampanii na intencję sprzedażową i serwisową.</li>
+                <li>Kampanie nie rozróżniają jakości leadów dla wynajmu i zakupu — wsteczny import zwalidowanych leadów z CRM jako osobne konwersje offline, żeby algorytmy mogły niezależnie optymalizować kampanie pod oba segmenty.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- P3 -->
+          <article class="card wide">
+            <div class="problem-head">
+              <span class="problem-no">P3</span>
+              <span class="problem-tag">Jakość leadów</span>
+            </div>
+            <h3>System optymalizuje pod zgłoszenia, nie pod sprzedaż</h3>
+            <span class="proof-pill">Brak pętli CRM → kampanie reklamowe</span>
+            <p class="muted">Algorytmy Google i Meta uczą się na każdym wypełnionym formularzu, nie na leadzie który faktycznie kupił auto. Obie platformy optymalizują pod to co dostają.</p>
+            <div class="solution-block">
+              <strong>Co to rozwiązuje</strong>
+              <ul>
+                <li>CRM → eksport hot leadów (zakup deklarowany w 2–3 miesiące) → upload do Google Ads jako offline conversion.</li>
+                <li>Rytm: daily dla hot leadów, weekly dla pełnego refreshu CRM.</li>
+                <li>Mission Control monitoruje status pętli — alert gdy nie zaktualizowała się ponad 48h.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- P4 -->
+          <article class="card wide">
+            <div class="problem-head">
+              <span class="problem-no">P4</span>
+              <span class="problem-tag">Priorytety modeli</span>
+            </div>
+            <h3>Kampanie nie wiedzą, co stoi w magazynie</h3>
+            <span class="proof-pill">Priorytety modeli aktualizowane ręcznie — miesięcznie</span>
+            <p class="muted">Zmiany priorytetów sprzedażowych docierają do kampanii z opóźnieniem. Auto stoi, a budżet idzie na model który się dobrze sprzedał miesiąc temu.</p>
+            <div class="solution-block">
+              <strong>Co to rozwiązuje</strong>
+              <ul>
+                <li>API New Car Sales (już w infrastrukturze dealerstwa) → feed modeli z dostępnością i dniami na parkingu.</li>
+                <li>Mission Control: połączone API New Car Sales (już w infrastrukturze dealerstwa) → feed modeli z dostępnością i dniami na parkingu.</li>
+                <li>Mission Control: miesięczna tabela priorytetów: model × salon × dni na parkingu → decyzja budżetowa.</li>
+                <li>Mission Control: checklist „priorytety na ten tydzień zatwierdzone" — widoczna przed uruchomieniem kampanii.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- P5 -->
+          <article class="card wide">
+            <div class="problem-head">
+              <span class="problem-no">P5</span>
+              <span class="problem-tag">Widoczność lokalna</span>
+            </div>
+            <h3>Sieć 5 salonów — widoczność jakby jeden istniał</h3>
+            <span class="proof-pill">720 opinii w Gdyni vs 29 w City Gdańsk</span>
+            <p class="muted">Lokalizacja z 29 opiniami jest praktycznie niewidoczna w wynikach lokalnych i w odpowiedziach asystentów AI. Bliskość geograficzna nie zastępuje widoczności w wyszukiwaniu — te dwie rzeczy nie korelują.</p>
+            <div class="solution-block">
+              <strong>Co to rozwiązuje</strong>
+              <ul>
+                <li>Strategia pozyskiwania opinii per salon — SMS do klienta po wizycie → link do recenzji (workflow BDC).</li>
+                <li>Local Content per lokalizacja: historia salonu, specjalizacje modeli, zespół — sygnały geolokacyjne dla AI. Sylwetki pracowników, ich pasje, lokalne inicjatywy.</li>
+                <li>GEO: treść w formie odpowiedzi na pytania cytowalne przez AI — „który dealer Audi w Trójmieście ma Q5 na stock".</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- P6 -->
+          <article class="card full">
+            <div class="problem-head">
+              <span class="problem-no">P6</span>
+              <span class="problem-tag">Konwersja strony</span>
+            </div>
+            <h3>Strona przyjmuje ruch kampanii — i na tym się kończy</h3>
+            <span class="proof-pill">CR 0,93% wobec 2–4% standardu rynkowego</span>
+            <p class="muted">Ktoś szukający Q5 ląduje na stronie głównej, nie na LP Q5. Formularz jest ten sam na wszystkich typach stron. Thank-you page jest pustą stroną bez następnego kroku. Każda złotówka z kampanii pracuje na ułamku potencjału.</p>
+            <div class="solution-block">
+              <strong>Co to rozwiązuje</strong>
+              <ul>
+                <li>Jeden CTA per typ strony — LP modelowa skupiona na jednej akcji, nie na nawigacji po serwisie.</li>
+                <li>Thank-you page z następnym krokiem: termin jazdy próbnej, film o modelu, kontakt do handlowca.</li>
+                <li>Clarity + GA4: mapa ciepła formularzy → które pola powodują porzucenie → backlog hipotez.</li>
+                <li>Conversion Upgrader: co miesiąc 3–5 hipotez z priorytetem, właścicielem i metryką sukcesu — nie pojedyncze strzały.</li>
+                <li>Wykorzystywanie i aktywacja chatbota — reguły wywołania, segmentacja komunikatu per kontekst strony i etap decyzji.</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+        <!-- /DUP:PROBLEMY -->
+        <p class="muted" style="margin-top:16px">Pe&#322;ny dow&oacute;d z danych i rozwi&#261;zanie dla ka&#380;dego &mdash; <a class="deeplink" href="PROBLEMY_Z_BRIEFU.html">Problemy szczególne →</a></p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ══ ZAJAWKI ROZDZIAŁÓW ══ -->
+    
+    <!-- ══ POKRYCIE 8 WARUNKÓW ══ -->
+    
+
+<div class="foot">Audi Grupa Plichta · odpowiedź na brief · lipiec 2026</div>
+<script>
+(function(){"use strict";
+var key="audi-plichta-odpowiedz-v1",state={};
+try{state=JSON.parse(localStorage.getItem(key)||"{}")}catch(e){state={}}
+var badge=document.getElementById("saveState");
+function save(){localStorage.setItem(key,JSON.stringify(state));
+  if(badge)badge.textContent="Zapisano "+new Date().toLocaleTimeString("pl-PL",{hour:"2-digit",minute:"2-digit"});}
+document.querySelectorAll("[data-edit]").forEach(function(el){var id=el.dataset.edit;
+  if(Object.prototype.hasOwnProperty.call(state,id))el.innerHTML=state[id];
+  el.addEventListener("input",function(){state[id]=el.innerHTML;save()});});
+document.querySelectorAll("[data-check]").forEach(function(el){var id=el.dataset.check;
+  if(Object.prototype.hasOwnProperty.call(state,id))el.checked=!!state[id];
+  el.addEventListener("change",function(){state[id]=el.checked;save()});});
+var navLinks=[].slice.call(document.querySelectorAll('nav a[href^="#"]'));
+var targets=navLinks.map(function(a){return document.querySelector(a.getAttribute("href"))}).filter(Boolean);
+if("IntersectionObserver" in window && targets.length){
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(!e.isIntersecting)return;
+    navLinks.forEach(function(a){a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id)});});},
+    {rootMargin:"-20% 0px -70% 0px"});
+  targets.forEach(function(t){io.observe(t)});}
+var eb=document.getElementById("exportBtn");
+if(eb)eb.addEventListener("click",function(){
+  var b=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");
+  a.href=u;a.download="audi-plichta-uwagi.json";a.click();URL.revokeObjectURL(u);});
+var hb=document.getElementById("htmlBtn");
+if(hb)hb.addEventListener("click",function(){
+  var c=document.documentElement.cloneNode(true);
+  c.querySelectorAll("[data-check]").forEach(function(el){el.checked?el.setAttribute("checked","checked"):el.removeAttribute("checked");});
+  var h="<!doctype html>\n"+c.outerHTML;
+  var b=new Blob([h],{type:"text/html;charset=utf-8"}),u=URL.createObjectURL(b),a=document.createElement("a");
+  a.href=u;a.download=document.title.replace(/[^\w]+/g,"_")+".html";a.click();URL.revokeObjectURL(u);});
+var pb=document.getElementById("printBtn");
+if(pb)pb.addEventListener("click",function(){window.print()});
+})();
+</script>
+</body>
+</html>

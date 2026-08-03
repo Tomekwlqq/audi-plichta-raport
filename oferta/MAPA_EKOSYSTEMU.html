@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mapa ekosystemu — Audi Grupa Plichta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;--ink:#0a0a0a;--muted:#5b6472;--faint:#8b93a2;--line:#e6e6e9;
+  --green:#16a34a;--green-d:#15803d;--green-soft:#e7f6ec;--green-line:#b7e3c4;
+  --orange:#f5751a;--orange-d:#dd5e0a;--orange-soft:#fff2e8;--orange-line:#f8c39a;
+  --blue:#0f7ae5;--blue-d:#0a63bd;--blue-soft:#e9f3fd;--blue-line:#a9d2f6;
+  --violet:#1800ad;--violet-d:#12007e;--violet-soft:#ece9fb;--violet-line:#c5bcf0;
+  --bord:#8d0a31;--bord-d:#6d0725;--bord-soft:#fcebf2;--bord-line:#e8b4c6;
+  --dark:#1a1f2b;
+  --grotesk:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--grotesk);background:var(--bg);color:var(--ink);line-height:1.6;
+  -webkit-font-smoothing:antialiased;font-size:16px;padding:74px 34px 90px;
+  background-image:radial-gradient(circle at 8% 0,#eeebfd 0,transparent 42%),radial-gradient(circle at 96% 3%,#fdeef4 0,transparent 36%);background-repeat:no-repeat}
+.wrap{max-width:1420px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:15px}
+h1{font-size:clamp(34px,5vw,54px);font-weight:700;letter-spacing:-.035em;line-height:1.03;margin-bottom:14px}
+.sub{color:var(--muted);font-size:19px;max-width:920px;line-height:1.5}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;margin-bottom:30px}
+.badge{font-family:var(--mono);font-size:11px;font-weight:600;padding:6px 11px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--faint)}
+.badge.draft{color:var(--bord);border-color:var(--bord-line);background:var(--bord-soft)}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:26px 28px;margin-bottom:18px;box-shadow:0 8px 26px rgba(20,26,45,.05)}
+h2{font-size:24px;font-weight:700;letter-spacing:-.025em;line-height:1.15;margin-bottom:5px}
+.h2sub{color:var(--muted);font-size:15px;margin-bottom:18px;line-height:1.55;max-width:960px}
+.svgbox{border:1px solid var(--line);border-radius:15px;background:#fff;padding:12px;overflow-x:auto}
+.svgbox svg{display:block;width:100%;min-width:940px;height:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:8px}
+th{background:var(--dark);color:#fff;padding:12px 14px;text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+td{padding:12px 14px;border-bottom:1px solid #f1eff7;vertical-align:top;color:var(--muted);line-height:1.55}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fbfaff}
+td strong{color:var(--ink)}
+.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);margin-top:10px}
+.legend span{display:flex;align-items:center;gap:8px}
+.dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.d-red{background:var(--bord)}.d-amb{background:var(--orange)}
+.key{font-family:var(--mono);font-size:12px;background:var(--violet-soft);color:var(--violet-d);padding:2px 7px;border-radius:6px}
+.sev{font-family:var(--mono);font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:20px;white-space:nowrap;display:inline-block}
+.s-p0{background:var(--bord-soft);color:var(--bord)}
+.s-p1{background:var(--orange-soft);color:var(--orange-d)}
+.pending{background:var(--blue-soft);color:var(--blue-d)}
+.note{border-left:3px solid var(--bord);background:var(--bord-soft);padding:15px 19px;border-radius:0 13px 13px 0;font-size:14.5px;margin-top:16px;color:var(--bord-d);line-height:1.6}
+.note b{color:var(--bord)}
+footer{color:var(--faint);font-family:var(--mono);font-size:11.5px;padding:16px 4px 30px;text-align:center}
+@media(max-width:640px){body{padding:56px 16px 60px}.card{padding:20px}}
+@media print{#hub-back-btn{display:none!important}body{padding:0;background:none}}
+#doc-tag-fix{position:fixed;top:18px;left:186px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#12007e;background:rgba(236,233,251,.96);backdrop-filter:blur(8px);padding:8px 13px;border-radius:9px;white-space:nowrap;box-shadow:0 2px 10px rgba(20,26,45,.06)}
+@media(max-width:900px){#doc-tag-fix{display:none}}
+</style>
+<script src="brama.js"></script>
+</head>
+<body>
+
+<a href="PLICHTA_START.html" style="position:fixed;top:18px;left:18px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#5b6472;text-decoration:none;padding:8px 14px;border:1px solid #e6e6e9;border-radius:9px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(20,26,45,.06)">← Menu Startowe</a>
+<span id="doc-tag-fix">materiał · mapa ekosystemu</span>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Audi Grupa Plichta · materiał · mapa ekosystemu</div>
+  <h1>Mapa ekosystemu</h1>
+  <p class="sub">Co składa się na ścieżkę od reklamy do zamówienia — i w których miejscach informacja się urywa. Wszystkie dziury oznaczone numerami pochodzą z analizy realnych danych GA4 Plichty, wykonanej przed złożeniem oferty.</p>
+  <div class="badges">
+    <span class="badge">23.07.2026</span>
+    <span class="badge">Źródło: GA4 property 355550660 + audyt strony + zwiad otwartych źródeł</span>
+    <span class="badge">5 salonów · 37 w grupie · 14 marek</span>
+  </div>
+</header>
+
+<div class="card">
+  <h2>Ekosystem — pełna mapa</h2>
+  <p class="h2sub">Od góry: trzy ekosystemy, w których jesteśmy obecni, z rozróżnieniem na to, co kupujemy, i to, co zdobywamy. Niżej: strona rozbita na realne typy stron. Na dole: obsługa, salony i sprzedaż. Czerwone znaczniki to miejsca, w których łańcuch informacji jest przerwany.</p>
+
+  <div class="svgbox">
+  <svg viewBox="0 0 1260 1180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pełna mapa ekosystemu Audi Plichta">
+  <style>text{font-family:"Space Grotesk",-apple-system,"Segoe UI",sans-serif}text[letter-spacing]{font-family:"IBM Plex Mono","SF Mono",Menlo,monospace}</style>
+
+    <defs>
+      <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#8b93a2"/></marker>
+      <marker id="ar2Red" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#8d0a31"/></marker>
+    </defs>
+
+    <!-- ══════ WARSTWA A: TRZY EKOSYSTEMY ══════ -->
+    <text x="18" y="26" font-size="11" font-weight="800" fill="#8d0a31" letter-spacing="1.4">A · EKOSYSTEMY — GDZIE NAS SZUKAJĄ</text>
+
+    <!-- GOOGLE -->
+    <rect x="18" y="38" width="620" height="152" rx="11" fill="#fbfaff" stroke="#e6e6e9" stroke-width="1.4"/>
+    <text x="32" y="58" font-size="12.5" font-weight="800" fill="#0a0a0a">EKOSYSTEM GOOGLE</text>
+    <text x="622" y="58" font-size="10" fill="#888" text-anchor="end">~42 000 zł/mc</text>
+
+    <text x="32" y="78" font-size="9.5" font-weight="800" fill="#dd5e0a" letter-spacing=".7">KUPUJEMY</text>
+    <rect x="32" y="84" width="186" height="40" rx="7" fill="#fff2e8" stroke="#f8c39a"/>
+    <text x="125" y="100" font-size="11.5" font-weight="700" text-anchor="middle">Search Ads</text>
+    <text x="125" y="114" font-size="9.5" fill="#777" text-anchor="middle">intencja za frazą — nierozdzielona</text>
+
+    <rect x="226" y="84" width="186" height="40" rx="7" fill="#fff2e8" stroke="#f8c39a"/>
+    <text x="319" y="100" font-size="11.5" font-weight="700" text-anchor="middle">Performance Max</text>
+    <text x="319" y="114" font-size="9.5" fill="#777" text-anchor="middle">worek — podział budżetu niewidoczny</text>
+
+    <rect x="420" y="84" width="202" height="40" rx="7" fill="#fff2e8" stroke="#f8c39a"/>
+    <text x="521" y="100" font-size="11.5" font-weight="700" text-anchor="middle">YouTube Ads</text>
+    <text x="521" y="114" font-size="9.5" fill="#777" text-anchor="middle">w ramach PMax — brak osobnej kontroli</text>
+
+    <text x="32" y="144" font-size="9.5" font-weight="800" fill="#15803d" letter-spacing=".7">ZDOBYWAMY</text>
+    <rect x="32" y="150" width="186" height="32" rx="7" fill="#e7f6ec" stroke="#b7e3c4"/>
+    <text x="125" y="170" font-size="11.5" font-weight="700" text-anchor="middle">Organic Search</text>
+
+    <rect x="226" y="150" width="186" height="32" rx="7" fill="#fcebf2" stroke="#e8b4c6"/>
+    <text x="319" y="164" font-size="11.5" font-weight="700" text-anchor="middle">Wizytówki + Mapy</text>
+    <text x="319" y="177" font-size="9.5" fill="#8d0a31" text-anchor="middle">720 / 592 / 123 / 29 opinii</text>
+    <circle cx="400" cy="160" r="10" fill="#8d0a31"/>
+    <text x="400" y="164" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">8</text>
+
+    <rect x="420" y="150" width="202" height="32" rx="7" fill="#e7f6ec" stroke="#b7e3c4"/>
+    <text x="521" y="170" font-size="11.5" font-weight="700" text-anchor="middle">YouTube — kanał własny</text>
+
+    <!-- META -->
+    <rect x="650" y="38" width="368" height="152" rx="11" fill="#fbfaff" stroke="#e6e6e9" stroke-width="1.4"/>
+    <text x="664" y="58" font-size="12.5" font-weight="800" fill="#0a0a0a">EKOSYSTEM META</text>
+    <text x="1002" y="58" font-size="10" fill="#888" text-anchor="end">~12 000 zł/mc</text>
+
+    <text x="664" y="78" font-size="9.5" font-weight="800" fill="#dd5e0a" letter-spacing=".7">KUPUJEMY</text>
+    <rect x="664" y="84" width="170" height="40" rx="7" fill="#fff2e8" stroke="#f8c39a"/>
+    <text x="749" y="100" font-size="11.5" font-weight="700" text-anchor="middle">Feed / Stories</text>
+    <text x="749" y="114" font-size="9.5" fill="#777" text-anchor="middle">ruch na stronę + remarketing</text>
+
+    <rect x="842" y="84" width="162" height="40" rx="7" fill="#fff2e8" stroke="#f8c39a"/>
+    <text x="923" y="100" font-size="11.5" font-weight="700" text-anchor="middle">Lead Ads</text>
+    <text x="923" y="114" font-size="9.5" fill="#8d0a31" text-anchor="middle">limit 5–6 tys. · niska jakość</text>
+
+    <text x="664" y="144" font-size="9.5" font-weight="800" fill="#15803d" letter-spacing=".7">ZDOBYWAMY</text>
+    <rect x="664" y="150" width="170" height="32" rx="7" fill="#e7f6ec" stroke="#b7e3c4"/>
+    <text x="749" y="164" font-size="11.5" font-weight="700" text-anchor="middle">Facebook</text>
+    <text x="749" y="177" font-size="9.5" fill="#777" text-anchor="middle">11 542 fanów · jeden profil</text>
+
+    <rect x="842" y="150" width="162" height="32" rx="7" fill="#e7f6ec" stroke="#b7e3c4"/>
+    <text x="923" y="164" font-size="11.5" font-weight="700" text-anchor="middle">Instagram</text>
+    <text x="923" y="177" font-size="9.5" fill="#777" text-anchor="middle">2 744 + profil Bydgoszcz</text>
+
+    <!-- LLM -->
+    <rect x="1030" y="38" width="212" height="152" rx="11" fill="#f7f5fb" stroke="#bdb2d4" stroke-width="1.4"/>
+    <text x="1044" y="58" font-size="12.5" font-weight="800" fill="#4a3b7a">ASYSTENCI AI</text>
+    <text x="1228" y="58" font-size="10" fill="#12007e" text-anchor="end">nie do kupienia</text>
+
+    <text x="1044" y="78" font-size="9.5" font-weight="800" fill="#6b32a8" letter-spacing=".7">TYLKO ZDOBYWAMY</text>
+    <rect x="1044" y="84" width="184" height="28" rx="7" fill="#fff" stroke="#c5bcf0"/>
+    <text x="1136" y="102" font-size="11.5" font-weight="700" text-anchor="middle">ChatGPT</text>
+
+    <rect x="1044" y="118" width="184" height="28" rx="7" fill="#fff" stroke="#c5bcf0"/>
+    <text x="1136" y="136" font-size="11.5" font-weight="700" text-anchor="middle">Perplexity</text>
+
+    <rect x="1044" y="152" width="184" height="30" rx="7" fill="#fff" stroke="#c5bcf0"/>
+    <text x="1136" y="166" font-size="11.5" font-weight="700" text-anchor="middle">AI Overviews</text>
+    <text x="1136" y="178" font-size="9.5" fill="#12007e" text-anchor="middle">nad wynikami Google</text>
+
+    <line x1="630" y1="190" x2="630" y2="214" stroke="#8b93a2" stroke-width="1.6" marker-end="url(#ar2)"/>
+
+    <!-- ══════ WARSTWA B: STRONA ══════ -->
+    <text x="18" y="238" font-size="11" font-weight="800" fill="#8d0a31" letter-spacing="1.4">B · STRONA WWW — audiplichta.pl<tspan fill="#8b93a2" font-weight="600">  · WordPress · dane rozbite na 7 osobnych usług GA4</tspan></text>
+    <rect x="18" y="250" width="1224" height="190" rx="11" fill="#fbfaff" stroke="#e6e6e9" stroke-width="1.4"/>
+
+    <!-- rząd 1 -->
+    <rect x="32" y="268" width="234" height="56" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="149" y="286" font-size="11.5" font-weight="700" text-anchor="middle">Strona główna</text>
+    <text x="149" y="300" font-size="9.5" fill="#777" text-anchor="middle">osobna per salon</text>
+    <text x="149" y="314" font-size="9.5" fill="#777" text-anchor="middle">wejście brandowe</text>
+
+    <rect x="276" y="268" width="234" height="56" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="393" y="286" font-size="11.5" font-weight="700" text-anchor="middle">Listing „Dostępne Audi"</text>
+    <text x="393" y="300" font-size="9.5" fill="#777" text-anchor="middle">~444 auta · filtry · sortowanie</text>
+    <text x="393" y="314" font-size="9.5" fill="#dd5e0a" text-anchor="middle">niespójny sort · brak formularza</text>
+
+    <rect x="520" y="268" width="234" height="56" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="637" y="286" font-size="11.5" font-weight="700" text-anchor="middle">Karta produktu</text>
+    <text x="637" y="300" font-size="9.5" fill="#777" text-anchor="middle">konkretne auto z magazynu</text>
+    <text x="637" y="314" font-size="9.5" fill="#15803d" text-anchor="middle">główna ścieżka do zgłoszenia</text>
+
+    <rect x="764" y="268" width="234" height="56" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="881" y="286" font-size="11.5" font-weight="700" text-anchor="middle">LP modelowe</text>
+    <text x="881" y="300" font-size="9.5" fill="#777" text-anchor="middle">A3 · Q5 · Q7 — jeden model</text>
+    <text x="881" y="314" font-size="9.5" fill="#8d0a31" text-anchor="middle">formularz nad foldem, brak treści</text>
+
+    <rect x="1008" y="268" width="220" height="56" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="1118" y="286" font-size="11.5" font-weight="700" text-anchor="middle">LP zbiorcze</text>
+    <text x="1118" y="300" font-size="9.5" fill="#777" text-anchor="middle">„oferta nowe Audi"</text>
+    <text x="1118" y="314" font-size="9.5" fill="#777" text-anchor="middle">„limitowana oferta"</text>
+
+    <!-- rząd 2 -->
+    <rect x="32" y="336" width="234" height="56" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="149" y="354" font-size="11.5" font-weight="700" text-anchor="middle">LP taktyczne</text>
+    <text x="149" y="368" font-size="9.5" fill="#777" text-anchor="middle">wyprzedaże · akcje specjalne</text>
+    <text x="149" y="382" font-size="9.5" fill="#777" text-anchor="middle">żyją tylko w czasie inicjatywy</text>
+
+    <rect x="276" y="336" width="234" height="56" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="393" y="354" font-size="11.5" font-weight="700" text-anchor="middle">LP finansowania (APL)</text>
+    <text x="393" y="368" font-size="9.5" fill="#777" text-anchor="middle">Audi Perfect Lease · VW Bank</text>
+    <text x="393" y="382" font-size="9.5" fill="#777" text-anchor="middle">kalkulator z zewnętrznego API</text>
+
+    <rect x="520" y="336" width="234" height="56" rx="8" fill="#fcebf2" stroke="#e8b4c6"/>
+    <text x="637" y="354" font-size="11.5" font-weight="700" text-anchor="middle">Serwis i części</text>
+    <text x="637" y="368" font-size="9.5" fill="#777" text-anchor="middle">jedyna sekcja dla obecnego klienta</text>
+    <text x="637" y="382" font-size="9.5" fill="#8d0a31" text-anchor="middle">brak zdarzenia wejścia</text>
+    <circle cx="738" cy="348" r="10" fill="#8d0a31"/>
+    <text x="738" y="352" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">4</text>
+
+    <rect x="764" y="336" width="234" height="56" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="881" y="354" font-size="11.5" font-weight="700" text-anchor="middle">Auta używane</text>
+    <text x="881" y="368" font-size="9.5" fill="#777" text-anchor="middle">uzywane.plichta.com.pl</text>
+    <text x="881" y="382" font-size="9.5" fill="#dd5e0a" text-anchor="middle">osobna domena — poza pomiarem?</text>
+
+    <rect x="1008" y="336" width="220" height="56" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="1118" y="354" font-size="11.5" font-weight="700" text-anchor="middle">Kontakt i pozostałe</text>
+    <text x="1118" y="368" font-size="9.5" fill="#777" text-anchor="middle">jazda próbna · odkup</text>
+    <text x="1118" y="382" font-size="9.5" fill="#777" text-anchor="middle">formularze ogólne</text>
+
+    <text x="32" y="420" font-size="10" fill="#888">Każdy typ strony ma inną intencję odwiedzającego i powinien mieć inny formularz oraz inny sposób pomiaru. Dziś większość dzieli jedno zdarzenie.</text>
+
+    <line x1="630" y1="440" x2="630" y2="464" stroke="#8b93a2" stroke-width="1.6" marker-end="url(#ar2)"/>
+
+    <!-- ══════ WARSTWA C: KONWERSJA ══════ -->
+    <text x="18" y="488" font-size="11" font-weight="800" fill="#8d0a31" letter-spacing="1.4">C · PUNKTY ZGŁOSZENIA</text>
+    <rect x="18" y="500" width="1224" height="92" rx="11" fill="#fcebf2" stroke="#e8cdd2" stroke-width="1.4"/>
+
+    <rect x="32" y="518" width="286" height="58" rx="8" fill="#fcebf2" stroke="#e8b4c6"/>
+    <text x="175" y="536" font-size="11.5" font-weight="700" text-anchor="middle">Formularz „nowe auta"</text>
+    <text x="175" y="550" font-size="9.5" fill="#777" text-anchor="middle">na karcie produktu, na LP, w kilku miejscach</text>
+    <text x="175" y="564" font-size="9.5" fill="#8d0a31" text-anchor="middle">wszędzie to samo zdarzenie — nie do rozróżnienia</text>
+    <circle cx="302" cy="530" r="10" fill="#8d0a31"/>
+    <text x="302" y="534" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">2</text>
+
+    <rect x="328" y="518" width="180" height="58" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="418" y="536" font-size="11.5" font-weight="700" text-anchor="middle">Jazda próbna</text>
+    <text x="418" y="556" font-size="9.5" fill="#777" text-anchor="middle">osobny formularz</text>
+
+    <rect x="518" y="518" width="230" height="58" rx="8" fill="#fcebf2" stroke="#e8b4c6"/>
+    <text x="633" y="536" font-size="11.5" font-weight="700" text-anchor="middle">Telefon</text>
+    <text x="633" y="550" font-size="9.5" fill="#777" text-anchor="middle">osobne numery: sprzedaż i serwis</text>
+    <text x="633" y="564" font-size="9.5" fill="#8d0a31" text-anchor="middle">brak śledzenia źródła połączenia</text>
+    <circle cx="732" cy="530" r="10" fill="#8d0a31"/>
+    <text x="732" y="534" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">1</text>
+
+    <rect x="758" y="518" width="200" height="58" rx="8" fill="#fff2e8" stroke="#f8c39a"/>
+    <text x="858" y="536" font-size="11.5" font-weight="700" text-anchor="middle">Komunikator / czat</text>
+    <text x="858" y="550" font-size="9.5" fill="#dd5e0a" text-anchor="middle">brief mówi że jest</text>
+    <text x="858" y="564" font-size="9.5" fill="#dd5e0a" text-anchor="middle">zwiad nie potwierdził</text>
+    <circle cx="942" cy="530" r="10" fill="#dd5e0a"/>
+    <text x="942" y="534" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">A</text>
+
+    <rect x="968" y="518" width="120" height="58" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="1028" y="536" font-size="11.5" font-weight="700" text-anchor="middle">E-mail</text>
+    <text x="1028" y="556" font-size="9.5" fill="#777" text-anchor="middle">klik w adres</text>
+
+    <rect x="1098" y="518" width="130" height="58" rx="8" fill="#fff2e8" stroke="#f8c39a"/>
+    <text x="1163" y="536" font-size="11.5" font-weight="700" text-anchor="middle">reCAPTCHA v2</text>
+    <text x="1163" y="556" font-size="9.5" fill="#dd5e0a" text-anchor="middle">tarcie na ścieżce</text>
+
+    <line x1="630" y1="592" x2="630" y2="616" stroke="#8b93a2" stroke-width="1.6" marker-end="url(#ar2)"/>
+
+    <!-- ══════ WARSTWA D: POMIAR ══════ -->
+    <text x="18" y="640" font-size="11" font-weight="800" fill="#8d0a31" letter-spacing="1.4">D · POMIAR  <tspan fill="#8d0a31" font-weight="700">— tu łańcuch pęka</tspan></text>
+    <rect x="18" y="652" width="1224" height="80" rx="11" fill="#fcebf2" stroke="#e8cdd2" stroke-width="1.4"/>
+
+    <rect x="32" y="668" width="240" height="50" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="152" y="686" font-size="11.5" font-weight="700" text-anchor="middle">Menedżer tagów</text>
+    <text x="152" y="705" font-size="9.5" fill="#777" text-anchor="middle">konfiguracja i zgody — do audytu</text>
+
+    <rect x="282" y="668" width="290" height="50" rx="8" fill="#fcebf2" stroke="#e8b4c6"/>
+    <text x="427" y="684" font-size="11.5" font-weight="700" text-anchor="middle">Analityka — 7 osobnych usług GA4</text>
+    <text x="427" y="697" font-size="9.5" fill="#8d0a31" text-anchor="middle">447 zdarzeń od 15 osób · źródło „not set"</text>
+    <text x="427" y="710" font-size="9.5" fill="#dd5e0a" text-anchor="middle">jedna z usług może być martwa (City)</text>
+    <circle cx="556" cy="680" r="10" fill="#8d0a31"/>
+    <text x="556" y="684" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">3</text>
+
+    <rect x="582" y="668" width="230" height="50" rx="8" fill="#fff2e8" stroke="#f8c39a"/>
+    <text x="697" y="686" font-size="11.5" font-weight="700" text-anchor="middle">Oznaczanie źródeł</text>
+    <text x="697" y="705" font-size="9.5" fill="#dd5e0a" text-anchor="middle">brak wspólnej reguły</text>
+
+    <rect x="822" y="668" width="180" height="50" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="912" y="686" font-size="11.5" font-weight="700" text-anchor="middle">Nagrania i mapy ciepła</text>
+    <text x="912" y="705" font-size="9.5" fill="#777" text-anchor="middle">do weryfikacji</text>
+
+    <rect x="1012" y="668" width="216" height="50" rx="8" fill="#e7f6ec" stroke="#b7e3c4" stroke-dasharray="5 3"/>
+    <text x="1120" y="686" font-size="11.5" font-weight="700" text-anchor="middle" fill="#1a7f4b">Conversion Keeper</text>
+    <text x="1120" y="705" font-size="9.5" fill="#777" text-anchor="middle">do wdrożenia</text>
+
+    <line x1="630" y1="732" x2="630" y2="756" stroke="#8b93a2" stroke-width="1.6" marker-end="url(#ar2)"/>
+
+    <!-- ══════ WARSTWA E: OBSŁUGA ══════ -->
+    <text x="18" y="780" font-size="11" font-weight="800" fill="#8d0a31" letter-spacing="1.4">E · OBSŁUGA KLIENTA  <tspan fill="#777" font-weight="600">— tu zgłoszenie zamienia się w rozmowę</tspan></text>
+    <rect x="18" y="792" width="1224" height="86" rx="11" fill="#fbfaff" stroke="#e6e6e9" stroke-width="1.4"/>
+
+    <rect x="32" y="810" width="250" height="54" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="157" y="828" font-size="11.5" font-weight="700" text-anchor="middle">BDC — kwalifikacja</text>
+    <text x="157" y="842" font-size="9.5" fill="#777" text-anchor="middle">drugi kontakt, weryfikacja intencji</text>
+    <text x="157" y="855" font-size="9.5" fill="#777" text-anchor="middle">tu powstaje „lead zwalidowany"</text>
+
+    <path d="M282,837 L312,837" stroke="#8b93a2" stroke-width="1.6" marker-end="url(#ar2)"/>
+
+    <rect x="316" y="810" width="250" height="54" rx="8" fill="#fcebf2" stroke="#e8b4c6"/>
+    <text x="441" y="828" font-size="11.5" font-weight="700" text-anchor="middle">CRM</text>
+    <text x="441" y="842" font-size="9.5" fill="#777" text-anchor="middle">statusy, historia, przypisanie</text>
+    <text x="441" y="855" font-size="9.5" fill="#8d0a31" text-anchor="middle">system i dostęp nieznane</text>
+    <circle cx="550" cy="822" r="10" fill="#8d0a31"/>
+    <text x="550" y="826" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">9</text>
+
+    <path d="M566,837 L596,837" stroke="#8b93a2" stroke-width="1.6" marker-end="url(#ar2)"/>
+
+    <rect x="600" y="810" width="220" height="54" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="710" y="828" font-size="11.5" font-weight="700" text-anchor="middle">Handlowiec</text>
+    <text x="710" y="847" font-size="9.5" fill="#777" text-anchor="middle">przypisany do salonu</text>
+
+    <rect x="838" y="810" width="390" height="54" rx="8" fill="#f0f4fa" stroke="#a9bdd8"/>
+    <text x="1033" y="828" font-size="11.5" font-weight="700" text-anchor="middle" fill="#2a4a72">Kanały kontaktu zwrotnego</text>
+    <text x="1033" y="847" font-size="9.5" fill="#4a648a" text-anchor="middle">telefon wychodzący · e-mail · komunikator — poza pomiarem</text>
+
+    <line x1="630" y1="878" x2="630" y2="902" stroke="#8b93a2" stroke-width="1.6" marker-end="url(#ar2)"/>
+
+    <!-- ══════ WARSTWA F: SALONY ══════ -->
+    <text x="18" y="926" font-size="11" font-weight="800" fill="#8d0a31" letter-spacing="1.4">F · SALONY — TOUCHPOINT FIZYCZNY  <tspan fill="#777" font-weight="600">· każdy ma własną wizytówkę, własne numery, własnych ludzi</tspan></text>
+    <rect x="18" y="938" width="1224" height="88" rx="11" fill="#fbfaff" stroke="#e6e6e9" stroke-width="1.4"/>
+
+    <rect x="32" y="956" width="228" height="54" rx="8" fill="#fcebf2" stroke="#e8b4c6"/>
+    <text x="146" y="974" font-size="11.5" font-weight="700" text-anchor="middle">Gdańsk Stadion</text>
+    <text x="146" y="988" font-size="9.5" fill="#777" text-anchor="middle">al. Marynarki Polskiej 90</text>
+    <text x="146" y="1001" font-size="9.5" fill="#8d0a31" text-anchor="middle">29 opinii — niewidoczny</text>
+
+    <rect x="270" y="956" width="228" height="54" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="384" y="974" font-size="11.5" font-weight="700" text-anchor="middle">Centrum Gdańsk</text>
+    <text x="384" y="988" font-size="9.5" fill="#777" text-anchor="middle">al. Lubowidzka 44</text>
+    <text x="384" y="1001" font-size="9.5" fill="#15803d" text-anchor="middle">720 opinii · 4,13</text>
+
+    <rect x="508" y="956" width="228" height="54" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="622" y="974" font-size="11.5" font-weight="700" text-anchor="middle">Centrum Gdynia</text>
+    <text x="622" y="988" font-size="9.5" fill="#777" text-anchor="middle">Łużycka 3A</text>
+    <text x="622" y="1001" font-size="9.5" fill="#15803d" text-anchor="middle">592 opinie · 4,42</text>
+
+    <rect x="746" y="956" width="228" height="54" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="860" y="974" font-size="11.5" font-weight="700" text-anchor="middle">Bydgoszcz</text>
+    <text x="860" y="988" font-size="9.5" fill="#777" text-anchor="middle">Fordońska 262</text>
+    <text x="860" y="1001" font-size="9.5" fill="#777" text-anchor="middle">123 opinie · 4,5</text>
+
+    <rect x="984" y="956" width="244" height="54" rx="8" fill="#fff" stroke="#e6e6e9"/>
+    <text x="1106" y="974" font-size="11.5" font-weight="700" text-anchor="middle">Select:plus Bydgoszcz</text>
+    <text x="1106" y="988" font-size="9.5" fill="#777" text-anchor="middle">Nowotoruńska 15 · używane</text>
+    <text x="1106" y="1001" font-size="9.5" fill="#dd5e0a" text-anchor="middle">wizytówka niesprawdzona</text>
+
+    <text x="18" y="1048" font-size="10" fill="#888">Audi City Gdańsk (al. Grunwaldzka 347) — według zwiadu zamknięty pod koniec 2025, mimo że wciąż ma osobną usługę GA4.</text>
+
+    <!-- ══════ ZAMÓWIENIE + PĘTLA ══════ -->
+    <rect x="470" y="1068" width="320" height="46" rx="9" fill="#e7f6ec" stroke="#b7e3c4" stroke-width="1.6"/>
+    <text x="630" y="1088" font-size="12.5" font-weight="800" text-anchor="middle" fill="#1a7f4b">ZAMÓWIENIE</text>
+    <text x="630" y="1104" font-size="9.5" fill="#777" text-anchor="middle">stąd liczy się koszt sprzedaży</text>
+
+    <path d="M470,1091 L300,1091 L300,760" fill="none" stroke="#8d0a31" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#ar2Red)"/>
+    <rect x="60" y="1068" width="380" height="46" rx="8" fill="#fcebf2" stroke="#e8b4c6"/>
+    <text x="250" y="1086" font-size="11.5" font-weight="800" fill="#8d0a31" text-anchor="middle">PĘTLA ZWROTNA — DZIŚ NIE ISTNIEJE</text>
+    <text x="250" y="1102" font-size="9.5" fill="#8a3a45" text-anchor="middle">informacja o sprzedaży nigdy nie wraca do kampanii</text>
+    <circle cx="428" cy="1080" r="10" fill="#8d0a31"/>
+    <text x="428" y="1084" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">5</text>
+
+    <!-- ══════ ZASILANIE ══════ -->
+    <text x="818" y="1082" font-size="10" font-weight="800" fill="#8d0a31" letter-spacing="1">ZASILANIE OFERTĄ</text>
+    <rect x="818" y="1090" width="424" height="26" rx="7" fill="#fff2e8" stroke="#f8c39a"/>
+    <text x="1030" y="1107" font-size="10" font-weight="700" text-anchor="middle">New Car Sales · magazyn · priorytety modeli · kalendarz inicjatyw</text>
+
+  </svg>
+  </div>
+
+  <div class="legend">
+    <span><i class="key" style="background:#fff8ed;border:1px solid #dcc08a"></i> kupujemy zasięg</span>
+    <span><i class="key" style="background:#f4f9f5;border:1px solid #a8d0b8"></i> zdobywamy zasięg</span>
+    <span><i class="key" style="background:#fff;border:1px solid #d5cfc8"></i> element własny, działa</span>
+    <span><i class="key" style="background:#fff2f3;border:1px solid #e0a3ad"></i> dziura krytyczna</span>
+    <span><i class="key" style="background:#fffaf0;border:1px solid #dcc08a"></i> do uporządkowania</span>
+  </div>
+
+  <div class="note">
+    <b>Trzy rzeczy, które widać dopiero po rozbiciu.</b> Po pierwsze — <b>asystentów AI nie da się kupić</b>, obecność w nich zdobywa się treścią i reputacją, a to jedyny kanał bez wersji płatnej. Po drugie — <b>strona to nie jedno miejsce, tylko dziewięć typów stron</b> o różnych intencjach, które dziś dzielą jedno zdarzenie pomiarowe. Po trzecie — <b>salon jest touchpointem</b>: ma własną wizytówkę, własne numery i własnych ludzi, a różnica między 720 a 29 opiniami to różnica między byciem widocznym a nieistnieniem w wynikach lokalnych.
+  </div>
+</div>
+
+<div class="card">
+  <h2>Pięć przerwanych połączeń</h2>
+  <p class="h2sub">Każde z nich znaleźliśmy w danych Plichty przed złożeniem oferty. To nie są hipotezy — to obserwacje z ich własnego GA4 i strony.</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:44px"></th><th style="width:210px">Gdzie pęka</th><th>Co to znaczy w praktyce</th><th style="width:150px">Konsekwencja</th><th style="width:74px">Waga</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="dot d-red">1</span></td>
+        <td><b>Telefon bez śledzenia</b><br><span style="color:#888;font-size:12px">warstwa 3</span></td>
+        <td>Nie wiadomo, które połączenie przyszło z której kampanii ani czy dotyczyło serwisu, czy zakupu auta. To jest dokładnie ten ból, który klient nazwał w briefie jako główny.</td>
+        <td>Budżet sprzedażowy finansuje ruch serwisowy — bez możliwości policzenia ile</td>
+        <td class="sev s-p0">P0</td>
+      </tr>
+      <tr>
+        <td><span class="dot d-red">2</span></td>
+        <td><b>Formularze nie do rozróżnienia</b><br><span style="color:#888;font-size:12px">warstwa 3</span></td>
+        <td>Formularz „nowe auta" występuje w kilku miejscach serwisu i wszędzie wysyła zdarzenie o tej samej nazwie. Z punktu widzenia biznesu to różne formularze — trafiają do różnych zespołów. Z punktu widzenia pomiaru są nierozróżnialne. Rozszycie wymagało łączenia nazwy z typem adresu URL.</td>
+        <td>Nie wiadomo, która część strony realnie generuje leady</td>
+        <td class="sev s-p0">P0</td>
+      </tr>
+      <tr>
+        <td><span class="dot d-red">3</span></td>
+        <td><b>Zdarzenia widmo</b><br><span style="color:#888;font-size:12px">warstwa 4</span></td>
+        <td>Zdarzenie <code>form_submit</code>: <b>447 wywołań od 15 użytkowników</b>. Ponad 96% to sztuczne odpalenia. Każda optymalizacja prowadzona na tej metryce działała na zaszumionych danych.</td>
+        <td>Decyzje budżetowe opierały się na liczbach, które nie opisują rzeczywistości</td>
+        <td class="sev s-p0">P0</td>
+      </tr>
+      <tr>
+        <td><span class="dot d-red">4</span></td>
+        <td><b>Serwis niewidoczny w pomiarze</b><br><span style="color:#888;font-size:12px">warstwa 2</span></td>
+        <td>Zakładka serwisowa nie ma podpiętego zdarzenia wejścia. Cała strona jest zaprojektowana pod pozyskanie nowego klienta — serwis jest jedynym miejscem dla klienta, który już kupił, i akurat tam nie mierzymy nic.</td>
+        <td>Skala problemu serwis kontra sprzedaż jest nieznana — mimo że to główne pytanie briefu</td>
+        <td class="sev s-p0">P0</td>
+      </tr>
+      <tr>
+        <td><span class="dot d-red">5</span></td>
+        <td><b>Brak pętli zwrotnej</b><br><span style="color:#888;font-size:12px">warstwa 5 → 4</span></td>
+        <td>Informacja o tym, czy lead został zwalidowany przez BDC i czy skończył się zamówieniem, zostaje w CRM. Nigdy nie wraca do Google Ads. Algorytm uczy się więc na wypełnieniach formularza, a nie na sprzedaży.</td>
+        <td>Kampanie optymalizują pod wolumen zgłoszeń, czyli dokładnie to, czego klient nie chce</td>
+        <td class="sev s-p0">P0</td>
+      </tr>
+      <tr>
+        <td><span class="dot d-amb">6</span></td>
+        <td><b>Brak reguły dla UTM</b><br><span style="color:#888;font-size:12px">warstwa 4</span></td>
+        <td>Źródła oznaczane bez wspólnej konwencji. Stąd bierze się „not set" wskazany w briefie. Jednorazowe posprzątanie danych nie pomoże, bo problem powstaje przy każdej nowej kampanii.</td>
+        <td>Atrybucja rozjeżdża się w kółko</td>
+        <td class="sev s-p1">P1</td>
+      </tr>
+      <tr>
+        <td><span class="dot d-amb">7</span></td>
+        <td><b>Landing page bez treści</b><br><span style="color:#888;font-size:12px">warstwa 2</span></td>
+        <td>Formularz umieszczony nad linią przewijania, jedna korzyść, brak materiału sprzedażowego. Większość odwiedzających nie schodzi niżej, więc reszta strony praktycznie nie istnieje.</td>
+        <td>Płatny ruch trafia na stronę, która nie sprzedaje</td>
+        <td class="sev s-p1">P1</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <b>Wniosek, który spina wszystko.</b> Punkty 1–5 to nie jest siedem osobnych usterek. To jeden problem: <b>łańcuch informacji od reklamy do zamówienia jest przerwany w pięciu miejscach</b>. Dopóki jest przerwany, żadna optymalizacja kampanii nie ma się na czym oprzeć — bo algorytm nie wie, co się naprawdę sprzedało. Dlatego pierwszym etapem nie jest zmiana kampanii, tylko domknięcie łańcucha.
+  </div>
+</div>
+
+<div class="card">
+  <h2>Warstwa obecności lokalnej</h2>
+  <p class="h2sub">Wizytówki Google odpowiadają za blisko jedną trzecią wagi w lokalnych wynikach wyszukiwania, a opinie są dosłownie cytowane przez asystentów AI, gdy ktoś pyta o dealera w regionie. To jest fundament pod punkt 7 briefu.</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:250px">Salon</th><th style="width:110px">Opinie</th><th style="width:90px">Ocena</th><th>Obserwacja</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Audi Centrum Gdańsk</b><br><span style="color:#888;font-size:12px">al. Lubowidzka 44</span></td><td><b style="font-size:16px">720</b></td><td>4,13</td><td>Najsilniejsza wizytówka w grupie. Ocena poniżej Gdyni mimo większej liczby opinii.</td></tr>
+      <tr><td><b>Audi Centrum Gdynia</b><br><span style="color:#888;font-size:12px">Łużycka 3A</span></td><td><b style="font-size:16px">592</b></td><td>4,42</td><td>Najlepszy stosunek oceny do wolumenu. Wzorzec dla pozostałych.</td></tr>
+      <tr><td><b>Audi Bydgoszcz</b><br><span style="color:#888;font-size:12px">Fordońska 262</span></td><td><b style="font-size:16px">123</b></td><td>4,5</td><td>Najwyższa ocena, najmniejszy wolumen wśród czynnych centrów. Potencjał do odblokowania.</td></tr>
+      <tr style="background:#fff5f6"><td><b>Audi Gdańsk Stadion</b><br><span style="color:#888;font-size:12px">al. Marynarki Polskiej 90</span></td><td><b style="font-size:16px;color:#c8102e">29</b></td><td>brak danych</td><td><b style="color:#c8102e">Praktycznie niewidoczny.</b> Przy tej liczbie opinii asystenci AI nie mają czego cytować, a wizytówka słabo waży w lokalnych wynikach.</td></tr>
+      <tr><td><b>Audi Select:plus Bydgoszcz</b><br><span style="color:#888;font-size:12px">Nowotoruńska 15 — auta używane</span></td><td colspan="3" style="color:#888">Nie zweryfikowano — osobna lokalizacja, osobna wizytówka do sprawdzenia</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <b>Dysproporcja 720 do 29 to gotowy punkt startowy.</b> Dwa salony mają silną reputację online, jeden praktycznie żadnej — przy czym wszystkie należą do tej samej grupy i obsługują tę samą markę. Wyrównanie wizytówki na Stadionie jest tanie i szybkie, a bezpośrednio przekłada się na widoczność w lokalnych wynikach i w odpowiedziach asystentów AI.
+  </div>
+</div>
+
+<div class="card">
+  <h2>Obecność w kanałach społecznościowych</h2>
+  <p class="h2sub">Struktura profili ma znaczenie dla kampanii Meta — jeden profil dla całej grupy oznacza wspólną społeczność, ale też brak lokalnego kontekstu.</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:150px">Kanał</th><th style="width:180px">Profil</th><th style="width:130px">Skala</th><th>Obserwacja</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Facebook</b></td><td>@audiplichta</td><td><b>11 542</b> fanów</td><td>Jeden profil dla całej sieci Audi. Najsilniejszy kanał społecznościowy.</td></tr>
+      <tr><td><b>Instagram</b></td><td>@audiplichta</td><td><b>2 744</b> obserwujących<br><span style="color:#888;font-size:12px">1 056 postów</span></td><td>Duża liczba publikacji przy stosunkowo małym zasięgu.</td></tr>
+      <tr><td><b>Instagram</b></td><td>@audibydgoszcz</td><td>osobny profil</td><td>Bydgoszcz prowadzi własny kanał — jedyna lokalizacja z odrębną obecnością.</td></tr>
+      <tr><td><b>YouTube</b></td><td>@audi.plichta</td><td>kanał istnieje</td><td>Statystyk nie udało się odczytać. Do sprawdzenia, czy publikują regularnie — to kanał naturalny dla prezentacji modeli.</td></tr>
+      <tr><td><b>LinkedIn</b></td><td>Audi Grupa Plichta</td><td>profil firmowy</td><td>Osobny profil ma też Grupa Plichta jako całość.</td></tr>
+      <tr style="color:#888"><td><b>TikTok</b></td><td colspan="3">Nie znaleziono dedykowanego profilu.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Grupa Plichta — kontekst, w którym siedzi Audi</h2>
+  <p class="h2sub">Audi to jedna z marek w sieci. Skala grupy ma znaczenie dla tego, co da się powtórzyć po udanym wdrożeniu.</p>
+
+  <table>
+    <thead><tr><th style="width:230px">Wymiar</th><th>Stan</th></tr></thead>
+    <tbody>
+      <tr><td><b>Salony w grupie</b></td><td><b>37</b> w północnej Polsce — Gdańsk, Gdynia, Wejherowo, Bydgoszcz, Toruń</td></tr>
+      <tr><td><b>Marki autoryzowane</b></td><td>Audi, Volkswagen, Skoda, Seat, Cupra, Ford, Volvo, Jaguar, Land Rover</td></tr>
+      <tr><td><b>Marki chińskie</b></td><td>BYD, MG, Omoda, Jaecoo — <b>dokładnie te, które opisaliśmy w standardach kategorii dla elektryków</b></td></tr>
+      <tr><td><b>Domeny</b></td><td>audiplichta.pl · plichta.com.pl (korporacyjna) · uzywane.plichta.com.pl (używane)</td></tr>
+      <tr><td><b>Główny konkurent premium</b></td><td>BMG Goworowski (Mercedes-Benz) — Gdańsk, Gdynia. Ocena 4,42 w Gdyni</td></tr>
+      <tr><td><b>Pozycja</b></td><td>Grupa jest wyraźnie największa w regionie — konkurenci prowadzą po kilka salonów</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <b>To zmienia sposób, w jaki należy myśleć o wdrożeniu.</b> Wszystko, co zbudujemy dla Audi — pomiar, taksonomia źródeł, mechanizm rozdziału ruchu, standard wizytówek — jest powtarzalne na pozostałych markach sieci. Pierwsza marka finansuje fundament, każda kolejna korzysta z niego przy ułamku nakładu.
+  </div>
+</div>
+
+<div class="card">
+  <h2>Trzy rozbieżności do wyjaśnienia z klientem</h2>
+  <p class="h2sub">Zwiad wykazał rzeczy, które nie zgadzają się z tym, co mamy w briefie i w notatkach. Każda wpływa na zakres.</p>
+
+  <table>
+    <thead><tr><th style="width:44px"></th><th style="width:210px">Co się nie zgadza</th><th>Na czym polega rozbieżność</th><th style="width:190px">Dlaczego to ważne</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="dot d-red">A</span></td>
+        <td><b>Czat na stronie</b></td>
+        <td>Brief wymienia „optymalizację obecnego narzędzia czatu" jako priorytet. Zwiad nie znalazł czatu na stronie głównej. Możliwe, że działa tylko na wybranych podstronach albo ładuje się warunkowo.</td>
+        <td>To pozycja w zakresie CRO — trzeba wiedzieć, czy optymalizujemy istniejące narzędzie, czy wdrażamy nowe</td>
+      </tr>
+      <tr>
+        <td><span class="dot d-red">B</span></td>
+        <td><b>Audi City Gdańsk</b></td>
+        <td>Wg zwiadu salon został zamknięty pod koniec 2025. Tymczasem w koncie analitycznym figuruje jako jedna z siedmiu osobnych usług GA4.</td>
+        <td>Jeśli to prawda, jedna z siedmiu usług jest martwa — zmienia zakres audytu i konfiguracji</td>
+      </tr>
+      <tr>
+        <td><span class="dot d-amb">C</span></td>
+        <td><b>Skala grupy</b></td>
+        <td>W rozmowie padła liczba około 60 marek. Zwiad wskazuje 14 marek i 37 salonów.</td>
+        <td>Argument o powtarzalności wdrożenia nadal działa — ale liczby w ofercie muszą się zgadzać</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pending">
+    <b>Zastrzeżenie do liczby opinii.</b> Dane pochodzą z serwisów agregujących oceny dealerów, nie bezpośrednio z Map Google. Przed użyciem w dokumencie dla klienta trzeba je zweryfikować wprost na wizytówkach — rząd wielkości jest wiarygodny, dokładne wartości mogą się różnić.
+  </div>
+</div>
+
+<footer>Dokument roboczy · Audi Grupa Plichta · 23.07.2026 · dane z GA4 property 355550660 i audytu serwisu</footer>
+
+</div>
+</body>
+</html>

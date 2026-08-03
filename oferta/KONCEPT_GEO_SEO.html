@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Założenia strategiczne GEO / SEO — Audi Grupa Plichta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;--ink:#0a0a0a;--muted:#5b6472;--faint:#8b93a2;--line:#e6e6e9;
+    --green:#16a34a;--green-d:#15803d;--green-soft:#e7f6ec;--green-line:#b7e3c4;
+    --orange:#f5751a;--orange-d:#dd5e0a;--orange-soft:#fff2e8;--orange-line:#f8c39a;
+    --blue:#0f7ae5;--blue-d:#0a63bd;--blue-soft:#e9f3fd;--blue-line:#a9d2f6;
+    --violet:#1800ad;--violet-d:#12007e;--violet-soft:#ece9fb;--violet-line:#c5bcf0;
+    --bord:#8d0a31;--bord-d:#6d0725;--bord-soft:#fcebf2;--bord-line:#e8b4c6;
+    --dark:#1a1f2b;
+    --grotesk:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--grotesk);background:var(--bg);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;font-size:16px;padding:74px 34px 100px;
+    background-image:radial-gradient(circle at 8% 0,#eeebfd 0,transparent 42%),radial-gradient(circle at 96% 3%,#fdeef4 0,transparent 36%);background-repeat:no-repeat}
+  .wrap{max-width:1420px;margin:0 auto}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:15px}
+  h1{font-size:clamp(34px,5vw,54px);font-weight:700;letter-spacing:-.035em;line-height:1.03;margin-bottom:14px}
+  h1 .g{color:var(--green-d)}
+  .lede{color:var(--muted);font-size:19px;max-width:980px;line-height:1.5}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;margin-bottom:34px}
+  .badge{font-family:var(--mono);font-size:11px;font-weight:600;padding:6px 11px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--faint)}
+  .badge.draft{color:var(--bord);border-color:var(--bord-line);background:var(--bord-soft)}
+  .badge.live{color:var(--green-d);border-color:var(--green-line);background:var(--green-soft)}
+  .card{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:26px 28px;margin-bottom:20px;box-shadow:0 8px 26px rgba(20,26,45,.05)}
+  h2{font-size:24px;font-weight:700;letter-spacing:-.025em;line-height:1.15;margin-bottom:6px}
+  .h2sub{color:var(--muted);font-size:15px;margin-bottom:22px;line-height:1.55;max-width:1010px}
+  h3{font-size:19px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  th{background:var(--dark);color:#fff;padding:12px 14px;text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  td{padding:13px 14px;border-bottom:1px solid #f1eff7;vertical-align:top;color:var(--muted);line-height:1.55}
+  tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:#fbfaff}
+  td strong{color:var(--ink)}
+  .etap{font-family:var(--mono);font-size:10px;font-weight:700;padding:4px 8px;border-radius:6px;white-space:nowrap;background:#fff;color:var(--violet-d)}
+  .st-ok{font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;background:var(--green-soft);color:var(--green-d);white-space:nowrap}
+  .st-new{font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;background:var(--orange-soft);color:var(--orange-d);white-space:nowrap}
+
+  .dwa{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:950px){.dwa{grid-template-columns:1fr}}
+
+  .msc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:1000px){.msc{grid-template-columns:1fr}}
+  .ms{border:1.5px solid var(--line);border-radius:17px;overflow:hidden;background:#fff}
+  .ms-h{padding:16px 19px;border-bottom:1px solid var(--line)}
+  .ms-h .n{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+  .ms-h .t{font-size:19px;font-weight:700;letter-spacing:-.02em}
+  .ms-b{padding:15px 19px}
+  .ms-b ul{list-style:none}
+  .ms-b li{position:relative;padding-left:18px;margin-bottom:9px;font-size:13.5px;color:var(--muted);line-height:1.5}
+  .ms-b li:last-child{margin-bottom:0}
+  .ms-b li::before{content:'';position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%}
+  .ms1 .ms-h{background:#fff}.ms1 .ms-h .t{color:var(--violet-d)}.ms1 li::before{background:var(--violet)}
+  .ms2 .ms-h{background:var(--blue-soft)}.ms2 .ms-h .t{color:var(--blue-d)}.ms2 li::before{background:var(--blue)}
+  .ms3 .ms-h{background:var(--green-soft)}.ms3 .ms-h .t{color:var(--green-d)}.ms3 li::before{background:var(--green)}
+  .ms-f{padding:12px 19px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:11px;color:var(--faint)}
+
+  .bud-h{display:grid;grid-template-columns:1.25fr 2fr 116px;background:var(--dark);color:#fff;font-family:var(--mono);
+    font-size:10px;letter-spacing:.11em;text-transform:uppercase;font-weight:600;padding:12px 18px;border-radius:14px 14px 0 0}
+  .bud-h span:last-child{text-align:right}
+  .bud{display:grid;grid-template-columns:1.25fr 2fr 116px;padding:15px 18px;border:1px solid var(--line);border-top:0;background:#fff;align-items:start}
+  .bud:hover{background:#fbfaff}
+  .bud .n{font-weight:700;font-size:14.5px;line-height:1.35}
+  .bud .n small{display:block;font-family:var(--mono);font-size:10px;font-weight:600;color:var(--faint);letter-spacing:.05em;margin-top:3px;text-transform:uppercase}
+  .bud .d{font-size:13.5px;color:var(--muted);line-height:1.5;padding:0 14px}
+  .bud .c{text-align:right;font-weight:700;font-size:15px;white-space:nowrap}
+  .bud-sum{display:grid;grid-template-columns:1.25fr 2fr 116px;padding:16px 18px;border:1.5px solid var(--green-line);
+    border-radius:0 0 14px 14px;background:var(--green-soft);align-items:center}
+  .bud-sum .n{font-weight:700;font-size:16px;color:var(--green-d)}
+  .bud-sum .c{text-align:right;font-weight:700;font-size:21px;color:var(--green-d);letter-spacing:-.02em}
+  @media(max-width:820px){.bud,.bud-h,.bud-sum{grid-template-columns:1fr;gap:6px}.bud .d{padding:0}.bud .c,.bud-sum .c{text-align:left}}
+
+
+  /* ── zestawienie ścieżek ── */
+  .zest{display:grid;grid-template-columns:1fr 58px 1fr;gap:0;align-items:start;margin-top:8px}
+  @media(max-width:980px){.zest{grid-template-columns:1fr}.zest .mid{display:none}}
+  .zk{border:1.5px solid var(--line);border-radius:17px;overflow:hidden;background:#fff}
+  .zk-h{padding:15px 18px;border-bottom:1px solid var(--line)}
+  .zk-h .n{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-bottom:4px}
+  .zk-h .t{font-size:17px;font-weight:700;letter-spacing:-.02em}
+  .zk-h .s{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .zk ol,.zk ul{list-style:none;padding:12px 18px 16px}
+  .zk li{font-size:13.5px;line-height:1.45;padding:8px 0 8px 26px;position:relative;border-bottom:1px dashed #f1eff7;color:var(--muted)}
+  .zk li:last-child{border-bottom:0}
+  .zk li b{color:var(--ink)}
+  .zk li .i{position:absolute;left:0;top:8px;font-family:var(--mono);font-size:11px;font-weight:700}
+  .zk.vw .zk-h{background:var(--blue-soft)}.zk.vw .zk-h .n,.zk.vw .zk-h .t{color:var(--blue-d)}.zk.vw li .i{color:var(--blue-d)}
+  .zk.ns .zk-h{background:var(--green-soft)}.zk.ns .zk-h .n,.zk.ns .zk-h .t{color:var(--green-d)}.zk.ns li .i{color:var(--green-d)}
+  .zk.ns li.nowa{background:var(--orange-soft);margin:0 -18px;padding-left:44px;padding-right:18px;border-bottom-color:var(--orange-line)}
+  .zk.ns li.nowa .i{left:18px;color:var(--orange-d)}
+  .zk.ns li.nowa b{color:var(--orange-d)}
+  .mid{display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:80px;gap:8px}
+  .mid .ar{font-family:var(--mono);font-size:22px;color:var(--faint);font-weight:700}
+  .mid .lb{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);writing-mode:vertical-rl;text-align:center}
+
+  .rr{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}
+  @media(max-width:1050px){.rr{grid-template-columns:1fr 1fr}}
+  @media(max-width:620px){.rr{grid-template-columns:1fr}}
+  .rr-k{border:1.5px solid var(--line);border-radius:15px;padding:17px 19px;background:#fff}
+  .rr-k .s{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;color:var(--violet-d);margin-bottom:7px}
+  .rr-k .t{font-size:16px;font-weight:700;letter-spacing:-.015em;margin-bottom:6px;line-height:1.25}
+  .rr-k .d{font-size:13px;color:var(--muted);line-height:1.5}
+  .rr-k .tool{margin-top:11px;font-family:var(--mono);font-size:10.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:8px}
+  .rr-k.fin{background:var(--green-soft);border-color:var(--green-line)}
+  .rr-k.fin .s,.rr-k.fin .t{color:var(--green-d)}
+  .rr-k.fin .d{color:#2f4a3c}
+  .rr-k.fin .tool{color:#5d8a72;border-top-color:var(--green-line)}
+  .note{border-left:3px solid var(--green);background:var(--green-soft);padding:15px 19px;border-radius:0 13px 13px 0;font-size:14.5px;margin-top:18px;color:#2f4a3c;line-height:1.6}
+  .note b{color:var(--green-d)}
+  .note.v{border-left-color:var(--violet);background:#fff;color:var(--muted)}
+  .note.v b{color:var(--violet-d)}
+  .note.warn{border-left-color:var(--bord);background:var(--bord-soft);color:var(--bord-d)}
+  .note.warn b{color:var(--bord)}
+  .note a{color:inherit;font-weight:600}
+  footer{color:var(--faint);font-family:var(--mono);font-size:11.5px;padding:16px 4px 30px;text-align:center}
+
+.warstwy{margin:0 0 26px}
+.w-lead{font-size:16px;color:var(--muted);margin-bottom:14px}
+.w-lead b{color:var(--ink)}
+.w-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:860px){.w-grid{grid-template-columns:1fr}}
+.w-grid a{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit;background:#fff;
+  border:1.5px solid var(--line);border-radius:17px;padding:18px 20px;position:relative;overflow:hidden;transition:.17s}
+.w-grid a::before{content:'';position:absolute;inset:0 0 auto 0;height:4px;background:var(--line)}
+.w-grid a:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(20,26,45,.10)}
+.w-grid a.tu{background:#fbfaff;border-color:var(--violet-line)}
+.w-grid a.tu::before{background:var(--violet)}
+.w-grid a:not(.tu):hover{border-color:var(--violet-line)}
+.w-n{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--violet-d)}
+.w-grid b{font-size:16.5px;font-weight:700;letter-spacing:-.015em;line-height:1.25}
+.w-d{font-size:13.5px;color:var(--muted);line-height:1.5}
+.w-go{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--violet-d);margin-top:4px}
+
+.tabelka-bud{border:1.5px solid var(--line);border-radius:17px;overflow:hidden;margin-top:18px;background:#fff}
+.bud-head,.bud-r{display:grid;grid-template-columns:1fr 92px 92px 92px;gap:10px;padding:12px 20px;align-items:baseline}
+.bud-head{background:var(--dark);color:#fff;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:700}
+.bud-head span:not(:first-child),.bud-r span:not(:first-child){text-align:right;font-family:var(--mono);font-weight:700}
+.bud-r{border-top:1px solid #f4f3f8;font-size:14.5px}
+.bud-r em{display:block;font-style:normal;font-size:12.5px;color:var(--faint);margin-top:2px}
+.bud-r.suma{background:#fbfaff;border-top:2px solid var(--dark);font-size:16px}
+.bud-r.suma span:not(:first-child){color:var(--violet-d);font-size:17px}
+@media(max-width:760px){.bud-head{display:none}.bud-r{grid-template-columns:1fr 70px 70px 70px;font-size:13px}}
+
+.audyt-shot{display:block;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;
+  background:#fff;transition:.16s;margin-top:6px}
+.audyt-shot:hover{border-color:var(--violet-line);box-shadow:0 14px 34px rgba(20,26,45,.10)}
+.audyt-shot img{display:block;width:100%;max-height:400px;object-fit:cover;object-position:top}
+.audyt-go{display:block;font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--violet-d);
+  padding:11px 16px;background:#fbfaff;border-top:1px solid var(--line)}
+.a3-h{font-size:19px;font-weight:700;letter-spacing:-.018em;margin:26px 0 12px}
+.a3-etapy{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.a3-etapy{grid-template-columns:1fr}}
+.a3-etap{border:1.5px solid var(--line);border-radius:15px;padding:17px 19px;background:#fff}
+.a3-m{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-d)}
+.a3-etap b{display:block;font-size:16.5px;font-weight:700;letter-spacing:-.015em;margin:6px 0 10px}
+.a3-etap ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:11px}
+.a3-etap li{font-size:13.5px;color:var(--muted);line-height:1.45;padding-left:14px;position:relative}
+.a3-etap li::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--green-line)}
+.a3-etap li em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:2px}
+.a3-t{font-size:13px;color:var(--faint);line-height:1.5;padding-top:10px;border-top:1px solid #f1eff7}
+#doc-tag-fix{position:fixed;top:18px;left:186px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#12007e;background:rgba(236,233,251,.96);backdrop-filter:blur(8px);padding:8px 13px;border-radius:9px;white-space:nowrap;box-shadow:0 2px 10px rgba(20,26,45,.06)}
+@media(max-width:900px){#doc-tag-fix{display:none}}
+</style>
+<script src="brama.js"></script>
+</head>
+<body>
+<a href="PLICHTA_START.html" style="position:fixed;top:18px;left:18px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#5b6472;text-decoration:none;padding:8px 14px;border:1px solid #e6e6e9;border-radius:9px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(20,26,45,.06)">← Menu Startowe</a>
+<span id="doc-tag-fix">08 · Założenia strategiczne GEO / SEO</span>
+
+<div class="wrap">
+  <div class="kicker">Audi Grupa Plichta · 08 · założenia strategiczne GEO / SEO</div>
+  <h1>Widoczność lokalna i AI (SEO + GEO) — <span class="g">plan na 3 miesiące</span></h1>
+  <p class="lede">Asystentów AI nie da się kupić. W tym kanale nie ma wersji płatnej — obecność zdobywa się treścią i reputacją. Dlatego to nie jest plan „pozycjonowania", tylko <b>plan budowy treści, która odpowiada na pytania kupującego auto</b> — i dzięki temu jest cytowana, a przy okazji konwertuje na stronie.</p>
+  <div class="badges">
+    <span class="badge" style="background:#fcebf2;border-color:#e8b4c6;color:#8d0a31">⚠ Warstwa techniczna osobno → <a href="STRATEGIA_SEO_3M.html" style="color:#8d0a31">Strategia SEO</a></span>
+    <span class="badge live">6 map kategorii gotowych przed ofertą</span>
+    <span class="badge">6 000 PLN / mc · budżet osobny od mediowego</span>
+  </div>
+
+  <!-- ══ TRZY USTALENIA ══ -->
+  
+
+<div class="warstwy">
+  <p class="w-lead">Widoczność w wyszukiwarce i w odpowiedziach AI ma <b>dwie warstwy</b>. Jedna bez drugiej nie działa.</p>
+  <div class="w-grid">
+    <a class="w-c" href="STRATEGIA_SEO_3M.html">
+      <span class="w-n">Warstwa 1 · techniczna</span>
+      <b>Strona musi być dostępna i poprawna</b>
+      <span class="w-d">Audyt 360 wykazał poważne błędy — dziś roboty Google dostają odmowę dostępu. To wymaga realnej optymalizacji serwisu, nie kosmetyki.</span>
+      <span class="w-go">Zobacz warstwę techniczną →</span>
+    </a>
+    <a class="w-c tu" href="KONCEPT_GEO_SEO.html">
+      <span class="w-n">Warstwa 2 · kontentowa</span>
+      <b>Treść i miejsca, w których ma Was znaleźć</b>
+      <span class="w-d">Strategia budowy i optymalizacji treści oraz miejsc pod widoczność lokalną i AI: mapy percepcji, pole pytań, plan publikacji, wizytówki.</span>
+      <span class="w-go">Jesteś tutaj</span>
+    </a>
+  </div>
+</div>
+<div class="card">
+  <h2>Punkt wyjścia — audyt SEO / GEO</h2>
+  <p class="h2sub">Zrobiony 31 lipca 2026, przed złożeniem tej oferty. To z niego wynika kolejność prac w pierwszych trzech miesiącach.</p>
+
+  <a class="audyt-shot" href="audyt_360/Audyt_360_2026-07-31.html" target="_blank" rel="noopener">
+    <img src="_img/audyt_360.jpg" alt="Audyt 360 SEO/GEO audiplichta.pl — Google nie może wejść">
+    <span class="audyt-go">Otwórz pełny audyt — 13 modułów, każda liczba ze źródłem ↗</span>
+  </a>
+
+  <div class="note warn" style="margin-top:16px"><b>Jeden problem blokuje wszystko inne.</b> Zabezpieczenie serwera zwraca robotom Google odmowę dostępu — strona z 7 709 adresami może nie być w ogóle przeszukiwana. Paradoks: roboty asystentów AI wchodzą bez przeszkód, więc dziś łatwiej trafić do odpowiedzi ChatGPT niż na pierwszą stronę Google.</div>
+
+  <h3 class="a3-h">Trzy miesiące poprawy — co i kiedy</h3>
+  <div class="a3-etapy">
+    <div class="a3-etap">
+      <span class="a3-m">Sierpień 2026</span>
+      <b>Odblokowanie i plan</b>
+      <ul>
+        <li>Odblokowanie serwisu dla robotów Google i asystentów AI <em>2 tygodnie</em></li>
+        <li>Plan optymalizacji SEO / GEO — część techniczna <em>1 miesiąc</em></li>
+      </ul>
+      <p class="a3-t">Najpierw wpuszczamy Google na stronę. Bez tego każda inna praca liczy się od zera.</p>
+    </div>
+    <div class="a3-etap">
+      <span class="a3-m">Wrzesień 2026</span>
+      <b>Przebudowa techniczna</b>
+      <ul>
+        <li>Indeksacja, struktura adresów, dane strukturalne <em>2 miesiące</em></li>
+        <li>Strategia treści w oparciu o mapy percepcji <em>1 miesiąc</em></li>
+        <li>Optymalizacja wizytówek Google Maps <em>1 miesiąc</em></li>
+      </ul>
+      <p class="a3-t">Naprawiamy to, co audyt wykrył: szybkość, stabilność układu, adresy zwracające błąd, brakujące dane strukturalne.</p>
+    </div>
+    <div class="a3-etap">
+      <span class="a3-m">Październik 2026</span>
+      <b>Start realizacji</b>
+      <ul>
+        <li>Przebudowa techniczna — dokończenie</li>
+        <li>Start działań GEO / SEO — pierwszy miesiąc planu <em>1 miesiąc</em></li>
+      </ul>
+      <p class="a3-t">Strona jest już dostępna i poprawna, więc treść ma na czym stanąć. Od tego miesiąca ruszają publikacje.</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+    <h2>Dlaczego to jest plan treści, a nie plan pozycjonowania</h2>
+    <p class="h2sub">Trzy ustalenia przesądzają o kształcie tego programu. Żadne nie jest naszą opinią — dwa pochodzą z badań, jedno z Waszych danych.</p>
+    <div class="dwa">
+      <div style="border:1.5px solid var(--line);border-radius:16px;padding:19px 21px;background:#fff">
+        <h3 style="color:var(--violet-d)">Bliskość nie decyduje w AI</h3>
+        <p style="font-size:14px;color:var(--muted);line-height:1.6">W wynikach lokalnych Google odległość waży. W odpowiedziach asystentów — praktycznie nie. Salon z Gdyni może wygrać zapytanie zadane w Toruniu, jeśli ma treść odpowiadającą na pytanie i reputację, która ją uwiarygadnia. To odwraca intuicję o „lokalności" i tłumaczy, dlaczego różnica <b>720 kontra 29 opinii</b> między Waszymi salonami jest różnicą między widocznością a nieistnieniem.</p>
+      </div>
+      <div style="border:1.5px solid var(--line);border-radius:16px;padding:19px 21px;background:#fff">
+        <h3 style="color:var(--green-d)">Tematów nie wymyślamy</h3>
+        <p style="font-size:14px;color:#2f4a3c;line-height:1.6">Mapy pytań kupującego auto są już zbudowane — <b>sześć kategorii, ponad 800 pytań</b>, każde z priorytetem i statusem „jest / brakuje / do rozbudowy". Powstały <b>przed złożeniem tej oferty</b>. Program treści nie zaczyna się od burzy mózgów, tylko od gotowego backlogu, w którym wiadomo, co pisać najpierw.</p>
+      </div>
+    </div>
+    <div class="note warn">
+      <b>Trzecie ustalenie — z Waszego własnego podwórka.</b> Badanie ścieżki konsumenta przeprowadzone w grupie Volkswagen wymienia konkretne bariery, na jakie trafia kupujący. Prawie każda z nich to <b>brakująca treść na stronie dealera</b>: brak porównywarki modeli, brak jasnej informacji co wchodzi w wyposażenie podstawowe, zbyt techniczne nazewnictwo, ograniczone doświadczenie auta online, trudności przy finansowaniu. Nie musimy zgadywać, czego brakuje — jest to spisane w Waszej grupie.
+    </div>
+  </div>
+
+  <!-- ══ PORÓWNANIE MAP ══ -->
+  
+
+  <!-- ══ MAPY DO ZBUDOWANIA ══ -->
+  <div class="card">
+    <h2>Mapy percepcji — plan na budowę</h2>
+    <p class="h2sub">Mapa percepcji to lista pytań, jakie zadaje sobie kupujący, zanim w ogóle trafi na Waszą stronę — pogrupowana w sytuacje wejścia, z priorytetem i statusem. Z niej bierze się każdy temat do napisania. Poniżej plan: co budujemy, w jakiej kolejności i po co.</p>
+    <table>
+      <thead><tr><th style="width:250px">Kategoria</th><th>Po co w Waszym przypadku</th><th style="width:112px">Stan</th><th style="width:104px">Kiedy</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Samochody osobowe — prywatny</strong><br><span style="font-family:var(--mono);font-size:11px;color:var(--faint)">152 pytania · 8 ścieżek</span></td><td>Rdzeń oferty nowych aut. Z niej wychodzą przewodniki wyboru, porównania i słownik.</td><td><span class="st-ok">gotowa</span></td><td>od startu</td></tr>
+        <tr><td><strong>Leasing i finansowanie</strong></td><td>Finansowanie jest w badaniu VW wymienione jako jeden z najtrudniejszych etapów. Tu mieszka kalkulator i Audi Perfect Lease.</td><td><span class="st-ok">gotowa</span></td><td>od startu</td></tr>
+        <tr><td><strong>Samochody osobowe — biznesowy</strong></td><td>Inna ścieżka decyzji, inne pytania: koszty, odpisy, flota. Inny odbiorca niż prywatny.</td><td><span class="st-ok">gotowa</span></td><td>od startu</td></tr>
+        <tr><td><strong>Samochody elektryczne</strong></td><td>Zasięg, ładowanie, koszt eksploatacji — obiekcje, których badanie z 2020 nie obejmuje.</td><td><span class="st-ok">gotowa</span></td><td>od startu</td></tr>
+        <tr><td><strong>Używane z gwarancją</strong></td><td>Osobna domena i osobna ścieżka. Dziś poza pomiarem — i poza treścią.</td><td><span class="st-ok">gotowa</span></td><td>od startu</td></tr>
+        <tr><td><strong>SUV premium</strong></td><td>Najmocniejszy segment Audi. Q3, Q5, Q7 — modele o największym ruchu na Waszych landing page'ach.</td><td><span class="st-ok">gotowa</span></td><td>od startu</td></tr>
+        <tr><td><strong>Serwis i części</strong><br><span style="font-family:var(--mono);font-size:11px;color:var(--orange-d)">do zbudowania</span></td><td><b>Kluczowa dla głównego bólu z briefu.</b> Żeby rozdzielić ruch serwisowy od sprzedażowego, trzeba wiedzieć, o co pyta klient serwisowy — a to zupełnie inne pytania i inna intencja. Bez tej mapy rozdzielamy ruch po omacku.</td><td><span class="st-new">budujemy</span></td><td>miesiąc 1</td></tr>
+        <tr><td><strong>Marki chińskie w grupie</strong><br><span style="font-family:var(--mono);font-size:11px;color:var(--orange-d)">do zbudowania</span></td><td>BYD, MG, Omoda, Jaecoo — inny zestaw obiekcji niż przy marce niemieckiej. Dziś obsługiwane jako odgałęzienie mapy elektryków; zasługują na własną.</td><td><span class="st-new">budujemy</span></td><td>miesiąc 2</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <b>Dlaczego mapa serwisowa jest w tym planie, choć dotyczy punktu 2 briefu.</b> Bo to ta sama robota. Rozdzielenie ruchu serwisowego od sprzedażowego zaczyna się od zrozumienia, czego szuka klient serwisowy — a wynik tej pracy zasila jednocześnie kampanie (osobne tory) i treść (sekcja serwisowa, która dziś nie ma nawet zdarzenia wejścia). <b>Jedna mapa, dwa zastosowania.</b>
+    </div>
+  </div>
+
+  <!-- ══ MAPA TREŚCI ══ -->
+  <div class="card">
+    <h2>Co konkretnie piszemy — bariera po barierze</h2>
+    <p class="h2sub">Każdy wiersz to typ treści przypisany do etapu ścieżki i do realnej bariery z badania. Ostatnia kolumna mówi, dlaczego ta sama treść działa również w asystentach AI — bo odpowiada na pytanie w formie, którą da się zacytować.</p>
+    <table>
+      <thead><tr><th style="width:112px">Etap</th><th style="width:228px">Bariera kupującego</th><th>Treść, która ją usuwa</th><th style="width:186px">Dlaczego cytowalna</th></tr></thead>
+      <tbody>
+        <tr><td><span class="etap">Rozpoznanie</span></td><td><strong>Przeładowanie informacjami</strong>, zbieranie z wielu źródeł naraz</td><td>Przewodniki wyboru: <strong>który model do czego</strong> — rodzina, firma, miasto, trasa. Wprost z pytań z mapy kategorii.</td><td>Pytanie w nagłówku, odpowiedź w pierwszym akapicie</td></tr>
+        <tr><td><span class="etap">Sprawdzanie</span></td><td><strong>Brak porównywarki modeli</strong> — kupujący porównują na dwóch monitorach przez portale ogłoszeniowe</td><td><strong>Porównania modelowe</strong>: Q3 kontra Q5, A4 kontra A6 — wymiary, bagażnik, koszty, dla kogo który.</td><td>Tabela z konkretnymi wartościami</td></tr>
+        <tr><td><span class="etap">Sprawdzanie</span></td><td><strong>Nie wiadomo, co wchodzi w wyposażenie podstawowe</strong>, dopłata za każdy element</td><td><strong>Rozpisane wersje wyposażenia</strong> bez kruczków: co w bazie, co w pakiecie, ile kosztuje dołożenie.</td><td>Lista faktów, zero marketingu</td></tr>
+        <tr><td><span class="etap">Sprawdzanie</span></td><td><strong>Nazewnictwo zbyt techniczne</strong> — potrzebny słownik, żeby zrozumieć ofertę</td><td><strong>Słownik po ludzku</strong>: quattro, mHEV, S line, pakiety — co to znaczy i czy tego potrzebujesz.</td><td>Definicja to idealny format do cytowania</td></tr>
+        <tr><td><span class="etap">Sprawdzanie</span></td><td><strong>Szukają awaryjności, spalania i kosztów utrzymania</strong> — na forach i w niezależnych testach, bo tam ufają</td><td><strong>Realne koszty utrzymania per model</strong>: przeglądy, ubezpieczenie, spalanie z eksploatacji, co się zużywa.</td><td>Liczby, których nie ma u producenta</td></tr>
+        <tr><td><span class="etap">Sprawdzanie</span></td><td><strong>Nie da się doświadczyć auta online</strong> — brakuje wnętrza, wymiarów, materiałów</td><td><strong>Treść wideo z opisem</strong>: bagażnik z wymiarami, wnętrze, materiały, zbliżenia. Opis tekstowy przy każdym materiale.</td><td>Opis i transkrypcja są czytane, wideo nie</td></tr>
+        <tr><td><span class="etap">Wybór</span></td><td><strong>Finansowanie to trudny etap</strong> — dokumenty, kilka miejsc do sprawdzenia</td><td><strong>Finansowanie krok po kroku</strong>: leasing kontra kredyt kontra wynajem, jakie dokumenty, ile trwa, dla kogo co.</td><td>Procedura rozpisana w krokach</td></tr>
+        <tr><td><span class="etap">Lokalne</span></td><td><strong>Wybór salonu</strong> — najbliższy kontra ten z lepszą ofertą na drugim końcu Polski</td><td><strong>Strony lokalizacyjne</strong>: historia salonu, zespół z sylwetkami, specjalizacje modelowe, lokalne inicjatywy, pytania dla regionu.</td><td>Sygnał geolokalizacyjny + treść unikalna</td></tr>
+        <tr><td><span class="etap">Po zakupie</span></td><td><strong>Brak kontaktu po zakupie</strong> — a telefon od dealera jest odbierany bardzo dobrze</td><td><strong>Treść posprzedażowa</strong> i program opinii: prośba o recenzję po wizycie, obsługa odpowiedzi.</td><td>Opinie są dosłownie cytowane przez asystentów</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <b>To jest ta sama robota dwa razy.</b> Treść, która usuwa barierę kupującego, jest jednocześnie treścią, którą cytuje asystent — bo obie odpowiadają na to samo pytanie. Dlatego nie dzielimy tego budżetu na „treść" i „GEO": <b>to jedno działanie z dwoma efektami</b> — wyższa konwersja na stronie i obecność w kanale, którego nie da się kupić.
+    </div>
+  </div>
+
+
+  <!-- ══ REVERSE RECON ══ -->
+  <div class="card">
+    <h2>Reverse Recon — skąd wiemy, co napisać, żeby miało szansę</h2>
+    <p class="h2sub">Pisanie treści „bo temat wygląda sensownie" to najdroższy sposób na zajęcie jedenastego miejsca. Zanim powstanie jakakolwiek jednostka, robimy rozpoznanie: <b>co już odpowiada na to pytanie — w Google i w asystentach — i czego tam brakuje.</b> To praca cykliczna, powtarzana co miesiąc na kolejnej partii pytań.</p>
+
+    <div class="rr">
+      <div class="rr-k">
+        <div class="s">KROK 1</div>
+        <div class="t">Pytanie ze ścieżki</div>
+        <div class="d">Wchodzimy konkretnym pytaniem z mapy kategorii, nie wymyśloną frazą. Pierwszeństwo mają pytania oznaczone jako blokery decyzji.</div>
+        <div class="tool">wsad: 805 pytań · 8 ścieżek wejścia</div>
+      </div>
+      <div class="rr-k">
+        <div class="s">KROK 2</div>
+        <div class="t">Kto tam już jest</div>
+        <div class="d">Czołówka wyników plus elementy strony: pytania powiązane, sekcja lokalna, wyróżnione odpowiedzi. Osobno — <b>co odpowiada asystent AI i kogo w tej odpowiedzi cytuje.</b></div>
+        <div class="tool">dwie czołówki: wyszukiwarka i asystent</div>
+      </div>
+      <div class="rr-k">
+        <div class="s">KROK 3</div>
+        <div class="t">Co mają w treści</div>
+        <div class="d">Pobranie stron z czołówki i sprowadzenie ich do czystego tekstu, bez nawigacji i banerów. Zestawienie: jakie sekcje mają wszyscy, jak długie, jak zbudowane.</div>
+        <div class="tool">czysty tekst zamiast kodu strony</div>
+      </div>
+      <div class="rr-k fin">
+        <div class="s">KROK 4 · WYNIK</div>
+        <div class="t">Luka, nie kopia</div>
+        <div class="d">Najważniejszy krok. Szukamy tego, <b>czego nikt nie odpowiada albo odpowiada jeden na dziesięciu</b>. Kopia czołówki nie daje nikomu powodu, żeby pokazać nas zamiast nich.</div>
+        <div class="tool">wynik: brief na jedną jednostkę treści</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Przewaga, która wynika z Waszej sytuacji.</b> Zwykły recon patrzy tylko na wyniki wyszukiwania. My sprawdzamy obie strony naraz — bo to bywają dwie różne czołówki. <b>Jeśli na pytanie „który dealer Audi w Trójmieście ma Q5 od ręki" asystent cytuje portal ogłoszeniowy albo forum, a nie żadnego dealera — to jest wolne miejsce.</b> Takich miejsc szukamy systematycznie, a nie przy okazji.
+    </div>
+
+    <div class="note v">
+      <b>Druga ścieżka: co już sprawdziła konkurencja.</b> Równolegle bierzemy frazy, na które rankują inni dealerzy premium w regionie, i przepuszczamy je przez filtr: precz z brandowymi, precz ze zbyt ogólnymi, zostają te ze średniego ogona i realną szansą. Sens jest prosty — <b>nie trzeba zgadywać, co działa, skoro ktoś już to sprawdził swoim budżetem.</b> Wynik to nie sama lista fraz, tylko przypisanie: która fraza na którą stronę i w jakiej kolejności.
+    </div>
+
+    <div class="note warn">
+      <b>Dlaczego to jest praca miesięczna, a nie jednorazowy audyt.</b> Czołówka się zmienia, asystenci zmieniają źródła, konkurencja dopisuje treści. Powtarzany recon daje dwie rzeczy naraz: <b>listę tematów na następny miesiąc</b> oraz <b>sprawdzenie, czy to, co napisaliśmy miesiąc temu, faktycznie weszło</b> — czyli zamyka pętlę między produkcją a wynikiem. Wiedza, jakie frazy rankuje konkurent, jest bezwartościowa bez decyzji, w jakiej kolejności i na jaką stronę je wdrożyć. Ta decyzja to właśnie ta pozycja w budżecie.
+    </div>
+  </div>
+
+  <!-- ══ TRZY MIESIĄCE ══ -->
+  <div class="card">
+    <h2>Plan na 3 miesiące</h2>
+    <div class="msc">
+      <div class="ms ms1">
+        <div class="ms-h"><div class="n">Miesiąc 1</div><div class="t">Fundament</div></div>
+        <div class="ms-b"><ul>
+          <li><b>Audyt widoczności</b> — gdzie jesteście dziś w odpowiedziach asystentów i w wynikach lokalnych. Punkt startu, do którego wrócimy w miesiącu trzecim</li>
+          <li><b>Mapa kategorii „serwis i części"</b> — budowa od zera; zasila jednocześnie rozdzielenie ruchu w kampaniach</li>
+          <li>Priorytetyzacja pytań z sześciu gotowych map pod Wasze modele i salony</li>
+          <li><b>Pięć wizytówek</b> uporządkowanych: kategorie, zdjęcia, godziny, opis, spójność danych firmowych</li>
+          <li><b>Cztery jednostki treści</b> — start od barier o największym zasięgu: słownik i wyposażenie</li>
+          <li>Pierwsza strona lokalizacyjna — salon z najsłabszą widocznością</li>
+        </ul></div>
+        <div class="ms-f">na koniec: punkt odniesienia, mapa serwisowa, pierwsze treści</div>
+      </div>
+      <div class="ms ms2">
+        <div class="ms-h"><div class="n">Miesiąc 2</div><div class="t">Produkcja</div></div>
+        <div class="ms-b"><ul>
+          <li><b>Osiem jednostek treści</b>: porównania modelowe i koszty utrzymania — najczęściej szukane, najrzadziej dostępne</li>
+          <li><b>Mapa kategorii „marki chińskie"</b> — BYD, MG, Omoda, Jaecoo jako osobna ścieżka zakupowa</li>
+          <li>Druga i trzecia strona lokalizacyjna, z sylwetkami zespołu</li>
+          <li><b>Program opinii uruchomiony</b>: wiadomość po wizycie z linkiem do recenzji, obsługa odpowiedzi</li>
+          <li>Opisy do materiałów wideo — żeby były czytane, nie tylko oglądane</li>
+          <li>Pierwszy pomiar cytowań: co i gdzie zaczyna się pojawiać</li>
+        </ul></div>
+        <div class="ms-f">na koniec: 12 jednostek treści, 3 strony lokalizacyjne, 8 map</div>
+      </div>
+      <div class="ms ms3">
+        <div class="ms-h"><div class="n">Miesiąc 3</div><div class="t">Skalowanie i dowód</div></div>
+        <div class="ms-b"><ul>
+          <li><b>Osiem jednostek treści</b>: finansowanie i przewodniki wyboru — etap najbliższy decyzji</li>
+          <li>Pozostałe strony lokalizacyjne — komplet pięciu salonów</li>
+          <li>Rozbudowa map o ścieżki, które w danych okazały się najmocniejsze</li>
+          <li><b>Raport widoczności</b>: gdzie jesteście cytowani, jak zmienił się ruch z asystentów, jak urosły opinie — zestawione z punktem startu</li>
+          <li>Rekomendacja: co skalować, co wygasić, czy kontynuować</li>
+        </ul></div>
+        <div class="ms-f">na koniec: 20 jednostek, 5 stron, raport z porównaniem</div>
+      </div>
+    </div>
+    <div class="note v">
+      <b>Dlaczego akurat trzy miesiące.</b> Obecność w odpowiedziach asystentów nie pojawia się w tydzień — treść musi zostać zindeksowana, przeczytana i uznana za wiarygodną. Kwartał to najkrótszy okres, po którym widać kierunek i można zdecydować na liczbach. Krótszy test pokaże szum, nie efekt.
+    </div>
+  </div>
+
+  <!-- ══ BUDŻET ══ -->
+  <div class="card">
+    <h2>Na co idzie budżet — 6 000 zł w pierwszym miesiącu, potem 4 000</h2>
+      <p class="h2sub">Pierwszy miesiąc jest droższy, bo powstają w nim <b>mapy percepcji i plan treści na cały kwartał</b> —
+      fundament, z którego bierze się każdy kolejny temat. Od drugiego miesiąca budżet spada do 4 000 i utrzymuje się na tym poziomie.</p>
+
+      <div class="tabelka-bud">
+        <div class="bud-head"><span>Pozycja</span><span>Miesiąc 1</span><span>Miesiąc 2</span><span>Miesiąc 3+</span></div>
+        <div class="bud-r"><span><b>Produkcja treści</b><em>32 jednostki w kwartale — ok. 10–12 miesięcznie</em></span><span>2 400</span><span>2 400</span><span>2 400</span></div>
+        <div class="bud-r"><span><b>Podstrony lokalizacyjne</b><em>1–2 salony miesięcznie, z wideo i zespołem</em></span><span>1 200</span><span>600</span><span>600</span></div>
+        <div class="bud-r"><span><b>Mapy percepcji i plan treści na kwartał</b><em>tylko w pierwszym miesiącu — fundament</em></span><span>1 400</span><span>—</span><span>—</span></div>
+        <div class="bud-r"><span><b>Wizytówki i program opinii</b><em>5 lokalizacji</em></span><span>500</span><span>500</span><span>500</span></div>
+        <div class="bud-r"><span><b>Audyt widoczności po frazach + reverse engineering</b><em>co miesiąc, przed produkcją kolejnej partii</em></span><span>500</span><span>500</span><span>500</span></div>
+        <div class="bud-r suma"><span><b>Razem miesięcznie</b></span><span>6 000</span><span>4 000</span><span>4 000</span></div>
+      </div>
+      <p class="h2sub" style="margin-top:14px">Kwoty netto, budżet osobny od mediowego. <b>Audyt widoczności po frazach kluczowych i reverse engineering czołówki
+      jest w każdym miesiącu</b> — bez niego produkcja treści byłaby strzelaniem. To on decyduje, co powstaje w kolejnej partii.</p>
+</div></div>
+

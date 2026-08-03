@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Audi Grupa Plichta — odpowiedź na brief z 10.06.2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0a;--muted:#5b6472;--faint:#8b93a2;--line:#e6e6e9;
+    --violet:#1800ad;--violet-d:#12007e;--violet-soft:#ece9fb;
+    --bord:#8d0a31;--dark:#1a1f2b;
+    --g:'Space Grotesk',-apple-system,sans-serif;--m:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--g);background:#fff;color:var(--ink);display:flex;flex-direction:column;overflow:hidden}
+
+  .top{display:flex;align-items:center;gap:18px;padding:12px 22px;border-bottom:1px solid var(--line);
+    background:rgba(255,255,255,.96);backdrop-filter:blur(12px);flex-wrap:wrap;flex:0 0 auto}
+  .marka{font-family:var(--m);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--violet);font-weight:700;white-space:nowrap}
+  .marka span{color:var(--faint);font-weight:400;letter-spacing:.08em;margin-left:9px}
+  nav{display:flex;gap:3px;flex-wrap:wrap;margin-left:6px}
+  nav button{font-family:var(--m);font-size:11.5px;font-weight:600;color:var(--muted);background:none;
+    border:0;padding:7px 11px;border-radius:9px;cursor:pointer;transition:.14s;white-space:nowrap}
+  nav button:hover{background:var(--violet-soft);color:var(--violet-d)}
+  nav button.on{background:var(--violet);color:#fff}
+  nav button .nr{opacity:.55;margin-right:6px}
+  nav button.on .nr{opacity:.75}
+  .link{margin-left:auto;font-family:var(--m);font-size:11px;color:var(--faint);text-decoration:none;
+    border:1px solid var(--line);padding:6px 11px;border-radius:8px;white-space:nowrap}
+  .link:hover{border-color:var(--violet);color:var(--violet-d)}
+
+  .ramka{flex:1 1 auto;position:relative;background:#fff}
+  iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .ladowanie{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--m);font-size:12px;color:var(--faint);background:#fff;transition:opacity .2s}
+  .ladowanie.off{opacity:0;pointer-events:none}
+  @media(max-width:820px){
+    body{overflow:auto}
+    .top{position:sticky;top:0;z-index:9}
+    .ramka{height:calc(100vh - 96px)}
+  }
+</style>
+<script src="brama.js"></script>
+</head>
+<body>
+
+<div class="top">
+  <div class="marka">Audi Grupa Plichta<span>odpowiedź na brief z 10.06.2026</span></div>
+  <nav id="nav"></nav>
+  <a class="link" id="osobno" href="#" target="_blank">otwórz w nowej karcie ↗</a>
+</div>
+
+<div class="ramka">
+  <div class="ladowanie" id="ladowanie">wczytywanie…</div>
+  <iframe id="widok" title="Dokument oferty"></iframe>
+</div>
+
+<script>
+const DOK = [
+  ["01","Odpowiedź na brief",       "ODPOWIEDZ_NA_BRIEF.html"],
+  ["02","Zakres działań",           "ODPOWIEDZ_NA_BRIEF.html#zakres"],
+  ["03","Plan wdrożenia",             "WYCENA_I_ZAKRES.html"],
+  ["04","Wycena",                   "WYCENA.html"],
+  ["05","Problemy szczególne",      "PROBLEMY_Z_BRIEFU.html"],
+  ["06","Architektura",             "ARCHITEKTURA_SCHEMAT.html"],
+  ["07","Narzędzia i workflowy",    "SILNIK_WYKONAWCZY.html"],
+  ["08","Założenia strategiczne GEO / SEO",      "KONCEPT_GEO_SEO.html"],
+  ["09","Referencje",               "REFERENCJE.html"],
+];
+
+const nav = document.getElementById('nav');
+const widok = document.getElementById('widok');
+const osobno = document.getElementById('osobno');
+const ladowanie = document.getElementById('ladowanie');
+
+DOK.forEach(([nr, nazwa, plik], i) => {
+  const b = document.createElement('button');
+  b.innerHTML = `<span class="nr">${nr}</span>${nazwa}`;
+  b.onclick = () => pokaz(i);
+  nav.appendChild(b);
+});
+
+function pokaz(i){
+  const [nr, nazwa, plik] = DOK[i];
+  [...nav.children].forEach((b, j) => b.classList.toggle('on', j === i));
+  ladowanie.classList.remove('off');
+  widok.src = plik;
+  osobno.href = plik;
+  document.title = `${nazwa} — Audi Grupa Plichta`;
+  history.replaceState(null, '', '#' + nr);
+}
+
+widok.addEventListener('load', () => ladowanie.classList.add('off'));
+
+const start = DOK.findIndex(d => d[0] === location.hash.replace('#',''));
+pokaz(start > -1 ? start : 0);
+</script>
+</body>
+</html>

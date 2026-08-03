@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategia i plan GEO/SEO — warstwa techniczna — Audi Grupa Plichta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;--ink:#0a0a0a;--muted:#5b6472;--faint:#8b93a2;--line:#e6e6e9;
+    --green:#16a34a;--green-d:#15803d;--green-soft:#e7f6ec;--green-line:#b7e3c4;
+    --orange:#f5751a;--orange-d:#dd5e0a;--orange-soft:#fff2e8;--orange-line:#f8c39a;
+    --blue:#0f7ae5;--blue-d:#0a63bd;--blue-soft:#e9f3fd;--blue-line:#a9d2f6;
+    --violet:#1800ad;--violet-d:#12007e;--violet-soft:#ece9fb;--violet-line:#c5bcf0;
+    --bord:#8d0a31;--bord-d:#6d0725;--bord-soft:#fcebf2;--bord-line:#e8b4c6;
+    --dark:#1a1f2b;
+    --grotesk:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--grotesk);background:var(--bg);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;font-size:16px;padding:74px 34px 100px;
+    background-image:radial-gradient(circle at 8% 0,#eeebfd 0,transparent 42%),radial-gradient(circle at 96% 3%,#fdeef4 0,transparent 36%);background-repeat:no-repeat}
+  .wrap{max-width:1420px;margin:0 auto}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:15px}
+  h1{font-size:clamp(34px,5vw,54px);font-weight:700;letter-spacing:-.035em;line-height:1.03;margin-bottom:14px}
+  h1 .g{color:var(--bord)}
+  .lede{color:var(--muted);font-size:19px;max-width:980px;line-height:1.5}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;margin-bottom:34px}
+  .badge{font-family:var(--mono);font-size:11px;font-weight:600;padding:6px 11px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--faint)}
+  .badge.draft{color:var(--bord);border-color:var(--bord-line);background:var(--bord-soft)}
+  .card{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:26px 28px;margin-bottom:20px;box-shadow:0 8px 26px rgba(20,26,45,.05)}
+  h2{font-size:24px;font-weight:700;letter-spacing:-.025em;line-height:1.15;margin-bottom:6px}
+  .h2sub{color:var(--muted);font-size:15px;margin-bottom:22px;line-height:1.55;max-width:1010px}
+  h3{font-size:18px;font-weight:700;letter-spacing:-.02em;margin-bottom:7px}
+
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:6px}
+  @media(max-width:1050px){.kpi{grid-template-columns:1fr 1fr}}
+  @media(max-width:620px){.kpi{grid-template-columns:1fr}}
+  .k{border:1.5px solid var(--line);border-radius:15px;padding:17px 19px;background:#fff;border-top-width:4px}
+  .k.r{border-top-color:var(--bord)}.k.a{border-top-color:var(--orange)}.k.g{border-top-color:var(--green)}
+  .k .v{font-size:31px;font-weight:700;letter-spacing:-.035em;line-height:1;margin-bottom:5px}
+  .k.r .v{color:var(--bord)}.k.a .v{color:var(--orange-d)}.k.g .v{color:var(--green-d)}
+  .k .l{font-size:13.5px;font-weight:700;margin-bottom:3px}
+  .k .s{font-family:var(--mono);font-size:10.5px;color:var(--faint);line-height:1.45}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  th{background:var(--dark);color:#fff;padding:12px 14px;text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  td{padding:13px 14px;border-bottom:1px solid #f1eff7;vertical-align:top;color:var(--muted);line-height:1.55}
+  tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:#fbfaff}
+  td strong{color:var(--ink)}
+  .own{font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;display:inline-block}
+  .o-my{background:var(--violet-soft);color:var(--violet-d)}
+  .o-dev{background:var(--orange-soft);color:var(--orange-d)}
+  .o-kl{background:#f2f3f6;color:var(--faint)}
+  .hl{background:var(--bord-soft)!important}
+
+  .msc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:1000px){.msc{grid-template-columns:1fr}}
+  .ms{border:1.5px solid var(--line);border-radius:17px;overflow:hidden;background:#fff}
+  .ms-h{padding:16px 19px;border-bottom:1px solid var(--line)}
+  .ms-h .n{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+  .ms-h .t{font-size:19px;font-weight:700;letter-spacing:-.02em}
+  .ms-b{padding:15px 19px}
+  .ms-b ul{list-style:none}
+  .ms-b li{position:relative;padding-left:18px;margin-bottom:9px;font-size:13.5px;color:var(--muted);line-height:1.5}
+  .ms-b li:last-child{margin-bottom:0}
+  .ms-b li::before{content:'';position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%}
+  .ms1 .ms-h{background:var(--bord-soft)}.ms1 .ms-h .t{color:var(--bord)}.ms1 li::before{background:var(--bord)}
+  .ms2 .ms-h{background:var(--orange-soft)}.ms2 .ms-h .t{color:var(--orange-d)}.ms2 li::before{background:var(--orange)}
+  .ms3 .ms-h{background:var(--green-soft)}.ms3 .ms-h .t{color:var(--green-d)}.ms3 li::before{background:var(--green)}
+  .ms-f{padding:12px 19px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:11px;color:var(--faint)}
+
+  .note{border-left:3px solid var(--bord);background:var(--bord-soft);padding:15px 19px;border-radius:0 13px 13px 0;font-size:14.5px;margin-top:18px;color:var(--bord-d);line-height:1.6}
+  .note b{color:var(--bord)}
+  .note.ok{border-left-color:var(--green);background:var(--green-soft);color:#2f4a3c}
+  .note.ok b{color:var(--green-d)}
+  .note.v{border-left-color:var(--violet);background:var(--violet-soft);color:var(--muted)}
+  .note.v b{color:var(--violet-d)}
+  .note a{color:inherit;font-weight:600}
+  .repro{font-family:var(--mono);font-size:11.5px;background:#fbfaff;border:1px solid var(--line);border-radius:8px;padding:8px 11px;margin-top:9px;color:var(--faint);display:inline-block}
+  footer{color:var(--faint);font-family:var(--mono);font-size:11.5px;padding:16px 4px 30px;text-align:center}
+
+.warstwy{margin:0 0 26px}
+.w-lead{font-size:16px;color:var(--muted);margin-bottom:14px}
+.w-lead b{color:var(--ink)}
+.w-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:860px){.w-grid{grid-template-columns:1fr}}
+.w-grid a{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit;background:#fff;
+  border:1.5px solid var(--line);border-radius:17px;padding:18px 20px;position:relative;overflow:hidden;transition:.17s}
+.w-grid a::before{content:'';position:absolute;inset:0 0 auto 0;height:4px;background:var(--line)}
+.w-grid a:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(20,26,45,.10)}
+.w-grid a.tu{background:#fbfaff;border-color:var(--violet-line)}
+.w-grid a.tu::before{background:var(--violet)}
+.w-grid a:not(.tu):hover{border-color:var(--violet-line)}
+.w-n{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--violet-d)}
+.w-grid b{font-size:16.5px;font-weight:700;letter-spacing:-.015em;line-height:1.25}
+.w-d{font-size:13.5px;color:var(--muted);line-height:1.5}
+.w-go{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--violet-d);margin-top:4px}
+#doc-tag-fix{position:fixed;top:18px;left:186px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#12007e;background:rgba(236,233,251,.96);backdrop-filter:blur(8px);padding:8px 13px;border-radius:9px;white-space:nowrap;box-shadow:0 2px 10px rgba(20,26,45,.06)}
+@media(max-width:900px){#doc-tag-fix{display:none}}
+</style>
+<script src="brama.js"></script>
+</head>
+<body>
+<a href="PLICHTA_START.html" style="position:fixed;top:18px;left:18px;z-index:99;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#5b6472;text-decoration:none;padding:8px 14px;border:1px solid #e6e6e9;border-radius:9px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(20,26,45,.06)">← Menu Startowe</a>
+<span id="doc-tag-fix">08 · GEO / SEO — warstwa techniczna</span>
+
+<div class="wrap">
+  <div class="kicker">Audi Grupa Plichta · 08 · strategia i plan GEO/SEO · warstwa techniczna</div>
+  <h1>Google nie może wejść.<br><span class="g">Reszta to kolejka.</span></h1>
+  <p class="lede">Audyt 360 wykrył jedną rzecz, która unieważnia wszystkie pozostałe: <b>zabezpieczenie serwisu zwraca Googlebotowi błąd 403</b> — na robots.txt i na wszystkich szesnastu mapach witryny. Strona z 7 709 adresami może w ogóle nie być odwiedzana przez Google, a 126 fraz, na które rankuje, to pozostałość po tym, co zindeksowano wcześniej.</p>
+  <div class="badges">
+    <a class="badge" href="audyt_360/Audyt_360_2026-07-31.html" style="text-decoration:none;border-color:#c5bcf0;color:#12007e;background:#ece9fb">Źródło: pełny audyt 360 →</a>
+    <span class="badge">31.07.2026 · metodologia V5.5</span>
+    <span class="badge">Bez dostępu do GSC i GA4 — część modułów niezbadana</span>
+  </div>
+
+  <!-- ══ PARADOKS ══ -->
+  
+
+<div class="warstwy">
+  <p class="w-lead">Widoczność w wyszukiwarce i w odpowiedziach AI ma <b>dwie warstwy</b>. Jedna bez drugiej nie działa.</p>
+  <div class="w-grid">
+    <a class="w-c tu" href="STRATEGIA_SEO_3M.html">
+      <span class="w-n">Warstwa 1 · techniczna</span>
+      <b>Strona musi być dostępna i poprawna</b>
+      <span class="w-d">Audyt 360 wykazał poważne błędy — dziś roboty Google dostają odmowę dostępu. To wymaga realnej optymalizacji serwisu, nie kosmetyki.</span>
+      <span class="w-go">Jesteś tutaj</span>
+    </a>
+    <a class="w-c" href="KONCEPT_GEO_SEO.html">
+      <span class="w-n">Warstwa 2 · kontentowa</span>
+      <b>Treść i miejsca, w których ma Was znaleźć</b>
+      <span class="w-d">Strategia budowy i optymalizacji treści oraz miejsc pod widoczność lokalną i AI: mapy percepcji, pole pytań, plan publikacji, wizytówki.</span>
+      <span class="w-go">Zobacz warstwę kontentową →</span>
+    </a>
+  </div>
+</div>
+<div class="card">
+    <h2>Paradoks, który przestawia kolejność działań</h2>
+    <p class="h2sub">Normalnie robi się SEO najpierw, widoczność w AI potem. Tutaj jest odwrotnie — i to nie jest nasza preferencja, tylko stan faktyczny sprawdzony testem.</p>
+
+    <table>
+      <thead><tr><th style="width:230px">Bot</th><th style="width:110px">Odpowiedź</th><th>Co to znaczy</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>Googlebot</strong></td><td><strong style="color:#8d0a31;font-family:var(--mono)">403</strong></td><td>Nie wchodzi. Ani na robots.txt, ani na mapy witryny.</td></tr>
+        <tr class="hl"><td><strong>Bingbot</strong></td><td><strong style="color:#8d0a31;font-family:var(--mono)">403</strong></td><td>To samo.</td></tr>
+        <tr><td>GPTBot · OAI-SearchBot</td><td><strong style="color:#15803d;font-family:var(--mono)">200</strong></td><td>Wchodzi swobodnie.</td></tr>
+        <tr><td>ClaudeBot · Claude-User</td><td><strong style="color:#15803d;font-family:var(--mono)">200</strong></td><td>Wchodzi swobodnie.</td></tr>
+        <tr><td>PerplexityBot · Perplexity-User</td><td><strong style="color:#15803d;font-family:var(--mono)">200</strong></td><td>Wchodzi swobodnie.</td></tr>
+        <tr><td>Google-Extended · anthropic-ai</td><td><strong style="color:#15803d;font-family:var(--mono)">200</strong></td><td>Wchodzą swobodnie.</td></tr>
+      </tbody>
+    </table>
+    <div class="repro">repro: curl -sI -A "…Googlebot/2.1…" https://audiplichta.pl/robots.txt · 2026-07-31</div>
+
+    <div class="note">
+      <b>Konfiguracja chroni Was przed Google, a asystentom AI oddaje treść za darmo.</b> To jest dokładnie odwrotnie, niż powinno być — i jednocześnie tłumaczy, dlaczego moduł „gotowość na AI" wypadł w audycie najwyżej ze wszystkich (7/10), a technika on-site najniżej (0/10).
+    </div>
+    <div class="note ok">
+      <b>Wniosek dla kolejności prac.</b> Odblokowanie Google to <b>zmiana konfiguracji, nie projekt</b> — dni, nie tygodnie. Ale dopóki nie zostanie zrobiona, każda złotówka włożona w treść pod wyszukiwarkę pracuje w próżnię. Za to <b>kanał AI jest otwarty już dziś</b> — więc program treści z <a href="KONCEPT_GEO_SEO.html">strategii i planu GEO/SEO</a> może ruszyć równolegle, nie czekając na odblokowanie.
+    </div>
+  </div>
+
+  <!-- ══ STAN ══ -->
+  <div class="card">
+    <h2>Punkt startu w liczbach</h2>
+    <p class="h2sub">Wszystkie z audytu z 31 lipca, każda z możliwością powtórzenia. Kolor mówi, czy to blokada, czy rezerwa.</p>
+    <div class="kpi">
+      <div class="k r"><div class="v">403</div><div class="l">Googlebot</div><div class="s">robots.txt i 16/16 map witryny</div></div>
+      <div class="k r"><div class="v">0,84</div><div class="l">CLS · p75 realnych sesji</div><div class="s">próg dobry &lt;0,10 · ośmiokrotnie za wysoko</div></div>
+      <div class="k r"><div class="v">4,4s</div><div class="l">LCP · p75</div><div class="s">próg dobry &lt;2,5s · TTFB 2,3s</div></div>
+      <div class="k a"><div class="v">126</div><div class="l">Fraz organicznych</div><div class="s">ruch szacowany 5 383 · TOP1: 4</div></div>
+      <div class="k r"><div class="v">0 / 91</div><div class="l">Stron z opisem meta</div><div class="s">żadna strona w serwisie</div></div>
+      <div class="k r"><div class="v">35 / 35</div><div class="l">Stron modelowych bez H1</div><div class="s">wszystkie strony modeli</div></div>
+      <div class="k a"><div class="v">502</div><div class="l">Par zduplikowanych adresów</div><div class="s">te same auta pod dwoma ścieżkami</div></div>
+      <div class="k g"><div class="v">7 / 10</div><div class="l">Gotowość na AI</div><div class="s">najwyższy wynik ze wszystkich modułów</div></div>
+    </div>
+
+    <h3 style="margin-top:26px">Porównanie, które boli najbardziej</h3>
+    <p class="h2sub" style="margin-bottom:12px">Nie zestawiamy Was z rynkiem, tylko z Waszą własną grupą.</p>
+    <table>
+      <thead><tr><th>Domena</th><th style="width:120px">Frazy</th><th style="width:140px">Ruch szacowany</th><th style="width:110px">TOP 1</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>audiplichta.pl</strong> — ta strona</td><td><strong>126</strong></td><td><strong>5 383</strong></td><td><strong>4</strong></td></tr>
+        <tr><td>plichta.com.pl — <strong>Wasza własna grupa</strong></td><td>1 062</td><td>61 514</td><td>36</td></tr>
+        <tr><td>krotoski.com — konkurent</td><td>938</td><td>45 524</td><td>42</td></tr>
+        <tr><td>volkswagenplichta.pl — Wasza grupa</td><td>385</td><td>27 272</td><td>25</td></tr>
+        <tr><td>audi.pl — producent</td><td>1 491</td><td>376 710</td><td>259</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <b>Serwis głównej marki grupy ma osiem razy mniej fraz niż serwis grupowy i cztery razy mniej niż konkurent z regionu.</b> To nie jest problem rynku ani budżetu — to skutek tego, że Google nie może wejść na stronę.
+    </div>
+  </div>
+
+  <!-- ══ SZYBKIE PIENIĄDZE ══ -->
+  <div class="card">
+    <h2>Pięć fraz, które są tuż za progiem</h2>
+    <p class="h2sub">Pozycje 11–18 przy realnym wolumenie. To są miejsca, gdzie ruch jest do wzięcia najszybciej — pod warunkiem, że Google w ogóle zobaczy zmiany.</p>
+    <table>
+      <thead><tr><th style="width:230px">Fraza</th><th style="width:90px">Pozycja</th><th style="width:120px">Wolumen /mc</th><th>Strona docelowa i problem</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>audi gotowe do odbioru</strong></td><td><strong>12</strong></td><td><strong>8 100</strong></td><td><strong style="color:#8d0a31">Strona, na którą rankuje, zwraca 404.</strong> Adres <code style="font-family:var(--mono);font-size:12px">/oferta/wszystkie</code> nie istnieje — realny to <code style="font-family:var(--mono);font-size:12px">/oferta/</code>. Najcenniejsza fraza zakupowa wskazuje w pustkę.</td></tr>
+        <tr><td>audi używane</td><td>14 i 18</td><td>4 400</td><td>Rankuje strona główna, bo nie ma dedykowanej. Do tego dwa warianty pisowni rozbijają wynik.</td></tr>
+        <tr><td>serwis audi</td><td>12</td><td>2 900</td><td>Intencja zakupowa serwisowa — dokładnie ten ruch, który dziś zjada budżet kampanii sprzedażowych.</td></tr>
+        <tr><td>audi p l</td><td>11</td><td>3 600</td><td>Fraza nawigacyjna — ktoś szuka Was po nazwie i nie znajduje na pierwszej stronie.</td></tr>
+      </tbody>
+    </table>
+    <div class="note ok">
+      <b>Około 23 000 wyszukiwań miesięcznie leży na pozycjach 11–18.</b> Przejście z drugiej strony wyników na pierwszą przy tych wolumenach jest wymiernie tańsze niż budowanie widoczności od zera — i to jest pierwszy realny zwrot z tej pracy. Fraza o najwyższym wolumenie wymaga jednej rzeczy: żeby strona, na którą wskazuje, przestała zwracać błąd.
+    </div>
+  </div>
+
+  <!-- ══ TRZY MIESIĄCE ══ -->
+  <div class="card">
+    <h2>Trzy miesiące — w kolejności wymuszonej przez blokady</h2>
+    <p class="h2sub">Kolejność nie jest kwestią gustu. Każdy etap odblokowuje następny, a rzeczy zrobione poza kolejnością nie dają efektu.</p>
+    <div class="msc">
+      <div class="ms ms1">
+        <div class="ms-h"><div class="n">Miesiąc 1</div><div class="t">Odblokowanie</div></div>
+        <div class="ms-b"><ul>
+          <li><b>Odblokowanie Googlebota i Bingbota</b> w zabezpieczeniu serwisu — zmiana konfiguracji, priorytet absolutny</li>
+          <li><b>Mapy witryny 403 → 200</b> — wszystkie szesnaście</li>
+          <li><b>Naprawa adresu <code style="font-family:var(--mono);font-size:12px">/oferta/wszystkie</code></b> — dziś 404, a rankuje na frazę o wolumenie 8 100</li>
+          <li>Diagnoza <b>przesunięć układu (CLS 0,84)</b> — co dokładnie skacze i dlaczego</li>
+          <li>Dostęp do Search Console i potwierdzenie, że Google wraca na stronę</li>
+          <li><b>Program treści pod AI rusza równolegle</b> — ten kanał jest otwarty już dziś</li>
+        </ul></div>
+        <div class="ms-f">warunek wyjścia: Googlebot dostaje 200</div>
+      </div>
+      <div class="ms ms2">
+        <div class="ms-h"><div class="n">Miesiąc 2</div><div class="t">Fundament on-page</div></div>
+        <div class="ms-b"><ul>
+          <li><b>H1 na 35 stronach modelowych</b> — dziś żadna go nie ma</li>
+          <li><b>Opisy meta na 91 stronach</b> — dziś zero</li>
+          <li><b>Tytuły ofert: model i rocznik zamiast wyposażenia</b> — dotyczy 502 listingów aut</li>
+          <li><b>Dane strukturalne</b> — dziś tylko okruszki na pięciu stronach; wchodzi typ pojazdu i dealera</li>
+          <li>Rozstrzygnięcie <b>502 par zduplikowanych adresów</b> i niespójności okruszków</li>
+          <li>Uporządkowanie taksonomii: wzmocnienie modelu i marki, wyłączenie z indeksu koloru, tagów i wyposażenia</li>
+          <li>71 obrazów bez opisu alternatywnego</li>
+        </ul></div>
+        <div class="ms-f">warunek wyjścia: strony modelowe mają komplet sygnałów</div>
+      </div>
+      <div class="ms ms3">
+        <div class="ms-h"><div class="n">Miesiąc 3</div><div class="t">Wejście i dowód</div></div>
+        <div class="ms-b"><ul>
+          <li><b>Pięć fraz z pozycji 11–18</b> — dedykowane strony i treść pod intencję</li>
+          <li><b>Strona pod „audi używane"</b> — dziś rankuje strona główna z braku lepszej</li>
+          <li><b>Sygnały wiarygodności</b>: strony salonów uzupełnione, dwa salony bez numeru telefonu, brak strony o firmie, zespole i opiniach</li>
+          <li>Domknięcie Core Web Vitals po zmianach z miesiąca pierwszego</li>
+          <li><b>Raport przed i po</b> — pozycje, frazy, indeksacja, obecność w odpowiedziach asystentów, zestawione z punktem startu z audytu</li>
+        </ul></div>
+        <div class="ms-f">warunek wyjścia: liczba, na której podejmuje się decyzję</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ KTO CO ══ -->
+  <div class="card">
+    <h2>Kto co robi — bo połowa tej listy to praca deweloperska</h2>
+    <p class="h2sub">To jest istotne dla wyceny i dla harmonogramu. Wskazujemy priorytet, piszemy specyfikację i weryfikujemy wynik — ale zmian w serwisie nie wdrażamy, bo to leży po stronie właściciela WordPressa. Tak samo mówi tabela zakresu w ofercie.</p>
+    <table>
+      <thead><tr><th style="width:250px">Zadanie</th><th style="width:130px">Kto</th><th>Uwaga</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Odblokowanie botów, mapy witryny</strong></td><td><span class="own o-dev">deweloper</span></td><td>My: dokładna specyfikacja i test potwierdzający. Zmiana konfiguracji, nie przebudowa.</td></tr>
+        <tr><td><strong>Core Web Vitals</strong></td><td><span class="own o-dev">deweloper</span></td><td>My: diagnoza co powoduje przesunięcia i priorytet napraw. Wykonanie: warstwa szablonu.</td></tr>
+        <tr><td><strong>H1, opisy meta, tytuły ofert</strong></td><td><span class="own o-my">my</span> <span class="own o-dev">deweloper</span></td><td>My: wzorce i treść. Deweloper: wpięcie w szablon, żeby generowało się automatycznie dla 502 ofert.</td></tr>
+        <tr><td><strong>Dane strukturalne</strong></td><td><span class="own o-my">my</span> <span class="own o-dev">deweloper</span></td><td>My: schemat i mapowanie pól. Deweloper: implementacja.</td></tr>
+        <tr><td><strong>Treść pod frazy i pod AI</strong></td><td><span class="own o-my">my</span></td><td>Pełna produkcja po naszej stronie — <a href="KONCEPT_GEO_SEO.html">plan treści</a>.</td></tr>
+        <tr><td><strong>Sygnały wiarygodności, wizytówki, opinie</strong></td><td><span class="own o-my">my</span> <span class="own o-kl">klient</span></td><td>My: strategia i treść. Klient: dane salonów, zgody, zdjęcia zespołu.</td></tr>
+        <tr><td><strong>Weryfikacja i raport</strong></td><td><span class="own o-my">my</span></td><td>Każda zmiana sprawdzona tym samym testem, którym wykryliśmy problem.</td></tr>
+      </tbody>
+    </table>
+    <div class="note v">
+      <b>Jak to się ma do wyceny.</b> Ta strategia mieści się w opcji <b>widoczność lokalna i AI — 6 000 PLN miesięcznie</b>, razem z programem treści. Zawiera priorytety, specyfikacje, treść i weryfikację. <b>Nie zawiera godzin deweloperskich</b> na wdrożenie zmian w serwisie — te są poza fee bazowym i rozliczane osobno, zgodnie z tabelą zakresu.
+    </div>
+  </div>
+
+  <!-- ══ CZEGO NIE WIEMY ══ -->
+  <div class="card">
+    <h2>Czego ten audyt nie wie — i co to zmienia</h2>
+    <p class="h2sub">Cztery moduły metodologii zostały nieuzupełnione, bo wymagają dostępów, których nie mieliśmy. Mówimy to wprost, żeby nikt nie budował planu na luce.</p>
+    <table>
+      <thead><tr><th style="width:250px">Moduł</th><th style="width:140px">Stan</th><th>Czego zabrakło</th></tr></thead>
+      <tbody>
+        <tr><td>Triangulacja ruchu</td><td><span class="own o-kl">nie zbadano</span></td><td>Brak dostępu do Search Console i analityki — nie da się zestawić wyświetleń, kliknięć i sesji.</td></tr>
+        <tr><td>Sygnały behawioralne</td><td><span class="own o-kl">nie zbadano</span></td><td>To samo. Bez tego nie wiadomo, które strony tracą użytkownika po wejściu.</td></tr>
+        <tr><td>Kanibalizacja</td><td><span class="own o-kl">nie zbadano</span></td><td>Podejrzenie jest: 502 pary zduplikowanych adresów i cztery strony o identycznym tytule. Potwierdzenie wymaga danych z Search Console.</td></tr>
+        <tr><td>Frazy tuż za progiem</td><td><span class="own o-dev">częściowo</span></td><td>Wyciągnięte z zewnętrznego źródła. Pełny obraz daje dopiero Search Console — tam widać frazy, na które się wyświetlacie, a nie klika.</td></tr>
+      </tbody>
+    </table>
+    <div class="note ok">
+      <b>Dostęp do Search Console jest najtańszą rzeczą, jaka może się wydarzyć w tym projekcie.</b> Kosztuje jedno kliknięcie po Waszej stronie, a domyka cztery moduły audytu naraz i pozwala potwierdzić, czy odblokowanie Google faktycznie zadziałało. To pierwsza pozycja na liście rzeczy do uzyskania przed startem.
+    </div>
+  </div>
+
+  <footer>Strategia SEO / GEO na 3 miesiące · z audytu 360 z 31.07.2026 · Audi Grupa Plichta · lipiec 2026</footer>
+</div>
+</body>
+</html>
