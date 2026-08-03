@@ -3,6 +3,10 @@
    To zamknięte drzwi, nie sejf — patrz BRIEF_SESJA_POPRAWKI.md. */
 (function () {
   var KLUCZ = 'plichta-2026', KOD = '2212';
+  /* Ścieżka do menu startowego liczona ze ścieżki tego skryptu — działa też
+     z podkatalogu (audyt_360/). Po wpisaniu hasła zawsze ląduje się w menu. */
+  var src = (document.currentScript && document.currentScript.src) || '';
+  var START = src.replace(/brama\.js.*$/, '') + 'PLICHTA_START.html';
   try { if (localStorage.getItem(KLUCZ) === '1') return; } catch (e) { return; }
 
   var st = document.createElement('style');
@@ -47,7 +51,9 @@
       e.preventDefault();
       if (inp.value.trim() === KOD) {
         try { localStorage.setItem(KLUCZ, '1'); } catch (er) {}
-        location.reload();
+        var okno = window.top || window;
+        if (START.indexOf('http') === 0) okno.location.href = START;
+        else okno.location.reload();
       } else {
         d.querySelector('#bzle').textContent = 'Nieprawidłowy kod.';
         inp.value = ''; inp.focus();
