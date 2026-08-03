@@ -34,8 +34,8 @@
     d.innerHTML =
       '<div class="pud">' +
       '<div class="kick">Audi Grupa Plichta</div>' +
-      '<h1>Materiały dostępne po kodzie</h1>' +
-      '<p>Odpowiedź na brief z 10.06.2026. Hasło dostępu przez SMS.</p>' +
+      '<h1>Odpowiedź na brief z 10.06.2026</h1>' +
+      '<p>Materiały dostępne po wpisaniu hasła. Hasło dostępu przez SMS.</p>' +
       '<form><input id="bkod" type="password" inputmode="numeric" maxlength="12" ' +
       'autocomplete="off" aria-label="Kod dostępu" placeholder="••••"> ' +
       '<button type="submit">Wejdź</button></form>' +
