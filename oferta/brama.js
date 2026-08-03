@@ -35,7 +35,7 @@
       '<div class="pud">' +
       '<div class="kick">Audi Grupa Plichta</div>' +
       '<h1>Materiały dostępne po kodzie</h1>' +
-      '<p>Komplet odpowiedzi na brief z 10.06.2026. Kod otrzymaliście osobno.</p>' +
+      '<p>Odpowiedź na brief z 10.06.2026. Hasło dostępu przez SMS.</p>' +
       '<form><input id="bkod" type="password" inputmode="numeric" maxlength="12" ' +
       'autocomplete="off" aria-label="Kod dostępu" placeholder="••••"> ' +
       '<button type="submit">Wejdź</button></form>' +
