@@ -104,6 +104,15 @@
 </head>
 <body>
 
+<style id="hub-back-style">
+#hub-back-btn{position:fixed;top:10px;left:10px;z-index:99999;display:flex;align-items:center;gap:6px;padding:7px 13px;background:rgba(255,253,252,.95);border:1px solid #ded3e5;border-radius:10px;color:#1800ad;font:700 12px -apple-system,sans-serif;text-decoration:none;box-shadow:0 4px 16px rgba(24,0,173,.12);backdrop-filter:blur(10px);transition:box-shadow .15s}
+#hub-back-btn:hover{box-shadow:0 6px 22px rgba(24,0,173,.2);border-color:#1800ad}
+#hub-back-btn svg{flex-shrink:0}
+</style>
+<a id="hub-back-btn" href="../ROBOCZY_HUB.html">
+<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M8.5 2.5L4 7l4.5 4.5" stroke="#1800ad" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Hub
+</a>
+
 <div class="header">
   <div class="header-left">
     <div class="audi-rings">⬤⬤⬤⬤</div>
@@ -114,7 +123,7 @@
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
     <div style="text-align:right;">
-      Zaktualizowano: 23 czerwca 2026<br>
+      Zaktualizowano: 3 sierpnia 2026<br>
       <span style="color:#666">Dane: Google Analytics 4</span><br><span style="color:#888;font-size:11px;">Zakres: <span class="data-aktmiesiac"></span> — dane za <span class="data-czesciowy"></span> (<span style="font-style:italic;">bieżący miesiąc niepełny</span>)</span>
     </div>
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Tryb jasny/ciemny">🌙</button>
@@ -141,6 +150,7 @@
   <button class="month-btn" onclick="switchGA4Month('apr', this)">Kwi 2026</button>
   <button class="month-btn active" onclick="switchGA4Month('may', this)">Maj 2026</button>
   <button class="month-btn" onclick="switchGA4Month('jun', this)">Cze 2026</button>
+  <button class="month-btn" onclick="switchGA4Month('jul', this)">Lip 2026</button>
   <button class="month-btn" style="border-color:#64748b;color:#64748b;" onclick="switchGA4Month('90d', this)">Σ 90 dni</button>
 </div>
 <div style="padding:0 32px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -374,6 +384,7 @@ const GA4_MONTHLY = {
   apr: { sessions: 21618, users: 14837, pv:  95100, form_start: 10573, form_total:  64, form_auta_nowe: 28, label: 'Kwiecień 2026', ts_key: 'apr' },
   may: { sessions: 14942, users:  9934, pv:  51451, form_start:  6348, form_total:  78, form_auta_nowe: 18, label: 'Maj 2026', ts_key: 'may' },
   jun: { sessions: 14971, users: 10800, pv:  60000, form_start:  6095, form_total:  82, form_auta_nowe: 18, label: 'Czerwiec 2026', ts_key: 'jun' },
+  jul: { sessions: 15168, users: 10335, pv:  57133, form_start:  4300, form_total:  91, form_auta_nowe: 31, label: 'Lipiec 2026', ts_key: 'jul' },
   '90d': { sessions: 57052, users: 57275, pv: 247897, form_start: 26609, form_total: 427, form_auta_nowe: 186, label: 'Ostatnie 90 dni (lut–maj)', ts_key: '90d' }
 };
 
@@ -384,6 +395,7 @@ const GA4_CHANNELS_MONTHLY = {
   apr: [{"channel":"Paid Search","sessions":13484},{"channel":"Organic Search","sessions":3454},{"channel":"Paid Social","sessions":2689},{"channel":"Direct","sessions":1556},{"channel":"Organic Social","sessions":260},{"channel":"Referral","sessions":89},{"channel":"Unassigned","sessions":88},{"channel":"Display","sessions":25},{"channel":"SMS","sessions":2}],
   may: [{"channel":"Paid Search","sessions":7720},{"channel":"Organic Search","sessions":3385},{"channel":"Paid Social","sessions":2160},{"channel":"Direct","sessions":1334},{"channel":"Organic Social","sessions":188},{"channel":"Unassigned","sessions":145},{"channel":"Referral","sessions":62},{"channel":"SMS","sessions":42}],
   jun: [{"channel":"Paid Search","sessions":8041,"conversions":44},{"channel":"Organic Search","sessions":2793,"conversions":17},{"channel":"Paid Social","sessions":1612,"conversions":12},{"channel":"Direct","sessions":1359,"conversions":5},{"channel":"Organic Social","sessions":922,"conversions":3},{"channel":"Unassigned","sessions":97,"conversions":0},{"channel":"Referral","sessions":73,"conversions":0},{"channel":"SMS","sessions":16,"conversions":0},{"channel":"AI Assistant","sessions":6,"conversions":1},{"channel":"Email","sessions":1,"conversions":0}],
+  jul: [{"channel":"Paid Search","sessions":8884,"conversions":67},{"channel":"Organic Search","sessions":2744,"conversions":18},{"channel":"Direct","sessions":1515,"conversions":20},{"channel":"Paid Social","sessions":1449,"conversions":24},{"channel":"Organic Social","sessions":276,"conversions":0},{"channel":"Unassigned","sessions":130,"conversions":0},{"channel":"SMS","sessions":89,"conversions":1},{"channel":"Referral","sessions":77,"conversions":7},{"channel":"Paid Other","sessions":63,"conversions":0},{"channel":"AI Assistant","sessions":23,"conversions":0}],
   '90d': [{"channel":"Paid Search","sessions":33111},{"channel":"Organic Search","sessions":10655},{"channel":"Paid Social","sessions":6959},{"channel":"Direct","sessions":4548},{"channel":"Unassigned","sessions":623},{"channel":"Organic Social","sessions":591},{"channel":"Referral","sessions":257},{"channel":"Cross-network","sessions":139},{"channel":"SMS","sessions":85},{"channel":"Display","sessions":25}]
 };
 
@@ -394,6 +406,7 @@ const GA4_PAGES_MONTHLY = {
   apr: [{"page":"/oferta/wszystkie","views":22566,"bounceRate":1.4},{"page":"/oferta/wszystkie/","views":22169,"bounceRate":20.9},{"page":"/oferta/wszystkie/page/2/","views":4289,"bounceRate":3.0},{"page":"/","views":4009,"bounceRate":11.2},{"page":"/oferta/nowe/Audi/","views":2130,"bounceRate":1.8},{"page":"/oferta/wszystkie/page/3/","views":2062,"bounceRate":2.8},{"page":"/oferta/demonstracyjne/Audi/","views":1071,"bounceRate":2.1},{"page":"/salony/","views":1020,"bounceRate":12.7},{"page":"/serwis-bydgoszcz/","views":1000,"bounceRate":46.9},{"page":"/audiperfectlease/","views":731,"bounceRate":14.7}],
   may: [{"page":"/oferta/wszystkie","views":8552,"bounceRate":5.2},{"page":"/oferta/wszystkie/","views":5528,"bounceRate":16.3},{"page":"/","views":2852,"bounceRate":12.0},{"page":"/oferta/wszystkie/page/2/","views":1573,"bounceRate":6.6},{"page":"/oferta/nowe/Audi/","views":1506,"bounceRate":5.5},{"page":"/a3-2026/","views":1012,"bounceRate":22.3},{"page":"/oferta/wszystkie/page/3/","views":864,"bounceRate":6.6},{"page":"/q7-2026/","views":692,"bounceRate":22.5},{"page":"/q5-2026-2/","views":641,"bounceRate":23.9},{"page":"/audiperfectlease/","views":601,"bounceRate":15.3}],
   jun: [{"page":"/oferta/wszystkie","views":9676,"bounceRate":1.9},{"page":"/oferta/wszystkie/","views":5446,"bounceRate":12.3},{"page":"/limitowana-oferta/","views":3229,"bounceRate":7.0},{"page":"/","views":2735,"bounceRate":10.0},{"page":"/oferta/nowe/Audi/","views":2723,"bounceRate":6.1},{"page":"/oferta/wszystkie/page/2/","views":1388,"bounceRate":3.4},{"page":"/a3-2026/","views":1212,"bounceRate":16.5},{"page":"/q5-2026-2/","views":1044,"bounceRate":13.6},{"page":"/oferta/demonstracyjne/Audi/","views":803,"bounceRate":1.3},{"page":"/q7-2026/","views":782,"bounceRate":23.6}],
+  jul: [{"page":"/oferta/wszystkie","views":9109,"bounceRate":0.0},{"page":"/limitowana-oferta/","views":5547,"bounceRate":0.0},{"page":"/oferta/wszystkie/","views":3948,"bounceRate":0.0},{"page":"/","views":3370,"bounceRate":0.0},{"page":"/oferta/nowe/Audi/","views":2400,"bounceRate":0.0},{"page":"/a3-2026/","views":1956,"bounceRate":0.0},{"page":"/oferta/demonstracyjne/Audi/","views":1363,"bounceRate":0.0},{"page":"/q3-2026-2/","views":1352,"bounceRate":0.0},{"page":"/oferta/wszystkie/page/2/","views":1311,"bounceRate":0.0},{"page":"/q5-2026-2/","views":882,"bounceRate":0.0},{"page":"/salony/","views":880,"bounceRate":0.0},{"page":"/a3-2026-bdg/","views":862,"bounceRate":0.0},{"page":"/oferta/wszystkie/page/3/","views":776,"bounceRate":0.0},{"page":"/q7-2026/","views":728,"bounceRate":0.0},{"page":"/q3-2026-bdg/","views":674,"bounceRate":0.0}],
   '90d': [{"page":"/oferta/wszystkie","views":57081,"bounceRate":1.9},{"page":"/oferta/wszystkie/","views":50873,"bounceRate":16.9},{"page":"/","views":12568,"bounceRate":12.4},{"page":"/oferta/wszystkie/page/2/","views":10701,"bounceRate":3.4},{"page":"/oferta/nowe/Audi/","views":7236,"bounceRate":2.7},{"page":"/oferta/wszystkie/page/3/","views":5267,"bounceRate":3.4},{"page":"/oferta/demonstracyjne/Audi/","views":3395,"bounceRate":2.7},{"page":"/salony/","views":3064,"bounceRate":13.9},{"page":"/oferta/wszystkie/page/4/","views":2766,"bounceRate":2.8},{"page":"/audiperfectlease/","views":2757,"bounceRate":15.5}]
 };
 
@@ -834,6 +847,11 @@ const AKCJE_DATA = {
     label: 'Czerwiec 2026',
     gda: [["A3 2026",1027,6],["Q5 2026",871,3],["Q7 2026",719,4],["Q3 2026",446,6],["A5 2026",431,3],["Q8 2026",355,2],["Q4 e-tron 2026",211,1]],
     bdg: [["A3 bdg",102,1],["Q4 bdg",114,1],["Q3 bdg",86,0],["Q5 bdg",60,1],["Q7 bdg",40,0],["A5 bdg",36,0],["Q8 bdg",22,1]]
+  },
+  jul: {
+    label: 'Lipiec 2026',
+    gda: [["A3 2026",1614,3],["Q3 2026",1126,4],["Q5 2026",690,1],["Q7 2026",646,0],["A5 2026",496,0],["Q8 2026",368,2],["Q4 e-tron 2026",125,1]],
+    bdg: [["A3 bdg",728,4],["Q3 bdg",508,2],["Q5 bdg",366,1],["Q7 bdg",145,0],["A5 bdg",463,0],["Q8 bdg",144,0]]
   }
 };
 let currentAkcjeMonth = 'jun';
@@ -955,6 +973,7 @@ function toggleSection(header) {
   <div class="section-label" style="margin-top:8px;">🎯 Akcje (form_total per landing page) — podział Gdańsk / Bydgoszcz</div>
   <div class="month-switcher" style="margin:10px 0 18px 0;">
     <button class="month-btn akcje-mb active" onclick="switchAkcjeMonth('jun', this)">Cze 2026</button>
+    <button class="month-btn akcje-mb" onclick="switchAkcjeMonth('jul', this)">Lip 2026</button>
   </div>
   <p style="font-size:12px;color:#6b6b6b;margin:0 0 14px 0;">Każda akcyjna landing page i jej wynik: <strong>duży słupek = sesje</strong>, <strong>mały słupek = konwersje</strong> (form_total z tego URL). Góra = <strong>Gdańsk / Trójmiasto</strong> (LP główne), dół = <strong>Bydgoszcz</strong> (warianty -bdg). Po prawej te same liczby w tabeli.</p>
 
@@ -1033,6 +1052,7 @@ function toggleSection(header) {
     <button class="month-btn" onclick="switchNoweTab('apr', this)">Kwi 2026</button>
     <button class="month-btn" onclick="switchNoweTab('may', this)">Maj 2026</button>
     <button class="month-btn" onclick="switchNoweTab('jun', this)">Cze 2026</button>
+    <button class="month-btn" onclick="switchNoweTab('jul', this)">Lip 2026</button>
     <button class="month-btn nowe-summary-btn active" onclick="switchNoweTab('summary', this)">Σ Podsumowanie</button>
   </div>
   <div class="nowe-content">
@@ -1455,6 +1475,54 @@ function toggleSection(header) {
     <h4>Wg napędu</h4>
     <table><thead><tr><th>Napęd</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
     <tbody id="agg-drive-jun"></tbody></table>
+  </div>
+</div>
+    </div>
+
+<div id="nowe-panel-jul" class="nowe-panel">
+<div class="chart-explain">
+  <div class="ce-row ce-see"><span class="ce-label">Co tu widzisz</span><span class="ce-text">Ranking kart pojazdów nowych w <strong>lipcu 2026</strong> — pełny miesiąc. Widzisz tu <strong>31 leadów</strong> (form_auta-nowe) z 44 form_start — CR na kartach nowych aut wyraźnie wzrósł relative do poprzednich miesięcy.</span></div>
+  <div class="ce-row ce-why"><span class="ce-label">Dlaczego to ważne</span><span class="ce-text">Lipiec daje pierwszą pełną miesięczną próbkę po wakacyjnym starcie. 31 leadów przy 44 form_start (CR ≈70%) to anomalnie wysoki CR — możliwe że form_start nie odpalił dla wszystkich kart lub sezonowość zmieniła profil intencji.</span></div>
+  <div class="ce-row ce-learn"><span class="ce-label">Dowiadujesz się że</span><span class="ce-text">Leady skupiają się na A3, Q3, Q5, A5, Q8, Q7 — wzorzec podobny do poprzednich miesięcy. Żadna karta nie generuje więcej niż 1 leada, co potwierdza rozproszony popyt formularzowy.</span></div>
+  <div class="ce-row ce-read"><span class="ce-label">Czytaj to tak</span><span class="ce-text">31 leadów z 44 form_start (CR ≈70.5%) kontrastuje z majowym 3.4% — różnica może wskazywać na niedoliczenie form_start per karta w lipcu lub zmianę w śledzeniu GTM. Porównaj z formularze globalne: form_total=91 całość serwisu.</span></div>
+  <div class="ce-row ce-do"><span class="ce-label">Co z tego wynika i co powinienem zrobić</span><span class="ce-text">Zweryfikuj tagi GTM dla form_start na kartach nowych aut — CR 70% per karta jest nieoczekiwanie wysoki i może sygnalizować brakujące tagowanie. Lipiec i tak daje 31 leadów = najlepszy wynik od Q1 2026.</span></div>
+</div>
+  <div class="nowe-legend">
+    <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#22c55e"></div>CR ≥20%</div>
+    <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#f59e0b"></div>CR 8–19%</div>
+    <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#ef4444"></div>CR 1–7%</div>
+    <div class="nowe-legend-item"><div class="nowe-legend-dot" style="background:#4b5563"></div>CR 0%</div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="num">#</th>
+          <th>Model / URL (slug)</th>
+          <th class="right">Wizyty (PV)</th>
+          <th class="right">Form_start</th>
+          <th class="right">Leady (ft)</th>
+          <th class="right">CR %</th>
+        </tr>
+      </thead>
+      <tbody id="nowe-jul-tbody"></tbody>
+    </table>
+  </div>
+<div class="nowe-agg-wrap">
+  <div class="nowe-agg">
+    <h4>Leady i wizyty wg modelu</h4>
+    <table><thead><tr><th>Model</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-model-jul"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg segmentu</h4>
+    <table><thead><tr><th>Segment</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-seg-jul"></tbody></table>
+  </div>
+  <div class="nowe-agg">
+    <h4>Wg napędu</h4>
+    <table><thead><tr><th>Napęd</th><th class="r">Wizyty</th><th class="r">Leady</th><th class="r">CR od wizyt</th></tr></thead>
+    <tbody id="agg-drive-jul"></tbody></table>
   </div>
 </div>
     </div>
@@ -2397,6 +2465,7 @@ function toggleSection(header) {
     <button class="month-btn" onclick="switchWeryMonth('apr', this)">Kwi 2026</button>
     <button class="month-btn active" onclick="switchWeryMonth('may', this)">Maj 2026</button>
     <button class="month-btn" onclick="switchWeryMonth('jun', this)">Cze 2026</button>
+    <button class="month-btn" onclick="switchWeryMonth('jul', this)">Lip 2026</button>
   </div>
   <p style="font-size:11px;color:#888;margin:-12px 0 16px 0;">Cze 2026 — dane za <span class="data-czesciowy"></span> (18 leadów form_auta-nowe)</p>
 
@@ -3330,6 +3399,16 @@ const WERY_CARDS_DATA = {
     { key:'pleasing',      label:'Perfect Lease',      fs:0,   ft:0,   cr:'—',     color:'#db2777', icon:'📋', url:'/audiperfectlease/' },
     { key:'apr',           label:'Audi Perfect Rent',  fs:0,   ft:0,   cr:'—',     color:'#f97316', icon:'🔑', url:'/audi-perfect-rent/' },
   ],
+  jul: [
+    { key:'nowe_auta',     label:'Nowe auta',         fs:47,  ft:31,  cr:'66.0%', color:'#1a1a1a', icon:'🚗', url:'/oferta/nowe/' },
+    { key:'jazda_testowa', label:'Jazda testowa',      fs:30,  ft:12,  cr:'40.0%', color:'#BB0A21', icon:'🏎', url:'/jazda-testowa/' },
+    { key:'apl',           label:'APL',                fs:5,   ft:3,   cr:'60.0%', color:'#2563eb', icon:'📃', url:'/audiperfectlease/' },
+    { key:'serwis',        label:'Serwis',             fs:11,  ft:7,   cr:'63.6%', color:'#7c3aed', icon:'🔧', url:'/serwis/' },
+    { key:'odkup',         label:'Odkup',              fs:2,   ft:2,   cr:'100%',  color:'#d97706', icon:'💰', url:'/odkup/' },
+    { key:'wyprzedaz',     label:'Wyprzedaże',         fs:0,   ft:0,   cr:'—',     color:'#059669', icon:'🏷', url:'/wyprzedaz-a5/' },
+    { key:'pleasing',      label:'Perfect Lease',      fs:0,   ft:0,   cr:'—',     color:'#db2777', icon:'📋', url:'/audiperfectlease/' },
+    { key:'apr',           label:'Audi Perfect Rent',  fs:2,   ft:0,   cr:'—',     color:'#f97316', icon:'🔑', url:'/audi-perfect-rent/' },
+  ],
 };
 
 const VERIFY_DATA = {
@@ -3392,6 +3471,16 @@ const VERIFY_DATA = {
     wyprzedaz:     {fs: 0,   ft: 0,   cr: "—",     label: "Wyprzedaże",         url: "/wyprzedaz-a5/",       event_ft: "form_wyprzedaz-*"},
     pleasing:      {fs: 0,   ft: 0,   cr: "—",     label: "Perfect Lease",      url: "/audiperfectlease/",   event_ft: "form_perfect_lease_*"},
     apr:           {fs: 0,   ft: 0,   cr: "—",     label: "Audi Perfect Rent",  url: "/audi-perfect-rent/",  event_ft: "form_APR_sent"},
+  },
+  jul: {
+    nowe_auta:     {fs: 47,  ft: 31,  cr: "66.0%", label: "Nowe auta",         url: "/oferta/nowe/",        event_ft: "form_auta-nowe"},
+    jazda_testowa: {fs: 30,  ft: 12,  cr: "40.0%", label: "Jazda testowa",      url: "/jazda-testowa/",      event_ft: "form_jazda-testowa + Formularz_jazda_testowa"},
+    apl:           {fs: 5,   ft: 3,   cr: "60.0%", label: "Audi Perfect Lease", url: "/audiperfectlease/",   event_ft: "form_APL_sent"},
+    serwis:        {fs: 11,  ft: 7,   cr: "63.6%", label: "Serwis",             url: "/serwis/",             event_ft: "form_serwis"},
+    odkup:         {fs: 2,   ft: 2,   cr: "100%",  label: "Odkup",              url: "/odkup/",              event_ft: "form_odkup"},
+    wyprzedaz:     {fs: 0,   ft: 0,   cr: "—",     label: "Wyprzedaże",         url: "/wyprzedaz-a5/",       event_ft: "form_wyprzedaz-*"},
+    pleasing:      {fs: 0,   ft: 0,   cr: "—",     label: "Perfect Lease",      url: "/audiperfectlease/",   event_ft: "form_perfect_lease_*"},
+    apr:           {fs: 2,   ft: 0,   cr: "—",     label: "Audi Perfect Rent",  url: "/audi-perfect-rent/",  event_ft: "form_APR_sent"},
   },
 };
 
@@ -3894,6 +3983,210 @@ const junData = [
   { url: '/oferta/nowe/samochod/audi-q5-kamera-cofania-tempomat-adaptacyjny-skladae-lusterka/', pv: 22, fs: 3, ft: 0 },
 ];
 
+const julData = [
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-kamera-cofania-tempomat-adaptacyjny-2/', pv: 168, fs: 2, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q3-kamera-cofania-auto-hold-tempomat-adaptacyjny-5/', pv: 164, fs: 2, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-od-reki-panorama-reflektory-led-akt-tempomat-martwe-pole-2/', pv: 144, fs: 2, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-od-reki-matrix-led-akt-tempomat-martwe-pole-kamera-360/', pv: 128, fs: 2, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-a6-limousine/', pv: 126, fs: 2, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q3-kamera-cofania-auto-hold-tempomat-adaptacyjny-8/', pv: 166, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q5-od-reki-matrix-led-akt-tempomat-martwe-pole-kamera-360-6/', pv: 140, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-kamery-360-ogrzewanie-kierownicy-auto-hold/', pv: 134, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-a3-limousine-kamera-cofania-tempomat-adaptacyjny-reflektory-led-2/', pv: 110, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q5-od-reki-tech-plus-ambiente-pro-2x-s-line-kola-20cali/', pv: 91, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-a5-avant-matrixled-kamera360-regulacjaamortyzatorow-headup-bang/', pv: 74, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q5-kamera-cofania-tempomat-adaptacyjny-18/', pv: 65, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q5-sportback-matrix-led-wentylacja-foteli-kamery-360/', pv: 57, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-od-reki-hak-matrix-led-akt-tempomat-martwe-pole-kamera-360/', pv: 56, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-rs-3-sportback-skora-feinnappa-pikowana-w-szesciokaty-z-logo-rs/', pv: 51, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q8-matrix-hd-os-skretna-hak-bang-olufsen-head-up-22-s-line/', pv: 49, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q5-skory-ambiente-kamera-cofani-a-4x4-audi-sound-system/', pv: 45, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-grzana-kierownica-s-line-kamera-led-asystenci-ambiente/', pv: 43, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q6-e-tron-251km-e-tron-compact-s-line-mikrofibra-leasing-101/', pv: 38, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q8-head-up-bang-olufsen-hak-tylna-os-skretna-2/', pv: 37, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q7-bang-olufsen-hak-head-up-zawieszenie-powietrzne-matrix-led/', pv: 37, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q8-head-up-bang-olufsen-dach-szklany-panoramiczny-tylna-os-skretna/', pv: 28, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-kamera-aktywny-tempomat-fotel-el-nawi-smartfon-interface/', pv: 27, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q5-sportback-bang-olufsen-hak-head-up-matrix-led/', pv: 25, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-5/', pv: 19, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q6-e-tron-kamera360-ladowarka-s-line-mikrofibra-251-km/', pv: 16, fs: 1, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-18-rabat-reflektory-led-kamera-cofania-czujniki-navi/', pv: 152, fs: 0, ft: 1 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-21-rabatu-grzana-kierownica-kamera-led-asystenci-ambiente/', pv: 46, fs: 2, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-auto-hold-kamera-cofania-tempomat-adaptacyjny/', pv: 91, fs: 1, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-od-reki-matrix-led-akt-tempomat-martwe-pole-kamera-360/', pv: 80, fs: 1, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a6-avant-matrix-led-hak-kamey-360-zawieszenie-sportowe/', pv: 64, fs: 1, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-hak-os-skretna-panorama-masaz-i-wentylacja-bangolufsen/', pv: 26, fs: 1, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-rs-3-sportback/', pv: 21, fs: 1, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-tech-plus-comfort-2x-sline-3-strefy-ambiente-przyciemniane/', pv: 14, fs: 1, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-matrix-led-hak-kamery-360-tempomat-adaptacyjny/', pv: 0, fs: 1, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-allstreet/', pv: 172, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-reflektory-led-kamera-cofania-ambiente-nawigacja-czujniki/', pv: 168, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-avant-kamera-cofania-18-tempomat-adaptacyjny/', pv: 166, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-2/', pv: 162, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-kamera360-s-line-mikrofibra-matrixled-ambiente-4x4/', pv: 105, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-kamera-cofania-tempomat-adaptacyjny-phone-box-3/', pv: 88, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-jasne-wnetrze-kamera-cofania-auto-hold/', pv: 83, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-sportback-hak-20-tech-matrix-kamery-audi-sound-system-s-line-2/', pv: 79, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-kamera-cofania-tempomat-adaptacyjny-phone-box/', pv: 78, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-od-reki-hak-reflektory-led-akt-tempomat-park-assist-4/', pv: 78, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-zawieszenie-sportowe-kamera-cofania-tempomat-adaptacyjny/', pv: 77, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-matrix-led-bang-olufsen-hak-kamery-360/', pv: 69, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q2-audi-q2-reflektoryled-kamera-cofania-czujniki-nawigacja-audi-sound-system/', pv: 63, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q6-e-tron-head-up-bang-ambiente-skora-bez-z-wentylacja-s-line/', pv: 62, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-116-km-czujniki-przod-tyl-tempomat/', pv: 60, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q2-matrixled-kamera-cofania-nawigacja-tkanina-lakier-perlowy/', pv: 57, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-od-reki-matrix-led-akt-tempomat-martwe-pole-kamera-360-2/', pv: 57, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a6-avant-e-hybrid-zawieszenie-pneumatyczne-hak-kamery-360-matrix-led/', pv: 56, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-kamera-cofanie-tempomat-adaptacyjny-skladane-lusterka/', pv: 55, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q6-e-tron-252-km-e-tron-compact-s-line-szary-daytona-perlowy/', pv: 54, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-sonos-sound-ledy-asystent-predkosci-kamera-ambiente/', pv: 53, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-matrixled-4x4-s-line-kamera360-bang-ambientepro-mikrofibra/', pv: 53, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-od-reki-matrix-led-akt-tempomat-martwe-pole-kamera-360-2/', pv: 51, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-aktywne-zawieszenie-bangolufsen-ladowarka-dynamica-skora-czern/', pv: 50, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q8-od-reki-pneumatyka-hak-tylna-os-skretna-bangolufsen/', pv: 49, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-kamera-cofania-tempomat-adaptacyjny-zawieszenie-sportowe/', pv: 47, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-hak-kamera-cofania-20-auto-hold/', pv: 42, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-zawieszenie-sportowe-tempomat-adaptacyjny-phone-box/', pv: 41, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-pneumatyka-headup-bang-panorama-kamera360-matrixled/', pv: 41, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-sportback-od-reki-hak-matrix-led-wentylacja-bangolufsen-head-up/', pv: 41, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-zawieszenie-sportowe-phone-box-kamera-cofania/', pv: 40, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q8-tfsi-e-hak-bang-head-up-22-plug-in-hd-matrix-pneumatyka/', pv: 38, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-matrix-led-zawieszenie-sport-19-auto-hold-sonos-navi/', pv: 38, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-kamera-cofania-wideorejestrator-tempomat-adaptacyjny/', pv: 37, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-kamera-cofania-auto-hold-18-tempomat-adaptacyjny/', pv: 37, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-audi-a3-sportback-sonos-sound-ledy-asystent-predkosci-kamera-ambiente/', pv: 37, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q8-tfsi-e-od-reki-hak-hd-matrix-led-tylna-os-skretna-bangolufsen/', pv: 36, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-sportback-od-reki-pneumatyka-hak-matrix-led-bangolufsen-head-up/', pv: 36, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-kamera-cofania-tempomat-nawigacja-led-ambiente-czujniki/', pv: 36, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a6-limousine-tech-plus-edition-one-21-cali-fotele-z-pamiecia-2x-s-line/', pv: 35, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-od-reki-pneumatyka-fotele-wentylowane-czern-tech-plus/', pv: 35, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a6-avant-bang-olufsen-hak-head-up-matrix-led/', pv: 34, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-od-reki-reflektory-led-akt-tempomat-sound-system-kamera/', pv: 34, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-wentylacja-i-funkcja-masazu-bang-olufsen-tylna-os-skretna-hak/', pv: 33, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q8-tfsi-e-bang-olufsen-head-up-hak-tylna-os-skretna-wentylacja-i-masaze/', pv: 33, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-matrix-led-head-up-bang-olufsen-tylna-os-skretna-3/', pv: 32, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-matrix-led-zawieszenie-sportowe-ogrzewanie-kierownicy/', pv: 32, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-matrix-led-kamery-360-phone-box-wyswietlacz-mmi/', pv: 32, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-sportback-od-reki-hak-matrix-led-akt-tempomat-martwe-pole-kamera-360-3/', pv: 31, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-head-up-technology-bangolufsen-matrix-2x-sline-fotele-el-2/', pv: 31, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a6-limousine-matrix-led-panoramiczny-dach-szklany-head-up-zawieszenie-s/', pv: 30, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-matrix-led-hak-kamery-360-mmi-dla-pasazea/', pv: 29, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-sq5-od-reki-pneumatyka-hak-panorama-wentylacja-foteli-head-up/', pv: 29, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-matrix-led-zawieszenie-sportowe-19-auto-hold-kamera-cofania/', pv: 29, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q6-e-tron-tech-plus-ekran-pasazera-ladowarka-2x-sline-fotele-elektr/', pv: 28, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q8-hak-bang-head-up-22-s-line-pneumatyka-286-km-4x4/', pv: 28, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-kamera360-matrixled-4x4-ambiente-19-tempomatadaptacyjny/', pv: 28, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-rs-3-limousine-dach-szklany-panoramiczny-sportowy-uklad-wydechowy/', pv: 27, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-ogrzewanie-przednich-siedzen-auto-hold-kamera-cofania-navi/', pv: 26, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-rs-3-sportback-dach-szklany-panoramiczny-sportowy-uklad-wydechowy/', pv: 25, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-od-reki-reflektory-led-akt-tempomat-park-assist-sound-system/', pv: 25, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-hak-comfort-2x-sline-aktywny-tempomat-martwe-pole-kolo-zapas/', pv: 25, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q8-tfsi-e-od-reki-hak-hd-matrix-led-tylna-os-skretna-bangolufsen-2/', pv: 25, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-kamera-cofania-auto-hold-tempomat-adaptacyjny/', pv: 25, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-rs-3-limousine-edycja-rs3-competition-limited/', pv: 25, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-matrix-led-hak-bang-olufsen-head-up/', pv: 24, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-auto-hold-19-zawieszenie-sportowe-kamera-cofania/', pv: 24, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-od-reki-matrix-led-akt-tempomat-martwe-pole-kamera-360-4/', pv: 24, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q2-matrixled-nawigacja-sound-system-kamera-cofania-czujniki/', pv: 23, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a6-limousine-od-reki-hak-matrix-led-bangolufsen-kamera-360-ambiente-pro/', pv: 23, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-limousine-auto-hold-kamera-cofania-18-tempomat-adaptacyjny/', pv: 23, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q6-e-tron-comfort-2x-s-line-pakiet-czern-kola-21-cali/', pv: 23, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-hak-martwe-pole-aktywny-tempomat-2x-s-line-isofix/', pv: 23, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-avant-e-hybrid-matrix-led-tempomat-adaptacyjny-zawieszenie-sportowe/', pv: 23, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-18-rabatu-kamera-cofania-reflektory-led-nawigacja/', pv: 23, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-kamera-cofania-18-auto-hold/', pv: 22, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-tfsi-e-os-skretna-hak-bang-olufsen-head-up-asystenci-jazdy-21/', pv: 22, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-rs-q8-performance-podniesienie-predkosci-maksymalnej-do-280-km-h/', pv: 21, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-od-reki-hak-matrix-led-bangolufsen-head-up-kamera-360/', pv: 21, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-matrix-led-kamey-360-tempomat-adaptacyjny/', pv: 21, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-limousine-auto-hold-kamra-cofania-18-tempomat-adaptacyjny/', pv: 20, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-kameracofania-plugin-mikrofibra-czern-ambiente/', pv: 20, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-od-reki-pneumatyka-hak-tylna-os-skretna-hd-matrix-led/', pv: 20, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-ambiente-tempomat-s-line-kamera-cofania-czern/', pv: 20, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q8-od-reki-pneumatyka-hak-tylna-os-skretna-panorama-bangolufsen/', pv: 20, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a6-avant-hak-tech-plus-czern-fotel-el-z-pamiecia-dynamica-skora-b-o/', pv: 20, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-tech-plus-fotel-el-dynamica-skora-bangolufsen-ekran-pasazera/', pv: 19, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a6-avant-e-hybrid-299-km-plug-in-4x4-headup-kamera360-bang-hak-ladowarka/', pv: 19, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-sq7-rata-3945-pln-netto-hak7-osobowypanoramawentylacjamasaz/', pv: 19, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-dach-panoramiczny-kamery-360-zawieszenie-pneumatyczne/', pv: 18, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-rs-q8-performance-pakiet-stylistyczny-rs-w-kolorze-czarnym-srebrnym-audi-exclusive/', pv: 18, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-plugin-s-line-sonos-headup-kamera-cofania-19-ambiente/', pv: 18, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-rs-3-sportback-edycja-rs3-competition-limited/', pv: 18, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-tfsi-e-od-reki-pneumatyka-hak-tylna-os-skretna-bangolufsen/', pv: 18, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-avant-zawieszenie-adaptacyjne-tech-pro-bo-fotele-wentylowane-z-pamiecia/', pv: 18, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-od-reki-matrix-led-akt-tempomat-martwe-pole-park-assist/', pv: 18, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-auto-hold-kamera-cofania-20-hak/', pv: 18, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-kamera-cofania-ambiente-czern-s-line-tempomat-19/', pv: 17, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-tempomat-adaptacyjny-led-kamera-cofania-nawigacja-18/', pv: 17, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-kamery-360-tempomat-adaptacyjny-20-mmi-dla-pasazera/', pv: 17, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-allstreet-auto-hold-19-navi-kamera-cofania/', pv: 17, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-limousine-auto-hold-kamera-cofania-tempomat-adaptacyjny-navi/', pv: 17, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-hak-4x4-kamera-cofania-tempomat-ambiente-plus-s-line/', pv: 17, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-4x4-kamera-360-tempomat-matrix-led-19/', pv: 16, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-od-reki-hak-matrix-led-tylna-os-skretna-bangolufsen-head-up/', pv: 16, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-zawieszenie-sportowe-kamery-360-hak-ogrzewanie-kierownicy/', pv: 16, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-od-reki-webasto-hak-matrix-led-audio-sonos-head-up/', pv: 16, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-rs5-hak-holowniczy-skladany-mechanicznie/', pv: 16, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-kamera-cofania-auto-hold-tempomat-adaptacyjny-4/', pv: 16, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-od-reki-hak-matrix-led-tylna-os-skretna-bangolufsen-head-up-3/', pv: 16, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-matrix-led-head-up-bang-olufsen-hak-iii-rzad-siedzen/', pv: 16, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q8-tfsi-e-hd-matrix-led-hak-dach-panoramiczny-head-up-tylna-os-skretna/', pv: 16, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-kamera-cofania-tempomat-adaptacyjny-19/', pv: 15, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-auto-hold-kamera-cofania-18-navi/', pv: 15, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q8-tfsi-e-bang-olufsen-head-up-hak-dach-szklany-tylna-os-skretna/', pv: 15, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-matrix-led-kamery-360-wyswietlacz-mmi-dla-pasazera-2/', pv: 15, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-kamera-cofania-nawigacja-czujniki-reflektory-led-tempomat/', pv: 15, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-avant/', pv: 15, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-kamera-cofania-18-tempomat-adaptacyjny/', pv: 15, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-od-reki-hak-matrix-led-tylna-os-skretna-bangolufsen-head-up-2/', pv: 14, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a6-limousine-matrix-led-kamery-360-zawieszenie-sportowe-20/', pv: 14, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-audi-q5-tech-plus-hak-holowniczy-matrix-led-s-line/', pv: 14, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-s3-sportback-od-reki-matrix-led-akt-tempomat-audio-sonos-kamera/', pv: 14, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-techplus-comfort-pakiet-zimowy-czern-3-strefy-ac-fotele-el/', pv: 14, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-272-km-plug-in-ladowarka-reflektory-led-leasing-101/', pv: 14, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-kamera-cofania-auto-hold-tempomat-adaptacyjny-2/', pv: 14, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-sportback-e-hybrid-hak-matrix-led-kamera-360-plug-in-s-line-4x4-367-km/', pv: 13, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q4-e-tron-czujniki-kamera-cofania-s-line-matrix-led-mikrofibra/', pv: 13, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-matrix-led-head-up-bang-olufsen-tylna-os-skretna-2/', pv: 13, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-allstreet-matrix-led-tempomat-systemy-kamera-cofania-ambiente/', pv: 13, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-s5-limousine-od-reki-hak-matrix-led-bangolufsen-akt-tempomat-kamera-360/', pv: 13, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-od-reki-akt-tempomat-martwe-pole-audio-sonos-park-assist/', pv: 13, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-rs5-pakiet-promocyjny-sport-style/', pv: 13, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-s5-limousine/', pv: 13, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-panorama-masaze-wentylacja-os-skretna-matrix-hd-hak/', pv: 12, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-sportback-head-up-hak-matrix-led-kamery-360-bang-olufsen/', pv: 12, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-avant-2/', pv: 12, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-sq8-od-reki-pneumatyka-hak-hd-matrix-led-wentylacja-i-masaz/', pv: 12, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-tech-plus-ambiente-plus-reflektory-led-tempomat-19-4/', pv: 12, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-panorama-hak-20-ambientepro-matrixled-kamera360/', pv: 12, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback/', pv: 12, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a6-limousine-hak-bang-head-up-zawieszenie-sportowe-s-line-ambiente/', pv: 12, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-kamera-cofania-tempomat-adaptacyjny-phone-box-2/', pv: 12, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-odbior-pazdziernik-22-kamera-cofania-pamiec-foteli/', pv: 11, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-8/', pv: 11, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-od-reki-reflektory-led-akt-tempomat-martwe-pole-audio-sonos/', pv: 11, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-kamera-cofania-auto-hold-18-skladane-lusterka/', pv: 11, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-limousine-phone-box-navi-kamera-cofania-auto-hold/', pv: 11, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-kamera-cofania-tempomat-adaptacyjny-ogrzewanie-przednich-foteli/', pv: 11, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-3/', pv: 11, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-sportback-grzana-kierownica-kamera-led-asystenci-ambiente-19/', pv: 11, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-kamera-cofania-tempomat-adaptacyjny-phone-box/', pv: 11, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-led-kamera-aktywny-tempomat-nawi-3-strefowa-klimatyzacja/', pv: 11, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-auto-hold-kamera-cofania-tempomat-adaptacyjny-navi/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-comfort-techplus-pakiet-zimowy-wideorejestrator-3-strefowe-ac/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-auto-hold-kamera-cofania-tempomat-adaptacyjny-2/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-avant-comfort-techplus-pakiet-zimowy-ekran-pasazera-wideorejestrator/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q7-matrix-led-asystenci-s-line-kamera-ambienta-dociagi/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-od-reki-hak-reflektory-led-akt-tempomat-sound-system-kamera/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a3-sportback-kamera-cofania-car-play-reflektory-led-czujniki-nawigacja/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-limousine-matrix-led-kamery-360-zawieszenie-sportowe/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-avant-wentylowane-fotele-head-up-glosniki-w-zaglowkach-hak-kamery/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-pakiet-tech-pluss-line-exterieurreflektory-matrix-led/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q5-sportback-26-rabatu-kamera360-ambientepro-czern-2025-matrixled-s-line-20/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-q3-auto-hold-kamera-cofania-phone-box/', pv: 10, fs: 0, ft: 0 },
+  { url: '/oferta/nowe/samochod/audi-a5-avant-matrix-led-kamery-360-zawieszenie-sportowe-hak/', pv: 10, fs: 0, ft: 0 },
+];
+
 // Build all tables
 
 function getModel(url) {
@@ -3968,6 +4261,7 @@ buildTable('nowe-mar-tbody', marData, 15398, 191, 35);
 buildTable('nowe-apr-tbody', aprData, 13271, 626, 28);
 buildTable('nowe-may-tbody', mayData, 10392, 535, 18);
 buildTable('nowe-jun-tbody', junData, 14971, 6095, 18);
+buildTable('nowe-jul-tbody', julData, 7452, 44, 31);
 
 buildAggregations('jan', janData);
 buildAggregations('feb', febData);
@@ -3975,6 +4269,7 @@ buildAggregations('mar', marData);
 buildAggregations('apr', aprData);
 buildAggregations('may', mayData);
 buildAggregations('jun', junData);
+buildAggregations('jul', julData);
 
 })();
 </script>
