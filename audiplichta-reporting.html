@@ -148,9 +148,9 @@
   <button class="month-btn" onclick="switchGA4Month('feb', this)">Lut 2026</button>
   <button class="month-btn" onclick="switchGA4Month('mar', this)">Mar 2026</button>
   <button class="month-btn" onclick="switchGA4Month('apr', this)">Kwi 2026</button>
-  <button class="month-btn active" onclick="switchGA4Month('may', this)">Maj 2026</button>
+  <button class="month-btn" onclick="switchGA4Month('may', this)">Maj 2026</button>
   <button class="month-btn" onclick="switchGA4Month('jun', this)">Cze 2026</button>
-  <button class="month-btn" onclick="switchGA4Month('jul', this)">Lip 2026</button>
+  <button class="month-btn active" onclick="switchGA4Month('jul', this)">Lip 2026</button>
   <button class="month-btn" style="border-color:#64748b;color:#64748b;" onclick="switchGA4Month('90d', this)">Σ 90 dni</button>
 </div>
 <div style="padding:0 32px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -410,7 +410,7 @@ const GA4_PAGES_MONTHLY = {
   '90d': [{"page":"/oferta/wszystkie","views":57081,"bounceRate":1.9},{"page":"/oferta/wszystkie/","views":50873,"bounceRate":16.9},{"page":"/","views":12568,"bounceRate":12.4},{"page":"/oferta/wszystkie/page/2/","views":10701,"bounceRate":3.4},{"page":"/oferta/nowe/Audi/","views":7236,"bounceRate":2.7},{"page":"/oferta/wszystkie/page/3/","views":5267,"bounceRate":3.4},{"page":"/oferta/demonstracyjne/Audi/","views":3395,"bounceRate":2.7},{"page":"/salony/","views":3064,"bounceRate":13.9},{"page":"/oferta/wszystkie/page/4/","views":2766,"bounceRate":2.8},{"page":"/audiperfectlease/","views":2757,"bounceRate":15.5}]
 };
 
-let currentGA4Month = 'may';
+let currentGA4Month = 'jul';
 let charts = {};
 
 function fmt(n) { return Number(n).toLocaleString('pl-PL'); }
@@ -854,7 +854,7 @@ const AKCJE_DATA = {
     bdg: [["A3 bdg",728,4],["Q3 bdg",508,2],["Q5 bdg",366,1],["Q7 bdg",145,0],["A5 bdg",463,0],["Q8 bdg",144,0]]
   }
 };
-let currentAkcjeMonth = 'jun';
+let currentAkcjeMonth = 'jul';
 
 // plugin: wartości na słupkach
 const akcjeValueLabels = {
@@ -972,8 +972,8 @@ function toggleSection(header) {
 <div class="container">
   <div class="section-label" style="margin-top:8px;">🎯 Akcje (form_total per landing page) — podział Gdańsk / Bydgoszcz</div>
   <div class="month-switcher" style="margin:10px 0 18px 0;">
-    <button class="month-btn akcje-mb active" onclick="switchAkcjeMonth('jun', this)">Cze 2026</button>
-    <button class="month-btn akcje-mb" onclick="switchAkcjeMonth('jul', this)">Lip 2026</button>
+    <button class="month-btn akcje-mb" onclick="switchAkcjeMonth('jun', this)">Cze 2026</button>
+    <button class="month-btn akcje-mb active" onclick="switchAkcjeMonth('jul', this)">Lip 2026</button>
   </div>
   <p style="font-size:12px;color:#6b6b6b;margin:0 0 14px 0;">Każda akcyjna landing page i jej wynik: <strong>duży słupek = sesje</strong>, <strong>mały słupek = konwersje</strong> (form_total z tego URL). Góra = <strong>Gdańsk / Trójmiasto</strong> (LP główne), dół = <strong>Bydgoszcz</strong> (warianty -bdg). Po prawej te same liczby w tabeli.</p>
 
@@ -2463,9 +2463,9 @@ function toggleSection(header) {
     <button class="month-btn" onclick="switchWeryMonth('feb', this)">Lut 2026</button>
     <button class="month-btn" onclick="switchWeryMonth('mar', this)">Mar 2026</button>
     <button class="month-btn" onclick="switchWeryMonth('apr', this)">Kwi 2026</button>
-    <button class="month-btn active" onclick="switchWeryMonth('may', this)">Maj 2026</button>
+    <button class="month-btn" onclick="switchWeryMonth('may', this)">Maj 2026</button>
     <button class="month-btn" onclick="switchWeryMonth('jun', this)">Cze 2026</button>
-    <button class="month-btn" onclick="switchWeryMonth('jul', this)">Lip 2026</button>
+    <button class="month-btn active" onclick="switchWeryMonth('jul', this)">Lip 2026</button>
   </div>
   <p style="font-size:11px;color:#888;margin:-12px 0 16px 0;">Cze 2026 — dane za <span class="data-czesciowy"></span> (18 leadów form_auta-nowe)</p>
 
@@ -2942,16 +2942,16 @@ function toggleSection(header) {
 <script>
 // ===== MoM DATA =====
 const MOM_DATA = {
-  labels: ['Kwi 2025','Maj 2025','Cze 2025','Lip 2025','Sie 2025','Wrz 2025','Paź 2025','Lis 2025','Gru 2025','Sty 2026','Lut 2026','Mar 2026','Kwi 2026','Maj 2026'],
-  total:      [279, 124, 102,  97,  63, 100, 105, 106, 101, 106, 107, 108,  64,  78],
-  nowe:       [ 61,  29,  25,  22,  18,  23,  38,  43,  32,  44,  45,  35,  28,  18],
-  jt:         [155,  34,  36,  39,  22,  32,  18,  41,  33,  38,  25,  28,  16,  13],
-  apl:        [ 17,  52,  23,  19,  16,  24,  18,   8,  17,   5,  12,  15,   5,  12],
-  serwis:     [  5,   5,  12,  13,   7,   8,   7,  11,  13,   9,   8,   9,   8,   5],
-  odkup:      [  6,   7,   6,   4,   0,   3,   5,   7,   4,   4,   5,   3,   2,   9],
-  wyprzedaz:  [  3,   1,   0,   0,   0,   0,   1,   0,   0,   0,   6,  13,   3,   3],
-  pleasing:   [  0,   0,   5,   4,   1,   7,  10,   3,   8,   3,   3,   8,   1,   3],
-  apr:        [  2,   3,   1,   1,   0,   4,   1,   0,   2,   1,   2,   3,   1,   0]
+  labels: ['Kwi 2025','Maj 2025','Cze 2025','Lip 2025','Sie 2025','Wrz 2025','Paź 2025','Lis 2025','Gru 2025','Sty 2026','Lut 2026','Mar 2026','Kwi 2026','Maj 2026','Cze 2026','Lip 2026'],
+  total:      [279, 124, 102,  97,  63, 100, 105, 106, 101, 106, 107, 108,  64,  78,  82,  91],
+  nowe:       [ 61,  29,  25,  22,  18,  23,  38,  43,  32,  44,  45,  35,  28,  18,  18,  31],
+  jt:         [155,  34,  36,  39,  22,  32,  18,  41,  33,  38,  25,  28,  16,  13,   9,  12],
+  apl:        [ 17,  52,  23,  19,  16,  24,  18,   8,  17,   5,  12,  15,   5,  12,   5,   3],
+  serwis:     [  5,   5,  12,  13,   7,   8,   7,  11,  13,   9,   8,   9,   8,   5,   8,   7],
+  odkup:      [  6,   7,   6,   4,   0,   3,   5,   7,   4,   4,   5,   3,   2,   9,   3,   2],
+  wyprzedaz:  [  3,   1,   0,   0,   0,   0,   1,   0,   0,   0,   6,  13,   3,   3,   0,   0],
+  pleasing:   [  0,   0,   5,   4,   1,   7,  10,   3,   8,   3,   3,   8,   1,   3,   0,   0],
+  apr:        [  2,   3,   1,   1,   0,   4,   1,   0,   2,   1,   2,   3,   1,   0,   0,   0]
 };
 
 (function initMoM() {
@@ -3484,7 +3484,7 @@ const VERIFY_DATA = {
   },
 };
 
-let currentWeryMonth = 'may';
+let currentWeryMonth = 'jul';
 
 function renderWeryCards(month) {
   const cards = WERY_CARDS_DATA[month] || WERY_CARDS_DATA['may'];
