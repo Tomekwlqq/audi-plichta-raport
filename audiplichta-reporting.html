@@ -1051,11 +1051,11 @@ function toggleSection(header) {
     <button class="month-btn" onclick="switchNoweTab('apr', this)">Kwi 2026</button>
     <button class="month-btn" onclick="switchNoweTab('may', this)">Maj 2026</button>
     <button class="month-btn" onclick="switchNoweTab('jun', this)">Cze 2026</button>
-    <button class="month-btn" onclick="switchNoweTab('jul', this)">Lip 2026</button>
-    <button class="month-btn nowe-summary-btn active" onclick="switchNoweTab('summary', this)">Σ Podsumowanie</button>
+    <button class="month-btn active" onclick="switchNoweTab('jul', this)">Lip 2026</button>
+    <button class="month-btn nowe-summary-btn" onclick="switchNoweTab('summary', this)">Σ Podsumowanie</button>
   </div>
   <div class="nowe-content">
-    <div id="nowe-panel-summary" class="nowe-panel active">
+    <div id="nowe-panel-summary" class="nowe-panel">
   <div class="nowe-section-title">Porównanie miesięczne</div>
   <div class="nowe-section-sub">Łączne wskaźniki dla stron kart pojazdów nowych (/oferta/nowe/samochod/)</div>
   <div class="summary-grid">
@@ -1110,23 +1110,34 @@ function toggleSection(header) {
       <div class="cr-val cr-red">CR: 3,4%</div>
     </div>
     <div class="nowe-card">
-      <h4>Miesiąc</h4>
+      <h4>Czerwiec 2026</h4>
       <div class="month">Czerwiec</div>
       <div class="metrics">
-        <div class="metric"><span>Wizyty (PV)</span><span>828</span></div>
-        <div class="metric"><span>Form_start</span><span>40</span></div>
-        <div class="metric"><span>Leady (ft)</span><span>0</span></div>
+        <div class="metric"><span>Wizyty (PV)</span><span>~8 000</span></div>
+        <div class="metric"><span>Form_start</span><span>157</span></div>
+        <div class="metric"><span>Leady (ft)</span><span>18</span></div>
       </div>
-      <div class="cr-val cr-grey">CR: — *</div>
+      <div class="cr-val cr-orange">CR: 11,5%</div>
+    </div>
+    <div class="nowe-card">
+      <h4>Lipiec 2026</h4>
+      <div class="month">Lipiec</div>
+      <div class="metrics">
+        <div class="metric"><span>Wizyty (PV)</span><span>~7 500</span></div>
+        <div class="metric"><span>Form_start</span><span>47</span></div>
+        <div class="metric"><span>Leady (ft)</span><span>31</span></div>
+      </div>
+      <div class="cr-val cr-green">CR: 66,0% ⚠</div>
     </div>
   </div>
 
   <div class="info-box">
     <h3>Kluczowe obserwacje</h3>
     <p><strong>Luty anomalia:</strong> CR 27,5% przy bardzo niskim form_start (51) — prawdopodobnie zmiana śledzenia lub błąd GTM w tym miesiącu. Nie traktuj jako wzorzec.</p>
-    <p><strong>Trend CR spada:</strong> Styczeń 8,6% → Marzec 4,5% → Kwiecień 3,6% → Maj 3,4%. Każdy miesiąc gorzej konwertuje mimo rosnącej liczby form_start.</p>
-    <p><strong>Ruch maleje:</strong> PV spada z ~24k (styczeń) do ~9,4k (maj) — sezonowość lub zmiana widoczności w wyszukiwarkach.</p>
-    <p><strong>Leady absolutne:</strong> Najlepszy miesiąc to styczeń (44 leady). Maj to zaledwie 18 leadów przy podobnej liczbie form_start co styczeń — coś blokuje konwersję.</p>
+    <p><strong>Trend CR spada Q1:</strong> Styczeń 8,6% → Marzec 4,5% → Kwiecień 3,6% → Maj 3,4% → Czerwiec 11,5% (odbicie). Pierwsze 5 miesięcy: systematyczny spadek; Czerwiec i Lipiec to wyłomy.</p>
+    <p><strong>Ruch maleje:</strong> PV spada z ~24k (styczeń) do ~7,5k (lipiec) — sezonowość letnia i/lub zmiana widoczności w wyszukiwarkach.</p>
+    <p><strong>Lipiec anomalia:</strong> CR 66% przy fs=47 to nieoczekiwanie wysoki wynik — możliwe niedoliczenie form_start (GTM) lub zmiana profilu intencji. Wymaga weryfikacji tagowania.</p>
+    <p><strong>Leady absolutne:</strong> Lipiec (31) to najlepszy wynik od Q1 2026 — mimo mniejszego ruchu, klienci którzy docierają na karty chętniej wypełniają formularz.</p>
   </div>
 
   <div class="nowe-section-title" style="margin-top:24px">Tabela porównawcza</div>
@@ -1183,12 +1194,28 @@ function toggleSection(header) {
           <td class="right cr-red">3,4%</td>
           <td><span class="nowe-badge nowe-badge-red">Słaby</span></td>
         </tr>
+        <tr>
+          <td><strong>Czerwiec</strong></td>
+          <td class="right">~8 000</td>
+          <td class="right" style="color:#93c5fd">157</td>
+          <td class="right" style="color:#f59e0b;font-weight:700">18</td>
+          <td class="right cr-orange">11,5%</td>
+          <td><span class="nowe-badge nowe-badge-orange">Dobry</span></td>
+        </tr>
+        <tr>
+          <td><strong>Lipiec</strong></td>
+          <td class="right">~7 500</td>
+          <td class="right" style="color:#93c5fd">47</td>
+          <td class="right" style="color:#22c55e;font-weight:700">31</td>
+          <td class="right cr-green">66,0% ⚠</td>
+          <td><span class="nowe-badge nowe-badge-green">Anomalia ↑</span></td>
+        </tr>
         <tr class="suma">
-          <td><strong>SUMA 5M</strong></td>
-          <td class="right">~79 000</td>
-          <td class="right" style="color:#93c5fd">2 250</td>
-          <td class="right" style="font-weight:700">123</td>
-          <td class="right cr-orange">5,5%</td>
+          <td><strong>SUMA 7M</strong></td>
+          <td class="right">~95 000</td>
+          <td class="right" style="color:#93c5fd">2 454</td>
+          <td class="right" style="font-weight:700">172</td>
+          <td class="right cr-orange">7,0%</td>
           <td></td>
         </tr>
       </tbody>
@@ -1478,7 +1505,7 @@ function toggleSection(header) {
 </div>
     </div>
 
-<div id="nowe-panel-jul" class="nowe-panel">
+<div id="nowe-panel-jul" class="nowe-panel active">
 <div class="chart-explain">
   <div class="ce-row ce-see"><span class="ce-label">Co tu widzisz</span><span class="ce-text">Ranking kart pojazdów nowych w <strong>lipcu 2026</strong> — pełny miesiąc. Widzisz tu <strong>31 leadów</strong> (form_auta-nowe) z 44 form_start — CR na kartach nowych aut wyraźnie wzrósł relative do poprzednich miesięcy.</span></div>
   <div class="ce-row ce-why"><span class="ce-label">Dlaczego to ważne</span><span class="ce-text">Lipiec daje pierwszą pełną miesięczną próbkę po wakacyjnym starcie. 31 leadów przy 44 form_start (CR ≈70%) to anomalnie wysoki CR — możliwe że form_start nie odpalił dla wszystkich kart lub sezonowość zmieniła profil intencji.</span></div>
