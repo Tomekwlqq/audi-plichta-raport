@@ -4442,7 +4442,7 @@ const julData = [
 // Build all tables
 
 function getModel(url) {
-  var m = url.match(/\/samochod\/audi-(.+?)\//);
+  var m = url.match(/\/samochod\/audi-(.+?)\//) || url.match(/\/oferta\/(?:nowe|demonstracyjne)\/([^\/]+)\/rok-/);
   if (!m) return 'Inne';
   var slug = m[1];
   if (slug.indexOf('rs-q8') >= 0 || slug.indexOf('rsq8') >= 0) return 'RSQ8';
@@ -4513,7 +4513,7 @@ buildTable('nowe-mar-tbody', marData, 15398, 191, 35);
 buildTable('nowe-apr-tbody', aprData, 13271, 626, 28);
 buildTable('nowe-may-tbody', mayData, 10392, 535, 18);
 buildTable('nowe-jun-tbody', junData, 14971, 6095, 18);
-buildTable('nowe-jul-tbody', julData, 7452, 44, 31);
+buildTable('nowe-aug-tbody', augData, 6327, 89, 33); buildTable('nowe-sep-tbody', sepData, 5660, 121, 44); buildTable('nowe-jul-tbody', julData, 7452, 44, 31);
 
 buildAggregations('jan', janData);
 buildAggregations('feb', febData);
