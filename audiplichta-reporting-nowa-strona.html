@@ -3866,6 +3866,16 @@ function slug(url) {
 }
 
 function modelName(url) {
+  const nw = url.match(/\/oferta\/(nowe|demonstracyjne)\/([^\/]+)\/rok-(\d{4})\/[^\/]+\/([^\/]+)\/([^\/]+)/);
+  if (nw) {
+    const tyt = x => x.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    const cz = nw[2].split('-');
+    const model = (cz[0] === 'rs' ? 'RS' + (cz.shift(), cz.shift().toUpperCase()) : cz.shift().toUpperCase())
+      + (cz.length ? ' ' + tyt(cz.join('-')).replace(/E Tron/g, 'e-tron').replace(/Tfsi E/g, 'TFSI e').replace(/E Hybrid/g, 'e-hybrid') : '');
+    const salon = tyt(nw[4].replace(/^audi-/, '').replace(/-fordonska$/, '')).replace(/Gdansk/g, 'Gdańsk');
+    const opis = tyt(nw[5]).substring(0, 42) + (nw[5].length > 42 ? '…' : '');
+    return 'Audi ' + model + ' · ' + salon + ' · ' + nw[3] + (nw[1] === 'demonstracyjne' ? ' · demo' : '') + ' — ' + opis;
+  }
   const s = slug(url);
   // convert slug to readable
   return s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()).substring(0, 60) + (s.length > 60 ? '…' : '');
