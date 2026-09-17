@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audi Plichta — pomiar formularzy: co jest zepsute i jak to naprawić</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f4f6fb;--surface:#fff;--surface2:#f1f3f7;--border:#e2e5ee;--text:#14161d;--muted:#5d6272;--faint:#8b90a0;
+ --accent:#BB0A21;--accent-d:#8f0719;--accent-soft:#fbe9ec;--accent-line:#f1b8c1;
+ --green:#1f8a4c;--green-soft:#e6f4ec;--yellow:#c26a00;--yellow-soft:#fdf1e2;--red:#b42318;--red-soft:#fdeceb;
+ --blue:#1c5d99;--blue-soft:#e7f0f9;--dark:#14161d;--shadow:0 1px 3px rgba(0,0,0,.07);
+ --grot:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+body{background:var(--bg);color:var(--text);font-family:var(--grot);font-size:15px;line-height:1.6;padding-bottom:50px}
+.hero{background:var(--dark);color:#fff;padding:26px 24px 22px}
+.hero .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-line);margin-bottom:6px}
+.hero h1{font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.25;max-width:900px}
+.hero .sub{color:#c7cad6;font-size:13.5px;margin-top:8px;max-width:840px}
+.sources{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.sources span{background:rgba(255,255,255,.08);border-radius:4px;padding:3px 9px;font-family:var(--mono);font-size:10px;color:#c7cad6}
+.container{max-width:1000px;margin:0 auto;padding:22px 16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card-title{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.card-title .num{font-family:var(--mono);font-size:10px;color:var(--accent-d);background:var(--accent-soft);padding:3px 8px;border-radius:10px}
+.section-label{font-size:15px;font-weight:700;margin:16px 0 6px}
+p{margin-bottom:10px}
+.lead{font-size:17px;font-weight:500;line-height:1.5}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);background:var(--surface2);font-weight:500}
+.table-wrap{overflow-x:auto}
+code{font-family:var(--mono);font-size:12.5px;background:var(--surface2);padding:1px 5px;border-radius:4px}
+pre{background:#14161a;color:#e8eaed;border-radius:8px;padding:12px 14px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.6;margin:8px 0}
+pre .c{color:#8b98a8}pre .k{color:#ff8ba0}pre .s{color:#9ad39a}
+.badge{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;font-family:var(--mono)}
+.badge-fail{background:var(--red-soft);color:var(--red)}.badge-ok{background:var(--green-soft);color:var(--green)}
+.badge-warn{background:var(--yellow-soft);color:var(--yellow)}.badge-info{background:var(--blue-soft);color:var(--blue)}
+.note{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;padding:12px 14px;margin:12px 0;font-size:14px}
+.note.ok{border-color:var(--green);background:var(--green-soft)}
+.note.warn{border-color:var(--yellow);background:var(--yellow-soft)}
+.note .lab{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;display:block;margin-bottom:4px;color:var(--muted)}
+.kpi-grid{display:grid;gap:10px;grid-template-columns:repeat(4,1fr);margin:10px 0}
+@media(max-width:820px){.kpi-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.kpi-grid{grid-template-columns:1fr}.hero h1{font-size:21px}.card{padding:14px}}
+.kpi{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px}
+.kpi .kpi-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;color:var(--muted);letter-spacing:.5px}
+.kpi .kpi-value{font-size:24px;font-weight:800;letter-spacing:-.5px;font-variant-numeric:tabular-nums;line-height:1.2;margin-top:2px}
+.kpi .kpi-sub{font-size:11.5px;color:var(--faint);margin-top:2px}
+ol,ul{margin:6px 0 10px 20px}li{margin-bottom:5px}
+.footer{font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.8;padding:14px 16px;max-width:1000px;margin:0 auto}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="kicker">Audi Plichta · analityka · 17.09.2026</div>
+  <h1>Pomiar formularzy na nowej stronie: co jest zepsute, dlaczego i jak to naprawić</h1>
+  <div class="sub">Przegląd maila o warstwie danych i GTM, dwóch instrukcji z sierpnia, kodu nowej strony i danych GA4. Każdy wniosek oparty na cytacie z kodu albo liczbie z GA4 — nie na deklaracji.</div>
+  <div class="sources"><span>mail + 2 instrukcje (sierpień)</span><span>kod audiplichta.pl — skan 12.09</span><span>GA4 355550660</span><span>Forminator 1.57.2</span><span>zweryfikowane niezależnie 17.09</span></div>
+</div>
+
+<div class="container">
+
+<div class="card">
+  <div class="card-title"><span class="num">0</span> Najkrócej</div>
+  <p class="lead">Numer formularza nie dochodzi do analityki: w 347 zdarzeniach od 1 sierpnia nie ma ani jednego poprawnego, więc <strong>każdy lead wygląda tak samo</strong>. Przyczyna to jedna linijka w skrypcie strony — znaleźliśmy ją i mamy poprawkę. Druga sprawa: tag APL odpala się przy każdym zgłoszeniu, więc raport „leady z leasingu” jest fikcją.</p>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">Formularzy na stronie</div><div class="kpi-value">17</div><div class="kpi-sub">wszystkie wysyłają jedno zdarzenie</div></div>
+    <div class="kpi"><div class="kpi-label">Poprawny numer formularza w GA4</div><div class="kpi-value">0 z 347</div><div class="kpi-sub">zdarzeń generate_lead, 01.08–16.09</div></div>
+    <div class="kpi"><div class="kpi-label">Tag <code>formularz_apl</code></div><div class="kpi-value">123 : 3</div><div class="kpi-sub">wywołań vs leady ze stron APL (1–16.09)</div></div>
+    <div class="kpi"><div class="kpi-label">Do zrobienia bez zmian w kodzie strony</div><div class="kpi-value">5 z 9</div><div class="kpi-sub">zadań z planu naprawy (sekcja 5)</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="num">1</span> Co dokładnie nie działa</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Objaw</th><th>Dowód</th><th>Konsekwencja</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Numer i nazwa formularza przychodzą jako <code>[object FormData]</code></strong></td><td>GA4: parametr <code>form_id</code> w 347 zdarzeniach (01.08–16.09) = <code>[object FormData]</code> albo pusty. Kod strony sprawdzony 17.09 — bez zmian od zgłoszenia 24.08</td><td>skrypt nie znajduje formularza w słowniku, więc typ leada wpada w wartość awaryjną „inne” (wynika z kodu — parametru <code>lead_type</code> nie ma w GA4 jako wymiaru, więc nie zobaczycie go w raportach); podział, o który w tym wszystkim chodzi, nie istnieje</td></tr>
+      <tr><td><strong>Zdarzenie może lecieć przy odrzuconej wysyłce</strong> <span class="badge badge-warn">do potwierdzenia testem</span></td><td>wtyczka wysyła „sukces”, gdy serwer odpowie <code>success: true</code>; nie sprawdza osobno, czy wpis się zapisał. Czy serwer tak odpowiada przy błędzie walidacji — nie testowaliśmy</td><td>jeśli tak — konwersje zawyżone o odrzucone próby. Rozstrzyga jedno zgłoszenie z celowo pustym polem</td></tr>
+      <tr><td><strong>Jedno zgłoszenie liczone wielokrotnie</strong></td><td>06.08: jeden użytkownik = <strong>24 zdarzenia</strong> na <code>/a3-2026/</code>, drugi 21 na <code>/q4-etron-2026/</code>. Sierpień: 223 zdarzenia przy 121 sesjach z leadem</td><td>sierpniowe raporty zawyżone prawie dwukrotnie; wrzesień (1–16.09): 119 zdarzeń przy 107 sesjach, czyli w normie</td></tr>
+      <tr><td><strong>Tag <code>formularz_apl</code> odpala się na każdym leadzie</strong></td><td>1–16.09: <strong>123 wywołania przy 3 leadach ze stron APL</strong>. 122 z nich pada na stronie <code>/thank-you/</code> — wspólnej stronie podziękowania dla wszystkich formularzy</td><td>raport leasingu pokazuje cudzy ruch</td></tr>
+      <tr><td><strong>Brak <code>gclid</code></strong></td><td>pola ukryte z instrukcji nie zostały wdrożone — 0 na 73 sprawdzonych stronach</td><td>nie ma jak zaimportować domkniętej sprzedaży z powrotem do Google Ads</td></tr>
+      <tr><td><strong>Kategoria strony to surowe nazwy szablonów</strong></td><td><code>page_type</code> ma trzy wartości: <code>front</code>, <code>page</code>, <code>car</code></td><td>landing z ofertą wygląda w danych tak samo jak strona serwisu</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><span class="lab">Co z tego wynika dla raportów</span>Do czasu poprawki typ leada liczymy ze strony, na której wysłano formularz. Tak działa hub nowej strony i raport dzienny. To obejście, nie rozwiązanie — nie rozróżni dwóch formularzy stojących na tej samej stronie.</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="num">2</span> Przyczyna <code>[object FormData]</code> — znaleziona w kodzie</div>
+  <p>Skrypt w motywie nasłuchuje zdarzenia Forminatora i bierze <strong>drugi argument jako numer formularza</strong>:</p>
+<pre><span class="c">// skrypt strony (motyw audi-plichta)</span>
+$(document).on(<span class="s">'forminator:form:submit:success'</span>, function (e, <span class="k">formId</span>, response) { … })</pre>
+  <p>Forminator 1.57.2 wywołuje to zdarzenie tak:</p>
+<pre><span class="c">// forminator/build/front/front.multi.min.js</span>
+f.trigger(<span class="s">"forminator:form:submit:success"</span>, [<span class="k">c</span>, e])   <span class="c">// c = new FormData(this), e = odpowiedź serwera</span></pre>
+  <p>Drugi argument to <strong>dane formularza</strong>, nie jego numer. Stąd napis <code>[object FormData]</code>. Słownik typów w kodzie strony jest poprawny (1176 → <code>zapytanie_ofertowe</code>), ale szuka klucza, którego nigdy nie znajdzie, i zwraca wartość awaryjną.</p>
+
+  <div class="section-label">Poprawka — trzy zmiany dla zespołu od strony</div>
+<pre>$(document).on(<span class="s">'forminator:form:submit:success'</span>, function (e, formData, response) {
+  var form = e.target &amp;&amp; e.target.closest ? e.target.closest(<span class="s">'form'</span>) : null;
+  <span class="c">// 1. numer z samego formularza, nie z argumentu zdarzenia</span>
+  <span class="c">// 2. licz tylko wtedy, gdy wpis naprawdę się zapisał</span>
+  if (!response || !response.data || response.data.success !== true) { return; }
+  pushSubmit(formIdFrom(form), form, response);
+});</pre>
+  <p><strong>Trzecia zmiana:</strong> wyłączyć zapasowy mechanizm nasłuchujący komunikatu „wysłano”. Przy poprawionym torze głównym jest już tylko źródłem duplikatów.</p>
+  <div class="note warn"><span class="lab">Czego nie zweryfikowałem</span>Wtyczka wysyła zdarzenie sukcesu, gdy serwer odpowie <code>success: true</code>. Czy przy błędzie walidacji serwer potrafi tak odpowiedzieć, nie wiemy — rozstrzyga jedno zgłoszenie z celowo pustym polem i podgląd odpowiedzi (krok 1 planu). Warunek w poprawce powyżej zabezpiecza oba przypadki.</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="num">3</span> Instrukcje z sierpnia a to, co stoi na produkcji</div>
+  <p>Instrukcja „Identyfikator zgłoszeń” i poradnik o rozróżnianiu formularzy opisują inne rozwiązanie niż wdrożone. Warto to wiedzieć, zanim ktoś zacznie je egzekwować.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Element</th><th>Instrukcja (sierpień)</th><th>Produkcja (skan 12.09)</th></tr></thead>
+    <tbody>
+      <tr><td>Skrypt</td><td><code>mu-plugins/apl-lead-tracking.js</code></td><td>brak — jest skrypt wpisany w motyw <span class="badge badge-fail">rozjazd</span></td></tr>
+      <tr><td>Kod zgłoszenia</td><td><code>APL-260812-K7M2Q</code>, generowany w przeglądarce</td><td>numer wpisu z ciasteczka, np. <code>263</code></td></tr>
+      <tr><td>Pola ukryte w formularzach</td><td>sześć, z klasami <code>apl-lead-*</code></td><td>zero na 73 stronach <span class="badge badge-fail">niewdrożone</span></td></tr>
+      <tr><td>Zdarzenie</td><td><code>apl_lead</code></td><td><code>apl_form_submit</code> → GTM → <code>generate_lead</code></td></tr>
+      <tr><td>Wartości typu leada</td><td>osiem, zgodnych z kategoriami BDC (<code>oferta</code>, <code>apl</code>, <code>kontakt_ogolny</code>…)</td><td>siedem innych (<code>zapytanie_ofertowe</code>, <code>finansowanie</code>, <code>flota</code>, <code>wydarzenie</code>…) <span class="badge badge-warn">inny słownik</span></td></tr>
+      <tr><td>Wzorzec landingów w GTM</td><td><code>^/[a-z0-9-]+-20[0-9]{2}/?$</code></td><td>nie złapie <code>/a3-2026-bdg/</code>, <code>/q5-2026-hybrid/</code>, <code>/q6-etron-3city/</code> <span class="badge badge-warn">do poprawki</span></td></tr>
+      <tr><td>Klucz złączenia z BDC</td><td>ten sam kod w mailu i w analityce</td><td><strong>działa</strong> — „ID zgłoszenia: 263” w mailu = <code>lead_id</code> w analityce <span class="badge badge-ok">jedyny element bez zmian</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="num">4</span> Jak to ma wyglądać docelowo</div>
+  <p>Jedno zdarzenie na zgłoszenie, z parametrami. Nazwy zostawiam takie, jakie już są w GTM, żeby nie przepisywać całej konfiguracji.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Parametr</th><th>Skąd</th><th>Po co</th></tr></thead>
+    <tbody>
+      <tr><td><code>lead_id</code></td><td>numer wpisu — ten sam co w mailu do BDC</td><td>złączenie leada z oceną jakości</td></tr>
+      <tr><td><code>form_id</code>, <code>form_name</code></td><td>z formularza w przeglądarce</td><td>który formularz, bez zgadywania</td></tr>
+      <tr><td><code>lead_type</code></td><td>tabela numer → typ w GTM</td><td>szczegół: oferta, jazda testowa, serwis…</td></tr>
+      <tr><td><code>lead_group</code></td><td>wyliczane z typu</td><td><strong>sprzedaż / serwis / odkup</strong> — główny podział z briefu</td></tr>
+      <tr><td><code>page_type</code></td><td>wzorzec adresu</td><td>karta auta, landing, katalog, serwis</td></tr>
+      <tr><td><code>salon</code>, <code>car_model</code></td><td>pole wyboru albo adres karty</td><td>raport per salon i model, jak w BDC</td></tr>
+      <tr><td><code>value</code>, <code>currency</code></td><td>tabela wartości per typ</td><td>licytowanie pod wartość leada, nie pod sztuki</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note ok"><span class="lab">Podział konwersji</span>W GA4 jedno zdarzenie kluczowe plus wymiar <code>lead_group</code>. W Google Ads osobne konwersje dla sprzedaży i serwisu — dzięki temu kampanie przestają optymalizować się pod zgłoszenia serwisowe. To wprost odpowiada na ból z briefu: ruch serwisowy zjada budżet sprzedażowy.</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="num">5</span> Co zrobimy w Tag Managerze, a co wymaga innych osób</div>
+  <p class="lead">Całą warstwę pomiaru da się ustawić w Tag Managerze, bez zmian w kodzie strony.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Zadanie</th><th>Gdzie</th><th>Kto potrzebny</th></tr></thead>
+    <tbody>
+      <tr><td>Własny nasłuch zdarzeń Forminatora: dobry numer formularza, tylko udane wysyłki, jedno zdarzenie na zgłoszenie</td><td>GTM, tag własny</td><td><span class="badge badge-ok">sami</span></td></tr>
+      <tr><td>Typ i grupa leada z tabeli numer → typ</td><td>GTM, zmienna</td><td><span class="badge badge-ok">sami</span></td></tr>
+      <tr><td>Kategoria strony, model i salon z adresu</td><td>GTM, zmienne</td><td><span class="badge badge-ok">sami</span></td></tr>
+      <tr><td>Wyłączenie starych tagów: <code>formularz_apl</code>, zdublowany <code>form_total</code>, drugi kontener</td><td>GTM</td><td><span class="badge badge-ok">sami</span></td></tr>
+      <tr><td>Wymiary, zdarzenia kluczowe, wyłączenie automatycznego pomiaru formularzy</td><td>GA4</td><td><span class="badge badge-ok">sami</span></td></tr>
+      <tr><td>Kanał i <code>gclid</code> w mailu do BDC (pola ukryte)</td><td>panel Forminatora</td><td><span class="badge badge-warn">admin WP</span> — konfiguracja, nie kod; ok. 10 min na formularz</td></tr>
+      <tr><td>Nazwy formularzy i treść maila do BDC</td><td>panel Forminatora</td><td><span class="badge badge-warn">admin WP</span></td></tr>
+      <tr><td>Poprawka skryptu w motywie (źródło problemu)</td><td>kod strony</td><td><span class="badge badge-info">zespół strony</span> — nie blokuje planu: nowy nasłuch w GTM działa niezależnie</td></tr>
+      <tr><td>Import sprzedaży do Ads bez <code>gclid</code></td><td>GTM + Google Ads</td><td><span class="badge badge-info">media</span> — przez dopasowanie po telefonie z CRM</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><span class="lab">Warunek</span>Potrzebne: prawo publikacji w produkcyjnym kontenerze GTM, uprawnienia edytora w GA4, jedno testowe zgłoszenie z uprzedzonym BDC i eksport z BDC z kolumną „ID zgłoszenia”. Do rozstrzygnięcia: który z dwóch kontenerów (<code>GTM-57RZGD7K</code>, <code>GTM-T5BGCJH</code>) zostaje.</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="num">6</span> Ryzyko i jak je pilnujemy</div>
+  <p>Własny tag nasłuchuje zdarzeń wtyczki. Jeśli zmieni się wtyczka formularzy albo sposób ich osadzania, pomiar padnie po cichu — tak jak padł przy zmianie strony. Dlatego w raporcie dziennym stoi <strong>strażnik pomiaru</strong> z trzema liczbami:</p>
+  <ul>
+    <li><strong>zdarzenia na lead</strong> — norma do 1,2; w sierpniu bywało 24 na jedną sesję,</li>
+    <li><strong>zgodność dwóch tagów</strong> — <code>generate_lead</code> wobec <code>form_total</code>,</li>
+    <li><strong>tag APL wobec leadów z APL</strong> — dziś 11 do 0, czyli jawny błąd.</li>
+  </ul>
+  <p>Do tego kontrola tygodniowa: zgłoszeń w GA4 nie może być więcej niż w panelu formularzy, żaden numer zgłoszenia nie może powtórzyć się dwa razy, a udział typu „brak typu” ma być poniżej 2%.</p>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="num">7</span> Plan w krokach i czego wymaga</div>
+  <p class="lead">Łącznie ok. 3,5 dnia roboczego (kroki 0–4) plus ok. 3 godziny w panelu formularzy; złączenie z BDC po dwóch tygodniach zbierania danych. Najdłużej trwa krok 0 — zależy od szybkości nadania dostępów.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>Krok</th><th>Kto</th><th>Czas</th><th>Czego wymaga</th><th>Po czym poznamy, że zrobione</th></tr></thead>
+    <tbody><tr><td><strong>0</strong></td><td><strong>Dostępy i decyzje</strong></td><td>Audi + my</td><td style="white-space:nowrap">1 dzień</td><td>prawo publikacji w produkcyjnym GTM · uprawnienia edytora GA4 · eksport obu kontenerów do pliku · decyzja, który kontener zostaje · kto ma dostęp administratora do WordPressa · osoba kontaktowa w BDC</td><td>eksport kontenerów w ręku, dostępy potwierdzone</td></tr><tr><td><strong>1</strong></td><td><strong>Przegląd kontenera + zgłoszenie testowe</strong></td><td>my (BDC uprzedzone)</td><td style="white-space:nowrap">0,5 dnia</td><td>eksport z kroku 0 · jedno zgłoszenie poprawne i jedno z celowo pustym polem, z podglądem odpowiedzi wtyczki</td><td>lista tagów liczących leady do wyłączenia · wiadomo, czy odpowiedź niesie numer zgłoszenia i czy odrzucona wysyłka wysyła „sukces”</td></tr><tr><td><strong>2</strong></td><td><strong>Nowy nasłuch zgłoszeń w GTM</strong></td><td>my</td><td style="white-space:nowrap">1 dzień</td><td>tryb podglądu GTM · tabela formularz → typ → grupa (17 formularzy) · reguły kategorii strony, modelu i salonu z adresu</td><td>test 6 najczęstszych formularzy: poprawny numer i typ, zero zdarzeń przy odrzuconej wysyłce, jedno zdarzenie na zgłoszenie</td></tr><tr><td><strong>3</strong></td><td><strong>Konfiguracja GA4</strong></td><td>my</td><td style="white-space:nowrap">0,5 dnia</td><td>uprawnienia edytora · rejestracja wymiarów PRZED publikacją (nie działa wstecz)</td><td>parametry widoczne w DebugView · zdarzenie kluczowe ustawione · automatyczny pomiar formularzy wyłączony</td></tr><tr><td><strong>4</strong></td><td><strong>Publikacja i wyłączenie starych tagów</strong></td><td>my, uzgodnione z mediami</td><td style="white-space:nowrap">0,5 dnia</td><td>zgoda na wstrzymanie <code>formularz_apl</code>, zdublowanego <code>form_total</code> i drugiego kontenera · informacja dla mediów o zmianie źródła konwersji</td><td>dzień później: leadów w GA4 nie więcej niż zgłoszeń w panelu formularzy, zero powtórzonych numerów zgłoszeń</td></tr><tr><td><strong>5</strong></td><td><strong>Kanał i gclid w zgłoszeniu do BDC</strong></td><td>osoba z dostępem administratora WP</td><td style="white-space:nowrap">ok. 3 h</td><td>pola ukryte w 17 formularzach + dopisanie ich do maila powiadomienia</td><td>testowe zgłoszenie z <code>?gclid=TEST</code> ma kanał i gclid w mailu do BDC</td></tr><tr><td><strong>6</strong></td><td><strong>Złączenie z oceną jakości z BDC</strong></td><td>my + BDC</td><td style="white-space:nowrap">po 2 tygodniach danych</td><td>eksport z BDC z numerem zgłoszenia i statusem jakości</td><td>raport jakości leadów per kanał, kampania i formularz · znany odsetek zgłoszeń dopasowanych do GA4</td></tr><tr><td><strong>7</strong></td><td><strong>Stały nadzór nad pomiarem</strong></td><td>automat</td><td style="white-space:nowrap">od kroku 4</td><td>— (raport dzienny już działa)</td><td>alert, gdy: zdarzeń na lead ponad 1,2 · dwa tagi leada się rozjeżdżają · typ „brak” ponad 2%</td></tr></tbody>
+  </table></div>
+  <div class="section-label">Czego wymaga — w skrócie, po stronach</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Strona</th><th>Co potrzebne</th><th>Kiedy</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Audi — analityka</strong></td><td>dostęp publikacji do produkcyjnego GTM · edytor GA4 · decyzja o kontenerze · zgoda na wyłączenie starych tagów</td><td>przed startem</td></tr>
+      <tr><td><strong>Audi — BDC</strong></td><td>uprzedzenie o zgłoszeniach testowych · eksport zgłoszeń z numerem i oceną jakości</td><td>krok 1 i krok 6</td></tr>
+      <tr><td><strong>Administrator WordPressa</strong></td><td>ok. 3 h w panelu formularzy — pola ukryte i treść maila do BDC; bez zmian w kodzie</td><td>krok 5</td></tr>
+      <tr><td><strong>Media (Google Ads, Meta)</strong></td><td>informacja o zmianie źródła konwersji · decyzja o osobnych konwersjach dla sprzedaży i serwisu · opcjonalnie import sprzedaży z CRM</td><td>krok 4</td></tr>
+      <tr><td><strong>Zespół strony</strong></td><td>opcjonalnie: poprawka skryptu z sekcji 2 u źródła — nie blokuje planu</td><td>dowolnie</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note ok"><span class="lab">Kolejność ma znaczenie</span>Wymiary w GA4 rejestrujemy przed publikacją tagu — rejestracja nie działa wstecz. Stare tagi wyłączamy w tym samym momencie, w którym włączamy nowy, żeby leady nie policzyły się podwójnie.</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="num">8</span> Pewność wniosków</div>
+  <p><strong>Sprawdzone na źródłach:</strong> kod strony i wywołania wtyczki Forminator 1.57.2, dane GA4 (223 zdarzenia przy 121 sesjach w sierpniu, 123 wywołania tagu APL przy 3 leadach ze stron APL w dniach 1–16.09, 0 poprawnych numerów formularza w 347 zdarzeniach), mail i obie instrukcje z sierpnia, 75 adresów strony. Całość sprawdzona ponownie i niezależnie 17.09 — kod strony bez zmian od 04.09.</p>
+  <p><strong>Założenia:</strong> dostęp do publikacji w produkcyjnym kontenerze GTM i osoba z dostępem administratora WordPressa po Waszej stronie.</p>
+  <p><strong>Czego jeszcze nie widzieliśmy:</strong> zawartości kontenerów GTM — mogą tam być dodatkowe tagi liczące leady. Nie wiemy też, czy odpowiedź wtyczki niesie numer zgłoszenia i czy odrzucona wysyłka wysyła „sukces”. Oba punkty rozstrzyga krok 0 i 1 planu.</p>
+  <p><strong>Co poprawi dokładność:</strong> eksport kontenerów — wtedy lista tagów do wyłączenia będzie co do nazwy, a nowy nasłuch przygotujemy jako gotowy plik do zaimportowania.</p>
+</div>
+
+</div>
+<div class="footer">
+Źródła: mail z analityki Audi · instrukcje „Identyfikator zgłoszeń” i „Rozróżnianie formularzy — GTM i GA4” (sierpień 2026) · kod audiplichta.pl (skan 12.09, ponownie 17.09) · GA4 355550660 · wtyczka Forminator 1.57.2. Stan na 17.09.2026.
+</div>
+</body>
+</html>
