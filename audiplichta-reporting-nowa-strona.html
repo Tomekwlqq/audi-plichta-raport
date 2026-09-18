@@ -138,7 +138,7 @@
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
     <div style="text-align:right;">
-      Zaktualizowano: 18 września 2026, 09:23<br>
+      Zaktualizowano: 18 września 2026, 09:29<br>
       <span style="color:#666">Dane: Google Analytics 4</span><br><span style="color:#888;font-size:11px;">Zakres: <span class="data-aktmiesiac"></span> — dane za <span class="data-czesciowy"></span> (<span style="font-style:italic;">bieżący miesiąc niepełny</span>)</span>
     </div>
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Tryb jasny/ciemny">🌙</button>
@@ -154,6 +154,7 @@
   <button class="main-tab-btn" onclick="switchMainTab('nowe-auta', this)">🚗 Leady Nowe Auta</button>
   <button class="main-tab-btn" onclick="switchMainTab('rzrodla', this)">🌐 Ruch / Źródła LP</button>
   <button class="main-tab-btn" onclick="switchMainTab('arch-combined', this)">🏗 Architektura + Eventy</button>
+  <button class="main-tab-btn" onclick="switchMainTab('instrukcja', this)">📖 Jak czytać</button>
 </div>
 
 <div class="main-tab-panel active" id="tab-live">
@@ -1801,6 +1802,50 @@ function toggleSection(header) {
 </div><!-- /tab-nowe-auta -->
 
 <!-- ===== TAB: ARCHITEKTURA + EVENTY (combined) ===== -->
+<div class="main-tab-panel" id="tab-instrukcja">
+<style id="instrukcja-css">
+#tab-instrukcja .in-wrap{max-width:980px}
+#tab-instrukcja .in-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:22px}
+#tab-instrukcja .in-box{background:#fff;border:1px solid #e4e4e7;border-radius:10px;padding:16px 18px}
+#tab-instrukcja .in-box h4{margin:0 0 6px;font-size:14px}
+#tab-instrukcja .in-box p,#tab-instrukcja li{font-size:13px;color:#3f3f46;line-height:1.55;margin:0 0 6px}
+#tab-instrukcja .in-tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;margin-bottom:8px}
+#tab-instrukcja .t-live{background:#fbe9ec;color:#BB0A21}#tab-instrukcja .t-mies{background:#e8e6f7;color:#1800ad}
+#tab-instrukcja .t-diag{background:#fdf1e2;color:#c26a00}#tab-instrukcja .t-stara{background:#f1f1f3;color:#5d6068}
+#tab-instrukcja table{width:100%;border-collapse:collapse;font-size:13px}
+#tab-instrukcja td,#tab-instrukcja th{border-bottom:1px solid #eee;padding:8px 10px;text-align:left;vertical-align:top}
+#tab-instrukcja th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#6b6b6b}
+@media(max-width:640px){#tab-instrukcja td,#tab-instrukcja th{padding:6px}}
+</style>
+<div class="in-wrap">
+  <div class="card" style="margin-bottom:22px;border-left:4px solid #1800ad;">
+    <div class="card-title"><span class="icon">📖</span> Jak czytać ten raport</div>
+    <p style="font-size:13px;color:#3f3f46;margin:0;">Raport ma trzy warstwy: <strong>tu i teraz</strong> (co się dzieje dziś), <strong>miesiące</strong> (porównania i planowanie)
+    oraz <strong>diagnozę</strong> (co się zmieniło i gdzie szukać błędów). Wszystkie liczby pochodzą z GA4 audiplichta.pl i odświeżają się same.</p>
+  </div>
+
+  <div class="section-label">Zakładki</div>
+  <div class="in-grid"><div class="in-box"><span class="in-tag t-live">Tu i teraz</span><h4>🔴 Live</h4><p>Raport dnia: dziś i wczoraj. Na górze blok <strong>TERAZ</strong> — ile osób jest na stronie w ostatnich 30 minutach. Dalej: wynik dnia, porównanie z normą (mediana 8 tych samych dni tygodnia), kanały, top 5 stron wejścia, lejek od wejścia do wysłania formularza, leady per typ formularza, ruch normalny kontra serwisowy i strażnik pomiaru, który sygnalizuje, gdy coś przestaje się liczyć.</p><p><strong>Po co:</strong> Rano zajrzeć, czy wczoraj był normalny dzień. Czerwone Δ = odchylenie od normy, które warto sprawdzić.</p></div><div class="in-box"><span class="in-tag t-mies">Miesiące</span><h4>📅 Leady Miesiące</h4><p>Leady miesiąc po miesiącu od kwietnia 2025, w podziale na typy (nowe auta, demo, jazda testowa, APL, serwis, odkup…). Do lipca 2026 dane ze starej strony, od sierpnia z nowej.</p><p><strong>Po co:</strong> Planowanie i porównania MoM. Uwaga na szew w sierpniu — patrz niżej „Zmiana strony”.</p></div><div class="in-box"><span class="in-tag t-mies">Miesiące</span><h4>🔍 Formularze - szczegóły</h4><p>Dla każdego typu formularza: ile sesji zaczęło wypełniać (form_start), ile wysłało (konwersje) i jaki jest współczynnik. Przełącznik miesięcy u góry.</p><p><strong>Po co:</strong> Szukanie formularza, który „przecieka”: dużo startów, mało wysłań.</p></div><div class="in-box"><span class="in-tag t-mies">Miesiące</span><h4>🚗 Leady Nowe Auta</h4><p>Oferty nowych aut: odsłony, rozpoczęte i wysłane formularze per model, z agregacją po rodzinach (A3, Q5, e-tron…). Przełącznik miesięcy + podsumowanie.</p><p><strong>Po co:</strong> Które modele ściągają zainteresowanie, a które zapytania.</p></div><div class="in-box"><span class="in-tag t-mies">Miesiące</span><h4>🌐 Ruch / Źródła LP</h4><p>Skąd przychodzą sesje (kanały, płatne kontra bezpłatne) i na jakie typy stron wchodzą; trend długiego okresu i porównanie miesiąc do miesiąca.</p><p><strong>Po co:</strong> Ocena, czy kampanie wprowadzają ruch, który zostawia leady.</p></div><div class="in-box"><span class="in-tag t-diag">Diagnoza</span><h4>🔀 Head-to-head: nowa strona</h4><p>Co się zmieniło w pomiarze po przejściu na nową stronę: lipiec (stara) kontra 1–17.09 (nowa). Eventy, formularze, struktura adresów, technologia pomiaru i dzienny wykres zmiany od 01.08.</p><p><strong>Po co:</strong> Zrozumienie, dlaczego liczby przed i po sierpniu nie są 1:1 porównywalne.</p></div><div class="in-box"><span class="in-tag t-stara">Do przepięcia</span><h4>🎯 Akcje aktualny miesiąc</h4><p>Leady per landing akcji z podziałem Gdańsk / Bydgoszcz. Na razie dane ze starej strony (czerwiec–lipiec).</p><p><strong>Po co:</strong> W trakcie przenoszenia na nową stronę.</p></div><div class="in-box"><span class="in-tag t-stara">Do przepięcia</span><h4>🏗 Architektura + Eventy</h4><p>Mapa strony, formularzy i eventów zrobiona na starej wersji serwisu.</p><p><strong>Po co:</strong> W trakcie aktualizacji; aktualny stan pomiaru jest w zakładce Head-to-head.</p></div></div>
+
+  <div class="section-label">Jak liczymy</div>
+  <div class="card" style="margin-bottom:22px;"><table>
+    <tr><th>Pojęcie</th><th>Definicja</th></tr>
+    <tr><td><strong>Lead</strong></td><td>Sesja, w której wysłano formularz (zdarzenie <code>form_total</code>). Liczymy sesje, nie zdarzenia — w sierpniu strona wysyłała zdarzenie kilka razy na jedno zgłoszenie.</td></tr>
+    <tr><td><strong>Typ leada</strong></td><td>Ustalany ze strony, na której wysłano formularz (np. <code>/oferta/nowe/…</code> = nowe auta, <code>/serwis/</code> = serwis). Numer formularza nie dochodzi dziś poprawnie do GA4 — po naprawie pomiaru typ będzie brany wprost z formularza.</td></tr>
+    <tr><td><strong>Ruch serwisowy</strong></td><td>Sesje, które odwiedziły <code>/serwis…</code> lub <code>/przypisz-swoje-auto…</code>. Reszta to ruch normalny (sprzedażowy i ogólny).</td></tr>
+    <tr><td><strong>Norma dnia</strong></td><td>Mediana z 8 tych samych dni tygodnia wstecz (poniedziałek porównujemy z poniedziałkami).</td></tr>
+    <tr><td><strong>Miesiąc z gwiazdką</strong></td><td>Miesiąc w toku — dane do wczoraj (17.09), więc nie porównujemy go 1:1 z pełnymi miesiącami.</td></tr>
+  </table></div>
+
+  <div class="section-label">Odświeżanie i zmiana strony</div>
+  <div class="in-grid">
+    <div class="in-box"><h4>Kiedy są nowe dane</h4><p>Automat odświeża raport co 2 godziny, od 6:05 do 22:05. Raport dzienny pokazuje dziś i wczoraj; zakładki miesięczne kończą się na wczoraj.</p>
+    <p>GA4 przetwarza dane z opóźnieniem — rano „dziś” bywa puste albo niepełne. Blok TERAZ pokazuje ruch z ostatnich 30 minut niezależnie od tego opóźnienia.</p></div>
+    <div class="in-box"><h4>Szew w sierpniu 2026</h4><p>Nowa strona działa od sierpnia. Do lipca pomiar szedł osobnymi eventami per formularz, od sierpnia jednym wspólnym zdarzeniem.</p>
+    <p>W zakładce Formularze sierpień liczymy od 13.08 (zmiana definicji form_start). Porównując „przed” i „po”, zerknij najpierw do Head-to-head.</p></div>
+  </div>
+</div>
+</div>
 <div class="main-tab-panel" id="tab-arch-combined">
 
 <div class="container">
