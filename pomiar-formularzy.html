@@ -63,8 +63,8 @@ ol,ul{margin:6px 0 10px 20px}li{margin-bottom:5px}
 
 <div class="card" style="border-left:4px solid var(--accent)">
   <div class="card-title">✉️ Odpowiedź na mail</div>
-  <p>Dzień dobry Panie Tymoteuszu,</p>
-  <p>dziękuję za mail i obie instrukcje. Przeszliśmy przez nie razem z kodem nowej strony i danymi GA4 od 1 sierpnia. Poniżej jest pełna diagnoza z dowodami, a na samym dole plan naprawy w krokach — suma tego, co wynika z Pana maila, instrukcji i skanu strony.</p>
+  <p>Cześć Tymek,</p>
+  <p>dzięki za maila i obie instrukcje. Przeszliśmy przez nie razem z kodem nowej strony i danymi GA4 od 1 sierpnia. Poniżej jest pełna diagnoza z dowodami, a na samym dole plan naprawy w krokach — suma tego, co wynika z Twojego maila, instrukcji i skanu strony.</p>
   <p><strong>Najważniejsze w skrócie:</strong></p>
   <ol>
     <li><strong><code>[object FormData]</code> zamiast numeru formularza</strong> — potwierdzam, dotyczy 347 z 347 zdarzeń <code>generate_lead</code>. Przyczyna to jedna linijka w skrypcie motywu: handler zdarzenia Forminatora bierze drugi argument jako numer formularza, a Forminator 1.57.2 przekazuje tam dane formularza. Z tego samego powodu typ leada zawsze wpada w „inne”. Poprawka jest w sekcji 2.</li>
@@ -75,15 +75,15 @@ ol,ul{margin:6px 0 10px 20px}li{margin-bottom:5px}
   </ol>
   <p>Na produkcji stoi inne rozwiązanie niż opisane w sierpniowych instrukcjach: inny skrypt, inny format identyfikatora i inny słownik typów leada (sekcja 3). Bez zmian zostało to, co najważniejsze: „ID zgłoszenia” w mailu do BDC to ten sam numer, który trafia do analityki jako <code>lead_id</code>. Na tym da się zbudować złączenie z oceną jakości leadów.</p>
   <p>Większość naprawy da się zrobić w Tag Managerze i GA4, bez zmian w kodzie strony: 5 z 9 zadań (sekcja 5). Całość to ok. 3,5 dnia pracy plus ok. 3 godziny w panelu formularzy (plan na dole). Do czasu naprawy typ leada liczymy w raportach ze strony, na której wysłano formularz.</p>
-  <div class="note"><span class="lab">Żeby ruszyć, potrzebujemy</span>
+  <div class="note"><span class="lab">Żeby ruszyć, potrzebuję</span>
     <ol style="margin-bottom:0">
       <li><strong>eksportu obu kontenerów GTM</strong> (<code>GTM-57RZGD7K</code>, <code>GTM-T5BGCJH</code>) do pliku — od razu, jeszcze przed nadaniem dostępów; na tej podstawie wskażemy co do nazwy, które tagi dziś liczą leady,</li>
-      <li><strong>dostępu do produkcyjnego kontenera GTM z prawem publikacji</strong> i <strong>uprawnień edytora w GA4</strong> — na etap wdrożenia; każdą publikację uzgadniamy z Panem przed wypuszczeniem,</li>
+      <li><strong>dostępu do produkcyjnego kontenera GTM z prawem publikacji</strong> i <strong>uprawnień edytora w GA4</strong> — na etap wdrożenia; każdą publikację uzgadniamy z Tobą przed wypuszczeniem,</li>
       <li><strong>zgody na jedno testowe zgłoszenie</strong> z celowo pustym polem, z uprzedzonym BDC.</li>
     </ol>
   </div>
-  <p>Chętnie przejdę przez ten dokument na krótkiej rozmowie, jeśli tak będzie Panu wygodniej.</p>
-  <p style="margin-bottom:0">Pozdrawiam<br>Tomasz</p>
+  <p>Jak wolisz, przejdziemy przez to razem na krótkim callu.</p>
+  <p style="margin-bottom:0">Pozdrawiam<br>Tomek</p>
 </div>
 
 <div class="section-label" style="margin:26px 0 10px;font-size:18px">Diagnoza</div>
