@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Audi Plichta — pomiar formularzy: co jest zepsute i jak to naprawić</title>
+<title>Audi Plichta — odpowiedź i plan: pomiar formularzy</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -53,13 +53,40 @@ ol,ul{margin:6px 0 10px 20px}li{margin-bottom:5px}
 </head>
 <body>
 <div class="hero">
-  <div class="kicker">Audi Plichta · analityka · 17.09.2026</div>
-  <h1>Pomiar formularzy na nowej stronie: co jest zepsute, dlaczego i jak to naprawić</h1>
-  <div class="sub">Przegląd maila o warstwie danych i GTM, dwóch instrukcji z sierpnia, kodu nowej strony i danych GA4. Każdy wniosek oparty na cytacie z kodu albo liczbie z GA4 — nie na deklaracji.</div>
+  <div class="kicker">Audi Plichta · analityka · 18.09.2026</div>
+  <h1>Warstwa danych i GTM: odpowiedź, diagnoza i plan naprawy pomiaru formularzy</h1>
+  <div class="sub">Na górze odpowiedź na mail, pod nią pełna diagnoza, na dole plan w krokach. Podstawa: mail o warstwie danych i GTM, dwóch instrukcji z sierpnia, kodu nowej strony i danych GA4. Każdy wniosek oparty na cytacie z kodu albo liczbie z GA4 — nie na deklaracji.</div>
   <div class="sources"><span>mail + 2 instrukcje (sierpień)</span><span>kod audiplichta.pl — skan 12.09</span><span>GA4 355550660</span><span>Forminator 1.57.2</span><span>zweryfikowane niezależnie 17.09</span></div>
 </div>
 
 <div class="container">
+
+<div class="card" style="border-left:4px solid var(--accent)">
+  <div class="card-title">✉️ Odpowiedź na mail</div>
+  <p>Dzień dobry Panie Tymoteuszu,</p>
+  <p>dziękuję za mail i obie instrukcje. Przeszliśmy przez nie razem z kodem nowej strony i danymi GA4 od 1 sierpnia. Poniżej jest pełna diagnoza z dowodami, a na samym dole plan naprawy w krokach — suma tego, co wynika z Pana maila, instrukcji i skanu strony.</p>
+  <p><strong>Najważniejsze w skrócie:</strong></p>
+  <ol>
+    <li><strong><code>[object FormData]</code> zamiast numeru formularza</strong> — potwierdzam, dotyczy 347 z 347 zdarzeń <code>generate_lead</code>. Przyczyna to jedna linijka w skrypcie motywu: handler zdarzenia Forminatora bierze drugi argument jako numer formularza, a Forminator 1.57.2 przekazuje tam dane formularza. Z tego samego powodu typ leada zawsze wpada w „inne”. Poprawka jest w sekcji 2.</li>
+    <li><strong>Tag <code>formularz_apl</code></strong> odpala się na wspólnej stronie <code>/thank-you/</code>, czyli po każdym formularzu: 123 wywołania przy 3 leadach ze stron APL (1–16.09).</li>
+    <li><strong>Wielokrotne zdarzenia</strong> — w sierpniu 223 zdarzenia przy 121 sesjach z leadem. We wrześniu jest już w normie.</li>
+    <li><strong>Zdarzenie przy nieudanej wysyłce</strong> — na razie hipoteza. Rozstrzygnie ją jedno testowe zgłoszenie z pustym polem. Poprawka z punktu 1 zabezpiecza oba warianty.</li>
+    <li><strong>Brak <code>gclid</code> i surowe <code>page_type</code></strong> — potwierdzam: pól ukrytych z instrukcji nie ma na żadnej z 73 sprawdzonych stron, a <code>page_type</code> ma tylko trzy wartości.</li>
+  </ol>
+  <p>Na produkcji stoi inne rozwiązanie niż opisane w sierpniowych instrukcjach: inny skrypt, inny format identyfikatora i inny słownik typów leada (sekcja 3). Bez zmian zostało to, co najważniejsze: „ID zgłoszenia” w mailu do BDC to ten sam numer, który trafia do analityki jako <code>lead_id</code>. Na tym da się zbudować złączenie z oceną jakości leadów.</p>
+  <p>Większość naprawy da się zrobić w Tag Managerze i GA4, bez zmian w kodzie strony: 5 z 9 zadań (sekcja 5). Całość to ok. 3,5 dnia pracy plus ok. 3 godziny w panelu formularzy (plan na dole). Do czasu naprawy typ leada liczymy w raportach ze strony, na której wysłano formularz.</p>
+  <div class="note"><span class="lab">Żeby ruszyć, potrzebujemy</span>
+    <ol style="margin-bottom:0">
+      <li><strong>eksportu obu kontenerów GTM</strong> (<code>GTM-57RZGD7K</code>, <code>GTM-T5BGCJH</code>) do pliku — od razu, jeszcze przed nadaniem dostępów; na tej podstawie wskażemy co do nazwy, które tagi dziś liczą leady,</li>
+      <li><strong>dostępu do produkcyjnego kontenera GTM z prawem publikacji</strong> i <strong>uprawnień edytora w GA4</strong> — na etap wdrożenia; każdą publikację uzgadniamy z Panem przed wypuszczeniem,</li>
+      <li><strong>zgody na jedno testowe zgłoszenie</strong> z celowo pustym polem, z uprzedzonym BDC.</li>
+    </ol>
+  </div>
+  <p>Chętnie przejdę przez ten dokument na krótkiej rozmowie, jeśli tak będzie Panu wygodniej.</p>
+  <p style="margin-bottom:0">Pozdrawiam<br>Tomasz</p>
+</div>
+
+<div class="section-label" style="margin:26px 0 10px;font-size:18px">Diagnoza</div>
 
 <div class="card">
   <div class="card-title"><span class="num">0</span> Najkrócej</div>
@@ -177,7 +204,16 @@ f.trigger(<span class="s">"forminator:form:submit:success"</span>, [<span class=
 </div>
 
 <div class="card">
-  <div class="card-title"><span class="num">7</span> Plan w krokach i czego wymaga</div>
+  <div class="card-title"><span class="num">7</span> Pewność wniosków</div>
+  <p><strong>Sprawdzone na źródłach:</strong> kod strony i wywołania wtyczki Forminator 1.57.2, dane GA4 (223 zdarzenia przy 121 sesjach w sierpniu, 123 wywołania tagu APL przy 3 leadach ze stron APL w dniach 1–16.09, 0 poprawnych numerów formularza w 347 zdarzeniach), mail i obie instrukcje z sierpnia, 75 adresów strony. Całość sprawdzona ponownie i niezależnie 17.09 — kod strony bez zmian od 04.09.</p>
+  <p><strong>Założenia:</strong> dostęp do publikacji w produkcyjnym kontenerze GTM i osoba z dostępem administratora WordPressa po Waszej stronie.</p>
+  <p><strong>Czego jeszcze nie widzieliśmy:</strong> zawartości kontenerów GTM — mogą tam być dodatkowe tagi liczące leady. Nie wiemy też, czy odpowiedź wtyczki niesie numer zgłoszenia i czy odrzucona wysyłka wysyła „sukces”. Oba punkty rozstrzyga krok 0 i 1 planu.</p>
+  <p><strong>Co poprawi dokładność:</strong> eksport kontenerów — wtedy lista tagów do wyłączenia będzie co do nazwy, a nowy nasłuch przygotujemy jako gotowy plik do zaimportowania.</p>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="num">8</span> Plan w krokach i czego wymaga</div>
+  <p>Plan łączy to, o co prosił mail i sierpniowe instrukcje, z tym, co faktycznie stoi na stronie (skan kodu) i co widać w GA4.</p>
   <p class="lead">Łącznie ok. 3,5 dnia roboczego (kroki 0–4) plus ok. 3 godziny w panelu formularzy; złączenie z BDC po dwóch tygodniach zbierania danych. Najdłużej trwa krok 0 — zależy od szybkości nadania dostępów.</p>
   <div class="table-wrap"><table>
     <thead><tr><th>#</th><th>Krok</th><th>Kto</th><th>Czas</th><th>Czego wymaga</th><th>Po czym poznamy, że zrobione</th></tr></thead>
@@ -197,17 +233,10 @@ f.trigger(<span class="s">"forminator:form:submit:success"</span>, [<span class=
   <div class="note ok"><span class="lab">Kolejność ma znaczenie</span>Wymiary w GA4 rejestrujemy przed publikacją tagu — rejestracja nie działa wstecz. Stare tagi wyłączamy w tym samym momencie, w którym włączamy nowy, żeby leady nie policzyły się podwójnie.</div>
 </div>
 
-<div class="card">
-  <div class="card-title"><span class="num">8</span> Pewność wniosków</div>
-  <p><strong>Sprawdzone na źródłach:</strong> kod strony i wywołania wtyczki Forminator 1.57.2, dane GA4 (223 zdarzenia przy 121 sesjach w sierpniu, 123 wywołania tagu APL przy 3 leadach ze stron APL w dniach 1–16.09, 0 poprawnych numerów formularza w 347 zdarzeniach), mail i obie instrukcje z sierpnia, 75 adresów strony. Całość sprawdzona ponownie i niezależnie 17.09 — kod strony bez zmian od 04.09.</p>
-  <p><strong>Założenia:</strong> dostęp do publikacji w produkcyjnym kontenerze GTM i osoba z dostępem administratora WordPressa po Waszej stronie.</p>
-  <p><strong>Czego jeszcze nie widzieliśmy:</strong> zawartości kontenerów GTM — mogą tam być dodatkowe tagi liczące leady. Nie wiemy też, czy odpowiedź wtyczki niesie numer zgłoszenia i czy odrzucona wysyłka wysyła „sukces”. Oba punkty rozstrzyga krok 0 i 1 planu.</p>
-  <p><strong>Co poprawi dokładność:</strong> eksport kontenerów — wtedy lista tagów do wyłączenia będzie co do nazwy, a nowy nasłuch przygotujemy jako gotowy plik do zaimportowania.</p>
-</div>
 
 </div>
 <div class="footer">
-Źródła: mail z analityki Audi · instrukcje „Identyfikator zgłoszeń” i „Rozróżnianie formularzy — GTM i GA4” (sierpień 2026) · kod audiplichta.pl (skan 12.09, ponownie 17.09) · GA4 355550660 · wtyczka Forminator 1.57.2. Stan na 17.09.2026.
+Źródła: mail z analityki Audi · instrukcje „Identyfikator zgłoszeń” i „Rozróżnianie formularzy — GTM i GA4” (sierpień 2026) · kod audiplichta.pl (skan 12.09, ponownie 17.09) · GA4 355550660 · wtyczka Forminator 1.57.2. Stan na 18.09.2026.
 </div>
 </body>
 </html>
