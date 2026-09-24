@@ -205,10 +205,10 @@ f.trigger(<span class="s">"forminator:form:submit:success"</span>, [<span class=
 
 <div class="card">
   <div class="card-title"><span class="num">7</span> Eksport kontenerów (23.09) — co naprawdę siedzi w GTM</div>
-  <p class="lead">Dostaliśmy oba kontenery. Najważniejsze: <strong>jedno wysłanie formularza odpala sześć tagów naraz</strong> — GA4 dostaje lead dwa razy, Meta trzy razy, Google Ads raz.</p>
+  <p class="lead">Dostaliśmy oba kontenery. Najważniejsze: <strong>jedno wysłanie formularza odpala sześć tagów naraz</strong> — GA4 dostaje lead dwa razy, Meta trzy zdarzenia (w tym „Lead” dwa razy), Google Ads raz.</p>
   <div class="kpi-grid">
     <div class="kpi"><div class="kpi-label">Tagi w kontenerze produkcyjnym</div><div class="kpi-value">104</div><div class="kpi-sub">81 aktywnych, 23 wstrzymane</div></div>
-    <div class="kpi"><div class="kpi-label">Tagi na jedno zgłoszenie</div><div class="kpi-value">6</div><div class="kpi-sub">GA4 ×2, Meta ×3, Google Ads ×1</div></div>
+    <div class="kpi"><div class="kpi-label">Tagi na jedno zgłoszenie</div><div class="kpi-value">6</div><div class="kpi-sub">GA4 ×2, Meta ×3 (Lead ×2), Google Ads ×1</div></div>
     <div class="kpi"><div class="kpi-label">Tagi bez ustawionej zgody</div><div class="kpi-value">78 z 81</div><div class="kpi-sub">consent „nie ustawiono” mimo Cookiebota</div></div>
     <div class="kpi"><div class="kpi-label"><code>lead_id</code> w produkcji</div><div class="kpi-value">0</div><div class="kpi-sub">parametru nie ma w tagu — działa tylko w teście</div></div>
   </div>
@@ -229,9 +229,9 @@ f.trigger(<span class="s">"forminator:form:submit:success"</span>, [<span class=
     <tbody>
       <tr><td><code>AAAAA GA4 - event - form_total</code></td><td>GA4: <code>form_total</code></td><td><span class="badge badge-warn">stara generacja</span> — zostawić do czasu przepięcia raportów</td></tr>
       <tr><td><code>NOWY - GA4 - generate_lead (Forminator)</code></td><td>GA4: <code>generate_lead</code> + 10 parametrów</td><td><span class="badge badge-ok">docelowy</span> — ale bez <code>lead_id</code>, patrz niżej</td></tr>
-      <tr><td><code>AAAAA Facebook - event - form_total</code></td><td>Meta: zdarzenie standardowe</td><td rowspan="3"><span class="badge badge-fail">trzy zdarzenia Meta na jedno zgłoszenie</span> — zostawić jedno, dwa wyłączyć</td></tr>
-      <tr><td><code>AAAAA Facebook - event - form_total niestandardowe</code></td><td>Meta: zdarzenie własne</td></tr>
-      <tr><td><code>NOWY - Meta - Lead (Forminator)</code></td><td>Meta: Lead (kod HTML)</td></tr>
+      <tr><td><code>AAAAA Facebook - event - form_total</code></td><td>Meta: zdarzenie standardowe <strong>Lead</strong></td><td rowspan="3"><span class="badge badge-fail">trzy zdarzenia Meta, w tym „Lead” dwa razy</span> — tag 639 ma klucz deduplikacji (<code>eventID</code>), tag 300 nie, więc Meta liczy oba. Zostawić jeden tag „Lead”, drugi wyłączyć; zdarzenie własne <code>Form_total</code> tylko jeśli ktoś go używa w kampaniach</td></tr>
+      <tr><td><code>AAAAA Facebook - event - form_total niestandardowe</code></td><td>Meta: zdarzenie własne <code>Form_total</code></td></tr>
+      <tr><td><code>NOWY - Meta - Lead (Forminator)</code></td><td>Meta: <strong>Lead</strong> (kod HTML, z <code>eventID</code>)</td></tr>
       <tr><td><code>AAAAA PI - Google Ads - event - form_total</code></td><td>Google Ads: jedna konwersja dla wszystkich formularzy</td><td><span class="badge badge-warn">do rozbicia</span> na sprzedaż i serwis</td></tr>
     </tbody>
   </table></div>
@@ -250,9 +250,11 @@ f.trigger(<span class="s">"forminator:form:submit:success"</span>, [<span class=
       <tr><td><strong>Tag APL odpala się na stronie podziękowania</strong></td><td>tag <code>GA4 - Formularz APL</code>, reguła „Thank You Page”: adres zawiera <code>thank-you</code></td><td>zawęzić regułę albo wyłączyć tag — potwierdza wynik z danych (123 wywołania przy 3 leadach APL)</td></tr>
       <tr><td><strong>Zgoda niekonfigurowana</strong></td><td>78 z 81 aktywnych tagów ma status zgody „nie ustawiono”</td><td>ustawić wymagane zgody — inaczej Cookiebot nie steruje tagami, a Consent Mode w Ads działa połowicznie</td></tr>
       <tr><td><strong>Resztki starej generacji</strong></td><td>22 tagi na regułach <code>ajaxComplete</code> (pomiar per formularz), z tego 19 wstrzymanych, 3 nadal aktywne: <code>form_house_of-RS</code>, <code>form_modele_elektryczne</code>, <code>form_nowe_q3</code></td><td>domknąć: albo wszystkie w nowym schemacie, albo wszystkie wyłączone</td></tr>
+      <tr><td><strong>Jedna konwersja Google Ads z popsutym identyfikatorem</strong></td><td>tag <code>PI - Google Ads - event - button_auta-demonstracyjne_szczegoly</code> ma identyfikator konwersji <code>17614253651{{PI - Google Ads - ID}}</code>, a zmienna zawiera dokładnie ten sam numer — w efekcie numer jest sklejony podwójnie. Pozostałe 33 tagi używają samej zmiennej</td><td>usunąć wpisany ręcznie numer — dziś ta konwersja nie dolatuje do Google Ads</td></tr>
       <tr><td><strong>Tag <code>form_start</code> bez pełnego kompletu</strong></td><td><code>NOWY - GA4 - form_start</code> wysyła 5 parametrów, lead 10 — inne zestawy</td><td>zrównać, żeby lejek liczył się na tych samych polach</td></tr>
     </tbody>
   </table></div>
+<div class="note ok"><span class="lab">Weryfikacja niezależna</span>Oba eksporty przepuściliśmy dodatkowo przez model Gemini, któremu zadaliśmy te same pytania bez pokazywania naszych wniosków. Wyniki się zgadzają; dwie rzeczy doprecyzował: Meta dostaje trzy zdarzenia, ale „Lead” dwa razy (trzecie ma własną nazwę), oraz wskazał sklejony identyfikator konwersji opisany wyżej.</div>
 </div>
 
 <div class="card">
