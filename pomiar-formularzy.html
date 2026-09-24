@@ -53,7 +53,7 @@ ol,ul{margin:6px 0 10px 20px}li{margin-bottom:5px}
 </head>
 <body>
 <div class="hero">
-  <div class="kicker">Audi Plichta · analityka · 18.09.2026</div>
+  <div class="kicker">Audi Plichta · analityka · 24.09.2026</div>
   <h1>Warstwa danych i GTM: odpowiedź, diagnoza i plan naprawy pomiaru formularzy</h1>
   <div class="sub">Na górze odpowiedź na mail, pod nią pełna diagnoza, na dole plan w krokach. Podstawa: mail o warstwie danych i GTM, dwóch instrukcji z sierpnia, kodu nowej strony i danych GA4. Każdy wniosek oparty na cytacie z kodu albo liczbie z GA4 — nie na deklaracji.</div>
   <div class="sources"><span>mail + 2 instrukcje (sierpień)</span><span>kod audiplichta.pl — skan 12.09</span><span>GA4 355550660</span><span>Forminator 1.57.2</span><span>zweryfikowane niezależnie 17.09</span></div>
@@ -189,7 +189,7 @@ f.trigger(<span class="s">"forminator:form:submit:success"</span>, [<span class=
       <tr><td>Import sprzedaży do Ads bez <code>gclid</code></td><td>GTM + Google Ads</td><td><span class="badge badge-info">media</span> — przez dopasowanie po telefonie z CRM</td></tr>
     </tbody>
   </table></div>
-  <div class="note"><span class="lab">Warunek</span>Potrzebne: prawo publikacji w produkcyjnym kontenerze GTM, uprawnienia edytora w GA4, jedno testowe zgłoszenie z uprzedzonym BDC i eksport z BDC z kolumną „ID zgłoszenia”. Do rozstrzygnięcia: który z dwóch kontenerów (<code>GTM-57RZGD7K</code>, <code>GTM-T5BGCJH</code>) zostaje.</div>
+  <div class="note"><span class="lab">Warunek</span>Potrzebne: prawo publikacji w produkcyjnym kontenerze GTM, uprawnienia edytora w GA4, jedno testowe zgłoszenie z uprzedzonym BDC i eksport z BDC z kolumną „ID zgłoszenia”. Kontenery rozpoznane (sekcja 7): produkcyjny to <code>GTM-T5BGCJH</code> (Kolaboracja), <code>GTM-57RZGD7K</code> to kontener testowy Tymka.</div>
 </div>
 
 <div class="card">
@@ -204,15 +204,67 @@ f.trigger(<span class="s">"forminator:form:submit:success"</span>, [<span class=
 </div>
 
 <div class="card">
-  <div class="card-title"><span class="num">7</span> Pewność wniosków</div>
+  <div class="card-title"><span class="num">7</span> Eksport kontenerów (23.09) — co naprawdę siedzi w GTM</div>
+  <p class="lead">Dostaliśmy oba kontenery. Najważniejsze: <strong>jedno wysłanie formularza odpala sześć tagów naraz</strong> — GA4 dostaje lead dwa razy, Meta trzy razy, Google Ads raz.</p>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">Tagi w kontenerze produkcyjnym</div><div class="kpi-value">104</div><div class="kpi-sub">81 aktywnych, 23 wstrzymane</div></div>
+    <div class="kpi"><div class="kpi-label">Tagi na jedno zgłoszenie</div><div class="kpi-value">6</div><div class="kpi-sub">GA4 ×2, Meta ×3, Google Ads ×1</div></div>
+    <div class="kpi"><div class="kpi-label">Tagi bez ustawionej zgody</div><div class="kpi-value">78 z 81</div><div class="kpi-sub">consent „nie ustawiono” mimo Cookiebota</div></div>
+    <div class="kpi"><div class="kpi-label"><code>lead_id</code> w produkcji</div><div class="kpi-value">0</div><div class="kpi-sub">parametru nie ma w tagu — działa tylko w teście</div></div>
+  </div>
+
+  <div class="section-label">Który kontener jest czyj</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Kontener</th><th>Nazwa w GTM</th><th>Wysyła do</th><th>Rola</th></tr></thead>
+    <tbody>
+      <tr><td><code>GTM-T5BGCJH</code></td><td>audiplichta.pl</td><td>GA4 <code>G-NFSVTBRHHK</code> (usługa, z której robimy raporty)</td><td><strong>produkcja</strong> — 104 tagi, prowadzi Kolaboracja</td></tr>
+      <tr><td><code>GTM-57RZGD7K</code></td><td>audiplichta.pl 2 test</td><td>GA4 <code>G-C5MKWKBCR0</code> (usługa testowa)</td><td>poligon Tymka — 7 tagów, tu działa <code>lead_id</code></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><span class="lab">Co to zmienia</span>Oba kontenery stoją na wszystkich stronach, ale liczby, na których pracują raporty i kampanie, robi wyłącznie kontener Kolaboracji. Poprawki wdrażane w kontenerze testowym nie mają wpływu na raporty, dopóki nie trafią do produkcyjnego.</div>
+
+  <div class="section-label">Co odpala się przy jednym wysłaniu formularza (reguła <code>apl_form_submit</code>)</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Tag</th><th>Co wysyła</th><th>Werdykt</th></tr></thead>
+    <tbody>
+      <tr><td><code>AAAAA GA4 - event - form_total</code></td><td>GA4: <code>form_total</code></td><td><span class="badge badge-warn">stara generacja</span> — zostawić do czasu przepięcia raportów</td></tr>
+      <tr><td><code>NOWY - GA4 - generate_lead (Forminator)</code></td><td>GA4: <code>generate_lead</code> + 10 parametrów</td><td><span class="badge badge-ok">docelowy</span> — ale bez <code>lead_id</code>, patrz niżej</td></tr>
+      <tr><td><code>AAAAA Facebook - event - form_total</code></td><td>Meta: zdarzenie standardowe</td><td rowspan="3"><span class="badge badge-fail">trzy zdarzenia Meta na jedno zgłoszenie</span> — zostawić jedno, dwa wyłączyć</td></tr>
+      <tr><td><code>AAAAA Facebook - event - form_total niestandardowe</code></td><td>Meta: zdarzenie własne</td></tr>
+      <tr><td><code>NOWY - Meta - Lead (Forminator)</code></td><td>Meta: Lead (kod HTML)</td></tr>
+      <tr><td><code>AAAAA PI - Google Ads - event - form_total</code></td><td>Google Ads: jedna konwersja dla wszystkich formularzy</td><td><span class="badge badge-warn">do rozbicia</span> na sprzedaż i serwis</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="section-label">Dlaczego <code>lead_id</code> nie dociera do raportów</div>
+  <p>W kontenerze testowym tag leada wysyła <strong>13 parametrów, w tym <code>lead_id</code></strong>. W produkcyjnym wysyła 10 i <code>lead_id</code> wśród nich nie ma — numer idzie wyłącznie jako <code>transaction_id</code>, a tego pola GA4 raportuje tylko przy zakupach w sklepie. Efekt w danych: w zdarzeniach <code>generate_lead</code> z ostatniego tygodnia numer zgłoszenia jest pusty w 100% przypadków.</p>
+  <div class="note ok"><span class="lab">Poprawka: 5 minut w GTM</span>W tagu <code>NOWY - GA4 - generate_lead</code> dopisać parametr <code>lead_id</code> ze zmiennej <code>DLV - lead_id</code> (zmienna już istnieje) i zarejestrować go w GA4 jako wymiar niestandardowy. Nie wymaga zmian w kodzie strony.</div>
+
+  <div class="section-label">Parametry docierają, ale nie ma ich gdzie zobaczyć</div>
+  <p>Tag leada wysyła <code>lead_type</code>, <code>form_name</code>, <code>page_type</code>, <code>salon</code>, <code>car_model</code>, <code>car_dealer</code>, <code>car_condition</code>. W GA4 zarejestrowanych jest 8 wymiarów niestandardowych i <strong>żaden z tych siedmiu</strong> na liście nie występuje. Do raportów trafia tylko <code>form_id</code> — czyli akurat ten, który przychodzi jako <code>[object FormData]</code> (46 z 46 zdarzeń w tygodniu 17–23.09).</p>
+
+  <div class="section-label">Pozostałe znaleziska z eksportu</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Znalezisko</th><th>Dowód z pliku</th><th>Co z tym zrobić</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Tag APL odpala się na stronie podziękowania</strong></td><td>tag <code>GA4 - Formularz APL</code>, reguła „Thank You Page”: adres zawiera <code>thank-you</code></td><td>zawęzić regułę albo wyłączyć tag — potwierdza wynik z danych (123 wywołania przy 3 leadach APL)</td></tr>
+      <tr><td><strong>Zgoda niekonfigurowana</strong></td><td>78 z 81 aktywnych tagów ma status zgody „nie ustawiono”</td><td>ustawić wymagane zgody — inaczej Cookiebot nie steruje tagami, a Consent Mode w Ads działa połowicznie</td></tr>
+      <tr><td><strong>Resztki starej generacji</strong></td><td>22 tagi na regułach <code>ajaxComplete</code> (pomiar per formularz), z tego 19 wstrzymanych, 3 nadal aktywne: <code>form_house_of-RS</code>, <code>form_modele_elektryczne</code>, <code>form_nowe_q3</code></td><td>domknąć: albo wszystkie w nowym schemacie, albo wszystkie wyłączone</td></tr>
+      <tr><td><strong>Tag <code>form_start</code> bez pełnego kompletu</strong></td><td><code>NOWY - GA4 - form_start</code> wysyła 5 parametrów, lead 10 — inne zestawy</td><td>zrównać, żeby lejek liczył się na tych samych polach</td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="num">8</span> Pewność wniosków</div>
   <p><strong>Sprawdzone na źródłach:</strong> kod strony i wywołania wtyczki Forminator 1.57.2, dane GA4 (223 zdarzenia przy 121 sesjach w sierpniu, 123 wywołania tagu APL przy 3 leadach ze stron APL w dniach 1–16.09, 0 poprawnych numerów formularza w 347 zdarzeniach), mail i obie instrukcje z sierpnia, 75 adresów strony. Całość sprawdzona ponownie i niezależnie 17.09 — kod strony bez zmian od 04.09.</p>
   <p><strong>Założenia:</strong> dostęp do publikacji w produkcyjnym kontenerze GTM i osoba z dostępem administratora WordPressa po Waszej stronie.</p>
-  <p><strong>Czego jeszcze nie widzieliśmy:</strong> zawartości kontenerów GTM — mogą tam być dodatkowe tagi liczące leady. Nie wiemy też, czy odpowiedź wtyczki niesie numer zgłoszenia i czy odrzucona wysyłka wysyła „sukces”. Oba punkty rozstrzyga krok 0 i 1 planu.</p>
+  <p><strong>Czego jeszcze nie widzieliśmy:</strong> nic po stronie GTM — oba kontenery przeanalizowane z eksportu z 23.09 (sekcja 7). Nie wiemy też, czy odpowiedź wtyczki niesie numer zgłoszenia i czy odrzucona wysyłka wysyła „sukces”. Oba punkty rozstrzyga krok 0 i 1 planu.</p>
   <p><strong>Co poprawi dokładność:</strong> eksport kontenerów — wtedy lista tagów do wyłączenia będzie co do nazwy, a nowy nasłuch przygotujemy jako gotowy plik do zaimportowania.</p>
 </div>
 
 <div class="card">
-  <div class="card-title"><span class="num">8</span> Plan w krokach i czego wymaga</div>
+  <div class="card-title"><span class="num">9</span> Plan w krokach i czego wymaga</div>
   <p>Plan łączy to, o co prosił mail i sierpniowe instrukcje, z tym, co faktycznie stoi na stronie (skan kodu) i co widać w GA4.</p>
   <p class="lead">Łącznie ok. 3,5 dnia roboczego (kroki 0–4) plus ok. 3 godziny w panelu formularzy; złączenie z BDC po dwóch tygodniach zbierania danych. Najdłużej trwa krok 0 — zależy od szybkości nadania dostępów.</p>
   <div class="table-wrap"><table>
@@ -236,7 +288,7 @@ f.trigger(<span class="s">"forminator:form:submit:success"</span>, [<span class=
 
 </div>
 <div class="footer">
-Źródła: mail z analityki Audi · instrukcje „Identyfikator zgłoszeń” i „Rozróżnianie formularzy — GTM i GA4” (sierpień 2026) · kod audiplichta.pl (skan 12.09, ponownie 17.09) · GA4 355550660 · wtyczka Forminator 1.57.2. Stan na 18.09.2026.
+Źródła: mail z analityki Audi · instrukcje „Identyfikator zgłoszeń” i „Rozróżnianie formularzy — GTM i GA4” (sierpień 2026) · kod audiplichta.pl (skan 12.09, ponownie 17.09) · GA4 355550660 · wtyczka Forminator 1.57.2. Stan na 24.09.2026 — sekcja 7 z eksportu kontenerów GTM (23.09).
 </div>
 </body>
 </html>
