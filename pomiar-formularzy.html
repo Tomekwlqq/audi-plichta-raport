@@ -267,6 +267,7 @@ f.trigger(<span class="s">"forminator:form:submit:success"</span>, [<span class=
 
 <div class="card">
   <div class="card-title"><span class="num">9</span> Plan w krokach i czego wymaga</div>
+  <div class="note ok"><span class="lab">Aktualizacja 24.09 — uzgodniony kierunek</span>Po stronie Audi zapadła decyzja: pomiar przenosimy do kontenera <code>GTM-57RZGD7K</code> po wymianie identyfikatora GA4 na produkcyjny, jedynym zdarzeniem leada zostaje <code>generate_lead</code>, a <code>form_total</code> i <code>formularz_apl</code> znikają. Plan poniżej pozostaje aktualny co do zadań; zmienia się miejsce wykonania i kolejność dwóch kroków: raporty przepinamy na <code>generate_lead</code> zanim stary tag zgaśnie, a wymiary w GA4 rejestrujemy przed publikacją nowego kontenera. Rozpisane etapy migracji są w osobnym dokumencie „Diagnoza 2 ekspertów”.</div>
   <p>Plan łączy to, o co prosił mail i sierpniowe instrukcje, z tym, co faktycznie stoi na stronie (skan kodu) i co widać w GA4.</p>
   <p class="lead">Łącznie ok. 3,5 dnia roboczego (kroki 0–4) plus ok. 3 godziny w panelu formularzy; złączenie z BDC po dwóch tygodniach zbierania danych. Najdłużej trwa krok 0 — zależy od szybkości nadania dostępów.</p>
   <div class="table-wrap"><table>
