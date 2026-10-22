@@ -54,18 +54,14 @@ code{font:13px 'IBM Plex Mono',monospace;background:var(--golds);border-radius:5
 .dzis{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;align-items:start;margin:10px 0 6px}.dzis figure{margin:0;background:var(--surf);border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .dzis img{display:block;width:100%;height:auto}.dzis ul{margin:0;padding-left:18px;font-size:14.5px;line-height:1.5}.dzis li{margin:0 0 9px}
 .kroki3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.zal li{margin:4px 0;font-size:14.5px}
-@media(max-width:820px){.cena,.kroki3,.zrz,.dzis{grid-template-columns:1fr}}
+.zrz.zrz2{grid-template-columns:1fr 1fr}
+@media(max-width:820px){.cena,.kroki3,.zrz,.zrz.zrz2,.dzis{grid-template-columns:1fr}}
 @media print{body{background:#fff}.hd{padding:18px 16px}.cn{break-inside:avoid}}</style></head><body><div class="hd"><div><div class="k">Audi Grupa Plichta · październik 2026 · Tomasz Waligóra</div>
 <h1>Propozycja współpracy — uproszczona</h1><p>Mierzę, gdzie strona traci klientów, poprawiam ją i sprawdzam zmiany testami. Wdrażam sam.</p></div></div><main>
-<div class="kick">Co już działa — raport dzienny</div>
-<div class="dzis"><figure><a href="zrzuty_benchmark/raport_dzienny_live.jpg" target="_blank"><img src="zrzuty_benchmark/raport_dzienny_live.jpg" alt="Raport dzienny Audi Grupa Plichta"></a></figure>
-<ul>
-<li><b>Każde zgłoszenie z formularza mierzone jednakowo</b>, z typem formularza i numerem zgłoszenia — lista leadów z numerami gotowa do zestawienia z BDC.</li>
-<li><b>Telefony i czat widoczne w GA4</b> od 13.10, razem z Tymkiem: sprzedaż czy serwis, salon, kampania, z której przyszedł klient.</li>
-<li><b>Naprawiony pomiar czatu:</b> stary liczył automatyczne powitanie konsultanta jako rozmowę i wysyłał to do Google Ads jako konwersję.</li>
-<li><b>Raport odświeżany co 2 godziny:</b> dziś i wczoraj na tle zwykłego dnia tygodnia, kampanie, strony wejścia, droga do formularza.</li>
-<li><b>Pomiar pod stałą kontrolą:</b> automat sprawdza dane przy każdym odświeżeniu i alarmuje, gdy coś przestaje się liczyć.</li>
-</ul></div>
+<div class="kick">Co już działa — Mission Control dziś</div>
+<div class="zrz zrz2"><figure><a href="zrzuty_benchmark/mc_1_raport_dzienny.jpg" target="_blank"><img src="zrzuty_benchmark/mc_1_raport_dzienny.jpg" alt="Raport dzienny" loading="lazy"></a><figcaption><b>Raport dzienny</b>Wynik dnia w podziale na formularze, telefony i czat, porównany ze zwykłym dniem tygodnia; odświeżany co 2 godziny.</figcaption></figure><figure><a href="zrzuty_benchmark/mc_2_telefony.jpg" target="_blank"><img src="zrzuty_benchmark/mc_2_telefony.jpg" alt="Telefony" loading="lazy"></a><figcaption><b>Telefony</b>Kliknięcia w numer: do sprzedaży czy do serwisu i z jakiej kampanii — widać kampanie, z których ludzie dzwonią do serwisu zamiast do sprzedaży.</figcaption></figure><figure><a href="zrzuty_benchmark/mc_3_czat.jpg" target="_blank"><img src="zrzuty_benchmark/mc_3_czat.jpg" alt="Czat" loading="lazy"></a><figcaption><b>Czat</b>Rozmowy rozpoczęte i właściwe (co najmniej 3 wiadomości klienta), z jakiej kampanii i na jakiej stronie klient zaczyna pisać.</figcaption></figure><figure><a href="zrzuty_benchmark/mc_4_lista_leadow.jpg" target="_blank"><img src="zrzuty_benchmark/mc_4_lista_leadow.jpg" alt="Lista leadów" loading="lazy"></a><figcaption><b>Lista leadów</b>Każde zgłoszenie z numerem, formularzem, modelem, salonem i źródłem — gotowe do zestawienia z BDC.</figcaption></figure></div>
+<ul class="zal"><li><b>Naprawiony pomiar czatu:</b> stary liczył automatyczne powitanie konsultanta jako rozmowę i wysyłał to do Google Ads jako konwersję.</li>
+<li><b>Pomiar pod stałą kontrolą:</b> automat sprawdza dane przy każdym odświeżeniu i alarmuje, gdy coś przestaje się liczyć.</li></ul>
 <div class="kick">Nowe Mission Control i kluczowe narzędzia</div>
 <div class="kroki3">
 <div class="krok"><i>widzę</i><b>Mission Control</b><span>jedno miejsce na leady, telefony, czat i kampanie, z czasem także sprzedaż z BDC; krótki mail z wynikami każdego dnia</span></div>
